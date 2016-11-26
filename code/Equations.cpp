@@ -22,9 +22,16 @@ int main(int argc, char* argv[]) {
 
 
 Equations::Equations(const std::vector<double>& p) {
-    double *value = new double;
+    double value;
     for (unsigned int i=0; i<p.size(); ++i){
-        *value += pow(p[i], i);
+        std::cout <<"vals " << pow(p[i], i) << std::endl;
+        value += pow(p[i], i);
         }
-    std::cout << "value " << *value << std::endl;
+    std::cout << "value " << value << std::endl;
+    double dv;
+    for (unsigned int i=1; i<p.size(); ++i){
+        dv += pow(p[i-1], i-1)/i;
+        std::cout <<"dvs " << pow(p[i-1], i-1)/i << std::endl;
+    }
+    std::cout <<"derivative " << dv << std::endl;
 }
