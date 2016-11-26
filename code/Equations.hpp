@@ -9,19 +9,7 @@
 class Equations {
 public:
 
-    // Constructors and destructors
-
-    //Equations(const std::vector<double> &p);
-
-    Equations(double x, const std::vector<double> &p);
-
-
-    static double PolyEquations(double x, const std::vector<double> &p);
-
-    virtual ~Equations();
-    // Public methods
-
-// Private variables
-
+    static double polyEquations(double x, const std::vector<double> &p);
+    static double polyDerivative(double x, const std::vector<double> &p);
 };
 #endif /* EQUATIONS_HPP_ */
