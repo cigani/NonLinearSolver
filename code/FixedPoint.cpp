@@ -32,6 +32,9 @@ FixedPoint::FixedPoint() {}
 
 FixedPoint::~FixedPoint() {}
 
+int main(int argc, char* argv[]) {
+
+}
 
 double FixedPoint::fixedPointSolver ( func1arg g,
 				      double x0,
@@ -39,7 +42,7 @@ double FixedPoint::fixedPointSolver ( func1arg g,
 				      int nMax,
 				      bool verbose )
 {
-	double x1, xm1, lambda, error_est;
+	double x1 = 0, xm1 = 0, lambda, error_est;
 	int i;
 
 	if (verbose) {

@@ -28,4 +28,4 @@ private:
 };
   
 #endif /* FIXEDPOINT_HPP_ */
-#endif /* FIXEDPOINT_HPP_ */
+

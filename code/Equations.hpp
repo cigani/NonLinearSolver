@@ -3,20 +3,22 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math>
+#include <cmath>
+#include <vector>
 
 class Equations {
 public:
 
-  // Constructors and destructors
-  Equations();
-  virtual ~Equations();
+    // Constructors and destructors
 
-  // Public methods
-    
+    Equations(const std::vector<double> &p);
+
+    virtual ~Equations();
+
+    // Public methods
+
 private:
-  
-  // Private variables
-  
-#endif /* EQUATIONS_HPP_ */
+
+    // Private variables
+};
 #endif /* EQUATIONS_HPP_ */

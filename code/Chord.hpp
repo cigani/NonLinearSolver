@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math>
+#include <jmorecfg.h>
 
 class Chord {
 public:
