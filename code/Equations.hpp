@@ -15,12 +15,13 @@ public:
 
     Equations(double x, const std::vector<double> &p);
 
-    virtual ~Equations();
 
+    static double PolyEquations(double x, const std::vector<double> &p);
+
+    virtual ~Equations();
     // Public methods
 
-private:
+// Private variables
 
-    // Private variables
 };
 #endif /* EQUATIONS_HPP_ */
