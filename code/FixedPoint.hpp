@@ -20,13 +20,13 @@ public:
 			      double x0,
 			      double tol,
 			      int nMax,
-			      boolean verbose );
+			      bool verbose );
     
 private:
     
     // Private variables
 
-}
+};
   
 #endif /* FIXEDPOINT_HPP_ */
 #endif /* FIXEDPOINT_HPP_ */

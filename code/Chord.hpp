@@ -21,7 +21,7 @@ public:
 			 double x0,
 			 double tol,
 			 int nMax,
-			 boolean verbose );
+			 bool verbose );
 	
 private:
     

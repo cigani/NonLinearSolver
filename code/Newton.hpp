@@ -21,7 +21,7 @@ public:
 			  double x0,
 			  double tol,
 			  int nMax,
-			  boolean verbose );
+			  bool verbose );
 
     double modifiedNewtonSolver ( func1arg f,
 				  func1arg df,
@@ -29,21 +29,21 @@ public:
 				  double tol,
 				  int nMax,
 				  int m,
-				  boolean verbose );
+				  bool verbose );
 
     double adaptiveNewtonSolver ( func1arg f,
 				  func1arg df,
 				  double x0,
 				  double tol,
 				  int nMax,
-				  boolean verbose );
+				  bool verbose );
 
     double newtonSystemSolver ( func1arg f,
 				func1arg df,
 				double x0,
 				double tol,
 				int nMax,
-				boolean verbose );
+				bool verbose );
 
     double modifiedNewtonSystemSolver ( func1arg f,
 					func1arg df,
@@ -51,7 +51,7 @@ public:
 					double tol,
 					int nMax,
 					int m,
-					boolean verbose );
+					bool verbose );
     
 private:
 	 
