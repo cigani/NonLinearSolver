@@ -5,6 +5,6 @@
  *      Author: mj
  */
 
+#include <Chord.hpp>
 
-
-
+xk+1 =xk −A−1 F(xk)

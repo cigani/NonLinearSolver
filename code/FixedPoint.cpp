@@ -26,10 +26,12 @@
  */
 
 #include <FixedPoint.hpp>
+#include <cmath>
 
 FixedPoint::FixedPoint() {}
 
 FixedPoint::~FixedPoint() {}
+
 
 double FixedPoint::fixedPointSolver ( func1arg g,
 				      double x0,
@@ -40,14 +42,14 @@ double FixedPoint::fixedPointSolver ( func1arg g,
 	double x1, xm1, lambda, error_est;
 	int i;
 
-	if ( verbose == true ) {
+	if (verbose) {
 		std::cout << std::setw(3) << 0 << "\t"  << std::setw(20)
-		<< x0 << std::setprecision(15) << endl;
+		<< x0 << std::setprecision(15) << std::endl;
 	}
   
 	for ( i = 1; i <= nMax; i++ ) {
 		x1 = g(x0);
-		if ( verbose == true ) {
+		if (verbose) {
 			std::cout << std::setw(3) << i << "\t" << std::setw(20)
 			<< x1 << std::setprecision(15) << std::endl;
 		}

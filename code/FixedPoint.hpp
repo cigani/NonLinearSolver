@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math>
 
 class FixedPoint {
 public:

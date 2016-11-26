@@ -21,13 +21,12 @@ public:
 			 double x0,
 			 double tol,
 			 int nMax,
-			 bool verbose );
+			 boolean verbose );
 	
 private:
     
     // Private variables
 
-}
+};
     
-#endif /* CHORD_HPP_ */
 #endif /* CHORD_HPP_ */
