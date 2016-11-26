@@ -14,24 +14,24 @@ int main(int argc, char* argv[]) {
         finalVector.push_back(std::atof(argv[i + 1]));
     }
 
-    Equations::Equations((const std::vector<double> &) finalVector);
+    Equations::Equations(1.0, (const std::vector<double> &) finalVector);
     return 0;
 }
 
 /// Inputs N - Power of Polynomial needs to be given in order. coef of x1^1..x2^2 --> a_0 + a_1 ... etc
 
 
-Equations::Equations(const std::vector<double>& p) {
+Equations::Equations(double x, const std::vector<double>& p) {
     double value;
     for (unsigned int i=0; i<p.size(); ++i){
-        std::cout <<"vals " << pow(p[i], i) << std::endl;
-        value += pow(p[i], i);
+        std::cout <<"vals " << pow(x, i)*p[i] << std::endl;
+        value += pow(x, i)*p[i];
         }
     std::cout << "value " << value << std::endl;
     double dv;
     for (unsigned int i=1; i<p.size(); ++i){
-        dv += pow(p[i-1], i-1)/i;
-        std::cout <<"dvs " << pow(p[i-1], i-1)/i << std::endl;
+        dv += pow(x, i-1)*(i+1)*p[i];
+        std::cout <<"dvs " << pow(x, i-1)*i*p[i] << std::endl;
     }
     std::cout <<"derivative " << dv << std::endl;
 }

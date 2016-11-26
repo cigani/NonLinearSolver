@@ -11,7 +11,9 @@ public:
 
     // Constructors and destructors
 
-    Equations(const std::vector<double> &p);
+    //Equations(const std::vector<double> &p);
+
+    Equations(double x, const std::vector<double> &p);
 
     virtual ~Equations();
 
