@@ -31,6 +31,7 @@
  * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
  */
 
+#include <assert.h>
 #include "Equations.hpp"
 #include "Chord.hpp"
 
@@ -73,4 +74,11 @@ double Chord::chordSolver(const std::vector<double>& coef,
     }
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return xnew;
+}
+
+double Chord::testChordSolver() {
+    std::vector<double> testVector{3, -4, 10, -22, 10, -2};
+    double *realValue = new double;
+    *realValue = chordSolver((const std::vector<double> &) testVector, 3, 0.001, 1000, false);
+    assert((*realValue - 0.66381) < 0.0015);
 }

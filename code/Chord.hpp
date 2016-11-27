@@ -22,8 +22,9 @@ public:
                          int nMax,
                          bool verbose );
 
+
 private:
-    
+    double testChordSolver();
     // Private variables
 
 };
