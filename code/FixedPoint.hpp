@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <vector>
 
 class FixedPoint {
 public:
@@ -13,10 +14,9 @@ public:
     virtual ~FixedPoint();
     
     // Public variables
-    typedef double (*func1arg) (double);
     
     // Public methods
-    double fixedPointSolver ( func1arg g,
+    double fixedPointSolver ( const std::vector<double>& coef,
 			      double x0,
 			      double tol,
 			      int nMax,

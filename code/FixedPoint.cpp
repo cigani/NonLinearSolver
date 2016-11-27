@@ -26,18 +26,23 @@
  */
 
 #include "FixedPoint.hpp"
+#include "Equations.hpp"
 
 FixedPoint::FixedPoint() {}
 FixedPoint::~FixedPoint() {}
 
-double FixedPoint::fixedPointSolver ( func1arg g,
+double FixedPoint::fixedPointSolver (const std::vector<double>& coef,
 				      double x0,
 				      double tol,
 				      int nMax,
 				      bool verbose )
 {
-	double x1 = 0, xm1 = 0, lambda, error_est;
+	double x1 = 0, error_est;
 	int i;
+	Equations mEquation;
+
+	std::vector<double> phi_coef(coef);
+	phi_coef[1] = phi_coef[1] + 1;
 
 	if (verbose) {
 		std::cout << std::setw(3) << 0 << "\t"  << std::setw(20)
@@ -45,22 +50,20 @@ double FixedPoint::fixedPointSolver ( func1arg g,
 	}
   
 	for ( i = 1; i <= nMax; i++ ) {
-		x1 = g(x0);
+		//x1 = mEquation.getEquation(phi_coef, x0);
+		x1 = mEquation.getCosine(x0);
+
 		if (verbose) {
 			std::cout << std::setw(3) << i << "\t" << std::setw(20)
 			<< x1 << std::setprecision(15) << std::endl;
 		}
-         
-		if ( i > 2 ) {
-			lambda = ( x1 - x0 ) / ( x0 - xm1 );
-			error_est = lambda / ( 1 - lambda ) * ( x1 - x0 );
-			if ( fabs(error_est) < tol ) {
-				return x1;
-			}
-		}
 
-		xm1 = x0;
-		x0 = x1;
+		error_est = fabs(x1 - x0);
+		if ( error_est < tol ) {
+			return x1;
+		} else {
+			x0 = x1;
+		}
 	}
 	std::cout << "Maximum number of iterations exceeded" << std::endl;
 	return x1;

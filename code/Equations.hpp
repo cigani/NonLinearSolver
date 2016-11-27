@@ -17,6 +17,8 @@ public:
 
     double getEquation(const std::vector<double> &coef, double value);
     double getDerivative(const std::vector<double> &coef, double value);
+    double getCosine(double value);
+    double getCosineIteration(double value);
 
 private:
     // Private variables

@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "FixedPoint.hpp"
 #include "Equations.hpp"
 
 int main(int argc, char* argv[]) {
@@ -48,6 +49,10 @@ int main(int argc, char* argv[]) {
 
 	double f = mEquation.getEquation((const std::vector<double> &) coefVector, x0);
 	double df = mEquation.getDerivative((const std::vector<double> &) coefVector, x0);
+
+	// Currently uses cosine as the iteration function
+	FixedPoint mFixedPoint;
+	double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 5, true );
 
     return 0;
 }

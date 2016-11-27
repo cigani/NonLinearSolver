@@ -1,3 +1,3 @@
 #!/bin/bash
 
-g++ Main.cpp Equations.cpp -o nonlinear -std=c++11
+g++ Main.cpp Equations.cpp FixedPoint.cpp -o nonlinear -std=c++11
