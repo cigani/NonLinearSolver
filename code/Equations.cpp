@@ -30,6 +30,7 @@ double Equations::getEquation(const std::vector<double>& coef, double value) {
 }
 
 double Equations::getDerivative(const std::vector<double>& coef, double value) {
+    // Do NOT set this to = 0.0. This will lead to bad errors during calculation that we wont notice.
     double df;
     //std::cout << "x = " << value << std::endl;
     //std::cout << "The derivative is: " << std::endl;
