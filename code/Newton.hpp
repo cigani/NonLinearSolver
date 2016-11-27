@@ -3,7 +3,8 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math>
+#include <cmath>
+#include <vector>
 
 class Newton {
 public:
@@ -14,22 +15,11 @@ public:
     
     // Public variables
     typedef double (*func1arg) (double);
-    
-    // Public methods
-    double newtonSolver ( func1arg f,
-			  func1arg df,
-			  double x0,
-			  double tol,
-			  int nMax,
-			  bool verbose );
 
-    double modifiedNewtonSolver ( func1arg f,
-				  func1arg df,
-				  double x0,
-				  double tol,
-				  int nMax,
-				  int m,
-				  bool verbose );
+    // Public methods
+	double newtonSolver(const std::vector<double> &coef, double x0, double tol, int nMax, bool verbose);
+
+    double modifiedNewtonSolver(const std::vector<double> &coef, double x0, double tol, int nMax, int m, bool verbose);
 
     double adaptiveNewtonSolver ( func1arg f,
 				  func1arg df,
@@ -57,7 +47,6 @@ private:
 	 
  // Private variables
 
-}
+};
     
-#endif /* NEWTON_HPP_ */
 #endif /* NEWTON_HPP_ */

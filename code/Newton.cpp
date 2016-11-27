@@ -33,20 +33,17 @@
  * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
  */
 
-#include <Newton.hpp>
+#include "Newton.hpp"
+#include "Equations.hpp"
 
 Newton::Newton() {}
 
 Newton::~Newton() {}
 
-double Newton::newtonSolver ( func1arg f,
-			      func1arg df,
-			      double x0,
-			      double tol, 
-			      int nMax,
-			      bool verbose )
+double Newton::newtonSolver(const std::vector<double>& coef, double x0,
+                            double tol, int nMax, bool verbose)
 {
-     double dx;
+     double dx, fx0, dfx0;
      int i;
 
      if ( verbose ) {
@@ -55,7 +52,9 @@ double Newton::newtonSolver ( func1arg f,
      }
 
      for ( i = 1; i <= nMax; i++ ) {
-         dx = f(x0) / df(x0);
+         fx0 = Equations::getPolyEquation(coef, x0);
+         dfx0 = Equations::getPolyDerivative(coef, x0);
+		 dx = fx0 / dfx0;
          x0 -= dx;
          if ( verbose ) {
         	 std::cout << std::setw(3) << i << "\t"  << std::setw(20)
@@ -69,24 +68,21 @@ double Newton::newtonSolver ( func1arg f,
      return x0;
 }
 
-double Newton::modifiedNewtonSolver ( func1arg f,
-				      func1arg df,
-				      double x0,
-				      double tol, 
-				      int nMax,
-				      int m,
-				      bool verbose )
+double Newton::modifiedNewtonSolver(const std::vector<double>& coef, double x0,
+                                    double tol, int nMax, int m, bool verbose)
 {
-     double dx;
+     double dx, fx0, dfx0;
      int i;
 
-     if ( verbose == true ) {
+     if ( verbose ) {
     	 std::cout << std::setw(3) << 0 << "\t" << std::setw(20)
              << x0 << std::setprecision(15) << std::endl;
      }
 
      for ( i = 1; i <= nMax; i++ ) {
-         dx = f(x0) / df(x0);
+         fx0 = Equations::getPolyEquation(coef, x0);
+         dfx0 = Equations::getPolyDerivative(coef, x0);
+         dx = fx0 / dfx0;
          x0 -= m*dx;
          if ( verbose ) {
         	 std::cout << std::setw(3) << i << "\t" << std::setw(20)
@@ -99,25 +95,3 @@ double Newton::modifiedNewtonSolver ( func1arg f,
      std::cout << "Maximum number of iterations exceeded" << std::endl;
      return x0;
 }
-
-double Newton::adaptiveNewtonSolver ( func1arg f,
-				      func1arg df,
-				      double x0,
-				      double tol, 
-				      int nMax,
-				      bool verbose ) {}
-
-double Newton::newtonSystemSolver ( func1arg f,
-				    func1arg df,
-				    double x0,
-				    double tol, 
-				    int nMax,
-				    bool verbose ) {}
-
-double Newton::modifiedNewtonSystemSolver ( func1arg f,
-					    func1arg df,
-					    double x0,
-					    double tol, 
-					    int nMax,
-					    int m,
-					    bool verbose ) {}

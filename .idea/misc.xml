@@ -5,6 +5,7 @@
     <excludeRoots>
       <file path="$PROJECT_DIR$/CMakeFiles" />
       <file path="$PROJECT_DIR$/cmake-build-debug/CMakeFiles" />
+      <file path="$PROJECT_DIR$/cmake-build-default/CMakeFiles" />
     </excludeRoots>
   </component>
 </project>

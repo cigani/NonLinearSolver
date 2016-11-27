@@ -17,6 +17,7 @@
 #include "FixedPoint.hpp"
 #include "Equations.hpp"
 #include "Chord.hpp"
+#include "Newton.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -55,6 +56,9 @@ int main(int argc, char* argv[]) {
 	FixedPoint mFixedPoint;
 	//double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true );
     Chord mChord;
-    double test = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
+    //double testChord = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
+    Newton mNewton;
+    double testNewton = mNewton.newtonSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
+
     return 0;
 }
