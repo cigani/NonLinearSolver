@@ -15,10 +15,10 @@ public:
 
     // Public methods
 
-    double getEquation(const std::vector<double> &coef, double value);
-    double getDerivative(const std::vector<double> &coef, double value);
-    double getCosine(double value);
-    double getCosineIteration(double value);
+    static double getPolyEquation(const std::vector<double> &coef, double value);
+    static double getPolyDerivative(const std::vector<double> &coef, double value);
+    static double getCosine(double value);
+    static double getCosineIteration(double value);
 
 private:
     // Private variables

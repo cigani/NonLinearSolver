@@ -16,6 +16,7 @@
 #include <vector>
 #include "FixedPoint.hpp"
 #include "Equations.hpp"
+#include "Chord.hpp"
 
 int main(int argc, char* argv[]) {
 
@@ -47,12 +48,13 @@ int main(int argc, char* argv[]) {
 	}
 	*/
 
-	double f = mEquation.getEquation((const std::vector<double> &) coefVector, x0);
-	double df = mEquation.getDerivative((const std::vector<double> &) coefVector, x0);
+	double f = mEquation.getPolyEquation((const std::vector<double> &) coefVector, x0);
+	double df = mEquation.getPolyDerivative((const std::vector<double> &) coefVector, x0);
 
 	// Currently uses cosine as the iteration function
 	FixedPoint mFixedPoint;
-	double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true );
-
+	//double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true );
+    Chord mChord;
+    double test = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
     return 0;
 }

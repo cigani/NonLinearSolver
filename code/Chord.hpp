@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <jmorecfg.h>
+#include <vector>
 
 class Chord {
 public:
@@ -16,13 +16,12 @@ public:
     typedef double (*func1arg) (double);
     
     // Public methods
-    double chordSolver ( func1arg f,
-			 func1arg fp,
-			 double x0,
-			 double tol,
-			 int nMax,
-			 boolean verbose );
-	
+    double chordSolver ( const std::vector<double>& coef,
+                         double x0,
+                         double tol,
+                         int nMax,
+                         bool verbose );
+
 private:
     
     // Private variables

@@ -18,7 +18,6 @@ public:
     // Public methods
     double secantSolver ( func1arg f,
 			  double x0,
-			  double x1,
 			  double tol,
 			  int nMax,
 			  bool verbose );

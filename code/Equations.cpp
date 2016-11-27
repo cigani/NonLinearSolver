@@ -10,7 +10,7 @@ Equations::~Equations() {}
 
 /// Inputs N - Power of Polynomial needs to be given in order. coef of x1^1..x2^2 --> a_0 + a_1 ... etc
 
-double Equations::getEquation(const std::vector<double>& coef, double value) {
+double Equations::getPolyEquation(const std::vector<double> &coef, double value) {
 	double f;
     //std::cout << "x = " << value << std::endl;
     //std::cout << "The equation is: " << std::endl;
@@ -24,7 +24,7 @@ double Equations::getEquation(const std::vector<double>& coef, double value) {
     return f;
 }
 
-double Equations::getDerivative(const std::vector<double>& coef, double value) {
+double Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
     // Do NOT set this to = 0.0. This will lead to bad errors during calculation that we wont notice.
     double df;
     //std::cout << "x = " << value << std::endl;

@@ -50,8 +50,8 @@ double FixedPoint::fixedPointSolver (const std::vector<double>& coef,
 	}
   
 	for ( i = 1; i <= nMax; i++ ) {
-		x1 = mEquation.getEquation(phi_coef, x0);
-        //5x1 = mEquation.getCosine(x0);
+		//x1 = mEquation.getEquation(phi_coef, x0);
+        x1 = mEquation.getCosine(x0);
 
 		if (verbose) {
 			std::cout << std::setw(3) << i << "\t" << std::setw(20)

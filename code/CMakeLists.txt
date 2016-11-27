@@ -8,3 +8,5 @@ set (CMAKE_CXX_STANDARD 11)
 # The syntax is add_executable(executable_name source_file_name)
 
 add_executable(nonlinear Main.cpp)
+add_executable(Chord Chord.cpp)
+add_executable(FixedPoint FixedPoint.cpp)
