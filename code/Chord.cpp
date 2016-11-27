@@ -77,7 +77,7 @@ double Chord::chordSolver(const std::vector<double>& coef,
 }
 
 double Chord::testChordSolver() {
-    std::vector<double> testVector{3, -4, 10, -22, 10, -2};
+    std::vector<double> testVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     double *realValue = new double;
     *realValue = chordSolver((const std::vector<double> &) testVector, 3, 0.001, 1000, false);
     assert((*realValue - 0.66381) < 0.0015);
