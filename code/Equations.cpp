@@ -43,6 +43,10 @@ double Equations::getCosine(double value) {
     return cos(value);
 }
 
+double Equations::getCosineDerivative(double value) {
+    return -sin(value);
+}
+
 double Equations::getCosineIteration(double value) {
     return cos(value) + value;
 }
