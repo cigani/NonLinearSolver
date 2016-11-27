@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
 
 	// Currently uses cosine as the iteration function
 	FixedPoint mFixedPoint;
-	double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 5, true );
+	double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true );
 
     return 0;
 }

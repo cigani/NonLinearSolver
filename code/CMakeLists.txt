@@ -1,4 +1,5 @@
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+cmake_minimum_required(VERSION 3.6)
 set (CMAKE_CXX_STANDARD 11)
 
 # The next lines represent a list of all the executables in the folder (chapter)
