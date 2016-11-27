@@ -22,7 +22,10 @@
  *                   type: double
  *
  * Created on: November 26, 2015
- *    Author: Alexander Lorkowski <alexander.lorkowski@epfl.ch>
+ *
+ * AUTHORS:
+ * Jaquier, Michael <michael.jaquier@epfl.ch>
+ * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
  */
 
 #include "FixedPoint.hpp"
@@ -42,7 +45,7 @@ double FixedPoint::fixedPointSolver (const std::vector<double>& coef,
 	Equations mEquation;
 
 	std::vector<double> phi_coef(coef);
-	phi_coef[1] = phi_coef[1] + 1;
+	//phi_coef[1] = phi_coef[1] + 1;
 
 	if (verbose) {
 		std::cout << std::setw(3) << 0 << "\t"  << std::setw(20)
@@ -50,9 +53,7 @@ double FixedPoint::fixedPointSolver (const std::vector<double>& coef,
 	}
   
 	for ( i = 1; i <= nMax; i++ ) {
-		//x1 = mEquation.getEquation(phi_coef, x0);
         x1 = mEquation.getCosine(x0);
-
 		if (verbose) {
 			std::cout << std::setw(3) << i << "\t" << std::setw(20)
 			<< x1 << std::setprecision(15) << std::endl;
