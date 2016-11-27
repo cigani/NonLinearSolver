@@ -21,4 +21,5 @@ public:
 private:
     // Private variables
 };
+
 #endif /* EQUATIONS_HPP_ */
