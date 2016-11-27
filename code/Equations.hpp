@@ -8,17 +8,17 @@
 
 class Equations {
 public:
-
     // Constructors and destructors
 
-    Equations(const std::vector<double> &p);
-
+    Equations();
     virtual ~Equations();
 
     // Public methods
 
-private:
+    double getEquation(const std::vector<double> &coef, double value);
+    double getDerivative(const std::vector<double> &coef, double value);
 
+private:
     // Private variables
 };
 #endif /* EQUATIONS_HPP_ */

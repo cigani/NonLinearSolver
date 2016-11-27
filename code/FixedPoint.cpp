@@ -25,16 +25,10 @@
  *    Author: Alexander Lorkowski <alexander.lorkowski@epfl.ch>
  */
 
-#include <FixedPoint.hpp>
-#include <cmath>
+#include "FixedPoint.hpp"
 
 FixedPoint::FixedPoint() {}
-
 FixedPoint::~FixedPoint() {}
-
-int main(int argc, char* argv[]) {
-
-}
 
 double FixedPoint::fixedPointSolver ( func1arg g,
 				      double x0,
