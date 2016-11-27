@@ -12,30 +12,19 @@ Equations::~Equations() {}
 
 double Equations::getPolyEquation(const std::vector<double> &coef, double value) {
 	double f;
-    //std::cout << "x = " << value << std::endl;
-    //std::cout << "The equation is: " << std::endl;
-    for (unsigned int i = 0; i < coef.size(); ++i){
-        	//std::cout << " + (" << coef[i]  << " * x^" << i << ")";
+    for (unsigned int i = 0; i < coef.size(); ++i) {
         	f += coef[i]*pow(value, i);
-        }
-    //std::cout << std::endl;
-    //std::cout << "result: " << f << std::endl;
-    //std::cout << std::endl;
+    }
     return f;
 }
 
 double Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
-    // Do NOT set this to = 0.0. This will lead to bad errors during calculation that we wont notice.
+    // Set an exception for methods where the derivative is a denominator.
+	// This way we can avoid null errors (this extends to 0.0 as well).
     double df;
-    //std::cout << "x = " << value << std::endl;
-    //std::cout << "The derivative is: " << std::endl;
     for (unsigned int i = 1; i < coef.size(); ++i) {
-    		//std::cout << " + (" << i*coef[i]  << " * x^" << i-1 << ")";
     		df += i*coef[i]*pow(value, i-1);
     }
-    //std::cout << std::endl;
-    //std::cout << "result: " << df << std::endl;
-    //std::cout << std::endl;
     return df;
 }
 
