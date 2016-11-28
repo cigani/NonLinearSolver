@@ -58,7 +58,7 @@ int main(int argc, char* argv[]) {
     Chord mChord;
     //double testChord = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
     Newton mNewton;
-    double testNewton = mNewton.newtonSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
+    double testNewton = mNewton.newtonSolver((const std::vector<double> &) coefVector, x0, 0.001, 100000, true);
 
     return 0;
 }
