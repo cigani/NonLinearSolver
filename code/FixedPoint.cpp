@@ -44,7 +44,7 @@ double FixedPoint::fixedPointSolver (const std::vector<double>& coef,
 	int i;
 	Equations mEquation;
 
-	std::vector<double> phi_coef(coef);
+	//std::vector<double> phi_coef(coef);
 	//phi_coef[1] = phi_coef[1] + 1;
 
 	if (verbose) {
@@ -53,7 +53,8 @@ double FixedPoint::fixedPointSolver (const std::vector<double>& coef,
 	}
   
 	for ( i = 1; i <= nMax; i++ ) {
-        x1 = mEquation.getCosine(x0);
+        //x1 = mEquation.getCosine(x0);
+        x1 = Equations::getPolyEquation(coef, x0);
 		if (verbose) {
 			std::cout << std::setw(3) << i << "\t" << std::setw(20)
 			<< x1 << std::setprecision(15) << std::endl;

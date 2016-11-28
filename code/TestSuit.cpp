@@ -8,6 +8,7 @@
 int main(int argc, char* argv[]) {
     TestSuit test;
     test.testChordSolver();
+    test.testNewtonSolver();
 };
 
 void TestSuit::testChordSolver() {

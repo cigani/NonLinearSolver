@@ -8,12 +8,14 @@
 #include "Equations.hpp"
 #include "Chord.hpp"
 #include "Newton.hpp"
+#include "FixedPoint.hpp"
 #include <assert.h>
 
 class TestSuit: Chord {
 public:
     void testChordSolver();
     void testNewtonSolver();
+    void testFixedPointSolver();
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
