@@ -21,10 +21,6 @@ public:
                          double tol,
                          int nMax,
                          bool verbose );
-
-
-private:
-    double testChordSolver();
     // Private variables
 
 };
