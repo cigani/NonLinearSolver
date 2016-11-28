@@ -1,6 +1,7 @@
-//
-// Created by Michael Jaquier on 26.11.16.
-//
+/* AUTHORS:
+* Jaquier, Michael <michael.jaquier@epfl.ch>
+* Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+*/
 
 #include "Equations.hpp"
 
