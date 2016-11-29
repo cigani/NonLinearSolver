@@ -114,10 +114,9 @@ TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
                                   const bool verbose,
                                   std::string &coefficient) {
     double testNewton;
-    coefficient = "cos(2*pi*x) + sin(2*pi*x)";
     Newton mNewton;
     //TODO: Testing periodicity so we aren't so hamstrung by starting point
-    testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient, x0,
+    testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
     if ((expected - testNewton) <= tol) {
         printf("Newton Exprtk: Trig Success");
