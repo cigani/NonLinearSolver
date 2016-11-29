@@ -60,13 +60,13 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     // The limit is 20 parameters for this method of doing the function,
     // It can be refactored to accept unlimited paramters but the code is more complex;
 
-    //T y;
-    //T z;
+    double y;
+    double z;
 
     symbol_table_t symbol_table;
     symbol_table.add_variable("x", x);
-    //symbol_table.add_variable("y", y);
-    //symbol_table.add_variable("z", z);
+    symbol_table.add_variable("y", y);
+    symbol_table.add_variable("z", z);
     symbol_table.add_constants();
 
     expression_t expression;
@@ -108,13 +108,13 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
     std::string expr_string = eq;
 
     double x = value;
-    //T y;
-    //T z;
+    double y;
+    double z;
 
     symbol_table_t symbol_table;
     symbol_table.add_variable("x", x);
-    //symbol_table.add_variable("y", y);
-    //symbol_table.add_variable("z", z);
+    symbol_table.add_variable("y", y);
+    symbol_table.add_variable("z", z);
     symbol_table.add_constants();
 
     expression_t expression;

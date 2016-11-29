@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
 	double x0;
 	Equations mEquation;
 
-	int i = 0;
+//	int i = 0;
 	while (true){
 //		std::cout << "Enter coefficient for " << "x^" << i << " " << "Terminate with a blank line: ";
 //		getline(std::cin, coefficient);
@@ -53,14 +53,14 @@ int main(int argc, char* argv[]) {
 	}
 	*/
 
-	double f = mEquation.getPolyEquation((const std::vector<double> &) coefVector, x0);
-	double df = mEquation.getPolyDerivative((const std::vector<double> &) coefVector, x0);
-    double ff = mEquation.exprtkGenerate2D((std::string &) coefficient, x0);
-    double dff = mEquation.exprtkGenerate2DDerivative(
-            (std::string &) coefficient, x0);
-
-    printf("Result Equation: %10.5f\n", ff);
-    printf("Result Derivative: %10.5f\n", dff);
+//	double f = mEquation.getPolyEquation((const std::vector<double> &) coefVector, x0);
+//	double df = mEquation.getPolyDerivative((const std::vector<double> &) coefVector, x0);
+//    double ff = mEquation.exprtkGenerate2D((std::string &) coefficient, x0);
+//    double dff = mEquation.exprtkGenerate2DDerivative(
+//            (std::string &) coefficient, x0);
+//
+//    printf("Result Equation: %10.5f\n", ff);
+//    printf("Result Derivative: %10.5f\n", dff);
 
 	// Currently uses cosine as the iteration function
 	FixedPoint mFixedPoint;

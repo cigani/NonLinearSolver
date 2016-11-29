@@ -22,6 +22,7 @@ void TestSuit::testChordSolver() {
     *realValue = testChord.chordSolver((const std::vector<double> &) testVector, 3, 0.001, 1000, false);
     assert((*realValue - 0.66381) < 0.0015);
     printf("Chord Success");
+    printf("\n");
 
 };
 

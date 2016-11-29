@@ -17,13 +17,9 @@ public:
     void testChordSolver();
     void testNewtonSolver();
     void testFixedPointSolver();
-
     void testNewtonWithExprtkPoly();
-
     void testNewtonWithExprtkLog();
-
     void testNewtonWithExprtTrig();
-
     void testNewtonWithExprtExp();
 
 

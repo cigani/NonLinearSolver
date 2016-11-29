@@ -25,8 +25,7 @@ public:
     // These aren't static on purpose
     double exprtkGenerate2D(const std::string &eq, double value);
 
-    double exprtkGenerate2DDerivative(
-            const std::string &eq, double value);
+    double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
 private:
     // Private variables
