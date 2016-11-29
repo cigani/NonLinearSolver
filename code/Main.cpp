@@ -28,14 +28,18 @@ int main(int argc, char* argv[]) {
 
 	int i = 0;
 	while (true){
-		std::cout << "Enter coefficient for " << "x^" << i << " " << "Terminate with a blank line: ";
+//		std::cout << "Enter coefficient for " << "x^" << i << " " << "Terminate with a blank line: ";
+//		getline(std::cin, coefficient);
+//	    if (coefficient.empty()){
+//	    	break;
+//	    } else {
+//	    	coefVector.push_back(stod(coefficient));
+//	    }
+//	    ++i;
+        std::cout << "Enter Equation ";
 		getline(std::cin, coefficient);
-	    if (coefficient.empty()){
-	    	break;
-	    } else {
-	    	coefVector.push_back(stod(coefficient));
-	    }
-	    ++i;
+        std::cout << "Enter Starting Value";
+        break;
 	}
 
 	// The following loop is for only development purpose
@@ -51,6 +55,12 @@ int main(int argc, char* argv[]) {
 
 	double f = mEquation.getPolyEquation((const std::vector<double> &) coefVector, x0);
 	double df = mEquation.getPolyDerivative((const std::vector<double> &) coefVector, x0);
+    double ff = mEquation.exprtkGenerate2D((std::string &) coefficient, x0);
+    double dff = mEquation.exprtkGenerate2DDerivative(
+            (std::string &) coefficient, x0);
+
+    printf("Result Equation: %10.5f\n", ff);
+    printf("Result Derivative: %10.5f\n", dff);
 
 	// Currently uses cosine as the iteration function
 	FixedPoint mFixedPoint;
@@ -58,7 +68,8 @@ int main(int argc, char* argv[]) {
     Chord mChord;
     //double testChord = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
     Newton mNewton;
-    double testNewton = mNewton.newtonSolver((const std::vector<double> &) coefVector, x0, 0.001, 100000, true);
+    double testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient,
+                                                   x0, 0.001, 100000, true);
 
     return 0;
 }

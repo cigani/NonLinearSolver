@@ -5,7 +5,8 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
-
+#include "exprtk.hpp"
+#include <string>
 class Equations {
 public:
     // Constructors and destructors
@@ -20,6 +21,12 @@ public:
     static double getCosine(double value);
     static double getCosineDerivative(double value);
     static double getCosineIteration(double value);
+
+    // These aren't static on purpose
+    double exprtkGenerate2D(const std::string &eq, double value);
+
+    double exprtkGenerate2DDerivative(
+            const std::string &eq, double value);
 
 private:
     // Private variables

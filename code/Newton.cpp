@@ -95,3 +95,32 @@ double Newton::modifiedNewtonSolver(const std::vector<double>& coef, double x0,
      std::cout << "Maximum number of iterations exceeded" << std::endl;
      return x0;
 }
+
+double
+Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
+                           double nMax, bool verbose) {
+    double dx, fx0, dfx0;
+    Equations mEquation;
+    int i;
+
+    if (verbose) {
+        std::cout << std::setw(3) << 0 << "\t" << std::setw(20)
+                  << x0 << std::setprecision(15) << std::endl;
+    }
+
+    for (i = 1; i <= nMax; i++) {
+        fx0 = mEquation.exprtkGenerate2D(eq, x0);
+        dfx0 = mEquation.exprtkGenerate2DDerivative(eq, x0);
+        dx = fx0 / dfx0;
+        x0 -= dx;
+        if (verbose) {
+            std::cout << std::setw(3) << i << "\t" << std::setw(20)
+                      << x0 << std::setprecision(15) << std::endl;
+        }
+        if (fabs(dx) < tol) {
+            return x0;
+        }
+    }
+    std::cout << "Maximum number of iterations exceeded" << std::endl;
+    return x0;
+}

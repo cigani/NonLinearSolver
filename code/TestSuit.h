@@ -10,12 +10,15 @@
 #include "Newton.hpp"
 #include "FixedPoint.hpp"
 #include <assert.h>
+#include "exprtk.hpp"
 
 class TestSuit: Chord {
 public:
     void testChordSolver();
     void testNewtonSolver();
     void testFixedPointSolver();
+
+    void testNewtonWithExprtk();
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

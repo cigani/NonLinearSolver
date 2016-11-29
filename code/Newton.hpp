@@ -17,9 +17,18 @@ public:
     typedef double (*func1arg) (double);
 
     // Public methods
-	double newtonSolver(const std::vector<double> &coef, double x0, double tol, int nMax, bool verbose);
+	double newtonSolver(const std::vector<double> &coef,
+						double x0,
+						double tol,
+						int nMax,
+						bool verbose);
 
-    double modifiedNewtonSolver(const std::vector<double> &coef, double x0, double tol, int nMax, int m, bool verbose);
+	double modifiedNewtonSolver(const std::vector<double> &coef,
+								double x0,
+								double tol,
+								int nMax,
+								int m,
+								bool verbose);
 
     double adaptiveNewtonSolver ( func1arg f,
 				  func1arg df,
@@ -42,6 +51,12 @@ public:
 					int nMax,
 					int m,
 					bool verbose );
+
+	double newtonExprtkSolver(const std::string &eq,
+							  double x0,
+							  double tol,
+							  double nMax,
+							  bool verbose);
     
 private:
 	 

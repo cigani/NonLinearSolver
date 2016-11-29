@@ -43,3 +43,67 @@ double Equations::getCosineDerivative(double value) {
 double Equations::getCosineIteration(double value) {
     return cos(value) + value;
 }
+
+
+double Equations::exprtkGenerate2D(const std::string &eq, double value) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+
+    std::string expr_string = eq;
+
+    double x = value;
+
+    // This is currently running as y = func(x);
+    // We can add more variables i.e., Z = func(x,y) by uncommenting the following;
+    // The limit is 20 parameters for this method of doing the function,
+    // It can be refactored to accept unlimited paramters but the code is more complex;
+
+    //T y;
+    //T z;
+
+    symbol_table_t symbol_table;
+    symbol_table.add_variable("x", x);
+    //symbol_table.add_variable("y", y);
+    //symbol_table.add_variable("z", z);
+    symbol_table.add_constants();
+
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    parser_t parser;
+    parser.compile(expr_string, expression);
+
+    double result = expression.value();
+    return result;
+}
+
+
+double
+Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+
+    std::string expr_string = eq;
+
+    double x = value;
+    //T y;
+    //T z;
+
+    symbol_table_t symbol_table;
+    symbol_table.add_variable("x", x);
+    //symbol_table.add_variable("y", y);
+    //symbol_table.add_variable("z", z);
+    symbol_table.add_constants();
+
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    parser_t parser;
+    parser.compile(expr_string, expression);
+
+    return exprtk::derivative(expression, x);
+
+    //T result = expression.value();
+}
