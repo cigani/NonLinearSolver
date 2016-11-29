@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <iomanip>
-#include <math>
+#include <cmath>
 
 class Aitken {
 public:
@@ -25,8 +25,7 @@ public:
 private:
     
     // Private variables
-
+    
 };
     
-#endif /* AITKEN_HPP_ */
 #endif /* AITKEN_HPP_ */
