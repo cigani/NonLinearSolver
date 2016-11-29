@@ -11,6 +11,7 @@ int main(int argc, char* argv[]) {
 
     // Equations
     std::string mPolyCoefficient = "x^2 -10";
+    std::string mZeroDerivativeCheck = "x^2 - x^3 -x^6 +x^7 +22x^3 -33x^6 +20";
     std::string mLogCoefficient = "log(x) - 10";
     std::string mTrigCoefficient = "cos(2*pi*x) + sin(2*pi*x)";
     std::string mExpCoefficient = "exp(x) - exp(-3x) + exp(9x)";
@@ -29,6 +30,8 @@ int main(int argc, char* argv[]) {
                                  mTrigCoefficient);
     test.testNewtonWithExprtExp(0.0015, -0.095561, 0.1, 1000, false,
                                 mExpCoefficient);
+    test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
+                                  mZeroDerivativeCheck);
 };
 
 void
