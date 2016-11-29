@@ -142,14 +142,15 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         result = exprtk::derivative(expression, x);
         x += 1000 * DBL_EPSILON;
         n += 1;
-        if (n > 100000) {
+        if (n > 10000) {
             while (result < DBL_EPSILON) {
-                x += 100 * FLT_EPSILON;
+                x += 1000 * FLT_EPSILON;
                 result = exprtk::derivative(expression, x);
                 k += 1;
-                if (k > 100000) {
+                if (k > 10000) {
                     while (result < DBL_EPSILON) {
                         x += 0.01;
+                        //std::cout << "3rd tier Derivtive" << std::endl;
                         result = exprtk::derivative(expression, x);
                         j += 1;
                         if (k > 10000) {
