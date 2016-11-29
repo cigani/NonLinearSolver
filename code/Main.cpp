@@ -26,20 +26,23 @@ int main(int argc, char* argv[]) {
 	double x0;
 	Equations mEquation;
 
-//	int i = 0;
+	int i = 0;
 	while (true){
-//		std::cout << "Enter coefficient for " << "x^" << i << " " << "Terminate with a blank line: ";
-//		getline(std::cin, coefficient);
-//	    if (coefficient.empty()){
-//	    	break;
-//	    } else {
-//	    	coefVector.push_back(stod(coefficient));
-//	    }
-//	    ++i;
+		std::cout << "Enter coefficient for " << "x^" << i << " " << "Terminate with a blank line: ";
+		getline(std::cin, coefficient);
+	    if (coefficient.empty()){
+	    	break;
+
+	    } else {
+	    	coefVector.push_back(stod(coefficient));
+	    }
+	    ++i;
+	    /*
         std::cout << "Enter Equation ";
 		getline(std::cin, coefficient);
         std::cout << "Enter Starting Value";
         break;
+        */
 	}
 
 	// The following loop is for only development purpose
@@ -64,12 +67,13 @@ int main(int argc, char* argv[]) {
 
 	// Currently uses cosine as the iteration function
 	FixedPoint mFixedPoint;
-	//double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true );
+	double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, false );
     Chord mChord;
     //double testChord = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
     Newton mNewton;
-    double testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient,
-                                                   x0, 0.001, 100000, true);
-
+    //double testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient,
+    //                                               x0, 0.001, 100000, true);
+	
+    std::cout << result << std::endl;
     return 0;
 }

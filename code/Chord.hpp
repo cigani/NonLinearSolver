@@ -6,6 +6,9 @@
 #include <vector>
 
 class Chord {
+private:
+	void printVerbose(int i, double &x);
+
 public:
 
     // Constructors and destructors
@@ -21,8 +24,6 @@ public:
                          double tol,
                          int nMax,
                          bool verbose );
-    // Private variables
-
 };
     
 #endif /* CHORD_HPP_ */

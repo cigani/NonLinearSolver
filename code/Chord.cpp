@@ -48,10 +48,8 @@ double Chord::chordSolver(const std::vector<double>& coef,
     int i;
 
     if ( verbose ) {
-        std::cout << std::setw(3) << 0 << "\t" << std::setw(20)
-                  << x0 << std::setprecision(15) << std::endl;
-        std::cout << std::setw(3) << 1 << "\t" << std::setw(20)
-                  << x1 << std::setprecision(15) << std::endl;
+    	printVerbose(0, x0);
+    	printVerbose(1, x1);
     }
 
     fx0 = Equations::getPolyEquation(coef, x0);
@@ -60,8 +58,7 @@ double Chord::chordSolver(const std::vector<double>& coef,
         dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
         xnew = x1 - dx;
         if ( verbose ) {
-            std::cout << std::setw(3) << i << "\t" << std::setw(20)
-                      << xnew << std::setprecision(15) << std::endl;
+        	printVerbose(i, x0);
         }
         if ( fabs(dx) < tol ) {
             return xnew;
@@ -74,4 +71,9 @@ double Chord::chordSolver(const std::vector<double>& coef,
     }
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return xnew;
+}
+
+void Chord::printVerbose(int i, double &x) {
+	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
+	<< x << std::setprecision(15) << std::endl;
 }

@@ -7,6 +7,10 @@
 #include <vector>
 
 class Newton {
+private:
+ // Private variables
+	void printVerbose(int i, double &x);
+
 public:
     
     // Constructors and destructors
@@ -57,11 +61,6 @@ public:
 							  double tol,
 							  double nMax,
 							  bool verbose);
-    
-private:
-	 
- // Private variables
-
 };
     
 #endif /* NEWTON_HPP_ */
