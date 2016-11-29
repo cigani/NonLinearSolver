@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <vector>
 #include <cassert>
+#include <cmath>
 
 class Bisection {
 private:
@@ -15,12 +16,12 @@ public:
 	virtual ~Bisection();
 	Bisection();
 
-double bisectionSolver ( const std::string &eq,
-		double a,
-		double b,
-		double tol,
-		int nMax,
-		bool verbose );
+	double bisectionSolver ( const std::string &eq,
+			double a,
+			double b,
+			double tol,
+			int nMax,
+			bool verbose );
 };
 
 #endif /* BISECTION_HPP_ */

@@ -45,7 +45,7 @@ double Bisection::bisectionSolver ( const std::string &eq,
 		int nMax,
 		bool verbose )
 {
-     double sign_fa, sign_fb, sign_mp, midpoint;
+     double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
      int i;
      Equations mEquation;
 
@@ -73,6 +73,15 @@ double Bisection::bisectionSolver ( const std::string &eq,
          } else {
         	 return midpoint;
          }
+
+         if (i > 2){
+        	 error_est = fabs(midpoint - prev_midpoint);
+        	 if ( fabs(error_est) < tol ) {
+        		 return midpoint;
+        	 }
+         }
+
+         prev_midpoint = midpoint;
      }
      std::cout << "Maximum number of iterations exceeded" << std::endl;
      return midpoint;
