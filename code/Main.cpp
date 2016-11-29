@@ -20,6 +20,18 @@
 #include "Newton.hpp"
 #include "Aitken.hpp"
 
+#ifndef NDEBUG
+	#define mAssert(condition, message) \
+		do { \
+			if (! (condition)) { \
+				std::cerr << message << std::endl; \
+				std::exit(1); \
+			} \
+		} while (false)
+#else
+	#define mAssert(condition, message) do { } while (false)
+#endif
+
 std::string stringPadding(std::string original, size_t charCount);
 static void show_usage(std::string name);
 static void show_methods();
@@ -32,7 +44,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	std::string mMethod;
-	std::string mExpression;
+	std::string mExpression = "NULL";
 	double x0 = 0.0;
 	int nMax = 1000;
 	double tol = 0.001;
@@ -79,6 +91,8 @@ int main(int argc, char* argv[]) {
 			}
 		}
 	}
+
+	mAssert(mExpression != "NULL", "ERROR: No mathematical expression provided");
 
 	if ( mMethod == "aitken") {
 		std::cout << "Calling the Aitken Method" << std::endl;
@@ -180,3 +194,5 @@ static void show_methods() {
 				<< std::endl
 				<< std::endl;
 }
+
+
