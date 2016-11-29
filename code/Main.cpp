@@ -19,6 +19,7 @@
 #include "Chord.hpp"
 #include "Newton.hpp"
 #include "Aitken.hpp"
+#include "Bisection.hpp"
 
 #ifndef NDEBUG
 	#define mAssert(condition, message) \
@@ -49,6 +50,8 @@ int main(int argc, char* argv[]) {
 	int nMax = 1000;
 	double tol = 0.001;
 	bool verbose = false;
+	double lowerBound = -1.0;
+	double upperBound = 1.0;
 
 	// Parse the command line arguments for flags and values
 	for (int i = 1; i < argc; i++) {
@@ -56,6 +59,8 @@ int main(int argc, char* argv[]) {
 			if (( strcmp( argv[i], "-m") == 0) || ( strcmp( argv[i], "--method") == 0)) {
 				// Method declaration
 				if ( strcmp( argv[i + 1], "aitken") == 0 ) {
+					mMethod = argv[i + 1];
+				} else if ( strcmp( argv[i + 1], "bisection") == 0 ) {
 					mMethod = argv[i + 1];
 				} else if ( strcmp( argv[i + 1], "chord") == 0 ) {
 					mMethod = argv[i + 1];
@@ -78,11 +83,19 @@ int main(int argc, char* argv[]) {
 				// Maximum number of iterations.  Default 1000 as defined above.
 				nMax = std::stoi(argv[i + 1]);
 			} else if ( strcmp( argv[i], "-t") == 0) {
-				// Maximum number of iterations.  Default 1000 as defined above.
+				// Error tolerance.  Default 0.001.
 				tol = std::stod(argv[i + 1]);
 			} else if ( strcmp( argv[i], "-v") == 0) {
-				// Maximum number of iterations.  Default 1000 as defined above.
+				// Verbose setting.  Default false.
 				std::istringstream(argv[i + 1]) >> std::boolalpha >> verbose;
+				// Doesn't work. Weird.
+				// verbose = true;
+			} else if ( strcmp( argv[i], "-l") == 0) {
+				// Lower bound of the search interval
+				lowerBound = std::stod(argv[i + 1]);
+			}else if ( strcmp( argv[i], "-u") == 0) {
+				// Upper bound of the search interval
+				upperBound = std::stod(argv[i + 1]);
 			} else if (( strcmp( argv[i], "-h") == 0) || ( strcmp( argv[i], "--help") == 0)) {
 				// Print help dialog
 				show_usage(argv[0]);
@@ -98,6 +111,11 @@ int main(int argc, char* argv[]) {
 		std::cout << "Calling the Aitken Method" << std::endl;
 		Aitken aitken;
 		double result = aitken.aitkenExprtkSolver(mExpression, x0, tol, nMax, verbose);
+		std::cout << result << std::endl;
+	} else if ( mMethod == "bisection") {
+		std::cout << "Calling the Bisection Method" << std::endl;
+		Bisection bisection;
+		double result = bisection.bisectionSolver(mExpression, lowerBound, upperBound, tol, nMax, verbose);
 		std::cout << result << std::endl;
 	} else if ( mMethod == "chord") {
 		std::cout << "Calling the Chord Method" << std::endl;
@@ -137,7 +155,9 @@ static void show_usage(std::string name) {
 				<< " -xi %d"
 				<< " -nmax %i"
 				<< " -t %d"
-				<< " -v %b"
+				<< " -v"
+				<< " -l %d"
+				<< " -u %d"
 				<< std::endl
 				<< std::endl
 	    		<< "Options:\n"
@@ -167,7 +187,15 @@ static void show_usage(std::string name) {
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-v", 20)
-				<< stringPadding("True to print all intermediate calculations [default: false]", 60)
+				<< stringPadding("Include to print all intermediate calculations", 60)
+				<< std::endl
+				<< "\t"
+				<< stringPadding("-l", 20)
+				<< stringPadding("The lower bound of the search interval [default: -1.0]", 60)
+				<< std::endl
+				<< "\t"
+				<< stringPadding("-u", 20)
+				<< stringPadding("The upper bound of the search interval [default: 1.0]", 60)
 				<< std::endl;
 	    show_methods();
 }
@@ -179,6 +207,10 @@ static void show_methods() {
 				<< "\t"
 				<< stringPadding("aitken", 20)
 				<< stringPadding("Aitken Method", 40)
+				<< std::endl
+	    		<< "\t"
+	    		<< stringPadding("bisection", 20)
+				<< stringPadding("Bisection Method", 40)
 				<< std::endl
 	    		<< "\t"
 	    		<< stringPadding("chord", 20)
