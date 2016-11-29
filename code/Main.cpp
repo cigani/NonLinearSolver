@@ -111,27 +111,27 @@ int main(int argc, char* argv[]) {
 		std::cout << std::endl << "AITKIN METHOD" << std::endl;
 		Aitken aitken;
 		double result = aitken.aitkenExprtkSolver(mExpression, x0, tol, nMax, verbose);
-		std::cout << std::endl << "Result: " << result << std::endl;
+		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
 	} else if ( mMethod == "bisection") {
 		std::cout << std::endl << "BISECTION METHOD" << std::endl;
 		Bisection bisection;
 		double result = bisection.bisectionSolver(mExpression, lowerBound, upperBound, tol, nMax, verbose);
-		std::cout << std::endl << "Result: " << result << std::endl;
+		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
 	} else if ( mMethod == "chord") {
 		std::cout << std::endl << "CHORD METHOD" << std::endl;
 		Chord chord;
 		double result = chord.chordExprtkSolver(mExpression, x0, tol, nMax, verbose);
-		std::cout << std::endl << "Result: " << result << std::endl;
+		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
 	} else if ( mMethod == "fixedpoint") {
 		std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
 		FixedPoint fixedPoint;
 		double result = fixedPoint.fixedPointExprtkSolver(mExpression, x0, tol, nMax, verbose);
-		std::cout << std::endl << "Result: " << result << std::endl;
+		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
 	} else if ( mMethod == "newton") {
 		std::cout << std::endl << "NEWTON METHOD" << std::endl;
 		Newton newton;
 		double result = newton.newtonExprtkSolver(mExpression, x0, tol, nMax, verbose);
-		std::cout << std::endl << "Result: " << result << std::endl;
+		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
 	} else {
 		std::cout << std::endl << "ERROR: No method provided" << std::endl;
 		show_usage(argv[0]);
