@@ -155,16 +155,12 @@ static void show_usage(std::string name) {
 				<< " -xi %d"
 				<< " -nmax %i"
 				<< " -t %d"
-				<< " -v"
+				<< " -v %b"
 				<< " -l %d"
 				<< " -u %d"
 				<< std::endl
 				<< std::endl
-	    		<< "Options:\n"
-				<< "\t"
-				<< stringPadding("-h,--help", 20)
-				<< stringPadding("Show this help message", 60)
-				<< std::endl
+				<< "Required:\n"
 				<< "\t"
 				<< stringPadding("-m,--method", 20)
 				<< stringPadding("Specify Non-Linear Solver", 60)
@@ -172,6 +168,12 @@ static void show_usage(std::string name) {
 				<< "\t"
 				<< stringPadding("-e,--expression", 20)
 				<< stringPadding("Mathematical expression to solve enclosed in ''", 60)
+				<< std::endl
+				<< std::endl
+	    		<< "Optional:\n"
+				<< "\t"
+				<< stringPadding("-h,--help", 20)
+				<< stringPadding("Show this help message", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-xi", 20)
@@ -187,7 +189,7 @@ static void show_usage(std::string name) {
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-v", 20)
-				<< stringPadding("Include to print all intermediate calculations", 60)
+				<< stringPadding("true to print all intermediate calculations [default: false]", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-l", 20)
