@@ -20,10 +20,16 @@ public:
     
     // Public methods
     double chordSolver ( const std::vector<double>& coef,
-                         double x0,
-                         double tol,
-                         int nMax,
-                         bool verbose );
+    		double x0,
+			double tol,
+			int nMax,
+			bool verbose );
+
+    double chordExprtkSolver(const std::string &eq,
+    		double x0,
+			double tol,
+			double nMax,
+			bool verbose);
 };
     
 #endif /* CHORD_HPP_ */

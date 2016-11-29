@@ -73,6 +73,38 @@ double Chord::chordSolver(const std::vector<double>& coef,
     return xnew;
 }
 
+double Chord::chordExprtkSolver(const std::string &eq, double x0, double tol,
+                                  double nMax, bool verbose) {
+	double xnew, dx , fx0, fx1;
+	double x1 = x0 + 1;
+	int i;
+
+	Equations mEquation;
+
+    if (verbose) {
+    	printVerbose(0, x0);
+    }
+
+    fx0 = mEquation.exprtkGenerate2D(eq, x0);
+    for ( i = 2; i <= nMax; i++ ) {
+    	fx1 = mEquation.exprtkGenerate2D(eq, x1);
+    	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
+    	xnew = x1 - dx;
+    	if ( verbose ) {
+    		printVerbose(i, x0);
+        }
+    	if (fabs(dx) < tol ) {
+    		return xnew;
+    	} else {
+    		x0 = x1;
+    		fx0 = fx1;
+    		x1 = xnew;
+        }
+    }
+    std::cout << "Maximum number of iterations exceeded" << std::endl;
+    return x0;
+}
+
 void Chord::printVerbose(int i, double &x) {
 	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
 	<< x << std::setprecision(15) << std::endl;

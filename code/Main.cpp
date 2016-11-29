@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 
 	std::string mMethod;
 	std::string mExpression;
-	double x0;
+	double x0 = 0.0;
 	int nMax = 1000;
 	double tol = 0.001;
 	bool verbose = false;
@@ -80,63 +80,34 @@ int main(int argc, char* argv[]) {
 		}
 	}
 
-	if ( mMethod == "fixedpoint") {
+	if ( mMethod == "aitken") {
+		std::cout << "Calling the Aitken Method" << std::endl;
+		Aitken aitken;
+		double result = aitken.aitkenExprtkSolver(mExpression, x0, tol, nMax, verbose);
+		std::cout << result << std::endl;
+	} else if ( mMethod == "chord") {
+		std::cout << "Calling the Chord Method" << std::endl;
+		Chord chord;
+		double result = chord.chordExprtkSolver(mExpression, x0, tol, nMax, verbose);
+		std::cout << result << std::endl;
+	} else if ( mMethod == "fixedpoint") {
 		std::cout << "Calling the Fixed Point Method" << std::endl;
 		FixedPoint fixedPoint;
+		double result = fixedPoint.fixedPointExprtkSolver(mExpression, x0, tol, nMax, verbose);
+		std::cout << result << std::endl;
 	} else if ( mMethod == "newton") {
 		std::cout << "Calling the Newton Method" << std::endl;
 		Newton newton;
 		double result = newton.newtonExprtkSolver(mExpression, x0, tol, nMax, verbose);
 		std::cout << result << std::endl;
-	} else if ( mMethod == "chord") {
-		std::cout << "Calling the Chord Method" << std::endl;
-		Chord chord;
-	} else if ( mMethod == "aitken") {
-		std::cout << "Calling the Aitken Method" << std::endl;
-		Aitken aitken;
-	}
-}
-
-	/*
-	int i = 0;
-	while (true){
-		std::cout << "Enter coefficient for " << "x^" << i << " " << "Terminate with a blank line: ";
-		getline(std::cin, coefficient);
-	    if (coefficient.empty()){
-	    	break;
-
-	    } else {
-	    	coefVector.push_back(stod(coefficient));
-	    }
-	    ++i;
-
-        std::cout << "Enter Equation ";
-		getline(std::cin, coefficient);
-        break;
+	} else {
+		std::cout << std::endl << "ERROR: No method provided" << std::endl;
+		show_usage(argv[0]);
+		return 1;
 	}
 
-	double f = mEquation.getPolyEquation((const std::vector<double> &) coefVector, x0);
-	double df = mEquation.getPolyDerivative((const std::vector<double> &) coefVector, x0);
-    double ff = mEquation.exprtkGenerate2D((std::string &) coefficient, x0);
-    double dff = mEquation.exprtkGenerate2DDerivative(
-            (std::string &) coefficient, x0);
-
-    printf("Result Equation: %10.5f\n", ff);
-    printf("Result Derivative: %10.5f\n", dff);
-
-	// Currently uses cosine as the iteration function
-	FixedPoint mFixedPoint;
-	double result = mFixedPoint.fixedPointSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, false );
-    Chord mChord;
-    //double testChord = mChord.chordSolver((const std::vector<double> &) coefVector, x0, 0.001, 1000, true);
-    Newton mNewton;
-    //double testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient,
-    //                                               x0, 0.001, 100000, true);
-	
-    std::cout << result << std::endl;
-    return 0;
+	return 0;
 }
-*/
 
 std::string stringPadding(std::string original, size_t charCount ) {
     original.resize( charCount, ' ' );
@@ -170,7 +141,7 @@ static void show_usage(std::string name) {
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-xi", 20)
-				<< stringPadding("Initial guess of the solution", 60)
+				<< stringPadding("Initial guess of the solution [default: 0.0]", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-nmax", 20)

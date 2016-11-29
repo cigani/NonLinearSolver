@@ -20,15 +20,16 @@ public:
     
     // Public methods
     double fixedPointSolver ( const std::vector<double>& coef,
-			      double x0,
-			      double tol,
-			      int nMax,
-			      bool verbose );
+    		double x0,
+			double tol,
+			int nMax,
+			bool verbose );
     
-private:
-    
-    // Private variables
-
+    double fixedPointExprtkSolver(const std::string &eq,
+    		double x0,
+    		double tol,
+    		int nMax,
+    		bool verbose );
 };
   
 #endif /* FIXEDPOINT_HPP_ */

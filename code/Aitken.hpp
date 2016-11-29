@@ -20,11 +20,17 @@ public:
     typedef double (*func1arg) (double);
     
     // Public methods
-	double aitkenSolver(std::__1::vector<double> &coef,
-						double x0,
-						double tol,
-						int nMax,
-						bool verbose);
+	double aitkenSolver(std::vector<double> &coef,
+			double x0,
+			double tol,
+			int nMax,
+			bool verbose);
+
+	double aitkenExprtkSolver(const std::string &eq,
+			double x0,
+			double tol,
+			int nMax,
+			bool verbose);
 };
     
 #endif /* AITKEN_HPP_ */
