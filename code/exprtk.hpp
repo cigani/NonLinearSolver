@@ -681,15 +681,15 @@ namespace exprtk {
                 exprtk_register_int_type_tag(short)
                 exprtk_register_int_type_tag(int)
                 exprtk_register_int_type_tag(long
-                                                     long
+                                             long
                                                      int)
                 exprtk_register_int_type_tag(unsigned
                                                      short)
                 exprtk_register_int_type_tag(unsigned
                                                      int)
                 exprtk_register_int_type_tag(unsigned
-                                                     long
-                                                     long
+                                             long
+                                             long
                                                      int)
 
 #undef exprtk_register_real_type_tag
@@ -2520,13 +2520,11 @@ namespace exprtk {
                         if ('#' == c0) {
                             mode = 1;
                             incr = 1;
-                        }
-                        else if ('/' == c0) {
+                        } else if ('/' == c0) {
                             if ('/' == c1) {
                                 mode = 1;
                                 incr = 2;
-                            }
-                            else if ('*' == c1) {
+                            } else if ('*' == c1) {
                                 mode = 2;
                                 incr = 2;
                             }
@@ -15134,42 +15132,43 @@ namespace exprtk {
 
         template<typename T>
         inline bool is_vov_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const vov_base_node<T> *>(node));
+            return (0 != dynamic_cast<const vov_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_cov_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const cov_base_node<T> *>(node));
+            return (0 != dynamic_cast<const cov_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_voc_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const voc_base_node<T> *>(node));
+            return (0 != dynamic_cast<const voc_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_cob_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const cob_base_node<T> *>(node));
+            return (0 != dynamic_cast<const cob_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_boc_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const boc_base_node<T> *>(node));
+            return (0 != dynamic_cast<const boc_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_t0ot1ot2_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const T0oT1oT2_base_node<T> *>(node));
+            return (0 != dynamic_cast<const T0oT1oT2_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_t0ot1ot2ot3_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const T0oT1oT2oT3_base_node<T> *>(node));
+            return (0 !=
+                    dynamic_cast<const T0oT1oT2oT3_base_node <T> *>(node));
         }
 
         template<typename T>
         inline bool is_uv_node(const expression_node<T> *node) {
-            return (0 != dynamic_cast<const uv_base_node<T> *>(node));
+            return (0 != dynamic_cast<const uv_base_node <T> *>(node));
         }
 
         template<typename T>
@@ -15284,16 +15283,18 @@ namespace exprtk {
             template<typename ResultNode, typename OpType, typename ExprNode>
             inline expression_node<typename ResultNode::value_type> *
             allocate(OpType &operation, ExprNode (&branch)[5]) {
-                return allocate<ResultNode>(operation, branch[0], branch[1],
-                                            branch[2], branch[3], branch[4]);
+                return allocate < ResultNode >
+                       (operation, branch[0], branch[1],
+                               branch[2], branch[3], branch[4]);
             }
 
             template<typename ResultNode, typename OpType, typename ExprNode>
             inline expression_node<typename ResultNode::value_type> *
             allocate(OpType &operation, ExprNode (&branch)[6]) {
-                return allocate<ResultNode>(operation, branch[0], branch[1],
-                                            branch[2], branch[3], branch[4],
-                                            branch[5]);
+                return allocate < ResultNode >
+                       (operation, branch[0], branch[1],
+                               branch[2], branch[3], branch[4],
+                               branch[5]);
             }
 
             template<typename node_type>
@@ -16443,7 +16444,7 @@ namespace exprtk {
         inline symbol_table<T> &operator=(const symbol_table<T> &st) {
             if (this != &st) {
                 control_block::destroy(control_block_,
-                                       reinterpret_cast<symbol_table<T> *>(0));
+                                       reinterpret_cast<symbol_table <T> *>(0));
 
                 control_block_ = st.control_block_;
                 control_block_->ref_count++;
@@ -17401,11 +17402,11 @@ namespace exprtk {
                                 break;
 
                             case e_data      :
-                                delete (T *) (local_data_list[i].pointer);
+                                delete (T * )(local_data_list[i].pointer);
                                 break;
 
                             case e_vecdata   :
-                                delete[] (T *) (local_data_list[i].pointer);
+                                delete[] (T * )(local_data_list[i].pointer);
                                 break;
 
                             case e_string    :
@@ -20609,8 +20610,8 @@ namespace exprtk {
 
             std::fill_n(branch, NumberofParameters,
                         reinterpret_cast<expression_node_ptr>(0));
-            scoped_delete<expression_node_t, NumberofParameters> sd(*this,
-                                                                    branch);
+            scoped_delete <expression_node_t, NumberofParameters> sd(*this,
+                                                                     branch);
 
             next_token();
 
@@ -20699,8 +20700,8 @@ namespace exprtk {
             std::fill_n(param_list, MaxNumberofParameters,
                         reinterpret_cast<expression_node_ptr>(0));
 
-            scoped_delete<expression_node_t, MaxNumberofParameters> sd(*this,
-                                                                       param_list);
+            scoped_delete <expression_node_t, MaxNumberofParameters> sd(*this,
+                                                                        param_list);
 
             next_token();
 
@@ -21198,7 +21199,7 @@ namespace exprtk {
             std::vector<expression_node_ptr> arg_list;
             std::vector<bool> side_effect_list;
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             brkcnt_list_.push_front(false);
 
@@ -21400,7 +21401,7 @@ namespace exprtk {
                             nse.depth = state_.scope_depth;
                             nse.data = new T(T(0));
                             nse.var_node = node_allocator_.allocate<variable_node_t>(
-                                    *(T *) (nse.data));
+                                    *(T * )(nse.data));
 
                             if (!sem_.add_element(nse)) {
                                 set_error(
@@ -21526,7 +21527,7 @@ namespace exprtk {
                 return error_node();
             }
 
-            scoped_vec_delete<expression_node_t> svd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> svd(*this, arg_list);
 
             next_token();
 
@@ -21655,7 +21656,7 @@ namespace exprtk {
                 return error_node();
             }
 
-            scoped_vec_delete<expression_node_t> svd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> svd(*this, arg_list);
 
             next_token();
 
@@ -21773,7 +21774,7 @@ namespace exprtk {
                 return error_node();
             }
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             lodge_symbol(symbol, e_st_function);
 
@@ -21989,7 +21990,7 @@ namespace exprtk {
 
             expression_node_ptr result = error_node();
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             scope_handler sh(*this);
 
@@ -22399,7 +22400,7 @@ namespace exprtk {
             std::vector<expression_node_ptr> arg_list;
             expression_node_ptr result = error_node();
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             next_token();
 
@@ -22670,7 +22671,7 @@ namespace exprtk {
                                     const std::string &function_name) {
             std::vector<expression_node_ptr> arg_list;
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             next_token();
 
@@ -22792,7 +22793,7 @@ namespace exprtk {
                                    const std::string &function_name) {
             std::vector<expression_node_ptr> arg_list;
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             next_token();
 
@@ -22875,8 +22876,8 @@ namespace exprtk {
                 expression_node_ptr result = error_node();
                 std::fill_n(branch, NumberOfParameters,
                             reinterpret_cast<expression_node_ptr>(0));
-                scoped_delete<expression_node_t, NumberOfParameters> sd(p,
-                                                                        branch);
+                scoped_delete <expression_node_t, NumberOfParameters> sd(p,
+                                                                         branch);
 
                 p.next_token();
 
@@ -23097,8 +23098,8 @@ namespace exprtk {
 
             std::vector<expression_node_ptr> vec_initilizer_list;
 
-            scoped_vec_delete<expression_node_t> svd(*this,
-                                                     vec_initilizer_list);
+            scoped_vec_delete <expression_node_t> svd(*this,
+                                                      vec_initilizer_list);
 
             bool single_value_initialiser = false;
             bool vec_to_vec_initialiser = false;
@@ -23283,7 +23284,7 @@ namespace exprtk {
                 nse.size = vec_size;
                 nse.data = new T[vec_size];
                 nse.vec_node = new typename scope_element::vector_holder_t(
-                        (T *) (nse.data), nse.size);
+                        (T * )(nse.data), nse.size);
 
                 if (!sem_.add_element(nse)) {
                     set_error(
@@ -23535,7 +23536,7 @@ namespace exprtk {
                 nse.depth = state_.scope_depth;
                 nse.data = new T(T(0));
                 nse.var_node = node_allocator_.allocate<variable_node_t>(
-                        *(T *) (nse.data));
+                        *(T * )(nse.data));
 
                 if (!sem_.add_element(nse)) {
                     set_error(
@@ -23622,7 +23623,7 @@ namespace exprtk {
                 nse.ip_index = sem_.next_ip_index();
                 nse.data = new T(T(0));
                 nse.var_node = node_allocator_.allocate<variable_node_t>(
-                        *(T *) (nse.data));
+                        *(T * )(nse.data));
 
                 if (!sem_.add_element(nse)) {
                     set_error(
@@ -23854,7 +23855,7 @@ namespace exprtk {
 
             std::vector<expression_node_ptr> arg_list;
 
-            scoped_vec_delete<expression_node_t> sdd(*this, arg_list);
+            scoped_vec_delete <expression_node_t> sdd(*this, arg_list);
 
             if (!details::imatch(current_token().value, "return")) {
                 return error_node();
@@ -24065,7 +24066,7 @@ namespace exprtk {
 
             {
                 // Are we dealing with a function?
-                ifunction<T> *function = symtab_store_.get_function(symbol);
+                ifunction <T> *function = symtab_store_.get_function(symbol);
 
                 if (function) {
                     lodge_symbol(symbol, e_st_function);
@@ -24089,7 +24090,7 @@ namespace exprtk {
 
             {
                 // Are we dealing with a vararg function?
-                ivararg_function<T> *vararg_function = symtab_store_.get_vararg_function(
+                ivararg_function <T> *vararg_function = symtab_store_.get_vararg_function(
                         symbol);
 
                 if (vararg_function) {
@@ -24115,7 +24116,7 @@ namespace exprtk {
 
             {
                 // Are we dealing with a vararg generic function?
-                igeneric_function<T> *generic_function = symtab_store_.get_generic_function(
+                igeneric_function <T> *generic_function = symtab_store_.get_generic_function(
                         symbol);
 
                 if (generic_function) {
@@ -24141,7 +24142,7 @@ namespace exprtk {
 
             {
                 // Are we dealing with a vararg string returning function?
-                igeneric_function<T> *string_function = symtab_store_.get_string_function(
+                igeneric_function <T> *string_function = symtab_store_.get_string_function(
                         symbol);
 
                 if (string_function) {
@@ -33925,8 +33926,8 @@ namespace exprtk {
 
                 if (details::e_add == opr) {
                     if (!b0_is_cs || !b1_is_cs) {
-                        return synthesize_expression < string_concat_node_t,
-                                2 > (opr, branch);
+                        return synthesize_expression<string_concat_node_t,
+                                2>(opr, branch);
                     }
                 }
 
@@ -34674,7 +34675,7 @@ namespace exprtk {
                        const std::string &variable_name,
                        const T &r0, const T &r1,
                        const std::size_t number_of_intervals = 1000000) {
-        const symbol_table<T> &sym_table = e.get_symbol_table();
+        const symbol_table <T> &sym_table = e.get_symbol_table();
 
         if (!sym_table.valid())
             return std::numeric_limits<T>::quiet_NaN();
@@ -34751,7 +34752,7 @@ namespace exprtk {
     inline T derivative(const expression<T> &e,
                         const std::string &variable_name,
                         const T &h = T(0.00000001)) {
-        const symbol_table<T> &sym_table = e.get_symbol_table();
+        const symbol_table <T> &sym_table = e.get_symbol_table();
 
         if (!sym_table.valid()) {
             return std::numeric_limits<T>::quiet_NaN();
@@ -34774,7 +34775,7 @@ namespace exprtk {
     inline T second_derivative(const expression<T> &e,
                                const std::string &variable_name,
                                const T &h = T(0.00001)) {
-        const symbol_table<T> &sym_table = e.get_symbol_table();
+        const symbol_table <T> &sym_table = e.get_symbol_table();
 
         if (!sym_table.valid()) {
             return std::numeric_limits<T>::quiet_NaN();
@@ -34797,7 +34798,7 @@ namespace exprtk {
     inline T third_derivative(const expression<T> &e,
                               const std::string &variable_name,
                               const T &h = T(0.0001)) {
-        const symbol_table<T> &sym_table = e.get_symbol_table();
+        const symbol_table <T> &sym_table = e.get_symbol_table();
 
         if (!sym_table.valid()) {
             return std::numeric_limits<T>::quiet_NaN();
@@ -34829,11 +34830,11 @@ namespace exprtk {
     template<typename T>
     inline bool compute(const std::string &expression_string, T &result) {
         // No variables
-        symbol_table<T> symbol_table;
+        symbol_table <T> symbol_table;
         symbol_table.add_constants();
 
-        expression<T> expression;
-        parser<T> parser;
+        expression <T> expression;
+        parser <T> parser;
 
         if (parser.compile(expression_string, expression)) {
             result = expression.value();
@@ -34850,12 +34851,12 @@ namespace exprtk {
         // Only 'x'
         static const std::string x_var("x");
 
-        symbol_table<T> symbol_table;
+        symbol_table <T> symbol_table;
         symbol_table.add_constants();
         symbol_table.add_variable(x_var, x);
 
-        expression<T> expression;
-        parser<T> parser;
+        expression <T> expression;
+        parser <T> parser;
 
         if (parser.compile(expression_string, expression)) {
             result = expression.value();
@@ -34873,13 +34874,13 @@ namespace exprtk {
         static const std::string x_var("x");
         static const std::string y_var("y");
 
-        symbol_table<T> symbol_table;
+        symbol_table <T> symbol_table;
         symbol_table.add_constants();
         symbol_table.add_variable(x_var, x);
         symbol_table.add_variable(y_var, y);
 
-        expression<T> expression;
-        parser<T> parser;
+        expression <T> expression;
+        parser <T> parser;
 
         if (parser.compile(expression_string, expression)) {
             result = expression.value();
@@ -34898,14 +34899,14 @@ namespace exprtk {
         static const std::string y_var("y");
         static const std::string z_var("z");
 
-        symbol_table<T> symbol_table;
+        symbol_table <T> symbol_table;
         symbol_table.add_constants();
         symbol_table.add_variable(x_var, x);
         symbol_table.add_variable(y_var, y);
         symbol_table.add_variable(z_var, z);
 
-        expression<T> expression;
-        parser<T> parser;
+        expression <T> expression;
+        parser <T> parser;
 
         if (parser.compile(expression_string, expression)) {
             result = expression.value();
