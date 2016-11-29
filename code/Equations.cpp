@@ -135,14 +135,33 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         return __nan();
     }
     int n = 0;
+    int k = 0;
+    int j = 0;
     double result = exprtk::derivative(expression, x);
     while (result < DBL_EPSILON) {
         result = exprtk::derivative(expression, x);
-        x += 10 * DBL_EPSILON;
+        x += 1000 * DBL_EPSILON;
         n += 1;
-        if (n > 10000) {
-            std::cout << "Derivative unable to calculate" << std::endl;
-            std::exit(1);
+        if (n > 100000) {
+            while (result < DBL_EPSILON) {
+                x += 100 * FLT_EPSILON;
+                result = exprtk::derivative(expression, x);
+                k += 1;
+                if (k > 100000) {
+                    while (result < DBL_EPSILON) {
+                        x += 0.01;
+                        result = exprtk::derivative(expression, x);
+                        j += 1;
+                        if (k > 10000) {
+                            std::cout << "No Derivative" << std::endl;
+                            std::exit(1);
+                        }
+                    }
+
+                }
+            }
+
+
         };
     }
     return result;
