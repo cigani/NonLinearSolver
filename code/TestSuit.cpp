@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
     // Tests
     test.testChordSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
-    test.testNewtonSolver(0.0015, -0.66381, 3, 1000, false, mTestVector);
+    test.testNewtonSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
     test.testNewtonWithExprtkPoly(0.0015, -3.16227766517654, 1.1, 1000, false,
                                   mPolyCoefficient);
     test.testNewtonWithExprtkLog(0.0015, 22026.4657948162, 10.0, 1000, false,
@@ -39,9 +39,14 @@ TestSuit::testChordSolver(const double tol, const double expected,
     double *realValue = new double;
     *realValue = testChord.chordSolver(
             vector, x0, tol, max, verbose);
-    assert((expected - *realValue) <= tol);
-    printf("Chord Success");
-    printf("\n");
+    if ((expected - *realValue) <= tol) {
+        printf("Chord: Poly Success");
+        printf("\n");
+    } else {
+        printf("Chord: Poly  --- Failure ---");
+        printf("\n");
+    };
+    delete (realValue);
 
 };
 
@@ -50,14 +55,19 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
                            const double x0, const int max,
                            const bool verbose,
                            const std::vector<double> &vector) {
-    //std::vector<double> testVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     Newton testNewton;
     double *realValue = new double;
     *realValue = testNewton.newtonSolver(
             vector, x0, tol, max, verbose);
-    assert((expected - *realValue) <= tol);
-    printf("Newton: Poly Success");
-    printf("\n");
+    if ((expected - *realValue) <= tol) {
+        printf("Newton: Poly Success");
+        printf("\n");
+    } else {
+        printf("Newton: Poly  --- Failure ---");
+        printf("\n");
+    }
+
+    delete (realValue);
 }
 
 void
@@ -70,9 +80,13 @@ TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
     Newton mNewton;
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
-    assert((expected - testNewton) <= tol);
-    printf("Newton: Exprtk Poly Success");
-    printf("\n");
+    if ((expected - testNewton) <= tol) {
+        printf("Newton Exprtk: Poly Success");
+        printf("\n");
+    } else {
+        printf("Newton Exprtk:  --- Poly Failure ---");
+        printf("\n");
+    }
 }
 
 void
@@ -85,9 +99,13 @@ TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
 
-    assert((expected - testNewton) <= tol);
-    printf("Newton: Exprtk Log Success");
-    printf("\n");
+    if ((expected - testNewton) <= tol) {
+        printf("Newton Exprtk: Log Success");
+        printf("\n");
+    } else {
+        printf("Newton Exprtk:  --- Log Failure ---");
+        printf("\n");
+    }
 }
 
 void
@@ -101,9 +119,13 @@ TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
     //TODO: Testing periodicity so we aren't so hamstrung by starting point
     testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient, x0,
                                             tol, max, verbose);
-    assert((expected - testNewton) < tol);
-    printf("Newton: Exprtk Trig Success");
-    printf("\n");
+    if ((expected - testNewton) <= tol) {
+        printf("Newton Exprtk: Trig Success");
+        printf("\n");
+    } else {
+        printf("Newton Exprtk: --- Trig Failure ---");
+        printf("\n");
+    }
 }
 
 void
@@ -113,10 +135,14 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
                                  std::string &coefficient) {
     double testNewton;
     Newton mNewton;
-    testNewton = mNewton.newtonExprtkSolver((std::string &) coefficient, x0,
+    testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
-    assert((expected - testNewton) < tol);
-    printf("Newton: Exprtk Exp Success");
-    printf("\n");
+    if ((expected - testNewton) <= tol) {
+        printf("Newton Exprtk: Exp Success");
+        printf("\n");
+    } else {
+        printf("Newton Exprtk: --- Exp Failure ---");
+        printf("\n");
+    }
 }
 
