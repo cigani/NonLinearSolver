@@ -7,6 +7,6 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # The syntax is add_executable(executable_name source_file_name)
 
 add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
-        Equations.cpp Aitken.cpp exprtk.hpp)
+        Equations.cpp Aitken.cpp exprtk.hpp Bisection.cpp)
 add_executable(tests Equations.cpp Chord.cpp Newton.cpp FixedPoint.cpp
-        Aitken.cpp TestSuit.cpp TestSuit.h exprtk.hpp)
+        Aitken.cpp TestSuit.cpp TestSuit.h exprtk.hpp Bisection.cpp)
