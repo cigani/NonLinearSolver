@@ -18,7 +18,15 @@ public:
     void testNewtonSolver();
     void testFixedPointSolver();
 
-    void testNewtonWithExprtk();
+    void testNewtonWithExprtkPoly();
+
+    void testNewtonWithExprtkLog();
+
+    void testNewtonWithExprtTrig();
+
+    void testNewtonWithExprtExp();
+
+
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

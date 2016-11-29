@@ -49,6 +49,7 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
+    typedef exprtk::parser_error::type error_t;
 
     std::string expr_string = eq;
 
@@ -73,6 +74,24 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
 
     parser_t parser;
     parser.compile(expr_string, expression);
+    if (!parser.compile(expr_string, expression)) {
+        printf("Error: %s\tExpression: %s\n",
+               parser.error().c_str(),
+               expr_string.c_str());
+
+        for (std::size_t i = 0; i < parser.error_count(); ++i) {
+            error_t error = parser.get_error(i);
+
+            printf("Error: %02d  Position: %02d Type: [%14s] Msg: %s\tExpression: %s\n",
+                   static_cast<unsigned int>(i),
+                   static_cast<unsigned int>(error.token.position),
+                   exprtk::parser_error::to_str(error.mode).c_str(),
+                   error.diagnostic.c_str(),
+                   expr_string.c_str());
+        }
+
+        return __nan();
+    }
 
     double result = expression.value();
     return result;
@@ -84,6 +103,7 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
+    typedef exprtk::parser_error::type error_t;
 
     std::string expr_string = eq;
 
@@ -102,6 +122,24 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
 
     parser_t parser;
     parser.compile(expr_string, expression);
+    if (!parser.compile(expr_string, expression)) {
+        printf("Error: %s\tExpression: %s\n",
+               parser.error().c_str(),
+               expr_string.c_str());
+
+        for (std::size_t i = 0; i < parser.error_count(); ++i) {
+            error_t error = parser.get_error(i);
+
+            printf("Error: %02d  Position: %02d Type: [%14s] Msg: %s\tExpression: %s\n",
+                   static_cast<unsigned int>(i),
+                   static_cast<unsigned int>(error.token.position),
+                   exprtk::parser_error::to_str(error.mode).c_str(),
+                   error.diagnostic.c_str(),
+                   expr_string.c_str());
+        }
+
+        return __nan();
+    }
 
     return exprtk::derivative(expression, x);
 
