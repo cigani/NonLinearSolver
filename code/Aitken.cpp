@@ -29,28 +29,29 @@
  */
 
 #include "Aitken.hpp"
+#include "Equations.hpp"
 
 Aitken::Aitken() {}
 
 Aitken::~Aitken() {}
 
-double Aitken::aitkenSolver ( func1arg g,
-			      double x0,
-			      double tol, 
-			      int nMax,
-			      boolean verbose )
+double Aitken::aitkenSolver(std::vector<double> &coef,
+                            double x0,
+                            double tol,
+                            int nMax,
+                            bool verbose)
 {
   double x1, x2, phat, phatold;
   int i;
-  
+  Equations mEquation;
   phatold = x0;
-  if ( verbose == true ) {
+  if (verbose) {
     std::cout << std::setw(3) << 0 << "\t" << std::setw(20) << x0
 	 << std::setprecision(15) << std::endl;
   }
-  
-  x1 = g(x0);
-  if ( verbose == true ) {
+
+  x1 = Equations::getPolyEquation(coef, x0);
+  if (verbose) {
 	  std::cout << std::setw(3) << 1 << "\t" << std::setw(20) << x1
 	 << std::setprecision(15) << std::endl;
   }
@@ -62,9 +63,9 @@ double Aitken::aitkenSolver ( func1arg g,
   }
   
   for ( i = 2; i <= nMax; i++ ) {
-    x2 = g(x1);
+    x2 = Equations::getPolyEquation(coef, x1);
     phat = x2 - ( x2 - x1 ) * ( x2 - x1 ) / ( x2 - 2 * x1 + x0 );
-    if ( verbose == true) {
+    if (verbose) {
     	std::cout << std::setw(3) << i << "\t" << std::setw(20)
 	   << x2 << "\t" << std::setw(20) << phat << std::setprecision(15) << std::endl;
     }

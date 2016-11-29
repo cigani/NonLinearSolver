@@ -54,12 +54,6 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     std::string expr_string = eq;
 
     double x = value;
-
-    // This is currently running as y = func(x);
-    // We can add more variables i.e., Z = func(x,y) by uncommenting the following;
-    // The limit is 20 parameters for this method of doing the function,
-    // It can be refactored to accept unlimited paramters but the code is more complex;
-
     double y;
     double z;
 

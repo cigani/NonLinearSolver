@@ -1,6 +1,7 @@
-//
-// Created by Michael Jaquier on 28.11.16.
-//
+/* AUTHORS:
+* Jaquier, Michael <michael.jaquier@epfl.ch>
+* Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+*/
 
 #ifndef PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
 #define PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

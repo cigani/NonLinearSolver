@@ -4,6 +4,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cmath>
+#include <vector>
 
 class Aitken {
 public:
@@ -16,11 +17,11 @@ public:
     typedef double (*func1arg) (double);
     
     // Public methods
-    double aitkenSolver( func1arg g,
-			 double x0,
-			 double tol,
-			 int nMax,
-			 bool verbose );
+	double aitkenSolver(std::__1::vector<double> &coef,
+						double x0,
+						double tol,
+						int nMax,
+						bool verbose);
     
 private:
     
