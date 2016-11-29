@@ -58,7 +58,7 @@ double Chord::chordSolver(const std::vector<double>& coef,
         dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
         xnew = x1 - dx;
         if ( verbose ) {
-        	printVerbose(i, x0);
+        	printVerbose(i, xnew);
         }
         if ( fabs(dx) < tol ) {
             return xnew;
@@ -83,6 +83,7 @@ double Chord::chordExprtkSolver(const std::string &eq, double x0, double tol,
 
     if (verbose) {
     	printVerbose(0, x0);
+    	printVerbose(1, x1);
     }
 
     fx0 = mEquation.exprtkGenerate2D(eq, x0);
@@ -91,7 +92,7 @@ double Chord::chordExprtkSolver(const std::string &eq, double x0, double tol,
     	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
     	xnew = x1 - dx;
     	if ( verbose ) {
-    		printVerbose(i, x0);
+    		printVerbose(i, xnew);
         }
     	if (fabs(dx) < tol ) {
     		return xnew;
