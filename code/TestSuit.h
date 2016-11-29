@@ -14,13 +14,18 @@
 
 class TestSuit: Chord {
 public:
-    void testChordSolver();
-    void testNewtonSolver();
+    void testChordSolver(const double tol, const double expected);
+
+    void testNewtonSolver(const double tol, const double expected);
     void testFixedPointSolver();
-    void testNewtonWithExprtkPoly();
-    void testNewtonWithExprtkLog();
-    void testNewtonWithExprtTrig();
-    void testNewtonWithExprtExp();
+
+    void testNewtonWithExprtkPoly(const double tol, const double expected);
+
+    void testNewtonWithExprtkLog(const double tol, const double expected);
+
+    void testNewtonWithExprtTrig(const double tol, const double expected);
+
+    void testNewtonWithExprtExp(const double tol, const double expected);
 
 
 };

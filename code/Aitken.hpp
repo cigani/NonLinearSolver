@@ -25,8 +25,8 @@ public:
 private:
     
     // Private variables
-    
-}
+
+};
     
 #endif /* AITKEN_HPP_ */
 #endif /* AITKEN_HPP_ */

@@ -141,6 +141,4 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         return __nan();
     }
     return exprtk::derivative(expression, x);
-
-    //T result = expression.value();
 }

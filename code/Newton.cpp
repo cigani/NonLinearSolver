@@ -96,9 +96,8 @@ double Newton::modifiedNewtonSolver(const std::vector<double>& coef, double x0,
      return x0;
 }
 
-double
-Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
-                           double nMax, bool verbose) {
+double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
+                                  double nMax, bool verbose) {
     double dx, fx0, dfx0;
     Equations mEquation;
     int i;
