@@ -14,6 +14,7 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include <boost/algorithm/string.hpp>
 #include "FixedPoint.hpp"
 #include "Equations.hpp"
 #include "Chord.hpp"
@@ -58,15 +59,15 @@ int main(int argc, char* argv[]) {
 		if (i + 1 != argc) {
 			if (( strcmp( argv[i], "-m") == 0) || ( strcmp( argv[i], "--method") == 0)) {
 				// Method declaration
-				if ( strcmp( argv[i + 1], "aitken") == 0 ) {
+				if (boost::iequals(argv[i + 1], "aitken")) {
 					mMethod = argv[i + 1];
-				} else if ( strcmp( argv[i + 1], "bisection") == 0 ) {
+				} else if (boost::iequals(argv[i + 1], "bisection")) {
 					mMethod = argv[i + 1];
-				} else if ( strcmp( argv[i + 1], "chord") == 0 ) {
+				} else if (boost::iequals(argv[i + 1], "chord")) {
 					mMethod = argv[i + 1];
-				} else if ( strcmp( argv[i + 1], "fixedpoint") == 0 ) {
+				} else if (boost::iequals(argv[i + 1],  "fixedpoint")) {
 					mMethod = argv[i + 1];
-				} else if ( strcmp( argv[i + 1], "newton") == 0 ) {
+				} else if (boost::iequals(argv[i + 1], "newton")) {
 					mMethod = argv[i + 1];
 				} else {
 					std::cout << std::endl << "ERROR: Unknown method provided" << std::endl;
@@ -107,27 +108,27 @@ int main(int argc, char* argv[]) {
 
 	mAssert(mExpression != "NULL", "ERROR: No mathematical expression provided");
 
-	if ( mMethod == "aitken") {
-		std::cout << std::endl << "AITKIN METHOD" << std::endl;
+	if (boost::iequals(mMethod, "aitken")) {
+		std::cout << std::endl << "AITKEN METHOD" << std::endl;
 		Aitken aitken;
 		double result = aitken.aitkenExprtkSolver(mExpression, x0, tol, nMax, verbose);
 		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
-	} else if ( mMethod == "bisection") {
+	} else if (boost::iequals(mMethod, "bisection")) {
 		std::cout << std::endl << "BISECTION METHOD" << std::endl;
 		Bisection bisection;
 		double result = bisection.bisectionSolver(mExpression, lowerBound, upperBound, tol, nMax, verbose);
 		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
-	} else if ( mMethod == "chord") {
+	} else if (boost::iequals(mMethod, "chord")) {
 		std::cout << std::endl << "CHORD METHOD" << std::endl;
 		Chord chord;
 		double result = chord.chordExprtkSolver(mExpression, x0, tol, nMax, verbose);
 		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
-	} else if ( mMethod == "fixedpoint") {
+	} else if (boost::iequals(mMethod, "fixedpoint")) {
 		std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
 		FixedPoint fixedPoint;
 		double result = fixedPoint.fixedPointExprtkSolver(mExpression, x0, tol, nMax, verbose);
 		std::cout << std::endl << "RESULT: " << result << std::endl << std::endl;
-	} else if ( mMethod == "newton") {
+	} else if (boost::iequals(mMethod, "newton")) {
 		std::cout << std::endl << "NEWTON METHOD" << std::endl;
 		Newton newton;
 		double result = newton.newtonExprtkSolver(mExpression, x0, tol, nMax, verbose);
