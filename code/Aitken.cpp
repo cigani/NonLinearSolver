@@ -46,14 +46,12 @@ double Aitken::aitkenSolver(std::vector<double> &coef,
   Equations mEquation;
   phatold = x0;
   if (verbose) {
-    std::cout << std::setw(3) << 0 << "\t" << std::setw(20) << x0
-	 << std::setprecision(15) << std::endl;
+	  printVerbose(0,x0);
   }
 
   x1 = Equations::getPolyEquation(coef, x0);
   if (verbose) {
-	  std::cout << std::setw(3) << 1 << "\t" << std::setw(20) << x1
-	 << std::setprecision(15) << std::endl;
+	  printVerbose(1,x1);
   }
   
   if ( fabs(x1-x0) < tol ) {
@@ -63,18 +61,23 @@ double Aitken::aitkenSolver(std::vector<double> &coef,
   }
   
   for ( i = 2; i <= nMax; i++ ) {
-    x2 = Equations::getPolyEquation(coef, x1);
-    phat = x2 - ( x2 - x1 ) * ( x2 - x1 ) / ( x2 - 2 * x1 + x0 );
-    if (verbose) {
-    	std::cout << std::setw(3) << i << "\t" << std::setw(20)
-	   << x2 << "\t" << std::setw(20) << phat << std::setprecision(15) << std::endl;
-    }
-    if ( fabs(phatold - phat) < tol ) {
-      return phat;
-    } else {
-      phatold = phat;  x0 = x1;  x1 = x2;
-    }
+	  x2 = Equations::getPolyEquation(coef, x1);
+	  phat = x2 - ( x2 - x1 ) * ( x2 - x1 ) / ( x2 - 2 * x1 + x0 );
+	  if (verbose) {
+		  printVerbose(i,x2);
+	  }
+	  if ( fabs(phatold - phat) < tol ) {
+		  return phat;
+	  } else {
+		  phatold = phat;  x0 = x1;  x1 = x2;
+	  }
   }
   std::cout << "Maximum number of iterations exceeded" << std::endl;
   return phat;
 }
+
+void Aitken::printVerbose(int i, double &x) {
+	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
+	<< x << std::setprecision(15) << std::endl;
+}
+

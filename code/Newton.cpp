@@ -47,8 +47,7 @@ double Newton::newtonSolver(const std::vector<double>& coef, double x0,
      int i;
 
      if ( verbose ) {
-        std::cout << std::setw(3) << 0 << "\t" << std::setw(20)
-             << x0 << std::setprecision(15) << std::endl;
+        printVerbose(0, x0);
      }
 
      for ( i = 1; i <= nMax; i++ ) {
@@ -57,12 +56,11 @@ double Newton::newtonSolver(const std::vector<double>& coef, double x0,
 		 dx = fx0 / dfx0;
          x0 -= dx;
          if ( verbose ) {
-        	 std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-                 << x0 << std::setprecision(15) << std::endl;
-	 }
+        	 printVerbose(i, x0);
+         }
          if ( fabs(dx) < tol ) {
-	   return x0;
-	 }
+        	 return x0;
+         }
      }
      std::cout << "Maximum number of iterations exceeded" << std::endl;
      return x0;
@@ -75,8 +73,7 @@ double Newton::modifiedNewtonSolver(const std::vector<double>& coef, double x0,
      int i;
 
      if ( verbose ) {
-    	 std::cout << std::setw(3) << 0 << "\t" << std::setw(20)
-             << x0 << std::setprecision(15) << std::endl;
+    	 printVerbose(0, x0);
      }
 
      for ( i = 1; i <= nMax; i++ ) {
@@ -85,12 +82,11 @@ double Newton::modifiedNewtonSolver(const std::vector<double>& coef, double x0,
          dx = fx0 / dfx0;
          x0 -= m*dx;
          if ( verbose ) {
-        	 std::cout << std::setw(3) << i << "\t" << std::setw(20)
-                 << x0 << std::setprecision(15) << std::endl;
-	 }
+        	 printVerbose(i, x0);
+         }
          if ( fabs(dx) < tol ) {
-	   return x0;
-	 }
+        	 return x0;
+         }
      }
      std::cout << "Maximum number of iterations exceeded" << std::endl;
      return x0;
@@ -103,8 +99,7 @@ double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
     int i;
 
     if (verbose) {
-        std::cout << std::setw(3) << 0 << "\t" << std::setw(20)
-                  << x0 << std::setprecision(15) << std::endl;
+    	printVerbose(0, x0);
     }
 
     for (i = 1; i <= nMax; i++) {
@@ -113,8 +108,7 @@ double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
         dx = fx0 / dfx0;
         x0 -= dx;
         if (verbose) {
-            std::cout << std::setw(3) << i << "\t" << std::setw(20)
-                      << x0 << std::setprecision(15) << std::endl;
+        	printVerbose(i, x0);
         }
         if (fabs(dx) < tol) {
             return x0;
@@ -122,4 +116,9 @@ double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
     }
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return x0;
+}
+
+void Newton::printVerbose(int i, double &x) {
+	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
+	<< x << std::setprecision(15) << std::endl;
 }

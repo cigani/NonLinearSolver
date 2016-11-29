@@ -7,8 +7,11 @@
 #include <vector>
 
 class FixedPoint {
-public:
+private:
+ // Private variables
+	void printVerbose( int i, double &x );
 
+public:
     // Constructors and destructors
     FixedPoint();
     virtual ~FixedPoint();

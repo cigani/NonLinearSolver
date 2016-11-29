@@ -7,6 +7,9 @@
 #include <vector>
 
 class Aitken {
+private:
+	void printVerbose(int i, double &x);
+
 public:
 
     // Constructors and destructors
@@ -22,11 +25,6 @@ public:
 						double tol,
 						int nMax,
 						bool verbose);
-    
-private:
-    
-    // Private variables
-    
 };
     
 #endif /* AITKEN_HPP_ */
