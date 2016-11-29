@@ -3,6 +3,7 @@
 * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
 */
 
+#include <cfloat>
 #include "Equations.hpp"
 
 Equations::Equations() {}
@@ -133,5 +134,11 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
 
         return __nan();
     }
-    return exprtk::derivative(expression, x);
+
+    double result = exprtk::derivative(expression, x);
+    while (result < DBL_EPSILON) {
+        result = exprtk::derivative(expression, x);
+        x += 10 * DBL_EPSILON;
+    }
+    return result;
 }
