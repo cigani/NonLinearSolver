@@ -147,42 +147,42 @@ static void show_usage(std::string name) {
 	    std::cerr << std::endl
 				<< "Usage: "
 				<< name
-				<< " -m <>"
-				<< " -e <>"
-				<< " -xi <>"
-				<< " -nmax <>"
-				<< " -t <>"
-				<< " -v <>"
+				<< " -m %s"
+				<< " -e '%s'"
+				<< " -xi %d"
+				<< " -nmax %i"
+				<< " -t %d"
+				<< " -v %b"
 				<< std::endl
 				<< std::endl
 	    		<< "Options:\n"
 				<< "\t"
 				<< stringPadding("-h,--help", 20)
-				<< stringPadding("Show this help message", 40)
+				<< stringPadding("Show this help message", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-m,--method", 20)
-				<< stringPadding("Specify Non-Linear Solver", 40)
+				<< stringPadding("Specify Non-Linear Solver", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-e,--expression", 20)
-				<< stringPadding("Input a mathematical expression to solve", 40)
+				<< stringPadding("Mathematical expression to solve enclosed in ''", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-xi", 20)
-				<< stringPadding("Initial guess of the solution", 40)
+				<< stringPadding("Initial guess of the solution", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-nmax", 20)
-				<< stringPadding("Maximum number of iterations [default: 1000]", 40)
+				<< stringPadding("Maximum number of iterations [default: 1000]", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-t", 20)
-				<< stringPadding("The convergence tolerance [default: 0.001]", 40)
+				<< stringPadding("The convergence tolerance [default: 0.001]", 60)
 				<< std::endl
 				<< "\t"
 				<< stringPadding("-v", 20)
-				<< stringPadding("True to print all intermediate calculations [default: false]", 40)
+				<< stringPadding("True to print all intermediate calculations [default: false]", 60)
 				<< std::endl;
 	    show_methods();
 }
