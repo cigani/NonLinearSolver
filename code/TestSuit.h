@@ -15,20 +15,31 @@
 
 class TestSuit: Chord {
 public:
-    void testChordSolver(const double tol, const double expected);
+    void testChordSolver(const double tol, const double expected,
+                         const int x0, const int max,
+                         const bool verbose);
 
-    void testNewtonSolver(const double tol, const double expected);
+    void testNewtonSolver(const double tol, const double expected,
+                          const double x0, const int max,
+                          const bool verbose);
     void testFixedPointSolver();
 
-    void testNewtonWithExprtkPoly(const double tol, const double expected);
+    void testNewtonWithExprtkPoly(const double tol, const double expected,
+                                  const double x0, const int max,
+                                  const bool verbose);
 
-    void testNewtonWithExprtkLog(const double tol, const double expected);
+    void testNewtonWithExprtTrig(const double tol, const double expected,
+                                 const double x0, const int max,
+                                 const bool verbose);
 
-    void testNewtonWithExprtTrig(const double tol, const double expected);
+    void testNewtonWithExprtExp(const double tol, const double expected,
+                                const double x0, const int max,
+                                const bool verbose);
 
-    void testNewtonWithExprtExp(const double tol, const double expected);
 
-
+    void testNewtonWithExprtkLog(const double tol, const double expected,
+                                 const double x0, const int max,
+                                 const bool verbose);
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

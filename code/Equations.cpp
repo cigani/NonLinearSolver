@@ -87,8 +87,7 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
         return __nan();
     }
 
-    double result = expression.value();
-    return result;
+    return expression.value();
 }
 
 
