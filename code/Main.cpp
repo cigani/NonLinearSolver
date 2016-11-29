@@ -36,7 +36,7 @@ int main(int argc, char* argv[]) {
 	double x0;
 	int nMax = 1000;
 	double tol = 0.001;
-	bool verbose = true;
+	bool verbose = false;
 
 	// Parse the command line arguments for flags and values
 	for (int i = 1; i < argc; i++) {
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 				tol = std::stod(argv[i + 1]);
 			} else if ( strcmp( argv[i], "-v") == 0) {
 				// Maximum number of iterations.  Default 1000 as defined above.
-				verbose = argv[i + 1];
+				std::istringstream(argv[i + 1]) >> std::boolalpha >> verbose;
 			} else if (( strcmp( argv[i], "-h") == 0) || ( strcmp( argv[i], "--help") == 0)) {
 				// Print help dialog
 				show_usage(argv[0]);
