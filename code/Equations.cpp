@@ -31,24 +31,30 @@ Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
     // differently, so we should initialize this (i.e. crash/error when
     // the original function is a constant). g++ w/ c++11 compiled program
     // automatically defaults to 0.0 anyway.
-
-    double df = 0.0;
     int n = 0;
-    int j = 0;
 
+    double df = getPolyDerivativePrivate(coef, value);
+
+    if (fabs(df) < DBL_EPSILON) {
+        for (int j = 0; j < 100000; ++j) {
+        n += 2 * (n + 1);
+        value += DBL_EPSILON * n;
+            df = getPolyDerivativePrivate(coef, value);
+        }
+    };
+
+    if (fabs(df) < DBL_EPSILON) {
+        std::cout << "No Derivative" << std::endl;
+        std::exit(1);
+    } else return df;
+}
+
+double Equations::getPolyDerivativePrivate(const std::vector<double> &coef,
+                                           double value) {
+    double df = 0.0;
     for (unsigned int i = 1; i < coef.size(); ++i) {
         df += i * coef[i] * pow(value, i - 1);
     }
-    while (df < DBL_EPSILON) {
-        n += 2 * (n + 1);
-        value += DBL_EPSILON * n;
-        df = getPolyDerivative(coef, value);
-        ++j;
-        if (j > 100000) {
-            std::cout << "No Derivative" << std::endl;
-            std::exit(1);
-        }
-    };
     return df;
 }
 
@@ -63,7 +69,7 @@ double Equations::getCosineDerivative(double value) {
 
     df = -sin(value);
 
-    while (df < DBL_EPSILON) {
+    while (fabs(df) < DBL_EPSILON) {
         n += 2 * (n + 1);
         value += DBL_EPSILON * n;
         df = getCosineDerivative(value);
@@ -175,7 +181,7 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
     int j = 0;
 
     double result = exprtk::derivative(expression, x);
-    while (result < DBL_EPSILON) {
+    while (fabs(result) < DBL_EPSILON) {
         n += 2 * (n + 1);
         x += DBL_EPSILON * n;
         result = exprtk::derivative(expression, x);

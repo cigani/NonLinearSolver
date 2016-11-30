@@ -28,6 +28,8 @@ public:
     double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
 private:
+    static double getPolyDerivativePrivate(const std::vector<double> &coef,
+                                           double value);
     // Private variables
 };
 
