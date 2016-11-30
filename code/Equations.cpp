@@ -33,9 +33,20 @@ Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
     // automatically defaults to 0.0 anyway.
 
     double df = 0.0;
+    int n = 0;
+
     for (unsigned int i = 1; i < coef.size(); ++i) {
         df += i * coef[i] * pow(value, i - 1);
     }
+    while (df < DBL_EPSILON) {
+        value += DBL_EPSILON * n;
+        df = getPolyDerivative(coef, value);
+        n += 1 + n;
+        if (n > 100000) {
+            std::cout << "No Derivative" << std::endl;
+            std::exit(1);
+        }
+    };
     return df;
 }
 
@@ -143,8 +154,6 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         return __nan();
     }
     int n = 0;
-    int k = 0;
-    int j = 0;
     double result = exprtk::derivative(expression, x);
     while (result < DBL_EPSILON) {
         x += DBL_EPSILON * n;
