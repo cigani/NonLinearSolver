@@ -226,7 +226,6 @@ static void show_methods() {
 				<< "\t"
 				<< stringPadding("newton", 20)
 				<< stringPadding("Newton Method", 40)
-				<< std::endl
 				<< std::endl;
 }
 
