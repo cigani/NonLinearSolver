@@ -10,25 +10,31 @@ Equations::Equations() {}
 
 Equations::~Equations() {}
 
-/// Inputs N - Power of Polynomial needs to be given in order. coef of x1^1..x2^2 --> a_0 + a_1 ... etc
+/// Inputs N - Power of Polynomial needs to be given in order.
+/// coef of x1^1..x2^2 --> a_0 + a_1 ... etc
 
-double Equations::getPolyEquation(const std::vector<double> &coef, double value) {
-	double f = 0.0;
+double
+Equations::getPolyEquation(const std::vector<double> &coef, double value) {
+    double f = 0.0;
     for (unsigned int i = 0; i < coef.size(); ++i) {
-        	f += coef[i]*pow(value, i);
+        f += coef[i] * pow(value, i);
     }
     return f;
 }
 
-double Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
+double
+Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
+
     // Set an exception for methods where the derivative is a denominator.
-	// This way we can avoid null errors (this extends to 0.0 as well).
-	// Different compilers/settings may treat uninitialized variables differently, so we should
-	// initialize this (i.e. crash/error when the original function is a constant).
-	// g++ w/ c++11 compiled program automatically defaults to 0.0 anyway.
+    // This way we can avoid null errors (this extends to 0.0 as well).
+    // Different compilers/settings may treat uninitialized variables
+    // differently, so we should initialize this (i.e. crash/error when
+    // the original function is a constant). g++ w/ c++11 compiled program
+    // automatically defaults to 0.0 anyway.
+
     double df = 0.0;
     for (unsigned int i = 1; i < coef.size(); ++i) {
-    		df += i*coef[i]*pow(value, i-1);
+        df += i * coef[i] * pow(value, i - 1);
     }
     return df;
 }
@@ -77,7 +83,8 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
         for (std::size_t i = 0; i < parser.error_count(); ++i) {
             error_t error = parser.get_error(i);
 
-            printf("Error: %02d  Position: %02d Type: [%14s] Msg: %s\tExpression: %s\n",
+            printf("Error: %02d  Position: %02d Type: [%14s] Msg: "
+                           "%s\tExpression: %s\n",
                    static_cast<unsigned int>(i),
                    static_cast<unsigned int>(error.token.position),
                    exprtk::parser_error::to_str(error.mode).c_str(),
@@ -124,7 +131,8 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         for (std::size_t i = 0; i < parser.error_count(); ++i) {
             error_t error = parser.get_error(i);
 
-            printf("Error: %02d  Position: %02d Type: [%14s] Msg: %s\tExpression: %s\n",
+            printf("Error: %02d  Position: %02d Type: [%14s] "
+                           "Msg: %s\tExpression: %s\n",
                    static_cast<unsigned int>(i),
                    static_cast<unsigned int>(error.token.position),
                    exprtk::parser_error::to_str(error.mode).c_str(),
@@ -141,11 +149,11 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
     while (result < DBL_EPSILON) {
         x += DBL_EPSILON * n;
         result = exprtk::derivative(expression, x);
-        n += 1;
+        n += 1 + n;
         if (n > 100000) {
             std::cout << "No Derivative" << std::endl;
             std::exit(1);
         }
-        };
+    };
     return result;
 }
