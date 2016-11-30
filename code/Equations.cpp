@@ -34,15 +34,17 @@ Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
 
     double df = 0.0;
     int n = 0;
+    int j = 0;
 
     for (unsigned int i = 1; i < coef.size(); ++i) {
         df += i * coef[i] * pow(value, i - 1);
     }
     while (df < DBL_EPSILON) {
+        n += 2 * (n + 1);
         value += DBL_EPSILON * n;
         df = getPolyDerivative(coef, value);
-        n += 1 + n;
-        if (n > 100000) {
+        ++j;
+        if (j > 100000) {
             std::cout << "No Derivative" << std::endl;
             std::exit(1);
         }
@@ -55,7 +57,23 @@ double Equations::getCosine(double value) {
 }
 
 double Equations::getCosineDerivative(double value) {
-    return -sin(value);
+    double df;
+    int n = 0;
+    int j = 0;
+
+    df = -sin(value);
+
+    while (df < DBL_EPSILON) {
+        n += 2 * (n + 1);
+        value += DBL_EPSILON * n;
+        df = getCosineDerivative(value);
+        ++j;
+        if (j > 100000) {
+            std::cout << "No Derivative" << std::endl;
+            std::exit(1);
+        }
+    };
+    return df;
 }
 
 double Equations::getCosineIteration(double value) {
@@ -154,12 +172,15 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         return __nan();
     }
     int n = 0;
+    int j = 0;
+
     double result = exprtk::derivative(expression, x);
     while (result < DBL_EPSILON) {
+        n += 2 * (n + 1);
         x += DBL_EPSILON * n;
         result = exprtk::derivative(expression, x);
-        n += 1 + n;
-        if (n > 100000) {
+        ++j;
+        if (j > 100000) {
             std::cout << "No Derivative" << std::endl;
             std::exit(1);
         }

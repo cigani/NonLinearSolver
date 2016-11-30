@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
     // Tests
     test.testChordSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
-    test.testNewtonSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
+    test.testNewtonSolver(0.0015, 0.66381, 3, 1000, true, mTestVector);
     test.testNewtonWithExprtkPoly(0.0015, -3.16227766517654, 1.1, 1000, false,
                                   mPolyCoefficient);
     test.testNewtonWithExprtkLog(0.0015, 22026.4657948162, 10.0, 1000, false,
@@ -39,17 +39,17 @@ TestSuit::testChordSolver(const double tol, const double expected,
                           const int x0, const int max, const bool verbose,
                           const std::vector<double> &vector) {
     Chord testChord;
-    double *realValue = new double;
-    *realValue = testChord.chordSolver(
+    double *chordRealValue = new double;
+    *chordRealValue = testChord.chordSolver(
             vector, x0, tol, max, verbose);
-    if ((expected - *realValue) <= tol) {
+    if ((expected - *chordRealValue) <= tol) {
         printf("Chord: Poly Success");
         printf("\n");
     } else {
         printf("Chord: Poly  --- Failure ---");
         printf("\n");
     };
-    delete (realValue);
+    delete (chordRealValue);
 
 };
 
@@ -59,10 +59,10 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
                            const bool verbose,
                            const std::vector<double> &vector) {
     Newton testNewton;
-    double *realValue = new double;
-    *realValue = testNewton.newtonSolver(
+    double *newtonRealValue = new double;
+    *newtonRealValue = testNewton.newtonSolver(
             vector, x0, tol, max, verbose);
-    if ((expected - *realValue) <= tol) {
+    if ((expected - *newtonRealValue) <= tol) {
         printf("Newton: Poly Success");
         printf("\n");
     } else {
@@ -70,7 +70,7 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
         printf("\n");
     }
 
-    delete (realValue);
+    delete (newtonRealValue);
 }
 
 void
