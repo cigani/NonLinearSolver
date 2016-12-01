@@ -1,0 +1,51 @@
+# Created by .ignore support plugin (hsz.mobi)
+### C++ template
+# Prerequisites
+*.d
+
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+.idea/workspace.xml
+CMakeCache.txt
+CMakeFiles/
+Makefile
+cmake-build-debug/
+cmake-build-default/
+cmake_install.cmake
+code/CMakeCache.txt
+code/CMakeFiles/
+code/Makefile
+code/Project.cbp
+code/boost/
+code/cmake_install.cmake
+code/nonlinear
+code/tests
+pcsc-nonlinear-systems-project.cbp

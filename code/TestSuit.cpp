@@ -79,7 +79,6 @@ TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
                                    const bool verbose,
                                    std::string &coefficient) {
     double testNewton;
-    //TODO: Refactor this into a constructor along with other parameters we can
     Newton mNewton;
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);

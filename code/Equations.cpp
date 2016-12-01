@@ -2,7 +2,7 @@
 * Jaquier, Michael <michael.jaquier@epfl.ch>
 * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
 */
-
+///
 #include <cfloat>
 #include "Equations.hpp"
 
