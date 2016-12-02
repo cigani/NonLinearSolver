@@ -246,18 +246,15 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
     }
     switch (variables) {
         case 1: {
-            x = value;
             symbol_table.add_variable("x", x);
             break;
         }
         case 2: {
-            x = value;
             symbol_table.add_variable("x", x);
             symbol_table.add_variable("y", y);
             break;
         }
         case 3: {
-            x = value;
             symbol_table.add_variable("x", x);
             symbol_table.add_variable("y", y);
             symbol_table.add_variable("z", z);
