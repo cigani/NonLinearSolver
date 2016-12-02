@@ -15,9 +15,12 @@ int main(int argc, char* argv[]) {
     std::string mLogCoefficient = "log(x) - 10";
     std::string mTrigCoefficient = "cos(2*pi*x) + sin(2*pi*x)";
     std::string mExpCoefficient = "exp(x) - exp(-3x) + exp(9x)";
+    std::string mNoDerivative = "10";
 
     // Vectors
     const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
+    const std::vector<double> mNeverDerivative{10};
+
 
     // Tests
     test.testChordSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
@@ -73,6 +76,8 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
     delete (newtonRealValue);
 }
 
+
+}
 void
 TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
                                    const double x0, const int max,
@@ -146,4 +151,5 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
         printf("\n");
     }
 }
+
 

@@ -6,6 +6,7 @@
 #include <cfloat>
 #include "Equations.hpp"
 
+
 Equations::Equations() {}
 
 Equations::~Equations() {}
@@ -191,5 +192,110 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
             std::exit(1);
         }
     };
+    return result;
+}
+
+double
+Equations::exprtkJacobian(const std::vector<std::string> &eq,
+                          double value,
+                          int variables) {
+
+    for (std::string equation : eq) {
+        switch (variables) {
+            case 1:
+        }
+
+
+    }
+
+    return 0;
+}
+
+double
+Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
+                                           int variables,
+                                           char *withRespectTo) {
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+    typedef exprtk::parser_error::type error_t;
+
+    std::string expr_string = eq;
+    symbol_table_t symbol_table;
+    double x;
+    double y;
+    double z;
+
+
+    switch (*withRespectTo) {
+        case 'x': {
+            x = value;
+            break;
+        }
+        case 'y': {
+            y = value;
+            break;
+        }
+        case 'z': {
+            z = value;
+            break;
+        }
+        default:
+            std::cout << "Bad Input to Jacobian Generator";
+            break;
+    }
+    switch (variables) {
+        case 1: {
+            x = value;
+            symbol_table.add_variable("x", x);
+            break;
+        }
+        case 2: {
+            x = value;
+            symbol_table.add_variable("x", x);
+            symbol_table.add_variable("y", y);
+            break;
+        }
+        case 3: {
+            x = value;
+            symbol_table.add_variable("x", x);
+            symbol_table.add_variable("y", y);
+            symbol_table.add_variable("z", z);
+            break;
+        }
+        default:
+            std::cout << "Bad Input to Jacobian Generator";
+            break;
+    }
+
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    parser_t parser;
+    parser.compile(expr_string, expression);
+    if (!parser.compile(expr_string, expression)) {
+        printf("Error: %s\tExpression: %s\n",
+               parser.error().c_str(),
+               expr_string.c_str());
+
+        for (std::size_t i = 0; i < parser.error_count(); ++i) {
+            error_t error = parser.get_error(i);
+
+            printf("Error: %02d  Position: %02d Type: [%14s] "
+                           "Msg: %s\tExpression: %s\n",
+                   static_cast<unsigned int>(i),
+                   static_cast<unsigned int>(error.token.position),
+                   exprtk::parser_error::to_str(error.mode).c_str(),
+                   error.diagnostic.c_str(),
+                   expr_string.c_str());
+        }
+
+        return __nan();
+    }
+
+    std::string strFromChar;
+    strFromChar.append(withRespectTo);
+    double result = exprtk::derivative(expression, strFromChar);
+
     return result;
 }
