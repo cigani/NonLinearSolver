@@ -200,10 +200,41 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
                           double value,
                           int variables) {
 
+    std::vector<double> Jacobian;
+
+    //TODO: Assuming this works - Refactor to less code:
+
     for (std::string equation : eq) {
         switch (variables) {
-            case 1:
+            case 1: {
+                Jacobian.push_back(
+                        exprtkGenerateDerivativePrivate(
+                                equation, value, 1, (char *) 'x'));
+            }
+            case 2: {
+                Jacobian.push_back(
+                        exprtkGenerateDerivativePrivate(
+                                equation, value, 1, (char *) 'x'));
+                Jacobian.push_back(
+                        exprtkGenerateDerivativePrivate(
+                                equation, value, 1, (char *) 'y'));
+            }
+            case 3: {
+                Jacobian.push_back(
+                        exprtkGenerateDerivativePrivate(
+                                equation, value, 1, (char *) 'x'));
+                Jacobian.push_back(
+                        exprtkGenerateDerivativePrivate(
+                                equation, value, 1, (char *) 'y'));
+                Jacobian.push_back(
+                        exprtkGenerateDerivativePrivate(
+                                equation, value, 1, (char *) 'z'));
+            }
+            default:
+                std::cout << "Jacobian Broken";
+                break;
         }
+
 
 
     }
