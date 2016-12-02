@@ -23,7 +23,8 @@ public:
     static double getCosineIteration(double value);
 
     std::vector<double>
-    exprtkJacobian(const std::vector<std::string> &eq, double value,
+    exprtkJacobian(const std::vector<std::string> &eq,
+                   std::vector<double> variableValues,
                    int unknown);
 
     // These aren't static on purpose
@@ -35,9 +36,10 @@ private:
     static double getPolyDerivativePrivate(const std::vector<double> &coef,
                                            double value);
 
-    double exprtkGenerateDerivativePrivate(const std::string &eq, double value,
+    double exprtkGenerateDerivativePrivate(const std::string &eq,
+                                           std::vector<double> variableValues,
                                            int variables,
-                                           std::vector<double> variableValues);
+                                           char *withRespectTo);
 };
 
 #endif /* EQUATIONS_HPP_ */

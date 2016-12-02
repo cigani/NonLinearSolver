@@ -200,38 +200,45 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
 
 std::vector<double>
 Equations::exprtkJacobian(const std::vector<std::string> &eq,
-                          double value,
+                          std::vector<double> variableValues,
                           int variables) {
 
     std::vector<double> Jacobian;
 
     //TODO: Assuming this works - Refactor to less code:
+    // These char casts are because switches only work with int/chars i think
 
     for (std::string equation : eq) {
         switch (variables) {
             case 1: {
                 Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(
-                                equation, value, 1, (char *) 'x'));
+                        exprtkGenerateDerivativePrivate(equation,
+                                                        variableValues, 1,
+                                                        (char *) 'x'));
             }
             case 2: {
                 Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(
-                                equation, value, 1, (char *) 'x'));
+                        exprtkGenerateDerivativePrivate(equation,
+                                                        variableValues, 1,
+                                                        (char *) 'x'));
                 Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(
-                                equation, value, 1, (char *) 'y'));
+                        exprtkGenerateDerivativePrivate(equation,
+                                                        variableValues, 1,
+                                                        (char *) 'y'));
             }
             case 3: {
                 Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(
-                                equation, value, 1, (char *) 'x'));
+                        exprtkGenerateDerivativePrivate(equation,
+                                                        variableValues, 1,
+                                                        (char *) 'x'));
                 Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(
-                                equation, value, 1, (char *) 'y'));
+                        exprtkGenerateDerivativePrivate(equation,
+                                                        variableValues, 1,
+                                                        (char *) 'y'));
                 Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(
-                                equation, value, 1, (char *) 'z'));
+                        exprtkGenerateDerivativePrivate(equation,
+                                                        variableValues, 1,
+                                                        (char *) 'z'));
             }
             default:
                 std::cout << "Jacobian Broken";
@@ -246,9 +253,11 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
 }
 
 double
-Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
+Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
+                                           std::vector<double> variableValues,
                                            int variables,
-                                           std::vector<double> variableValues) {
+                                           char *withRespectTo) {
+
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
@@ -256,21 +265,24 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
 
     std::string expr_string = eq;
     symbol_table_t symbol_table;
-    double x = variableValues[0];
-    double y = variableValues[1];
-    double z = variableValues[2];
 
     switch (variables) {
         case 1: {
+            double x = variableValues[0];
             symbol_table.add_variable("x", x);
             break;
         }
         case 2: {
+            double x = variableValues[0];
+            double y = variableValues[1];
             symbol_table.add_variable("x", x);
             symbol_table.add_variable("y", y);
             break;
         }
         case 3: {
+            double x = variableValues[0];
+            double y = variableValues[1];
+            double z = variableValues[2];
             symbol_table.add_variable("x", x);
             symbol_table.add_variable("y", y);
             symbol_table.add_variable("z", z);
@@ -307,7 +319,7 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
     }
 
     std::string strFromChar;
-    strFromChar.append(variableValues);
+    strFromChar.append(withRespectTo);
     double result = exprtk::derivative(expression, strFromChar);
 
     return result;
