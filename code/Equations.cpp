@@ -206,10 +206,6 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
     int n = 0;
 
     //std::cout << "Variables Values " << std::endl;
-    for (auto i = variableValues[n].begin();
-         i != variableValues[n].end(); ++i) {
-        std::cout << *i << ' ';
-    }
     //TODO: Assuming this works - Refactor to less code:
 
     for (std::string equation : eq) {
