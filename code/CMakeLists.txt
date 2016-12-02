@@ -11,3 +11,4 @@ add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
 add_executable(tests Equations.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Aitken.cpp TestSuit.cpp TestSuit.h exprtk.hpp Bisection.cpp
         string.hpp)
+add_executable(scratch scratch.cpp exprtk.hpp)

@@ -22,7 +22,7 @@ public:
     static double getCosineDerivative(double value);
     static double getCosineIteration(double value);
 
-    double
+    std::vector<double>
     exprtkJacobian(const std::vector<std::string> &eq, double value,
                    int unknown);
 
@@ -36,7 +36,8 @@ private:
                                            double value);
 
     double exprtkGenerateDerivativePrivate(const std::string &eq, double value,
-                                           int variables, char *withRespectTo);
+                                           int variables,
+                                           std::vector<double> variableValues);
 };
 
 #endif /* EQUATIONS_HPP_ */

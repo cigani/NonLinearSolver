@@ -131,7 +131,9 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
         return __nan();
     }
 
-    return expression.value();
+    double result = expression.value();
+    std::cout << "Result" << result;
+    return result;
 }
 
 
@@ -192,10 +194,11 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
             std::exit(1);
         }
     };
+
     return result;
 }
 
-double
+std::vector<double>
 Equations::exprtkJacobian(const std::vector<std::string> &eq,
                           double value,
                           int variables) {
@@ -239,13 +242,13 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
 
     }
 
-    return 0;
+    return Jacobian;
 }
 
 double
 Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
                                            int variables,
-                                           char *withRespectTo) {
+                                           std::vector<double> variableValues) {
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
@@ -253,28 +256,10 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
 
     std::string expr_string = eq;
     symbol_table_t symbol_table;
-    double x;
-    double y;
-    double z;
+    double x = variableValues[0];
+    double y = variableValues[1];
+    double z = variableValues[2];
 
-
-    switch (*withRespectTo) {
-        case 'x': {
-            x = value;
-            break;
-        }
-        case 'y': {
-            y = value;
-            break;
-        }
-        case 'z': {
-            z = value;
-            break;
-        }
-        default:
-            std::cout << "Bad Input to Jacobian Generator";
-            break;
-    }
     switch (variables) {
         case 1: {
             symbol_table.add_variable("x", x);
@@ -322,7 +307,7 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq, double value,
     }
 
     std::string strFromChar;
-    strFromChar.append(withRespectTo);
+    strFromChar.append(variableValues);
     double result = exprtk::derivative(expression, strFromChar);
 
     return result;
