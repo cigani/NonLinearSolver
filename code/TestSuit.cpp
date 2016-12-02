@@ -3,6 +3,7 @@
 * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
 */
 
+#include <cfloat>
 #include "TestSuit.h"
 
 
@@ -35,6 +36,7 @@ int main(int argc, char* argv[]) {
                                 mExpCoefficient);
     test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
                                   mZeroDerivativeCheck);
+    test.testExprtkJacobian();
 };
 
 void
@@ -76,8 +78,6 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
     delete (newtonRealValue);
 }
 
-
-}
 void
 TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
                                    const double x0, const int max,
@@ -149,6 +149,40 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
     } else {
         printf("Newton Exprtk: --- Exp Failure ---");
         printf("\n");
+    }
+}
+
+void TestSuit::testExprtkJacobian() {
+    std::vector<std::string> equations;
+    equations.push_back("x^2 + y^4 - z^3 + 10");
+    std::vector<std::vector<double> > values(0, std::vector<double>(3));
+    std::vector<double> val1{2, 3, 4};
+    values.push_back(val1);
+    std::vector<double> assertResults{4, 108, -48};
+    int var = 3;
+
+    std::vector<double> testEquation;
+    Equations mEquations;
+
+    std::vector<double> returns = Equations::exprtkJacobian(equations, values,
+                                                            var);
+    int n = 0;
+    for (auto i = returns.begin(); i != returns.end(); ++i) {
+        std::cout << *i << ' ';
+        assert((assertResults[n] - *i) <= 0.015);
+        n++;
+    }
+    equations.push_back("x^3 + y^2 - z^1 + 10");
+    std::vector<double> val2{5, 1, 2};
+    values.push_back(val2);
+    testEquation = mEquations.exprtkJacobian(equations, values, var);
+
+    for (auto i = testEquation.begin(); i != testEquation.end(); ++i) {
+        std::cout << *i << ' ';
+        //std::cout << assertResults[n];
+        //assert((assertResults[n] - *i) <= 0.015);
+        //n++;
+
     }
 }
 

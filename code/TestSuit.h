@@ -46,6 +46,8 @@ public:
                                  const bool verbose,
                                  std::string &coefficient);
 
+    void testExprtkJacobian();
+
 private:
     //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
 };
