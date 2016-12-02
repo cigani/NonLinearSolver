@@ -158,7 +158,7 @@ void TestSuit::testExprtkJacobian() {
     std::vector<std::vector<double> > values(0, std::vector<double>(3));
     std::vector<double> val1{2, 3, 4};
     values.push_back(val1);
-    std::vector<double> assertResults{4, 108, -48};
+    std::vector<double> assertResults{4, 108, -48, 75, 2, -1};
     int var = 3;
 
     std::vector<double> returns = Equations::exprtkJacobian(equations, values,
@@ -171,7 +171,7 @@ void TestSuit::testExprtkJacobian() {
     }
     std::cout << "\n-------------------" << std::endl;
     std::cout << "First Run Complete " << std::endl;
-    std::cout << "-------------------\n" << std::endl;
+    std::cout << "-------------------" << std::endl;
 
     equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<double> val2{5, 1, 2};
@@ -180,12 +180,11 @@ void TestSuit::testExprtkJacobian() {
     std::vector<double> testEquation;
     Equations mEquations;
     testEquation = mEquations.exprtkJacobian(equations, values, var);
-
+    int k = 0;
     for (auto i = testEquation.begin(); i != testEquation.end(); ++i) {
         std::cout << *i << ' ';
-        //std::cout << assertResults[n];
-        //assert((assertResults[n] - *i) <= 0.015);
-        //n++;
+        assert((assertResults[k] - *i) <= 0.015);
+        k++;
 
     }
 }

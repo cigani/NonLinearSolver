@@ -206,7 +206,7 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
     int n = 0;
 
     //std::cout << "Variables Values " << std::endl;
-    //TODO: Assuming this works - Refactor to less code:
+    //TODO: Refactor to less code:
 
     for (std::string equation : eq) {
         switch (variables) {
