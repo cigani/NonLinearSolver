@@ -74,6 +74,7 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
     double *newtonRealValue = new double;
     *newtonRealValue = testNewton.newtonSolver(
             vector, x0, tol, max, verbose);
+
     testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));
 
     delete (newtonRealValue);
@@ -88,6 +89,7 @@ TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
     Newton mNewton;
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
+
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkPoly"));
 }
 
@@ -114,6 +116,7 @@ TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
     //TODO: Testing periodicity so we aren't so hamstrung by starting point
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
+
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkTrig"));
 
 }
@@ -127,6 +130,7 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
     Newton mNewton;
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
+
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkExp"));
 }
 
@@ -153,7 +157,6 @@ void TestSuit::testExprtkJacobian() {
         for (returns_iterator2 = (*returns_iterator).begin();
              returns_iterator2 !=
              (*returns_iterator).end(); ++returns_iterator2) {
-            //std::cout << *returns_iterator2 << " ";
             testAsssertion(0.015, assertResults[n], *returns_iterator2,
                            std::string("Jacobian_1"));
             n++;
@@ -161,10 +164,6 @@ void TestSuit::testExprtkJacobian() {
 
         }
     }
-
-//    std::cout << "\n-------------------" << std::endl;
-//    std::cout << "First Run Complete " << std::endl;
-//    std::cout << "-------------------" << std::endl;
 
     equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<double> val2{5, 1, 2};
@@ -179,11 +178,10 @@ void TestSuit::testExprtkJacobian() {
     int k = 0;
     for (mReturnsIterator = testEquation.begin();
          mReturnsIterator != testEquation.end(); ++mReturnsIterator) {
-        //std::cout << std::endl;
+
         for (mReturnsIterator2 = (*mReturnsIterator).begin();
              mReturnsIterator2 !=
              (*mReturnsIterator).end(); ++mReturnsIterator2) {
-            //std::cout << *mReturnsIterator2 << " ";
             testAsssertion(0.015, assertResults[k], *mReturnsIterator2,
                            std::string("Jacobian_2"));
             k++;
