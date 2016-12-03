@@ -164,7 +164,7 @@ void TestSuit::testExprtkJacobian() {
     std::vector<std::vector<double>> returns = Equations::exprtkJacobian(
             equations, values,
             var);
-    int n = 0;
+
     std::vector<std::vector<double> >::iterator returns_iterator;
     std::vector<double>::iterator returns_iterator2;
 
@@ -178,13 +178,7 @@ void TestSuit::testExprtkJacobian() {
             std::cout << *returns_iterator2 << " ";
         }
     }
-//    for (auto i = returns.begin(); i != returns.end(); ++i) {
-//        //std::cout << *i << ' ';
-//        for (auto k = *i.begin(); k != *i.end(); ++k) {
-//            std::cout << *k << ' ';
-//        //assert((assertResults[n] - *i) <= 0.015);
-//        n++;
-//    }
+
     std::cout << "\n-------------------" << std::endl;
     std::cout << "First Run Complete " << std::endl;
     std::cout << "-------------------" << std::endl;
@@ -202,23 +196,13 @@ void TestSuit::testExprtkJacobian() {
 
     for (mReturnsIterator = testEquation.begin();
          mReturnsIterator != testEquation.end(); ++mReturnsIterator) {
+        std::cout << std::endl;
         for (mReturnsIterator2 = (*mReturnsIterator).begin();
              mReturnsIterator2 !=
              (*mReturnsIterator).end(); ++mReturnsIterator2) {
             std::cout << *mReturnsIterator2 << " ";
         }
     }
-
-//    std::vector<std::vector<double>>testEquation;
-//    Equations mEquations;
-//    testEquation = mEquations.exprtkJacobian(equations, values, var);
-//    int k = 0;
-//    for (auto i = testEquation.begin(); i != testEquation.end(); ++i) {
-//        std::cout << *i << ' ';
-//        //assert((assertResults[k] - *i) <= 0.015);
-//        k++;
-//
-//    }
 }
 
 
