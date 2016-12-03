@@ -39,6 +39,17 @@ int main(int argc, char* argv[]) {
     test.testExprtkJacobian();
 };
 
+void TestSuit::testAsssertion(const double tol, const double expected,
+                              double testNewton, std::string name) const {
+    if ((expected - testNewton) <= tol) {
+        std::cout << name << " Success";
+        printf("\n");
+    } else {
+        std::cout << name << " --- Failure --- ";
+        printf("\n");
+    }
+}
+
 void
 TestSuit::testChordSolver(const double tol, const double expected,
                           const int x0, const int max, const bool verbose,
@@ -47,13 +58,9 @@ TestSuit::testChordSolver(const double tol, const double expected,
     double *chordRealValue = new double;
     *chordRealValue = testChord.chordSolver(
             vector, x0, tol, max, verbose);
-    if ((expected - *chordRealValue) <= tol) {
-        printf("Chord: Poly Success");
-        printf("\n");
-    } else {
-        printf("Chord: Poly  --- Failure ---");
-        printf("\n");
-    };
+
+    testAsssertion(tol, expected, *chordRealValue, std::string("Chord"));
+
     delete (chordRealValue);
 
 };
@@ -67,13 +74,7 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
     double *newtonRealValue = new double;
     *newtonRealValue = testNewton.newtonSolver(
             vector, x0, tol, max, verbose);
-    if ((expected - *newtonRealValue) <= tol) {
-        printf("Newton: Poly Success");
-        printf("\n");
-    } else {
-        printf("Newton: Poly  --- Failure ---");
-        printf("\n");
-    }
+    testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));
 
     delete (newtonRealValue);
 }
@@ -87,13 +88,7 @@ TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
     Newton mNewton;
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
-    if ((expected - testNewton) <= tol) {
-        printf("Newton Exprtk: Poly Success");
-        printf("\n");
-    } else {
-        printf("Newton Exprtk:  --- Poly Failure ---");
-        printf("\n");
-    }
+    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkPoly"));
 }
 
 void
@@ -106,13 +101,7 @@ TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
 
-    if ((expected - testNewton) <= tol) {
-        printf("Newton Exprtk: Log Success");
-        printf("\n");
-    } else {
-        printf("Newton Exprtk:  --- Log Failure ---");
-        printf("\n");
-    }
+    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkLog"));
 }
 
 void
@@ -125,13 +114,8 @@ TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
     //TODO: Testing periodicity so we aren't so hamstrung by starting point
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
-    if ((expected - testNewton) <= tol) {
-        printf("Newton Exprtk: Trig Success");
-        printf("\n");
-    } else {
-        printf("Newton Exprtk: --- Trig Failure ---");
-        printf("\n");
-    }
+    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkTrig"));
+
 }
 
 void
@@ -143,13 +127,7 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
     Newton mNewton;
     testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
                                             tol, max, verbose);
-    if ((expected - testNewton) <= tol) {
-        printf("Newton Exprtk: Exp Success");
-        printf("\n");
-    } else {
-        printf("Newton Exprtk: --- Exp Failure ---");
-        printf("\n");
-    }
+    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkExp"));
 }
 
 void TestSuit::testExprtkJacobian() {
@@ -169,19 +147,24 @@ void TestSuit::testExprtkJacobian() {
     std::vector<double>::iterator returns_iterator2;
 
     // Ridiculous PITA to print this stuff out. But this is probably the cleanest way
-
+    int n = 0;
     for (returns_iterator = returns.begin();
          returns_iterator != returns.end(); ++returns_iterator) {
         for (returns_iterator2 = (*returns_iterator).begin();
              returns_iterator2 !=
              (*returns_iterator).end(); ++returns_iterator2) {
-            std::cout << *returns_iterator2 << " ";
+            //std::cout << *returns_iterator2 << " ";
+            testAsssertion(0.015, assertResults[n], *returns_iterator2,
+                           std::string("Jacobian_1"));
+            n++;
+
+
         }
     }
 
-    std::cout << "\n-------------------" << std::endl;
-    std::cout << "First Run Complete " << std::endl;
-    std::cout << "-------------------" << std::endl;
+//    std::cout << "\n-------------------" << std::endl;
+//    std::cout << "First Run Complete " << std::endl;
+//    std::cout << "-------------------" << std::endl;
 
     equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<double> val2{5, 1, 2};
@@ -193,14 +176,17 @@ void TestSuit::testExprtkJacobian() {
     std::vector<std::vector<double> >::iterator mReturnsIterator;
     std::vector<double>::iterator mReturnsIterator2;
 
-
+    int k = 0;
     for (mReturnsIterator = testEquation.begin();
          mReturnsIterator != testEquation.end(); ++mReturnsIterator) {
-        std::cout << std::endl;
+        //std::cout << std::endl;
         for (mReturnsIterator2 = (*mReturnsIterator).begin();
              mReturnsIterator2 !=
              (*mReturnsIterator).end(); ++mReturnsIterator2) {
-            std::cout << *mReturnsIterator2 << " ";
+            //std::cout << *mReturnsIterator2 << " ";
+            testAsssertion(0.015, assertResults[k], *mReturnsIterator2,
+                           std::string("Jacobian_2"));
+            k++;
         }
     }
 }
