@@ -165,13 +165,13 @@ void TestSuit::testExprtkJacobian() {
                                                             var);
     int n = 0;
     for (auto i = returns.begin(); i != returns.end(); ++i) {
-        std::cout << *i << ' ';
+        //std::cout << *i << ' ';
         assert((assertResults[n] - *i) <= 0.015);
         n++;
     }
-    std::cout << "\n-------------------" << std::endl;
-    std::cout << "First Run Complete " << std::endl;
-    std::cout << "-------------------" << std::endl;
+//    std::cout << "\n-------------------" << std::endl;
+//    std::cout << "First Run Complete " << std::endl;
+//    std::cout << "-------------------" << std::endl;
 
     equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<double> val2{5, 1, 2};
@@ -182,7 +182,7 @@ void TestSuit::testExprtkJacobian() {
     testEquation = mEquations.exprtkJacobian(equations, values, var);
     int k = 0;
     for (auto i = testEquation.begin(); i != testEquation.end(); ++i) {
-        std::cout << *i << ' ';
+        //std::cout << *i << ' ';
         assert((assertResults[k] - *i) <= 0.015);
         k++;
 

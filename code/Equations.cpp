@@ -253,7 +253,7 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
                 std::cout << "Jacobian Broken";
                 break;
         }
-        n++;
+        if (variableValues.size() != 1) n++;
     }
     //std::cout << "Jacobian Completed: " << std::endl;
     return Jacobian;

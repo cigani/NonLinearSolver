@@ -28,8 +28,8 @@ void square_wave() {
     double f = pi / double(10);
     double t = double(0);
     double a = double(10);
-    std::cout << "a" << a;
-    std::cout << "t" << t;
+    //std::cout << "a" << a;
+    //std::cout << "t" << t;
 
     symbol_table_t symbol_table;
     symbol_table.add_variable("f", f);
@@ -47,11 +47,17 @@ void square_wave() {
 
     for (t = double(-2) * pi; t <= double(+2) * pi; t += delta) {
         double result = expression.value();
-        printf("%19.15f\t%19.15f\t%19.15f\t%19.15f\n", t, result, t, a);
+        //printf("%19.15f\t%19.15f\t%19.15f\t%19.15f\n", t, result, t, a);
     }
 }
 
 int main() {
-    square_wave();
+//    square_wave();
+
+    std::vector<std::vector<double> > values(0, std::vector<double>(3));
+    std::vector<double> val1{2, 3, 4};
+    values.push_back(val1);
+    values.push_back(val1);
+    std::cout << values.size() << std::endl;
     return 0;
 }
