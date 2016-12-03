@@ -161,32 +161,64 @@ void TestSuit::testExprtkJacobian() {
     std::vector<double> assertResults{4, 108, -48, 75, 2, -1};
     int var = 3;
 
-    std::vector<double> returns = Equations::exprtkJacobian(equations, values,
-                                                            var);
+    std::vector<std::vector<double>> returns = Equations::exprtkJacobian(
+            equations, values,
+            var);
     int n = 0;
-    for (auto i = returns.begin(); i != returns.end(); ++i) {
-        //std::cout << *i << ' ';
-        assert((assertResults[n] - *i) <= 0.015);
-        n++;
+    std::vector<std::vector<double> >::iterator returns_iterator;
+    std::vector<double>::iterator returns_iterator2;
+
+    // Ridiculous PITA to print this stuff out. But this is probably the cleanest way
+
+    for (returns_iterator = returns.begin();
+         returns_iterator != returns.end(); ++returns_iterator) {
+        for (returns_iterator2 = (*returns_iterator).begin();
+             returns_iterator2 !=
+             (*returns_iterator).end(); ++returns_iterator2) {
+            std::cout << *returns_iterator2 << " ";
+        }
     }
-//    std::cout << "\n-------------------" << std::endl;
-//    std::cout << "First Run Complete " << std::endl;
-//    std::cout << "-------------------" << std::endl;
+//    for (auto i = returns.begin(); i != returns.end(); ++i) {
+//        //std::cout << *i << ' ';
+//        for (auto k = *i.begin(); k != *i.end(); ++k) {
+//            std::cout << *k << ' ';
+//        //assert((assertResults[n] - *i) <= 0.015);
+//        n++;
+//    }
+    std::cout << "\n-------------------" << std::endl;
+    std::cout << "First Run Complete " << std::endl;
+    std::cout << "-------------------" << std::endl;
 
     equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<double> val2{5, 1, 2};
     values.push_back(val2);
-
-    std::vector<double> testEquation;
+    std::vector<std::vector<double>> testEquation;
     Equations mEquations;
     testEquation = mEquations.exprtkJacobian(equations, values, var);
-    int k = 0;
-    for (auto i = testEquation.begin(); i != testEquation.end(); ++i) {
-        //std::cout << *i << ' ';
-        assert((assertResults[k] - *i) <= 0.015);
-        k++;
 
+    std::vector<std::vector<double> >::iterator mReturnsIterator;
+    std::vector<double>::iterator mReturnsIterator2;
+
+
+    for (mReturnsIterator = testEquation.begin();
+         mReturnsIterator != testEquation.end(); ++mReturnsIterator) {
+        for (mReturnsIterator2 = (*mReturnsIterator).begin();
+             mReturnsIterator2 !=
+             (*mReturnsIterator).end(); ++mReturnsIterator2) {
+            std::cout << *mReturnsIterator2 << " ";
+        }
     }
+
+//    std::vector<std::vector<double>>testEquation;
+//    Equations mEquations;
+//    testEquation = mEquations.exprtkJacobian(equations, values, var);
+//    int k = 0;
+//    for (auto i = testEquation.begin(); i != testEquation.end(); ++i) {
+//        std::cout << *i << ' ';
+//        //assert((assertResults[k] - *i) <= 0.015);
+//        k++;
+//
+//    }
 }
 
 

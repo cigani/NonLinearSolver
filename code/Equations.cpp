@@ -2,21 +2,22 @@
 * Jaquier, Michael <michael.jaquier@epfl.ch>
 * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
 */
-///
+
 #include <cfloat>
 #include "Equations.hpp"
 
+//TODO::  Psuedo Inverse::  J^- = (J^T J)^-1 J^T
 
 Equations::Equations() {}
 
 Equations::~Equations() {}
 
-/** ///
+/**
  * * Calculates the value of a polynomial given in the form
  * (a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
  * @param coef - Vector of coefficients.
  * @param value - Initial Value
- * @return
+ * @return - Symbolic Evaluation
  */
 
 double
@@ -28,7 +29,7 @@ Equations::getPolyEquation(const std::vector<double> &coef, double value) {
     return f;
 }
 
-/** ///
+/**
  * Calculates the value of a polynomial derivative given in the form
  * d/dx(a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
  * Methods used require a non-zero derivative. The function will jostle the
@@ -36,7 +37,7 @@ Equations::getPolyEquation(const std::vector<double> &coef, double value) {
  *
  * @param coef
  * @param value
- * @return
+ * @return - Symbolic evaluation
  */
 double
 Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
@@ -59,11 +60,11 @@ Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
     } else return df;
 }
 
-/** ///
+/**
  * Called by @getPolyDerivative to get the evaluated derivative
  * @param coef
  * @param value
- * @return
+ * @return - Symbolic evaluation
  */
 double Equations::getPolyDerivativePrivate(const std::vector<double> &coef,
                                            double value) {
@@ -78,7 +79,7 @@ double Equations::getCosine(double value) {
     return cos(value);
 }
 
-/** ///
+/**
  * Hard coded cosine derivative
  * @param value
  * @return
@@ -107,7 +108,7 @@ double Equations::getCosineIteration(double value) {
     return cos(value) + value;
 }
 
-/** ///
+/**
  *
  * @param eq - String containing the equation to evaluate
  * @param value - value to compute from
@@ -160,7 +161,7 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     return result;
 }
 
-/** ///
+/**
  *
  * @param eq - String containing the equation to evaluate
  * @param value - value to compute from
@@ -228,19 +229,21 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
     return result;
 }
 
-/** ///
+/**
  *
  * @param eq - Equations to be used
  * @param variableValues - Matrix of values. If column vector then we use the
  * same values for each equation.
  * @param variables - Number of variables to be used
- * @return - Returns a coumn vecor representing numerical solution to Jacobian
+ * @return - Returns a column vector representing numerical solution to Jacobian
  */
-std::vector<double>
+std::vector<std::vector<double>>
 Equations::exprtkJacobian(const std::vector<std::string> &eq,
                           std::vector<std::vector<double> > variableValues,
                           int variables) {
 
+    std::vector<std::vector<double> > JacobianCompiled(0, std::vector<double>(
+            (unsigned long) variables));
     std::vector<double> Jacobian;
     int n = 0;
 
@@ -292,19 +295,21 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
                 std::cout << "Jacobian Broken";
                 break;
         }
+        JacobianCompiled.push_back(Jacobian);
+        Jacobian.clear();
         if (variableValues.size() != 1) n++;
     }
     //std::cout << "Jacobian Completed: " << std::endl;
-    return Jacobian;
+    return JacobianCompiled;
 }
 
-/** ///
+/**
  * This is used by @exprtkJacobian to calculate the Jacobian
  * @param eq
  * @param variableValues
  * @param variables
  * @param withRespectTo
- * @return
+ * @return a singlle double (df/(dx_i))
  */
 double
 Equations::exprtkGenerateDerivativePrivate(const std::string &eq,

@@ -22,7 +22,7 @@ public:
     static double getCosineDerivative(double value);
     static double getCosineIteration(double value);
 
-    static std::vector<double>
+    static std::vector<std::vector<double>>
     exprtkJacobian(const std::vector<std::string> &eq,
                    std::vector<std::vector<double>> variableValues,
                    int variables);
