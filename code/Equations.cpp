@@ -11,8 +11,13 @@ Equations::Equations() {}
 
 Equations::~Equations() {}
 
-/// Inputs N - Power of Polynomial needs to be given in order.
-/// coef of x1^1..x2^2 --> a_0 + a_1 ... etc
+/** ///
+ * * Calculates the value of a polynomial given in the form
+ * (a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
+ * @param coef - Vector of coefficients.
+ * @param value - Initial Value
+ * @return
+ */
 
 double
 Equations::getPolyEquation(const std::vector<double> &coef, double value) {
@@ -23,15 +28,19 @@ Equations::getPolyEquation(const std::vector<double> &coef, double value) {
     return f;
 }
 
+/** ///
+ * Calculates the value of a polynomial derivative given in the form
+ * d/dx(a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
+ * Methods used require a non-zero derivative. The function will jostle the
+ * starting value in the event of a zero derivative for a fixed number of iterations
+ *
+ * @param coef
+ * @param value
+ * @return
+ */
 double
 Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
 
-    // Set an exception for methods where the derivative is a denominator.
-    // This way we can avoid null errors (this extends to 0.0 as well).
-    // Different compilers/settings may treat uninitialized variables
-    // differently, so we should initialize this (i.e. crash/error when
-    // the original function is a constant). g++ w/ c++11 compiled program
-    // automatically defaults to 0.0 anyway.
     int n = 0;
 
     double df = getPolyDerivativePrivate(coef, value);
@@ -50,6 +59,12 @@ Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
     } else return df;
 }
 
+/** ///
+ * Called by @getPolyDerivative to get the evaluated derivative
+ * @param coef
+ * @param value
+ * @return
+ */
 double Equations::getPolyDerivativePrivate(const std::vector<double> &coef,
                                            double value) {
     double df = 0.0;
@@ -63,6 +78,11 @@ double Equations::getCosine(double value) {
     return cos(value);
 }
 
+/** ///
+ * Hard coded cosine derivative
+ * @param value
+ * @return
+ */
 double Equations::getCosineDerivative(double value) {
     double df;
     int n = 0;
@@ -87,7 +107,12 @@ double Equations::getCosineIteration(double value) {
     return cos(value) + value;
 }
 
-
+/** ///
+ *
+ * @param eq - String containing the equation to evaluate
+ * @param value - value to compute from
+ * @return - computed equation at value
+ */
 double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
@@ -135,6 +160,12 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     return result;
 }
 
+/** ///
+ *
+ * @param eq - String containing the equation to evaluate
+ * @param value - value to compute from
+ * @return - Derivative of equation at value. Uses numeric approximation.
+ */
 
 double
 Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
@@ -197,6 +228,14 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
     return result;
 }
 
+/** ///
+ *
+ * @param eq - Equations to be used
+ * @param variableValues - Matrix of values. If column vector then we use the
+ * same values for each equation.
+ * @param variables - Number of variables to be used
+ * @return - Returns a coumn vecor representing numerical solution to Jacobian
+ */
 std::vector<double>
 Equations::exprtkJacobian(const std::vector<std::string> &eq,
                           std::vector<std::vector<double> > variableValues,
@@ -259,6 +298,14 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
     return Jacobian;
 }
 
+/** ///
+ * This is used by @exprtkJacobian to calculate the Jacobian
+ * @param eq
+ * @param variableValues
+ * @param variables
+ * @param withRespectTo
+ * @return
+ */
 double
 Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
                                            std::vector<double> variableValues,
