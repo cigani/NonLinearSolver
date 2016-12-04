@@ -6,6 +6,7 @@
 #include <cfloat>
 #include "TestSuit.h"
 
+std::vector<std::string> mErrors;
 
 int main(int argc, char* argv[]) {
     TestSuit test;
@@ -37,16 +38,19 @@ int main(int argc, char* argv[]) {
     test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
+
 };
 
 void TestSuit::testAsssertion(const double tol, const double expected,
-                              double testNewton, std::string name) const {
+                              double testNewton, std::string name) {
     if ((expected - testNewton) <= tol) {
         std::cout << name << " Success";
         printf("\n");
     } else {
         std::cout << name << " --- Failure --- ";
         printf("\n");
+        testErrorCode(name);
+
     }
 }
 
@@ -151,19 +155,8 @@ void TestSuit::testExprtkJacobian() {
     std::vector<double>::iterator returns_iterator2;
 
     // Ridiculous PITA to print this stuff out. But this is probably the cleanest way
-    int n = 0;
-    for (returns_iterator = returns.begin();
-         returns_iterator != returns.end(); ++returns_iterator) {
-        for (returns_iterator2 = (*returns_iterator).begin();
-             returns_iterator2 !=
-             (*returns_iterator).end(); ++returns_iterator2) {
-            testAsssertion(0.015, assertResults[n], *returns_iterator2,
-                           std::string("Jacobian_1"));
-            n++;
-
-
-        }
-    }
+    iterateNestedVectors(assertResults, returns, returns_iterator,
+                         returns_iterator2);
 
     equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<double> val2{5, 1, 2};
@@ -175,18 +168,42 @@ void TestSuit::testExprtkJacobian() {
     std::vector<std::vector<double> >::iterator mReturnsIterator;
     std::vector<double>::iterator mReturnsIterator2;
 
-    int k = 0;
-    for (mReturnsIterator = testEquation.begin();
-         mReturnsIterator != testEquation.end(); ++mReturnsIterator) {
+    iterateNestedVectors(assertResults, testEquation, mReturnsIterator,
+                         mReturnsIterator2);
+}
 
-        for (mReturnsIterator2 = (*mReturnsIterator).begin();
-             mReturnsIterator2 !=
-             (*mReturnsIterator).end(); ++mReturnsIterator2) {
-            testAsssertion(0.015, assertResults[k], *mReturnsIterator2,
-                           std::string("Jacobian_2"));
-            k++;
+void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
+                                    std::vector<std::vector<double>> &returns,
+                                    std::vector<std::__1::vector<double>>::iterator &returns_iterator,
+                                    std::vector<double>::iterator &returns_iterator2) {
+    int n = 0;
+    for (returns_iterator = returns.begin();
+         returns_iterator != returns.end(); ++returns_iterator) {
+        for (returns_iterator2 = (*returns_iterator).begin();
+             returns_iterator2 !=
+             (*returns_iterator).end(); ++returns_iterator2) {
+            testAsssertion(0.015, assertResults[n], *returns_iterator2,
+                           std::__1::string("Jacobian"));
+            n++;
+
+
         }
     }
 }
+
+void TestSuit::iterateVectors(const std::vector<double> &assertResults,
+                              std::vector<std::string> &returns) {
+
+    std::vector<std::string>::iterator i;
+
+    for (i = returns.begin(); i != returns.end(); ++i) {
+        std::cout << *i << std::endl;
+    }
+}
+
+void TestSuit::testErrorCode(std::string &ErrorType) {
+    mErrors.push_back(ErrorType);
+}
+
 
 

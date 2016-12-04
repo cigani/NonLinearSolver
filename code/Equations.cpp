@@ -98,7 +98,7 @@ double Equations::getCosineDerivative(double value) {
         ++j;
         if (j > 100000) {
             std::cout << "No Derivative" << std::endl;
-            std::exit(1);
+            return __nan();
         }
     };
     return df;
@@ -222,7 +222,7 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
         ++j;
         if (j > 100000) {
             std::cout << "No Derivative" << std::endl;
-            std::exit(1);
+            return __nan();
         }
     };
 
