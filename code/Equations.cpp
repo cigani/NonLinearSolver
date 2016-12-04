@@ -397,6 +397,14 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
     return result;
 }
 
+/**
+ * Extract the Minor for a given Matrix. Edits the given Matrix via Refrence
+ *
+ * @param M - Given Matrix
+ * @param size - Size of Matrix (in our case M.Size());
+ * @param col - Column that will act as scalar in Det
+ * @param minor - Minor from @createMinor
+ */
 void Equations::ExtractMinor(std::vector<std::vector<double>> &M,
                              const int size,
                              const int col,
@@ -411,14 +419,29 @@ void Equations::ExtractMinor(std::vector<std::vector<double>> &M,
     }
 }
 
+/**
+ * Create a vector<vector> to be populated later
+ * @param size - of the Main Vector<Vector> - 1
+ * @return A NxN vector<vector> of zeros
+ */
 std::vector<std::vector<double>>
 Equations::createMinor(unsigned long size) {
     std::vector<std::vector<double>> minor(size, std::vector<double>(size));
     return minor;
 }
 
+/**
+ * Calculate the Det of an input Vector<Vector>
+ * Special Case: If it's a 2x2 Matrix we just calculate it in place
+ * @param M - Initial Vector<Vector>
+ * @param size - Size of the <Vector<Vector> : M.Size()
+ * @return The determinant
+ */
 double
 Equations::Determinant(std::vector<std::vector<double>> &M, const int size) {
+
+    //TODO: special case for 3x3 matrix. Speeds it up
+
     if (size == 2) {
         return M[0][0] * M[1][1] - M[0][1] * M[1][0];
     } else {
