@@ -21,7 +21,7 @@
 #include "Newton.hpp"
 #include "Aitken.hpp"
 #include "Bisection.hpp"
-#include "Eigen/LU"
+#include "Eigen/Eigen"
 
 #ifndef NDEBUG
 #define mAssert(condition, message) \

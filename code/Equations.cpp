@@ -4,6 +4,7 @@
 */
 
 #include <cfloat>
+#include <boost/function.hpp>
 #include "Equations.hpp"
 
 //TODO::  Psuedo Inverse::  J^- = (J^T J)^-1 J^T
@@ -42,21 +43,29 @@ Equations::getPolyEquation(const std::vector<double> &coef, double value) {
 double
 Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
 
-    int n = 0;
-
     double df = getPolyDerivativePrivate(coef, value);
 
-    if (fabs(df) < DBL_EPSILON) {
+    df = jostleInitialValue(coef, value, df);
+
+    return df;
+}
+
+double
+Equations::jostleInitialValue(const std::vector<double> &coef, double value,
+                              double df) {
+    int n = 0;
+    while (fabs(df) < DBL_EPSILON) {
         for (int j = 0; j < 100000; ++j) {
         n += 2 * (n + 1);
         value += DBL_EPSILON * n;
             df = getPolyDerivativePrivate(coef, value);
+
         }
     };
 
     if (fabs(df) < DBL_EPSILON) {
         std::cout << "No Derivative" << std::endl;
-        std::exit(1);
+        return __nan();
     } else return df;
 }
 
@@ -73,6 +82,7 @@ double Equations::getPolyDerivativePrivate(const std::vector<double> &coef,
         df += i * coef[i] * pow(value, i - 1);
     }
     return df;
+
 }
 
 double Equations::getCosine(double value) {
@@ -90,19 +100,10 @@ double Equations::getCosineDerivative(double value) {
     int j = 0;
 
     df = -sin(value);
-
-    while (fabs(df) < DBL_EPSILON) {
-        n += 2 * (n + 1);
-        value += DBL_EPSILON * n;
-        df = getCosineDerivative(value);
-        ++j;
-        if (j > 100000) {
-            std::cout << "No Derivative" << std::endl;
-            std::exit(1);
-        }
-    };
+    df = jostleInitialValue(value, df, n, j);
     return df;
 }
+
 
 double Equations::getCosineIteration(double value) {
     return cos(value) + value;
@@ -211,23 +212,12 @@ Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
 
         return __nan();
     }
-    int n = 0;
-    int j = 0;
 
-    double result = exprtk::derivative(expression, x);
-    while (fabs(result) < DBL_EPSILON) {
-        n += 2 * (n + 1);
-        x += DBL_EPSILON * n;
-        result = exprtk::derivative(expression, x);
-        ++j;
-        if (j > 100000) {
-            std::cout << "No Derivative" << std::endl;
-            std::exit(1);
-        }
-    };
+    double result = jostleInitialValue(x, expression);
 
     return result;
 }
+
 
 /**
  *
@@ -387,5 +377,38 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
 
     double result = exprtk::derivative(expression, withRespectTo);
     //std::cout << "Jacobian Der Results: " << result << std::endl;
+    return result;
+}
+
+double Equations::jostleInitialValue(double value, double df, int n, int j) {
+    while (fabs(df) < DBL_EPSILON) {
+        n += 2 * (n + 1);
+        value += DBL_EPSILON * n;
+        df = getCosineDerivative(value);
+        ++j;
+        if (j > 100000) {
+            std::__1::cout << "No Derivative" << std::__1::endl;
+            return __nan();
+        }
+    };
+    return df;
+}
+
+double
+Equations::jostleInitialValue(double x,
+                              const exprtk::expression<double> &expression) const {
+    int n = 0;
+    int j = 0;
+    double result = derivative(expression, x);
+    while (fabs(result) < DBL_EPSILON) {
+        n += 2 * (n + 1);
+        x += DBL_EPSILON * n;
+        result = derivative(expression, x);
+        ++j;
+        if (j > 100000) {
+            std::__1::cout << "No Derivative" << std::__1::endl;
+            return __nan();
+        }
+    };
     return result;
 }
