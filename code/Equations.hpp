@@ -42,15 +42,6 @@ private:
                                                   int variables,
                                                   std::string withRespectTo);
 
-    double
-    jostleInitialValue(double x,
-                       const exprtk::expression<double> &expression) const;
-
-    static double jostleInitialValue(double value, double df, int n, int j);
-
-    static double
-    jostleInitialValue(const std::vector<double> &coef, double value,
-                       double df);
 };
 
 #endif /* EQUATIONS_HPP_ */
