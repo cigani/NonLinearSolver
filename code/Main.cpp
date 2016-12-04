@@ -22,6 +22,7 @@
 #include "Aitken.hpp"
 #include "Bisection.hpp"
 #include "Eigen/Eigen"
+#include "NonlinearSolver.hpp"
 
 #ifndef NDEBUG
 #define mAssert(condition, message) \
@@ -36,9 +37,7 @@
 #endif
 
 std::string stringPadding(std::string original, size_t charCount);
-
 static void show_usage(std::string name);
-
 static void show_methods();
 
 int main(int argc, char *argv[]) {
@@ -124,31 +123,26 @@ int main(int argc, char *argv[]) {
                   << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
-        Bisection bisection;
-        double result = bisection.bisectionSolver(mExpression, lowerBound,
-                                                  upperBound, tol, nMax,
-                                                  verbose);
+        Bisection bisection(mExpression, x0, tol, nMax, verbose, lowerBound, upperBound);
+        double result = bisection.solve();
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
         std::cout << std::endl << "CHORD METHOD" << std::endl;
-        Chord chord;
-        double result = chord.chordExprtkSolver(mExpression, x0, tol, nMax,
-                                                verbose);
+        Chord chord(mExpression, x0, tol, nMax, verbose);
+        double result = chord.solve();
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
-        FixedPoint fixedPoint;
-        double result = fixedPoint.fixedPointExprtkSolver(mExpression, x0, tol,
-                                                          nMax, verbose);
+        FixedPoint fixedPoint(mExpression, x0, tol, nMax, verbose);
+        double result = fixedPoint.solve();
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
-        Newton newton;
-        double result = newton.newtonExprtkSolver(mExpression, x0, tol, nMax,
-                                                  verbose);
+        Newton newton(mExpression, x0, tol, nMax, verbose);
+        double result = newton.solve();
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else {

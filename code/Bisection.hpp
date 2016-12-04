@@ -6,22 +6,32 @@
 #include <vector>
 #include <cassert>
 #include <cmath>
+#include "NonlinearSolver.hpp"
 
-class Bisection {
+class Bisection : public NonlinearSolver{
 private:
 	double getSign(double value);
-	void printVerbose(int i, double &x);
+	double a;
+	double b;
 
 public:
 	virtual ~Bisection();
-	Bisection();
 
-	double bisectionSolver ( const std::string &eq,
-			double a,
-			double b,
-			double tol,
-			int nMax,
-			bool verbose );
+	Bisection(const std::string &equation,
+			double initial,
+			double tolerance,
+			int maxIter,
+			bool verbosity);
+
+	Bisection(const std::string &equation,
+				double initial,
+				double tolerance,
+				int maxIter,
+				bool verbosity,
+				double lowerBound,
+				double upperBound);
+
+	double solve();
 };
 
 #endif /* BISECTION_HPP_ */
