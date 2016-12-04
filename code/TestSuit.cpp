@@ -27,32 +27,26 @@ int main(int argc, char* argv[]) {
     // Tests
     test.testChordSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
     test.testNewtonSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
-    test.testNewtonWithExprtkPoly(0.0015, -3.16227766517654, 1.1, 1000, false,
+    test.testNewtonWithExprtkPoly(0.0015, 3.16227766517654, 1.1, 1000, false,
                                   mPolyCoefficient);
     test.testNewtonWithExprtkLog(0.0015, 22026.4657948162, 10.0, 1000, false,
                                  mLogCoefficient);
-    test.testNewtonWithExprtTrig(0.0015, -1.62499999969059, 1, 1000, false,
+    test.testNewtonWithExprtTrig(0.0015, 0.8749999979997, 1, 1000, false,
                                  mTrigCoefficient);
     test.testNewtonWithExprtExp(0.0015, -0.095561, 0.1, 1000, false,
                                 mExpCoefficient);
     test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
+
+    // Error Logging
     test.iterateVectors(mErrors);
 
 };
 
 void TestSuit::testAsssertion(const double tol, const double expected,
                               double testNewton, std::string name) {
-    if ((expected - testNewton) <= tol) {
-        std::cout << name << " Success";
-        printf("\n");
-    } else {
-        std::cout << name << " --- Failure --- ";
-        printf("\n");
-        testErrorCode(name);
-
-    }
+    if (fabs(expected - testNewton) >= tol) { testErrorCode(name); }
 }
 
 void
