@@ -52,6 +52,8 @@ public:
 
     void iterateVectors(std::vector<std::string> &returns);
 
+    void testDeterm();
+
 private:
     //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     static void testAsssertion(const double tol, const double expected,

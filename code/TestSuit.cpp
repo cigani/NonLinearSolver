@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
-
+    test.testDeterm();
     // Error Logging
     test.iterateVectors(mErrors);
 
@@ -197,5 +197,21 @@ void TestSuit::testErrorCode(std::string &ErrorType) {
     mErrors.push_back(ErrorType);
 }
 
+void TestSuit::testDeterm() {
+    std::vector<std::vector<double> > values(0, std::vector<double>(4));
+    std::vector<double> val1{4, 3, 2, 1};
+    std::vector<double> val2{1, 2, 3, 4};
+    std::vector<double> val3{3, 2, 1, 4};
+    std::vector<double> val4{4, 2, 1, 3};
+    values.push_back(val1);
+    values.push_back(val2);
+    values.push_back(val3);
+    values.push_back(val4);
+    Equations mEquations;
+    double det = mEquations.Determinant(values, (const int) values.size());
+//    std::cout<<"det" << det << std::endl;
+    testAsssertion(0.0015, -20, det, std::string("Determinant"));
+
+}
 
 

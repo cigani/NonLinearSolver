@@ -22,6 +22,10 @@ public:
     static double getCosineDerivative(double value);
     static double getCosineIteration(double value);
 
+    std::vector<std::vector<double>> createMinor(unsigned long size);
+
+    double Determinant(std::vector<std::vector<double>> &M, const int size);
+
     static std::vector<std::vector<double>>
     exprtkJacobian(const std::vector<std::string> &eq,
                    std::vector<std::vector<double>> variableValues,
@@ -33,6 +37,13 @@ public:
 
     double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
+    void ExtractMinor(std::vector<std::vector<double>> &M,
+                      const int size,
+                      const int col,
+                      std::vector<std::vector<double>> &minor);
+
+
+
 private:
     static double getPolyDerivativePrivate(const std::vector<double> &coef,
                                            double value);
@@ -42,6 +53,7 @@ private:
                                                   int variables,
                                                   std::string withRespectTo);
 
+    static double jostleInitial(const std::vector<double> &coef, double value);
 };
 
 #endif /* EQUATIONS_HPP_ */

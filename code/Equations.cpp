@@ -4,6 +4,7 @@
 */
 
 #include <cfloat>
+#include <boost/function.hpp>
 #include "Equations.hpp"
 
 //TODO::  Psuedo Inverse::  J^- = (J^T J)^-1 J^T
@@ -42,22 +43,28 @@ Equations::getPolyEquation(const std::vector<double> &coef, double value) {
 double
 Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
 
-    int n = 0;
-
     double df = getPolyDerivativePrivate(coef, value);
 
     if (fabs(df) < DBL_EPSILON) {
-        for (int j = 0; j < 100000; ++j) {
-        n += 2 * (n + 1);
-        value += DBL_EPSILON * n;
-            df = getPolyDerivativePrivate(coef, value);
-        }
-    };
+        df = jostleInitial(coef, value);
+    } else return df;
 
     if (fabs(df) < DBL_EPSILON) {
         std::cout << "No Derivative" << std::endl;
-        std::exit(1);
+        return __nan();
     } else return df;
+}
+
+double
+Equations::jostleInitial(const std::vector<double> &coef, double value) {
+    int n = 0;
+    double df = 0.0;
+    for (int j = 0; j < 100000; ++j) {
+        n += 2 * (n + 1);
+        value += DBL_EPSILON * n;
+        df = getPolyDerivativePrivate(coef, value);
+    }
+    return df;
 }
 
 /**
@@ -388,4 +395,41 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
     double result = exprtk::derivative(expression, withRespectTo);
     //std::cout << "Jacobian Der Results: " << result << std::endl;
     return result;
+}
+
+void Equations::ExtractMinor(std::vector<std::vector<double>> &M,
+                             const int size,
+                             const int col,
+                             std::vector<std::vector<double>> &minor) {
+    for (int row = 1; row < size; ++row) {
+        for (int k = 0; k < col; ++k) {
+            minor[row - 1][k] = M[row][k];
+        }
+        for (int k = col + 1; k < size; ++k) {
+            minor[row - 1][k - 1] = M[row][k];
+        }
+    }
+}
+
+std::vector<std::vector<double>>
+Equations::createMinor(unsigned long size) {
+    std::vector<std::vector<double>> minor(size, std::vector<double>(size));
+    return minor;
+}
+
+double
+Equations::Determinant(std::vector<std::vector<double>> &M, const int size) {
+    if (size == 2) {
+        return M[0][0] * M[1][1] - M[0][1] * M[1][0];
+    } else {
+        double det = 0;
+        for (int col = 0; col < size; ++col) {
+            std::vector<std::vector<double>> minor = createMinor(
+                    (unsigned long) size);
+            ExtractMinor(M, size, col, minor);
+            det += M[0][col] * std::pow(-1.0, col)
+                   * Determinant(minor, size - 1);
+        }
+        return det;
+    }
 }

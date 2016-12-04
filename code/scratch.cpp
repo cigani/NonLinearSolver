@@ -8,56 +8,77 @@
 #include <iostream>
 #include "exprtk.hpp"
 
-
-void square_wave() {
-    typedef exprtk::symbol_table<double> symbol_table_t;
-    typedef exprtk::expression<double> expression_t;
-    typedef exprtk::parser<double> parser_t;
-
-    std::string expr_string = "a*(4/pi)*"
-            "((1 /1)*sin( 2*pi*f*t)+(1 /3)*sin( 6*pi*f*t)+"
-            " (1 /5)*sin(10*pi*f*t)+(1 /7)*sin(14*pi*f*t)+"
-            " (1 /9)*sin(18*pi*f*t)+(1/11)*sin(22*pi*f*t)+"
-            " (1/13)*sin(26*pi*f*t)+(1/15)*sin(30*pi*f*t)+"
-            " (1/17)*sin(34*pi*f*t)+(1/19)*sin(38*pi*f*t)+"
-            " (1/21)*sin(42*pi*f*t)+(1/23)*sin(46*pi*f*t)+"
-            " (1/25)*sin(50*pi*f*t)+(1/27)*sin(54*pi*f*t))";
-
-    static const double pi = double(3.141592653589793238462643383279502);
-
-    double f = pi / double(10);
-    double t = double(0);
-    double a = double(10);
-    //std::cout << "a" << a;
-    //std::cout << "t" << t;
-
-    symbol_table_t symbol_table;
-    symbol_table.add_variable("f", f);
-    symbol_table.add_variable("t", t);
-    symbol_table.add_variable("a", a);
-    symbol_table.add_constants();
-
-    expression_t expression;
-    expression.register_symbol_table(symbol_table);
-
-    parser_t parser;
-    parser.compile(expr_string, expression);
-
-    const double delta = double(4) * pi / double(1000);
-
-    for (t = double(-2) * pi; t <= double(+2) * pi; t += delta) {
-        double result = expression.value();
-        //printf("%19.15f\t%19.15f\t%19.15f\t%19.15f\n", t, result, t, a);
+void ExtractMinor(std::vector<std::vector<double>> &M,
+                  const int size,
+                  const int col,
+                  std::vector<std::vector<double>> &minor) {
+    for (int row = 1; row < size; ++row) {
+        for (int k = 0; k < col; ++k) {
+            minor[row - 1][k] = M[row][k];
+        }
+        for (int k = col + 1; k < size; ++k) {
+            minor[row - 1][k - 1] = M[row][k];
+        }
     }
 }
 
-int main() {
-//    square_wave();
+std::vector<std::vector<double>>
+createMinor(unsigned long size) {
+    std::vector<std::vector<double>> minor(size, std::vector<double>(size));
+    return minor;
+}
 
-    std::vector<std::vector<double> > values(0, std::vector<double>(3));
-    std::vector<double> val1{2, 3, 4};
+double Determinant(std::vector<std::vector<double>> &M, const int size) {
+    if (size == 2) {
+        return M[0][0] * M[1][1] - M[0][1] * M[1][0];
+    } else {
+        double det = 0;
+        for (int col = 0; col < size; ++col) {
+            std::vector<std::vector<double>> minor = createMinor(
+                    (unsigned long) size);
+            ExtractMinor(M, size, col, minor);
+            det += M[0][col] * std::pow(-1.0, col)
+                   * Determinant(minor, size - 1);
+        }
+        return det;
+    }
+}
+
+
+
+int main() {
+    std::vector<std::vector<double> > values(0, std::vector<double>(4));
+    std::vector<double> val1{4, 3, 2, 1};
+    std::vector<double> val2{1, 2, 3, 4};
+    std::vector<double> val3{3, 2, 1, 4};
+    std::vector<double> val4{4, 2, 1, 3};
+    // {{4,3,2,1},{1,2,3,4},{3,2,1,4},{4,2,1,3}}
     values.push_back(val1);
-    values.push_back(val1);
-    std::cout << values.size() << std::endl;
+    values.push_back(val2);
+    values.push_back(val3);
+    values.push_back(val4);
+//    std::cout << values[0][1] << std::endl;
+//    std::cout << values.size() << std::endl;
+    std::vector<double>::iterator myIterator;
+    std::vector<std::vector<double>>::iterator i;
+//    for (i = values.begin(); i != values.end(); ++i) {
+//        for (myIterator = (*i).begin();
+//             myIterator !=
+//             (*i).end(); ++myIterator) {
+//            std::cout << *myIterator << std::endl;
+//        }
+//    }
+    //std::vector<std::vector<double>>mMinor = createMinor(values.size()-1);
+
+    //ExtractMinor(values, (const int) values.size(), 1, mMinor);
+    double det = Determinant(values, (const int) values.size());
+    std::cout << det << "    " << "Det" << std::endl;
+//    for (i = values.begin(); i != values.end(); ++i) {
+//        for (myIterator = (*i).begin();
+//             myIterator !=
+//             (*i).end(); ++myIterator) {
+//            std::cout << *myIterator << std::endl;
+//        }
+//    }
     return 0;
 }
