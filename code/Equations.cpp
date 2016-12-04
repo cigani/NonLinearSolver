@@ -45,6 +45,7 @@ Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
 
     double df = getPolyDerivativePrivate(coef, value);
 
+    // For now this is hardcoded but you can easily add a switch later if you want
     df = jostleInitialValue(coef, value, df);
 
     return df;
