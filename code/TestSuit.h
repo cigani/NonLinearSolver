@@ -50,6 +50,8 @@ public:
     void testExprtkJacobian();
 
 
+    void iterateVectors(std::vector<std::string> &returns);
+
 private:
     //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     static void testAsssertion(const double tol, const double expected,
@@ -62,8 +64,6 @@ private:
                               std::vector<std::__1::vector<double>>::iterator &returns_iterator,
                               std::vector<double>::iterator &returns_iterator2);
 
-    void iterateVectors(const std::vector<double> &assertResults,
-                        std::vector<std::string> &returns);
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

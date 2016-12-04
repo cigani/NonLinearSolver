@@ -38,6 +38,7 @@ int main(int argc, char* argv[]) {
     test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
+    test.iterateVectors(mErrors);
 
 };
 
@@ -185,20 +186,17 @@ void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
             testAsssertion(0.015, assertResults[n], *returns_iterator2,
                            std::__1::string("Jacobian"));
             n++;
-
-
         }
     }
 }
 
-void TestSuit::iterateVectors(const std::vector<double> &assertResults,
-                              std::vector<std::string> &returns) {
-
+void TestSuit::iterateVectors(std::vector<std::string> &returns) {
     std::vector<std::string>::iterator i;
-
-    for (i = returns.begin(); i != returns.end(); ++i) {
+    if (returns.size() != 0)
+        for (i = returns.begin(); i != returns.end(); ++i) {
         std::cout << *i << std::endl;
-    }
+        }
+    else std::cout << "~~~ No Errors ~~~" << std::endl;
 }
 
 void TestSuit::testErrorCode(std::string &ErrorType) {
