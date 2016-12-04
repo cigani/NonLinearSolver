@@ -31,7 +31,6 @@
  * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
  */
 
-#include <assert.h>
 #include "Equations.hpp"
 #include "Chord.hpp"
 
@@ -43,7 +42,7 @@ double Chord::chordSolver(const std::vector<double>& coef,
                           double x0, double tol,
                           int nMax, bool verbose) {
 
-    double xnew, dx , fx0, fx1;
+    double xnew = 0, dx, fx0, fx1;
     double x1 = x0 + 1;
     int i;
 

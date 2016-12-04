@@ -39,8 +39,11 @@ int main(int argc, char* argv[]) {
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
     test.testDeterm();
+
     // Error Logging
     test.iterateVectors(mErrors);
+
+    return 0;
 
 };
 
@@ -198,7 +201,7 @@ void TestSuit::testErrorCode(std::string &ErrorType) {
 }
 
 void TestSuit::testDeterm() {
-    std::vector<std::vector<double> > values(0, std::vector<double>(4));
+    std::vector<std::vector<double> > values(0, std::vector<double>());
     std::vector<double> val1{4, 3, 2, 1};
     std::vector<double> val2{1, 2, 3, 4};
     std::vector<double> val3{3, 2, 1, 4};

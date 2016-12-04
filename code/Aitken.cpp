@@ -41,7 +41,7 @@ double Aitken::aitkenSolver(std::vector<double> &coef,
                             int nMax,
                             bool verbose)
 {
-	double x1, x2, phat, phatold;
+    double x1, x2, phat = 0, phatold;
 	int i;
 	Equations mEquation;
 	phatold = x0;
@@ -82,7 +82,7 @@ double Aitken::aitkenExprtkSolver(const std::string &eq,
                             int nMax,
                             bool verbose)
 {
-	double x1, x2, phat, phatold;
+    double x1, x2, phat = 0, phatold;
 	int i;
 	Equations mEquation;
 	phatold = x0;
