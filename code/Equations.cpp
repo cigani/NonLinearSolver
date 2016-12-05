@@ -183,16 +183,21 @@ Equations::getJacobianVector(const std::string &eq,
                              std::vector<double> variableValues,
                              std::string withRespectTo) {
 
+    double x = variableValues[0];
+    double y = variableValues[1];
+    double z = variableValues[2];
+
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
     typedef exprtk::parser_error::type error_t;
 
+
     std::string expr_string = eq;
     symbol_table_t symbol_table;
-    symbol_table.add_variable("x", variableValues[0]);
-    symbol_table.add_variable("y", variableValues[1]);
-    symbol_table.add_variable("z", variableValues[2]);
+    symbol_table.add_variable("x", x);
+    symbol_table.add_variable("y", y);
+    symbol_table.add_variable("z", z);
     symbol_table.add_constants();
 
     expression_t expression;
@@ -219,7 +224,9 @@ Equations::getJacobianVector(const std::string &eq,
 
         return __nan();
     }
-
+//     x = 1;
+//     y = 2;
+//     z = 3;
     double result = exprtk::derivative(expression, withRespectTo);
     return result;
 }
