@@ -148,57 +148,48 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
     std::vector<double> Jacobian;
     int n = 0;
 
-    for (std::string equation : eq) {
+    create_tables(eq, variableValues, variables, JacobianCompiled,
+                  Jacobian, n);
+    //std::cout << "Jacobian Completed: " << std::endl;
+    return JacobianCompiled;
+}
+
+void Equations::create_tables(const std::vector<std::string> &eq,
+                              const std::vector<std::vector<double>> &variableValues,
+                              int variables,
+                              std::vector<std::vector<double>> &JacobianCompiled,
+                              std::vector<double> &Jacobian, int n) {
+    for (std::__1::string equation : eq) {
         switch (variables) {
             case 1: {
-                Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(equation,
-                                                        variableValues[n],
-                                                        variables,
-                                                        "x"));
+                Jacobian.push_back(getJacobian(equation, variableValues[n],
+                                               variables, "x"));
                 break;
             }
             case 2: {
-                Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(equation,
-                                                        variableValues[n],
-                                                        variables,
-                                                        "x"));
-                Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(equation,
-                                                        variableValues[n],
-                                                        variables,
-                                                        "y"));
+                Jacobian.push_back(getJacobian(equation, variableValues[n],
+                                               variables, "x"));
+                Jacobian.push_back(getJacobian(equation, variableValues[n],
+                                               variables, "y"));
                 break;
             }
             case 3: {
-                Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(equation,
-                                                        variableValues[n],
-                                                        variables,
-                                                        "x"));
-                Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(equation,
-                                                        variableValues[n],
-                                                        variables,
-                                                        "y"));
-                Jacobian.push_back(
-                        exprtkGenerateDerivativePrivate(equation,
-                                                        variableValues[n],
-                                                        variables,
-                                                        "z"));
+                Jacobian.push_back(getJacobian(equation, variableValues[n],
+                                               variables, "x"));
+                Jacobian.push_back(getJacobian(equation, variableValues[n],
+                                               variables, "y"));
+                Jacobian.push_back(getJacobian(equation, variableValues[n],
+                                               variables, "z"));
                 break;
             }
             default:
-                std::cout << "Jacobian Broken";
+                std::__1::cout << "Jacobian Broken";
                 break;
         }
         JacobianCompiled.push_back(Jacobian);
         Jacobian.clear();
         if (variableValues.size() != 1) n++;
     }
-    //std::cout << "Jacobian Completed: " << std::endl;
-    return JacobianCompiled;
 }
 
 /**
@@ -210,10 +201,10 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
  * @return a singlle double (df/(dx_i))
  */
 double
-Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
-                                           std::vector<double> variableValues,
-                                           int variables,
-                                           std::string withRespectTo) {
+Equations::getJacobian(const std::string &eq,
+                       std::vector<double> variableValues,
+                       int variables,
+                       std::string withRespectTo) {
 
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
@@ -229,26 +220,20 @@ Equations::exprtkGenerateDerivativePrivate(const std::string &eq,
 
     switch (variables) {
         case 1: {
-            double x = variableValues[0];
-            symbol_table.add_variable("x", x);
+            symbol_table.add_variable("x", variableValues[0]);
             //std::cout <<"Added 1 variable(s) to Jacobian " << std::endl;
             break;
         }
         case 2: {
-            double x = variableValues[0];
-            double y = variableValues[1];
-            symbol_table.add_variable("x", x);
-            symbol_table.add_variable("y", y);
+            symbol_table.add_variable("x", variableValues[0]);
+            symbol_table.add_variable("y", variableValues[1]);
             //std::cout <<"Added 2 variable(s) to Jacobian " << std::endl;
             break;
         }
         case 3: {
-            double x = variableValues[0];
-            double y = variableValues[1];
-            double z = variableValues[2];
-            symbol_table.add_variable("x", x);
-            symbol_table.add_variable("y", y);
-            symbol_table.add_variable("z", z);
+            symbol_table.add_variable("x", variableValues[0]);
+            symbol_table.add_variable("y", variableValues[1]);
+            symbol_table.add_variable("z", variableValues[2]);
             //std::cout <<"Added 3 variable(s) to Jacobian " << std::endl;
             break;
         }

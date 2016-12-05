@@ -31,13 +31,19 @@ public:
 
 private:
 
-    double exprtkGenerateDerivativePrivate(const std::string &eq,
-                                           std::vector<double> variableValues,
-                                           int variables,
-                                           std::string withRespectTo);
+    double getJacobian(const std::string &eq,
+                       std::vector<double> variableValues,
+                       int variables,
+                       std::string withRespectTo);
 
     void ExtractMinor(std::vector<std::vector<double>> &M, const int size,
                       const int col, std::vector<std::vector<double>> &minor);
+
+    void create_tables(const std::vector<std::string> &eq,
+                       const std::vector<std::vector<double>> &variableValues,
+                       int variables,
+                       std::vector<std::vector<double>> &JacobianCompiled,
+                       std::vector<double> &Jacobian, int n);
 };
 
 #endif /* EQUATIONS_HPP_ */
