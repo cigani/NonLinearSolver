@@ -29,6 +29,9 @@ public:
 
     double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
+    std::vector<double>
+    subtractVectors(std::vector<double> &v1, std::vector<double> &v2);
+
 private:
 
     double getJacobianVector(const std::string &eq,
@@ -42,8 +45,6 @@ private:
                            const std::vector<std::vector<double>> &variableValues,
                            std::vector<std::vector<double>> &JacobianCompiled);
 
-    std::vector<double>
-    subtractVectors(std::vector<double> &v1, std::vector<double> &v2);
 };
 
 #endif /* EQUATIONS_HPP_ */

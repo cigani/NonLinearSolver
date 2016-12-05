@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
     test.testDeterm();
-
+    test.testSubtract();
     // Error Logging
     test.iterateVectors(mErrors);
 
@@ -211,3 +211,14 @@ void TestSuit::testDeterm() {
 
 }
 
+void TestSuit::testSubtract() {
+    std::vector<double> v1{1, 2, 3, 4};
+    std::vector<double> v2{4, 3, 2, 1};
+    std::vector<double> assertVector{3, 1, 1, 3};
+    Equations mEquations;
+    std::vector<double> testVector = mEquations.subtractVectors(v1, v2);
+    for (int n = 0; n != v1.size(); n++) {
+        testAsssertion(0.1, assertVector[n], testVector[n],
+                       std::string("subtract))"));
+    }
+}
