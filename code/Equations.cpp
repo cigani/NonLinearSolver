@@ -290,3 +290,12 @@ Equations::Determinant(std::vector<std::vector<double>> &M, const int size) {
         return det;
     }
 }
+
+std::vector<double> Equations::subtractVectors(
+        std::vector<double> &v1, std::vector<double> &v2) {
+    std::vector<double> result;
+    std::transform(v1.begin(), v1.end(), v2.begin(),
+                   std::back_inserter(result),
+                   [](double v1, double v2) { return fabs(v1 - v2); });
+    return result;
+}

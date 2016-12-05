@@ -41,6 +41,9 @@ private:
     void getJacobianMatrix(const std::vector<std::string> &eq,
                            const std::vector<std::vector<double>> &variableValues,
                            std::vector<std::vector<double>> &JacobianCompiled);
+
+    std::vector<double>
+    subtractVectors(std::vector<double> &v1, std::vector<double> &v2);
 };
 
 #endif /* EQUATIONS_HPP_ */
