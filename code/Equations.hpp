@@ -16,32 +16,42 @@ public:
 
     // Public methods
 
-    static double getPolyEquation(const std::vector<double> &coef, double value);
-    static double getPolyDerivative(const std::vector<double> &coef, double value);
-    static double getCosine(double value);
-    static double getCosineDerivative(double value);
-    static double getCosineIteration(double value);
+    double getPolyEquation(const std::vector<double> &coef, double value);
 
-    static std::vector<std::vector<double>>
-    exprtkJacobian(const std::vector<std::string> &eq,
-                   std::vector<std::vector<double>> variableValues,
-                   int variables);
+    double getPolyDerivative(const std::vector<double> &coef, double value);
 
+    double getCosine(double value);
 
-    // These aren't static on purpose
+    double getCosineDerivative(double value);
+
+    double getCosineIteration(double value);
+
+    std::vector<std::vector<double>> createMinor(unsigned long size);
+
+    double Determinant(std::vector<std::vector<double>> &M, const int size);
+
+    std::vector<std::vector<double>> exprtkJacobian(
+            const std::vector<std::string> &eq,
+            std::vector<std::vector<double>> variableValues,
+            int variables);
+
     double exprtkGenerate2D(const std::string &eq, double value);
 
     double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
 private:
-    static double getPolyDerivativePrivate(const std::vector<double> &coef,
-                                           double value);
+    double getPolyDerivativePrivate(const std::vector<double> &coef,
+                                    double value);
 
-    static double exprtkGenerateDerivativePrivate(const std::string &eq,
-                                                  std::vector<double> variableValues,
-                                                  int variables,
-                                                  std::string withRespectTo);
+    double exprtkGenerateDerivativePrivate(const std::string &eq,
+                                           std::vector<double> variableValues,
+                                           int variables,
+                                           std::string withRespectTo);
 
+    double jostleInitial(const std::vector<double> &coef, double value);
+
+    void ExtractMinor(std::vector<std::vector<double>> &M, const int size,
+                      const int col, std::vector<std::vector<double>> &minor);
 };
 
 #endif /* EQUATIONS_HPP_ */

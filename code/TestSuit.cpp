@@ -25,8 +25,10 @@ int main(int argc, char* argv[]) {
 
 
     // Tests
-    test.testChordSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
-    test.testNewtonSolver(0.0015, 0.66381, 3, 1000, false, mTestVector);
+    test.testChordSolver(0.0015, 3.16227766517654, 3, 1000, false,
+                         mPolyCoefficient);
+    test.testNewtonSolver(0.0015, 3.16227766517654, 3, 1000, false,
+                          mPolyCoefficient);
     test.testNewtonWithExprtkPoly(0.0015, 3.16227766517654, 1.1, 1000, false,
                                   mPolyCoefficient);
     test.testNewtonWithExprtkLog(0.0015, 22026.4657948162, 10.0, 1000, false,
@@ -52,12 +54,11 @@ void TestSuit::testAsssertion(const double tol, const double expected,
 void
 TestSuit::testChordSolver(const double tol, const double expected,
                           const int x0, const int max, const bool verbose,
-                          const std::vector<double> &vector) {
-    Chord testChord;
-    double *chordRealValue = new double;
-    *chordRealValue = testChord.chordSolver(
-            vector, x0, tol, max, verbose);
+                          std::string &eq) {
 
+    Chord testChord(eq, x0, tol, max, verbose);
+    double *chordRealValue = new double;
+    *chordRealValue = testChord.solve();
     testAsssertion(tol, expected, *chordRealValue, std::string("Chord"));
 
     delete (chordRealValue);
@@ -68,11 +69,10 @@ void
 TestSuit::testNewtonSolver(const double tol, const double expected,
                            const double x0, const int max,
                            const bool verbose,
-                           const std::vector<double> &vector) {
-    Newton testNewton;
+                           std::string &eq) {
+    Newton testNewton(eq, x0, tol, max, verbose);
     double *newtonRealValue = new double;
-    *newtonRealValue = testNewton.newtonSolver(
-            vector, x0, tol, max, verbose);
+    *newtonRealValue = testNewton.solve();
 
     testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));
 
@@ -83,11 +83,10 @@ void
 TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
                                    const double x0, const int max,
                                    const bool verbose,
-                                   std::string &coefficient) {
+                                   std::string &eq) {
     double testNewton;
-    Newton mNewton;
-    testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
-                                            tol, max, verbose);
+    Newton mNewton(eq, x0, tol, max, verbose);
+    testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkPoly"));
 }
@@ -96,11 +95,10 @@ void
 TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
                                   const double x0, const int max,
                                   const bool verbose,
-                                  std::string &coefficient) {
+                                  std::string &eq) {
     double testNewton;
-    Newton mNewton;
-    testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
-                                            tol, max, verbose);
+    Newton mNewton(eq, x0, tol, max, verbose);
+    testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkLog"));
 }
@@ -109,12 +107,10 @@ void
 TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
                                   const double x0, const int max,
                                   const bool verbose,
-                                  std::string &coefficient) {
+                                  std::string &eq) {
     double testNewton;
-    Newton mNewton;
-    //TODO: Testing periodicity so we aren't so hamstrung by starting point
-    testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
-                                            tol, max, verbose);
+    Newton mNewton(eq, x0, tol, max, verbose);
+    testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkTrig"));
 
@@ -124,17 +120,17 @@ void
 TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
                                  const double x0, const int max,
                                  const bool verbose,
-                                 std::string &coefficient) {
+                                 std::string &eq) {
     double testNewton;
-    Newton mNewton;
-    testNewton = mNewton.newtonExprtkSolver(coefficient, x0,
-                                            tol, max, verbose);
+    Newton mNewton(eq, x0, tol, max, verbose);
+    testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkExp"));
 }
 
 void TestSuit::testExprtkJacobian() {
     std::vector<std::string> equations;
+    Equations mEquations;
     equations.push_back("x^2 + y^4 - z^3 + 10");
     std::vector<std::vector<double> > values(0, std::vector<double>(3));
     std::vector<double> val1{2, 3, 4};
@@ -142,14 +138,13 @@ void TestSuit::testExprtkJacobian() {
     std::vector<double> assertResults{4, 108, -48, 75, 2, -1};
     int var = 3;
 
-    std::vector<std::vector<double>> returns = Equations::exprtkJacobian(
+    std::vector<std::vector<double>> returns = mEquations.exprtkJacobian(
             equations, values,
             var);
 
-    std::vector<std::vector<double> >::iterator returns_iterator;
-    std::vector<double>::iterator returns_iterator2;
+    std::vector<std::vector<double> >::const_iterator returns_iterator;
+    std::vector<double>::const_iterator returns_iterator2;
 
-    // Ridiculous PITA to print this stuff out. But this is probably the cleanest way
     iterateNestedVectors(assertResults, returns, returns_iterator,
                          returns_iterator2);
 
@@ -157,11 +152,10 @@ void TestSuit::testExprtkJacobian() {
     std::vector<double> val2{5, 1, 2};
     values.push_back(val2);
     std::vector<std::vector<double>> testEquation;
-    Equations mEquations;
     testEquation = mEquations.exprtkJacobian(equations, values, var);
 
-    std::vector<std::vector<double> >::iterator mReturnsIterator;
-    std::vector<double>::iterator mReturnsIterator2;
+    std::vector<std::vector<double> >::const_iterator mReturnsIterator;
+    std::vector<double>::const_iterator mReturnsIterator2;
 
     iterateNestedVectors(assertResults, testEquation, mReturnsIterator,
                          mReturnsIterator2);
@@ -169,28 +163,31 @@ void TestSuit::testExprtkJacobian() {
 
 void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
                                     std::vector<std::vector<double>> &returns,
-                                    std::vector<std::__1::vector<double>>::iterator &returns_iterator,
-                                    std::vector<double>::iterator &returns_iterator2) {
+                                    std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
+                                    std::vector<double>::const_iterator &returns_iterator2) {
     int n = 0;
-    for (returns_iterator = returns.begin();
-         returns_iterator != returns.end(); ++returns_iterator) {
+    for (returns_iterator = returns.begin(); returns_iterator != returns.end();
+         ++returns_iterator) {
         for (returns_iterator2 = (*returns_iterator).begin();
-             returns_iterator2 !=
-             (*returns_iterator).end(); ++returns_iterator2) {
-            testAsssertion(0.015, assertResults[n], *returns_iterator2,
-                           std::__1::string("Jacobian"));
+             returns_iterator2 != (*returns_iterator).end();
+             ++returns_iterator2) {
+            testAsssertion(0.015, assertResults[n],
+                           *returns_iterator2,
+                           std::string("Jacobian"));
             n++;
         }
     }
 }
 
 void TestSuit::iterateVectors(std::vector<std::string> &returns) {
-    std::vector<std::string>::iterator i;
-    if (returns.size() != 0)
+    std::vector<std::string>::const_iterator i;
+
+    if (returns.size() != 0) {
         for (i = returns.begin(); i != returns.end(); ++i) {
-        std::cout << *i << std::endl;
+            std::cout << "FAILED --> " << *i << "\n";
         }
-    else std::cout << "~~~ No Errors ~~~" << std::endl;
+        std::cout << std::endl;
+    } else std::cout << "~~~ No Errors ~~~" << std::endl;
 }
 
 void TestSuit::testErrorCode(std::string &ErrorType) {

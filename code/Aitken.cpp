@@ -49,7 +49,7 @@ double Aitken::aitkenSolver(std::vector<double> &coef,
 		printVerbose(0,x0);
 	}
 
-	x1 = Equations::getPolyEquation(coef, x0);
+    x1 = mEquation.getPolyEquation(coef, x0);
 	if (verbose) {
 		printVerbose(1,x1);
 	}
@@ -61,7 +61,7 @@ double Aitken::aitkenSolver(std::vector<double> &coef,
 	}
   
 	for ( i = 2; i <= nMax; i++ ) {
-		x2 = Equations::getPolyEquation(coef, x1);
+        x2 = mEquation.getPolyEquation(coef, x1);
 		phat = x2 - ( x2 - x1 ) * ( x2 - x1 ) / ( x2 - 2 * x1 + x0 );
 		if (verbose) {
 			printVerbose(i,x2);

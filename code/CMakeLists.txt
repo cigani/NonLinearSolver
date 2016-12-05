@@ -11,5 +11,5 @@ add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
 	string.hpp Eigen)
 add_executable(tests Equations.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Aitken.cpp TestSuit.cpp TestSuit.h exprtk.hpp Bisection.cpp
-        string.hpp Eigen)
+		string.hpp NonlinearSolver.cpp Eigen)
 add_executable(scratch scratch.cpp exprtk.hpp Eigen)
