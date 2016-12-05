@@ -51,6 +51,11 @@ void square_wave() {
     }
 }
 
+template<class Container, class OutputIterator>
+OutputIterator copy(const Container &c, OutputIterator result) {
+    return std::copy(c.begin(), c.end(), result);
+}
+
 int main() {
 //    square_wave();
 
@@ -58,6 +63,11 @@ int main() {
     std::vector<double> val1{2, 3, 4};
     values.push_back(val1);
     values.push_back(val1);
-    std::cout << values.size() << std::endl;
+    //std::cout << values.size() << std::endl;
+    copy(val1.begin(), val1.end(),
+         std::ostream_iterator<double>(std::cout, "\n"));
+
+
+
     return 0;
 }

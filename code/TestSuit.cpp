@@ -171,21 +171,20 @@ void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
         for (returns_iterator2 = (*returns_iterator).begin();
              returns_iterator2 != (*returns_iterator).end();
              ++returns_iterator2) {
-            testAsssertion(0.015, assertResults[n],
+            // This is an interesting trick to inc while still evaluating
+            // Prefix vs Postfix ++;
+            testAsssertion(0.015, assertResults[n++],
                            *returns_iterator2,
                            std::string("Jacobian"));
-            n++;
         }
     }
 }
 
 void TestSuit::iterateVectors(std::vector<std::string> &returns) {
-    std::vector<std::string>::const_iterator i;
 
     if (returns.size() != 0) {
-        for (i = returns.begin(); i != returns.end(); ++i) {
-            std::cout << "FAILED --> " << *i << "\n";
-        }
+        copy(returns.begin(), returns.end(),
+             std::ostream_iterator<std::string>(std::cout, "\n"));
         std::cout << std::endl;
     } else std::cout << "~~~ No Errors ~~~" << std::endl;
 }
