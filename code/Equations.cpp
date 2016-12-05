@@ -225,7 +225,7 @@ Equations::getJacobianVector(const std::string &eq,
         return __nan();
     }
 //     x = 1;
-//     y = 2;
+//     y = 2; Changing these will change the result.
 //     z = 3;
     double result = exprtk::derivative(expression, withRespectTo);
     return result;
@@ -296,6 +296,6 @@ std::vector<double> Equations::subtractVectors(
     std::vector<double> result;
     std::transform(v1.begin(), v1.end(), v2.begin(),
                    std::back_inserter(result),
-                   [](double v1, double v2) { return fabs(v1 - v2); });
+                   [](double v1, double v2) { return (v1 - v2); });
     return result;
 }
