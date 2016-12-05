@@ -12,109 +12,9 @@ Equations::Equations() {}
 
 Equations::~Equations() {}
 
-/**
- * * Calculates the value of a polynomial given in the form
- * (a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
- * @param coef - Vector of coefficients.
- * @param value - Initial Value
- * @return - Symbolic Evaluation
- */
+double Equations::exprtkGenerate2D(const std::string &eq,
+                                   double value) {
 
-double
-Equations::getPolyEquation(const std::vector<double> &coef, double value) {
-    double f = 0.0;
-    for (unsigned int i = 0; i < coef.size(); ++i) {
-        f += coef[i] * pow(value, i);
-    }
-    return f;
-}
-
-/**
- * Calculates the value of a polynomial derivative given in the form
- * d/dx(a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
- * Methods used require a non-zero derivative. The function will jostle the
- * starting value in the event of a zero derivative for a fixed number of iterations
- *
- * @param coef
- * @param value
- * @return - Symbolic evaluation
- */
-double
-Equations::getPolyDerivative(const std::vector<double> &coef, double value) {
-
-    int n = 0;
-
-    double df = getPolyDerivativePrivate(coef, value);
-
-    if (fabs(df) < DBL_EPSILON) {
-        for (int j = 0; j < 100000; ++j) {
-        n += 2 * (n + 1);
-        value += DBL_EPSILON * n;
-            df = getPolyDerivativePrivate(coef, value);
-        }
-    };
-
-    if (fabs(df) < DBL_EPSILON) {
-        std::cout << "No Derivative" << std::endl;
-        std::exit(1);
-    } else return df;
-}
-
-/**
- * Called by @getPolyDerivative to get the evaluated derivative
- * @param coef
- * @param value
- * @return - Symbolic evaluation
- */
-double Equations::getPolyDerivativePrivate(const std::vector<double> &coef,
-                                           double value) {
-    double df = 0.0;
-    for (unsigned int i = 1; i < coef.size(); ++i) {
-        df += i * coef[i] * pow(value, i - 1);
-    }
-    return df;
-}
-
-double Equations::getCosine(double value) {
-    return cos(value);
-}
-
-/**
- * Hard coded cosine derivative
- * @param value
- * @return
- */
-double Equations::getCosineDerivative(double value) {
-    double df;
-    int n = 0;
-    int j = 0;
-
-    df = -sin(value);
-
-    while (fabs(df) < DBL_EPSILON) {
-        n += 2 * (n + 1);
-        value += DBL_EPSILON * n;
-        df = getCosineDerivative(value);
-        ++j;
-        if (j > 100000) {
-            std::cout << "No Derivative" << std::endl;
-            return __nan();
-        }
-    };
-    return df;
-}
-
-double Equations::getCosineIteration(double value) {
-    return cos(value) + value;
-}
-
-/**
- *
- * @param eq - String containing the equation to evaluate
- * @param value - value to compute from
- * @return - computed equation at value
- */
-double Equations::exprtkGenerate2D(const std::string &eq, double value) {
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
@@ -168,8 +68,9 @@ double Equations::exprtkGenerate2D(const std::string &eq, double value) {
  * @return - Derivative of equation at value. Uses numeric approximation.
  */
 
-double
-Equations::exprtkGenerate2DDerivative(const std::string &eq, double value) {
+double Equations::exprtkGenerate2DDerivative(const std::string &eq,
+                                             double value) {
+
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
     typedef exprtk::parser<double> parser_t;
@@ -246,9 +147,6 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
             (unsigned long) variables));
     std::vector<double> Jacobian;
     int n = 0;
-
-    //std::cout << "Variables Values " << std::endl;
-    //TODO: Refactor to less code:
 
     for (std::string equation : eq) {
         switch (variables) {

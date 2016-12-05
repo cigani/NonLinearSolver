@@ -52,6 +52,8 @@ public:
 
     void iterateVectors(std::vector<std::string> &returns);
 
+    void testDeterm();
+
 private:
     //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     void testAsssertion(const double tol, const double expected,
@@ -63,6 +65,7 @@ private:
                               std::vector<std::vector<double>> &returns,
                               std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
                               std::vector<double>::const_iterator &returns_iterator2);
+
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

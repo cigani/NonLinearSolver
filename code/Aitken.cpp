@@ -35,47 +35,6 @@ Aitken::Aitken() {}
 
 Aitken::~Aitken() {}
 
-double Aitken::aitkenSolver(std::vector<double> &coef,
-                            double x0,
-                            double tol,
-                            int nMax,
-                            bool verbose)
-{
-	double x1, x2, phat, phatold;
-	int i;
-	Equations mEquation;
-	phatold = x0;
-	if (verbose) {
-		printVerbose(0,x0);
-	}
-
-    x1 = mEquation.getPolyEquation(coef, x0);
-	if (verbose) {
-		printVerbose(1,x1);
-	}
-  
-	if ( fabs(x1-x0) < tol ) {
-		return x1;
-	} else {
-		x0 = x1;
-	}
-  
-	for ( i = 2; i <= nMax; i++ ) {
-        x2 = mEquation.getPolyEquation(coef, x1);
-		phat = x2 - ( x2 - x1 ) * ( x2 - x1 ) / ( x2 - 2 * x1 + x0 );
-		if (verbose) {
-			printVerbose(i,x2);
-		}
-		if ( fabs(phatold - phat) < tol ) {
-			return phat;
-		} else {
-			phatold = phat;  x0 = x1;  x1 = x2;
-		}
-	}
-	std::cout << "Maximum number of iterations exceeded" << std::endl;
-	return phat;
-}
-
 double Aitken::aitkenExprtkSolver(const std::string &eq,
                             double x0,
                             double tol,
