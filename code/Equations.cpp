@@ -145,47 +145,25 @@ Equations::exprtkJacobian(const std::vector<std::string> &eq,
 
     std::vector<std::vector<double> > JacobianCompiled(0, std::vector<double>(
             (unsigned long) variables));
-    std::vector<double> Jacobian;
-    int n = 0;
-
-    create_tables(eq, variableValues, variables, JacobianCompiled,
-                  Jacobian, n);
-    //std::cout << "Jacobian Completed: " << std::endl;
+    getJacobianMatrix(eq, variableValues, JacobianCompiled);
     return JacobianCompiled;
 }
 
-void Equations::create_tables(const std::vector<std::string> &eq,
-                              const std::vector<std::vector<double>> &variableValues,
-                              int variables,
-                              std::vector<std::vector<double>> &JacobianCompiled,
-                              std::vector<double> &Jacobian, int n) {
+void Equations::getJacobianMatrix(
+        const std::vector<std::string> &eq,
+        const std::vector<std::vector<double>> &variableValues,
+        std::vector<std::vector<double>> &JacobianCompiled) {
+
+    std::vector<double> Jacobian;
+    int n = 0;
+
     for (std::__1::string equation : eq) {
-        switch (variables) {
-            case 1: {
-                Jacobian.push_back(getJacobian(equation, variableValues[n],
-                                               variables, "x"));
-                break;
-            }
-            case 2: {
-                Jacobian.push_back(getJacobian(equation, variableValues[n],
-                                               variables, "x"));
-                Jacobian.push_back(getJacobian(equation, variableValues[n],
-                                               variables, "y"));
-                break;
-            }
-            case 3: {
-                Jacobian.push_back(getJacobian(equation, variableValues[n],
-                                               variables, "x"));
-                Jacobian.push_back(getJacobian(equation, variableValues[n],
-                                               variables, "y"));
-                Jacobian.push_back(getJacobian(equation, variableValues[n],
-                                               variables, "z"));
-                break;
-            }
-            default:
-                std::__1::cout << "Jacobian Broken";
-                break;
-        }
+        Jacobian.push_back(
+                getJacobianVector(equation, variableValues[n], "x"));
+        Jacobian.push_back(
+                getJacobianVector(equation, variableValues[n], "y"));
+        Jacobian.push_back(
+                getJacobianVector(equation, variableValues[n], "z"));
         JacobianCompiled.push_back(Jacobian);
         Jacobian.clear();
         if (variableValues.size() != 1) n++;
@@ -201,10 +179,9 @@ void Equations::create_tables(const std::vector<std::string> &eq,
  * @return a singlle double (df/(dx_i))
  */
 double
-Equations::getJacobian(const std::string &eq,
-                       std::vector<double> variableValues,
-                       int variables,
-                       std::string withRespectTo) {
+Equations::getJacobianVector(const std::string &eq,
+                             std::vector<double> variableValues,
+                             std::string withRespectTo) {
 
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
@@ -213,34 +190,9 @@ Equations::getJacobian(const std::string &eq,
 
     std::string expr_string = eq;
     symbol_table_t symbol_table;
-
-//    std::cout << "Jacobians Der Begin: " <<std::endl;
-//    std::cout << "Variables " << variables << std::endl;
-//    std::cout << "Variable Values: " << variableValues[0] << std::endl;
-
-    switch (variables) {
-        case 1: {
-            symbol_table.add_variable("x", variableValues[0]);
-            //std::cout <<"Added 1 variable(s) to Jacobian " << std::endl;
-            break;
-        }
-        case 2: {
-            symbol_table.add_variable("x", variableValues[0]);
-            symbol_table.add_variable("y", variableValues[1]);
-            //std::cout <<"Added 2 variable(s) to Jacobian " << std::endl;
-            break;
-        }
-        case 3: {
-            symbol_table.add_variable("x", variableValues[0]);
-            symbol_table.add_variable("y", variableValues[1]);
-            symbol_table.add_variable("z", variableValues[2]);
-            //std::cout <<"Added 3 variable(s) to Jacobian " << std::endl;
-            break;
-        }
-        default:
-            std::cout << "Bad Input to Jacobian Generator";
-            break;
-    }
+    symbol_table.add_variable("x", variableValues[0]);
+    symbol_table.add_variable("y", variableValues[1]);
+    symbol_table.add_variable("z", variableValues[2]);
     symbol_table.add_constants();
 
     expression_t expression;
@@ -269,7 +221,6 @@ Equations::getJacobian(const std::string &eq,
     }
 
     double result = exprtk::derivative(expression, withRespectTo);
-    //std::cout << "Jacobian Der Results: " << result << std::endl;
     return result;
 }
 

@@ -31,19 +31,16 @@ public:
 
 private:
 
-    double getJacobian(const std::string &eq,
-                       std::vector<double> variableValues,
-                       int variables,
-                       std::string withRespectTo);
+    double getJacobianVector(const std::string &eq,
+                             std::vector<double> variableValues,
+                             std::string withRespectTo);
 
     void ExtractMinor(std::vector<std::vector<double>> &M, const int size,
                       const int col, std::vector<std::vector<double>> &minor);
 
-    void create_tables(const std::vector<std::string> &eq,
-                       const std::vector<std::vector<double>> &variableValues,
-                       int variables,
-                       std::vector<std::vector<double>> &JacobianCompiled,
-                       std::vector<double> &Jacobian, int n);
+    void getJacobianMatrix(const std::vector<std::string> &eq,
+                           const std::vector<std::vector<double>> &variableValues,
+                           std::vector<std::vector<double>> &JacobianCompiled);
 };
 
 #endif /* EQUATIONS_HPP_ */
