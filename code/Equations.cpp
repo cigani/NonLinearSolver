@@ -107,9 +107,14 @@ Equations::getDerivative(const std::string &eq,
                          std::vector<double> variableValues,
                          std::string withRespectTo) {
 
-    double x = variableValues[0];
-    double y = variableValues[1];
-    double z = variableValues[2];
+    // Use .at here to make use of the bounds check vectors come with
+    double x = variableValues.at(0);
+    if (variableValues.size() != 1) {
+        double y = variableValues.at(1);
+        if (variableValues.size() == 3) {
+            double z = variableValues.at(2);
+        }
+    }
 
     typedef exprtk::symbol_table<double> symbol_table_t;
     typedef exprtk::expression<double> expression_t;
