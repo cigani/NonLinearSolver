@@ -5,6 +5,8 @@
 
 #include <cfloat>
 #include "TestSuit.h"
+#include "Jacobian.h"
+#include "EquationTools.h"
 
 std::vector<std::string> mErrors;
 
