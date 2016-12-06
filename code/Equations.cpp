@@ -12,6 +12,7 @@ Equations::Equations() {}
 
 Equations::~Equations() {}
 
+//TODO: Delete this. Replace with @getEquations method
 double Equations::exprtkGenerate2D(const std::string &eq,
                                    double value) {
 
@@ -115,9 +116,9 @@ Equations::getDerivative(const std::string &eq,
     std::string expr_string = eq;
     symbol_table_t symbol_table;
 
-    // Use .at here to make use of the bounds check vectors come with
-    // We only need it for the first check. After that we can shave off nano
-    // seconds by not checking the bounds since we know its there via size()
+    /* Use .at here to make use of the bounds check vectors come with
+    we only need it for the first check. After that we can shave off nano
+    seconds by not checking the bounds since we know its there via size() */
 
     double x = variableValues.at(0);
     symbol_table.add_variable("x", x);
@@ -129,9 +130,6 @@ Equations::getDerivative(const std::string &eq,
             symbol_table.add_variable("z", z);
         }
     }
-    symbol_table.add_constants();
-
-
     symbol_table.add_constants();
 
     expression_t expression;
@@ -148,5 +146,48 @@ Equations::getDerivative(const std::string &eq,
 //     z = 3;
     double result = derivative(expression, withRespectTo);
     return result;
+}
+
+double
+Equations::getEquations(const std::string &eq,
+                        std::vector<double> variableValues) {
+
+    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef exprtk::expression<double> expression_t;
+    typedef exprtk::parser<double> parser_t;
+    typedef exprtk::parser_error::type error_t;
+
+    std::string expr_string = eq;
+    symbol_table_t symbol_table;
+
+    /* Use .at here to make use of the bounds check vectors come with
+    we only need it for the first check. After that we can shave off nano
+    seconds by not checking the bounds since we know its there via size() */
+
+    double x = variableValues.at(0);
+    symbol_table.add_variable("x", x);
+    if (variableValues.size() != 1) {
+        double y = variableValues[1];
+        symbol_table.add_variable("y", y);
+        if (variableValues.size() == 3) {
+            double z = variableValues[2];
+            symbol_table.add_variable("z", z);
+        }
+    }
+    symbol_table.add_constants();
+
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    parser_t parser;
+    parser.compile(expr_string, expression);
+    if (!parser.compile(expr_string, expression)) {
+        logErrors(expr_string, parser);
+        return __nan();
+    }
+//     x = 1;
+//     y = 2; Changing these will change the result.
+//     z = 3;
+    return expression.value();
 }
 

@@ -27,6 +27,8 @@ protected:
                          std::vector<double> variableValues,
                          std::string withRespectTo);
 
+    double
+    getEquations(const std::string &eq, std::vector<double> variableValues);
 };
 
 #endif /* EQUATIONS_HPP_ */
