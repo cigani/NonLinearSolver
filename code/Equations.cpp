@@ -46,24 +46,7 @@ double Equations::exprtkGenerate2D(const std::string &eq,
     return result;
 }
 
-void Equations::logErrors(const std::string &expr_string,
-                          exprtk::parser<double> &parser) const {
-    printf("Error: %s\tExpression: %s\n",
-           parser.error().c_str(),
-           expr_string.c_str());
 
-    for (size_t i = 0; i < parser.error_count(); ++i) {
-        exprtk::parser_error::type error = parser.get_error(i);
-
-            printf("Error: %02d  Position: %02d Type: [%14s] Msg: "
-                           "%s\tExpression: %s\n",
-                   static_cast<unsigned int>(i),
-                   static_cast<unsigned int>(error.token.position),
-                   exprtk::parser_error::to_str(error.mode).c_str(),
-                   error.diagnostic.c_str(),
-                   expr_string.c_str());
-        }
-}
 
 /**
  *
@@ -100,21 +83,12 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
         logErrors(expr_string, parser);
         return __nan();
     }
-    int n = 0;
     int j = 0;
-
     double result = exprtk::derivative(expression, x);
-    while (fabs(result) < DBL_EPSILON) {
-        n += 2 * (n + 1);
-        x += DBL_EPSILON * n;
+    while ((fabs(result) < DBL_EPSILON) && ++j < 100000) {
+        x += DBL_EPSILON * exp(j * j + 1);
         result = exprtk::derivative(expression, x);
-        ++j;
-        if (j > 100000) {
-            std::cout << "No Derivative" << std::endl;
-            return __nan();
-        }
     };
-
     return result;
 }
 

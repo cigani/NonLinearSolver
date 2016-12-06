@@ -6,8 +6,9 @@
 #include <cmath>
 #include <vector>
 #include "exprtk.hpp"
-#include <string>
-class Equations {
+#include "EquationsControl.h"
+
+class Equations : public EquationsControl {
 public:
     // Constructors and destructors
 
@@ -26,8 +27,6 @@ protected:
                          std::vector<double> variableValues,
                          std::string withRespectTo);
 
-    void logErrors(const std::string &expr_string,
-                   exprtk::parser<double> &parser) const;
 };
 
 #endif /* EQUATIONS_HPP_ */

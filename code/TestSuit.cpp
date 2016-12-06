@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
                                  mTrigCoefficient);
     test.testNewtonWithExprtExp(0.0015, -0.095561, 0.1, 1000, false,
                                 mExpCoefficient);
-    test.testNewtonWithExprtkPoly(0.0015, -0.807004, 0.0, 1000, false,
+    test.testNewtonWithExprtkPoly(0.00015, -0.807004, 0.0, 1000, false,
                                   mZeroDerivativeCheck);
     test.testExprtkJacobian();
     test.testDeterm();
@@ -51,6 +51,7 @@ int main(int argc, char* argv[]) {
 
 void TestSuit::testAsssertion(const double tol, const double expected,
                               double testNewton, std::string name) {
+    if (isnan(testNewton)) { testErrorCode(name); }
     if (fabs(expected - testNewton) >= tol) { testErrorCode(name); }
 }
 
