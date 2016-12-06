@@ -55,6 +55,7 @@ double Equations::exprtkGenerate2D(const std::string &eq,
  * @return - Derivative of equation at value. Uses numeric approximation.
  */
 
+//TODO: Delete this and replace all method calls with @getDerivative
 double Equations::exprtkGenerate2DDerivative(const std::string &eq,
                                              double value) {
 
@@ -83,11 +84,11 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
         logErrors(expr_string, parser);
         return __nan();
     }
+    double result = derivative(expression, x);
     int j = 0;
-    double result = exprtk::derivative(expression, x);
     while ((fabs(result) < DBL_EPSILON) && ++j < 100000) {
         x += DBL_EPSILON * exp(j * j + 1);
-        result = exprtk::derivative(expression, x);
+        result = derivative(expression, x);
     };
     return result;
 }
@@ -135,7 +136,7 @@ Equations::getDerivative(const std::string &eq,
 //     x = 1;
 //     y = 2; Changing these will change the result.
 //     z = 3;
-    double result = exprtk::derivative(expression, withRespectTo);
+    double result = derivative(expression, withRespectTo);
     return result;
 }
 
