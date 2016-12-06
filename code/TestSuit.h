@@ -13,6 +13,8 @@
 #include <assert.h>
 #include "exprtk.hpp"
 #include <vector>
+#include "EquationTools.h"
+#include "Jacobian.h"
 
 class TestSuit {
 public:

@@ -4,7 +4,6 @@
 */
 
 #include <cfloat>
-#include <valarray>
 #include "TestSuit.h"
 
 std::vector<std::string> mErrors;
@@ -132,7 +131,7 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
 
 void TestSuit::testExprtkJacobian() {
     std::vector<std::string> equations;
-    Equations mEquations;
+    Jacobian mEquations;
     equations.push_back("x^2 + y^4 - z^3 + 10");
     std::vector<std::vector<double> > values(0, std::vector<double>(3));
     std::vector<double> val1{2, 3, 4};
@@ -205,7 +204,7 @@ void TestSuit::testDeterm() {
     values.push_back(val2);
     values.push_back(val3);
     values.push_back(val4);
-    Equations mEquations;
+    EquationTools mEquations;
     double det = mEquations.Determinant(values, (const int) values.size());
 //    std::cout<<"det" << det << std::endl;
     testAsssertion(0.0015, -20, det, std::string("Determinant"));
@@ -216,7 +215,7 @@ void TestSuit::testSubtract() {
     std::vector<double> v1{1, 2, 3, 4};
     std::vector<double> v2{4, 3, 2, 1};
     std::vector<double> assertVector{-3, -1, 1, 3};
-    Equations mEquations;
+    EquationTools mEquations;
     std::vector<double> testVector = mEquations.subtractVectors(v1, v2);
     for (int n = 0; n != v1.size(); n++) {
         testAsssertion(0.1, assertVector[n], testVector[n],

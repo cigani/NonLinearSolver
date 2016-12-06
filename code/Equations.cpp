@@ -57,12 +57,6 @@ double Equations::exprtkGenerate2D(const std::string &eq,
         return __nan();
     }
 
-    double result = getDouble(expression);
-    return result;
-}
-
-double
-Equations::getDouble(const exprtk::expression<double> &expression) const {
     double result = expression.value();
     return result;
 }
@@ -137,45 +131,6 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
 }
 
 /**
- *
- * @param eq - Equations to be used
- * @param variableValues - Matrix of values. If column vector then we use the
- * same values for each equation.
- * @param variables - Number of variables to be used
- * @return - Returns a column vector representing numerical solution to Jacobian
- **/
-std::vector<std::vector<double>>
-Equations::exprtkJacobian(const std::vector<std::string> &eq,
-                          std::vector<std::vector<double> > variableValues,
-                          int variables) {
-
-    std::vector<std::vector<double> > jm(0, std::vector<double>(
-            (unsigned long) variables));
-    getJacobianMatrix(eq, variableValues, jm);
-    return jm;
-}
-
-void Equations::getJacobianMatrix(const std::vector<std::string> &eq,
-                                  const std::vector<std::vector<double>> &vals,
-                                  std::vector<std::vector<double>> &JM) {
-
-    std::vector<double> Jacobian;
-    int n = 0;
-
-    for (std::__1::string equation : eq) {
-        Jacobian.push_back(
-                getDerivative(equation, vals[n], "x"));
-        Jacobian.push_back(
-                getDerivative(equation, vals[n], "y"));
-        Jacobian.push_back(
-                getDerivative(equation, vals[n], "z"));
-        JM.push_back(Jacobian);
-        Jacobian.clear();
-        if (vals.size() != 1) n++;
-    }
-}
-
-/**
  * This is used by @exprtkJacobian to calculate the Jacobian
  * @param eq
  * @param variableValues
@@ -236,71 +191,3 @@ Equations::getDerivative(const std::string &eq,
     return result;
 }
 
-/**
- * Extract the Minor for a given Matrix. Edits the given Matrix via Refrence
- *
- * @param M - Given Matrix
- * @param size - Size of Matrix (in our case M.Size());
- * @param col - Column that will act as scalar in Det
- * @param minor - Minor from @createMinor
- */
-void Equations::ExtractMinor(std::vector<std::vector<double>> &M,
-                             const int size,
-                             const int col,
-                             std::vector<std::vector<double>> &minor) {
-    for (int row = 1; row < size; ++row) {
-        for (int k = 0; k < col; ++k) {
-            minor[row - 1][k] = M[row][k];
-        }
-        for (int k = col + 1; k < size; ++k) {
-            minor[row - 1][k - 1] = M[row][k];
-        }
-    }
-}
-
-/**
- * Create a vector<vector> to be populated later
- * @param size - of the Main Vector<Vector> - 1
- * @return A NxN vector<vector> of zeros
- */
-std::vector<std::vector<double>>
-Equations::createMinor(unsigned long size) {
-    std::vector<std::vector<double>> minor(size, std::vector<double>(size));
-    return minor;
-}
-
-/**
- * Calculate the Det of an input Vector<Vector>
- * Special Case: If it's a 2x2 Matrix we just calculate it in place
- * @param M - Initial Vector<Vector>
- * @param size - Size of the <Vector<Vector> : M.Size()
- * @return The determinant
- */
-double
-Equations::Determinant(std::vector<std::vector<double>> &M, const int size) {
-
-    //TODO: special case for 3x3 matrix. Speeds it up
-
-    if (size == 2) {
-        return M[0][0] * M[1][1] - M[0][1] * M[1][0];
-    } else {
-        double det = 0;
-        for (int col = 0; col < size; ++col) {
-            std::vector<std::vector<double>> minor = createMinor(
-                    (unsigned long) size);
-            ExtractMinor(M, size, col, minor);
-            det += M[0][col] * std::pow(-1.0, col)
-                   * Determinant(minor, size - 1);
-        }
-        return det;
-    }
-}
-
-std::vector<double> Equations::subtractVectors(
-        std::vector<double> &v1, std::vector<double> &v2) {
-    std::vector<double> result;
-    std::transform(v1.begin(), v1.end(), v2.begin(),
-                   std::back_inserter(result),
-                   [](double v1, double v2) { return (v1 - v2); });
-    return result;
-}
