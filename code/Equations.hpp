@@ -34,17 +34,21 @@ public:
 
 private:
 
-    double getJacobianVector(const std::string &eq,
-                             std::vector<double> variableValues,
-                             std::string withRespectTo);
+    double getDerivative(const std::string &eq,
+                         std::vector<double> variableValues,
+                         std::string withRespectTo);
 
     void ExtractMinor(std::vector<std::vector<double>> &M, const int size,
                       const int col, std::vector<std::vector<double>> &minor);
 
     void getJacobianMatrix(const std::vector<std::string> &eq,
-                           const std::vector<std::vector<double>> &variableValues,
-                           std::vector<std::vector<double>> &JacobianCompiled);
+                           const std::vector<std::vector<double>> &vals,
+                           std::vector<std::vector<double>> &JM);
 
+    void table(double x, double y, double z,
+               exprtk::symbol_table<double> &symbol_table);
+
+    double getDouble(const exprtk::expression<double> &expression) const;
 };
 
 #endif /* EQUATIONS_HPP_ */

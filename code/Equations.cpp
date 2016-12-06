@@ -57,6 +57,12 @@ double Equations::exprtkGenerate2D(const std::string &eq,
         return __nan();
     }
 
+    double result = getDouble(expression);
+    return result;
+}
+
+double
+Equations::getDouble(const exprtk::expression<double> &expression) const {
     double result = expression.value();
     return result;
 }
@@ -137,36 +143,35 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
  * same values for each equation.
  * @param variables - Number of variables to be used
  * @return - Returns a column vector representing numerical solution to Jacobian
- */
+ **/
 std::vector<std::vector<double>>
 Equations::exprtkJacobian(const std::vector<std::string> &eq,
                           std::vector<std::vector<double> > variableValues,
                           int variables) {
 
-    std::vector<std::vector<double> > JacobianCompiled(0, std::vector<double>(
+    std::vector<std::vector<double> > jm(0, std::vector<double>(
             (unsigned long) variables));
-    getJacobianMatrix(eq, variableValues, JacobianCompiled);
-    return JacobianCompiled;
+    getJacobianMatrix(eq, variableValues, jm);
+    return jm;
 }
 
-void Equations::getJacobianMatrix(
-        const std::vector<std::string> &eq,
-        const std::vector<std::vector<double>> &variableValues,
-        std::vector<std::vector<double>> &JacobianCompiled) {
+void Equations::getJacobianMatrix(const std::vector<std::string> &eq,
+                                  const std::vector<std::vector<double>> &vals,
+                                  std::vector<std::vector<double>> &JM) {
 
     std::vector<double> Jacobian;
     int n = 0;
 
     for (std::__1::string equation : eq) {
         Jacobian.push_back(
-                getJacobianVector(equation, variableValues[n], "x"));
+                getDerivative(equation, vals[n], "x"));
         Jacobian.push_back(
-                getJacobianVector(equation, variableValues[n], "y"));
+                getDerivative(equation, vals[n], "y"));
         Jacobian.push_back(
-                getJacobianVector(equation, variableValues[n], "z"));
-        JacobianCompiled.push_back(Jacobian);
+                getDerivative(equation, vals[n], "z"));
+        JM.push_back(Jacobian);
         Jacobian.clear();
-        if (variableValues.size() != 1) n++;
+        if (vals.size() != 1) n++;
     }
 }
 
@@ -179,9 +184,9 @@ void Equations::getJacobianMatrix(
  * @return a singlle double (df/(dx_i))
  */
 double
-Equations::getJacobianVector(const std::string &eq,
-                             std::vector<double> variableValues,
-                             std::string withRespectTo) {
+Equations::getDerivative(const std::string &eq,
+                         std::vector<double> variableValues,
+                         std::string withRespectTo) {
 
     double x = variableValues[0];
     double y = variableValues[1];
