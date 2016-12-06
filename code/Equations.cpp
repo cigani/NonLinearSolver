@@ -38,12 +38,22 @@ double Equations::exprtkGenerate2D(const std::string &eq,
     parser_t parser;
     parser.compile(expr_string, expression);
     if (!parser.compile(expr_string, expression)) {
-        printf("Error: %s\tExpression: %s\n",
-               parser.error().c_str(),
-               expr_string.c_str());
+        logErrors(expr_string, parser);
+        return __nan();
+    }
 
-        for (std::size_t i = 0; i < parser.error_count(); ++i) {
-            error_t error = parser.get_error(i);
+    double result = expression.value();
+    return result;
+}
+
+void Equations::logErrors(const std::string &expr_string,
+                          exprtk::parser<double> &parser) const {
+    printf("Error: %s\tExpression: %s\n",
+           parser.error().c_str(),
+           expr_string.c_str());
+
+    for (size_t i = 0; i < parser.error_count(); ++i) {
+        exprtk::parser_error::type error = parser.get_error(i);
 
             printf("Error: %02d  Position: %02d Type: [%14s] Msg: "
                            "%s\tExpression: %s\n",
@@ -53,12 +63,6 @@ double Equations::exprtkGenerate2D(const std::string &eq,
                    error.diagnostic.c_str(),
                    expr_string.c_str());
         }
-
-        return __nan();
-    }
-
-    double result = expression.value();
-    return result;
 }
 
 /**
@@ -77,7 +81,6 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
     typedef exprtk::parser_error::type error_t;
 
     std::string expr_string = eq;
-
     double x = value;
     double y;
     double z;
@@ -94,22 +97,7 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
     parser_t parser;
     parser.compile(expr_string, expression);
     if (!parser.compile(expr_string, expression)) {
-        printf("Error: %s\tExpression: %s\n",
-               parser.error().c_str(),
-               expr_string.c_str());
-
-        for (std::size_t i = 0; i < parser.error_count(); ++i) {
-            error_t error = parser.get_error(i);
-
-            printf("Error: %02d  Position: %02d Type: [%14s] "
-                           "Msg: %s\tExpression: %s\n",
-                   static_cast<unsigned int>(i),
-                   static_cast<unsigned int>(error.token.position),
-                   exprtk::parser_error::to_str(error.mode).c_str(),
-                   error.diagnostic.c_str(),
-                   expr_string.c_str());
-        }
-
+        logErrors(expr_string, parser);
         return __nan();
     }
     int n = 0;
@@ -129,6 +117,7 @@ double Equations::exprtkGenerate2DDerivative(const std::string &eq,
 
     return result;
 }
+
 
 /**
  * This is used by @exprtkJacobian to calculate the Jacobian
@@ -166,22 +155,7 @@ Equations::getDerivative(const std::string &eq,
     parser_t parser;
     parser.compile(expr_string, expression);
     if (!parser.compile(expr_string, expression)) {
-        printf("Error: %s\tExpression: %s\n",
-               parser.error().c_str(),
-               expr_string.c_str());
-
-        for (std::size_t i = 0; i < parser.error_count(); ++i) {
-            error_t error = parser.get_error(i);
-
-            printf("Error: %02d  Position: %02d Type: [%14s] "
-                           "Msg: %s\tExpression: %s\n",
-                   static_cast<unsigned int>(i),
-                   static_cast<unsigned int>(error.token.position),
-                   exprtk::parser_error::to_str(error.mode).c_str(),
-                   error.diagnostic.c_str(),
-                   expr_string.c_str());
-        }
-
+        logErrors(expr_string, parser);
         return __nan();
     }
 //     x = 1;

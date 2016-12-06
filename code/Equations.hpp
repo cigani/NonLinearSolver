@@ -25,6 +25,9 @@ protected:
     double getDerivative(const std::string &eq,
                          std::vector<double> variableValues,
                          std::string withRespectTo);
+
+    void logErrors(const std::string &expr_string,
+                   exprtk::parser<double> &parser) const;
 };
 
 #endif /* EQUATIONS_HPP_ */
