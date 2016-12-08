@@ -50,7 +50,8 @@ int main(int argc, char* argv[]) {
 };
 
 void TestSuit::testAsssertion(const double tol, const double expected,
-                              double testNewton, std::string name) {
+                              std::vector<double> testNewton,
+                              std::string name) {
     if (isnan(testNewton)) { testErrorCode(name); }
     if (isinf(testNewton)) { testErrorCode(name); }
     if (fabs(expected - testNewton) >= tol) { testErrorCode(name); }
@@ -76,7 +77,7 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
                            const bool verbose,
                            std::string &eq) {
     Newton testNewton(eq, x0, tol, max, verbose);
-    double *newtonRealValue = new double;
+    std::vector<double> *newtonRealValue = new double;
     *newtonRealValue = testNewton.solve();
 
     testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));

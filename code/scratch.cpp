@@ -9,24 +9,27 @@
 #include "exprtk.hpp"
 
 
+std::__1::vector<double> negateVector(
+        std::__1::vector<double> &v1) {
+    std::__1::vector<double> result;
+    transform(v1.begin(), v1.end(), back_inserter(result),
+              [](double v1) { return (-v1); });
+    return result;
+}
 
+void printVec(std::vector<double> &dx) {
+    std::vector<double>::const_iterator c;
+    for (c = dx.begin(); c != dx.end();
+         ++c) {
+        std::cout << *c << "\n";
+    };
+}
 
 int main() {
-//    square_wave();
-    std::string mPolyCoefficient = "x^2 -10";
-    std::vector<std::vector<double> > values(0, std::vector<double>(3));
-    std::vector<double> val1{2, 3, 4};
-    values.push_back(val1);
-    values.push_back(val1);
-    //std::cout << values.size() << std::endl;
-//    copy(val1.begin(), val1.end(),
-//         std::ostream_iterator<double>(std::cout, "\n"));
-
-
-    //printf(mExpression.results())
-    printf("%19.15f", mExpression.value());
-
-
+    std::vector<double> dx{1, 2, 3, 4, 5};
+    std::vector<double> mx = negateVector(dx);
+    printVec(dx);
+    printVec(mx);
 
     return 0;
 }

@@ -41,6 +41,10 @@ public:
 
     std::vector<double>
     addVectors(std::vector<double> &v1, std::vector<double> &v2);
+
+    double getNorm(std::vector<double> &vec);
+
+    std::vector<double> negateVector(std::vector<double> &v1);
 };
 
 

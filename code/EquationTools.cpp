@@ -89,6 +89,14 @@ std::__1::vector<double> EquationTools::addVectors(
     return result;
 }
 
+std::__1::vector<double> EquationTools::negateVector(
+        std::__1::vector<double> &v1) {
+    std::__1::vector<double> result;
+    transform(v1.begin(), v1.end(), back_inserter(result),
+              [](double v1) { return (-v1); });
+    return result;
+}
+
 std::__1::vector<double>
 EquationTools::getSystemEquations(const std::__1::vector<std::__1::string> &eq,
                                   std::__1::vector<double> variableValues) {
@@ -98,4 +106,16 @@ EquationTools::getSystemEquations(const std::__1::vector<std::__1::string> &eq,
     }
     return systemReturns;
 }
+
+
+double
+EquationTools::getNorm(std::vector<double> &vec) {
+    std::vector::const_iterator c;
+    double result = 0.0;
+    for (c = vec.begin(); c != vec.end(); ++c) {
+        result += *c * *c;
+    }
+    return sqrt(result);
+};
+
 

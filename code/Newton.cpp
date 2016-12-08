@@ -62,7 +62,7 @@ Newton::Newton(const std::vector<std::string> &equation,
 Newton::~Newton() {}
 
 std::vector<double> Newton::solve() {
-    std::vector<double> dx, fx0, dxyz;
+    std::vector<double> dx, fx0, dxyz, fxNeg;
     std::vector<std::vector<double>> dfx0;
     Equations mEquation;
     EquationTools mEquationTools;
@@ -76,8 +76,9 @@ std::vector<double> Newton::solve() {
     for (int i = 1; i <= nMax; i++) {
         fx0 = mEquationTools.getSystemEquations(eq, x0);
         dfx0 = mJacobian.exprtkJacobian(eq, x0, (int) x0.size());
-        mGauss.GaussPartialPivoting(dfx0, fx0);
-        dxyz = mGauss.BackwardSolve(dfx0, fx0);
+        fxNeg = mEquationTools.negateVector(fx0);
+        mGauss.GaussPartialPivoting(dfx0, fxNeg);
+        dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
         dx = mEquationTools.addVectors(fx0, dxyz);
         x0 = dx;
         //if (verbose) {
