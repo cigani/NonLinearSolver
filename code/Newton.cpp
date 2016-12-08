@@ -61,29 +61,27 @@ Newton::Newton(const std::vector<std::string> &equation,
 
 Newton::~Newton() {}
 
-double Newton::solve() {
+std::vector<double> Newton::solve() {
     std::vector<double> dx, fx0, dxyz;
     std::vector<std::vector<double>> dfx0;
     Equations mEquation;
     EquationTools mEquationTools;
     Jacobian mJacobian;
     Gauss mGauss;
-    int i;
 
 //    if (verbose) {
 //    	printVerbose(0, x0);
 //    }
 
-    for (i = 1; i <= nMax; i++) {
+    for (int i = 1; i <= nMax; i++) {
         fx0 = mEquationTools.getSystemEquations(eq, x0);
         dfx0 = mJacobian.exprtkJacobian(eq, x0, (int) x0.size());
         mGauss.GaussPartialPivoting(dfx0, fx0);
         dxyz = mGauss.BackwardSolve(dfx0, fx0);
         dx = mEquationTools.addVectors(fx0, dxyz);
         x0 = dx;
-        if (verbose) {
-        	printVerbose(i, x0);
-        }
+        //if (verbose) {
+        //	printVerbose(i, x0);}
         if (fabs(dx) < tol) {
             return x0;
         }

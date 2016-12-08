@@ -20,7 +20,7 @@ public:
     virtual ~Chord();
 
     // Public methods
-    double solve();
+    std::vector<double> solve();
 };
     
 #endif /* CHORD_HPP_ */

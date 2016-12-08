@@ -31,7 +31,7 @@ public:
               double lowerBound,
               double upperBound);
 
-	double solve();
+	std::vector<double> solve();
 };
 
 #endif /* BISECTION_HPP_ */

@@ -10,8 +10,7 @@ add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Equations.cpp Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
         string.hpp Eigen Jacobian.cpp EquationTools.cpp EquationsControl.cpp
         Gauss.cpp)
-add_executable(tests Equations.cpp Chord.cpp Newton.cpp FixedPoint.cpp
-        Aitken.cpp TestSuit.cpp TestSuit.h exprtk.hpp Bisection.cpp
-        string.hpp NonlinearSolver.cpp Eigen EquationTools.cpp
+add_executable(tests Equations.cpp Newton.cpp TestSuit.cpp TestSuit.h
+        exprtk.hpp string.hpp NonlinearSolver.cpp EquationTools.cpp
         Jacobian.cpp EquationsControl.cpp Gauss.cpp)
 add_executable(scratch scratch.cpp exprtk.hpp Eigen Gauss.cpp)

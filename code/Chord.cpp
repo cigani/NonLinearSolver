@@ -43,7 +43,7 @@ Chord::Chord(const std::vector<std::string> &equation,
 
 Chord::~Chord() {}
 
-double Chord::solve() {
+std::vector<double> Chord::solve() {
 	double xnew, dx , fx0, fx1;
 	double x1 = x0 + 1;
 	int i;

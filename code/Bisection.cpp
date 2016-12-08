@@ -60,7 +60,7 @@ Bisection::Bisection(const std::vector<std::string> &equation,
 	b = upperBound;
 }
 
-double Bisection::solve () {
+std::vector<double> Bisection::solve() {
      double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
      int i;
      Equations mEquation;

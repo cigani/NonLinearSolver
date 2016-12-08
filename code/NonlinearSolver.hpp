@@ -8,7 +8,7 @@
 
 class NonlinearSolver {
 protected:
-    const std::vector<std::string> eq;
+    std::vector<std::string> eq;
     std::vector<double> x0;
 	double tol;
 	int nMax;
@@ -25,7 +25,7 @@ public:
     virtual ~NonlinearSolver();
 
     // Abstract method
-	virtual double solve() = 0;
+    virtual std::vector<double> solve() = 0;
 
 	// Methods
 	void printVerbose(int i, double &x);

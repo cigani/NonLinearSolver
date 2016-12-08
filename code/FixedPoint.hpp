@@ -20,7 +20,7 @@ public:
     virtual ~FixedPoint();
     
     // Public methods
-    double solve();
+    std::vector<double> solve();
     
 };
   

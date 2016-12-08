@@ -27,8 +27,8 @@ int main(int argc, char* argv[]) {
 
 
     // Tests
-    test.testChordSolver(0.0015, 3.16227766517654, 3, 1000, false,
-                         mPolyCoefficient);
+    //test.testChordSolver(0.0015, 3.16227766517654, 3, 1000, false,
+//                         mPolyCoefficient);
     test.testNewtonSolver(0.0015, 3.16227766517654, 3, 1000, false,
                           mPolyCoefficient);
     test.testNewtonWithExprtkPoly(0.0015, 3.16227766517654, 1.1, 1000, false,

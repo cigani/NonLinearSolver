@@ -29,7 +29,7 @@ public:
     virtual ~Newton();
 
     // Public methods
-	double solve();
+	std::vector<double> solve();
 };
     
 #endif /* NEWTON_HPP_ */
