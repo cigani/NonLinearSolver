@@ -35,11 +35,12 @@ Aitken::Aitken() {}
 
 Aitken::~Aitken() {}
 
-double Aitken::aitkenExprtkSolver(const std::string &eq,
-                            double x0,
-                            double tol,
-                            int nMax,
-                            bool verbose)
+std::vector<double> Aitken::aitkenExprtkSolver(
+		const std::vector<std::string> &eq,
+		std::vector<double> x0,
+		double tol,
+		int nMax,
+		bool verbose)
 {
 	double x1, x2, phat, phatold;
 	int i;

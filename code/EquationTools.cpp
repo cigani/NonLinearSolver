@@ -5,6 +5,7 @@
 */
 //
 
+#include "Equations.hpp"
 #include "EquationTools.h"
 
 /**
@@ -78,3 +79,14 @@ std::__1::vector<double> EquationTools::subtractVectors(
               [](double v1, double v2) { return (v1 - v2); });
     return result;
 }
+
+std::__1::vector<double>
+EquationTools::getSystemEquations(const std::__1::vector<std::__1::string> &eq,
+                                  std::__1::vector<double> variableValues) {
+    std::__1::vector<double> systemReturns;
+    for (std::__1::string equations : eq) {
+        systemReturns.push_back(getEquations(equations, variableValues));
+    }
+    return systemReturns;
+}
+

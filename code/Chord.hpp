@@ -12,11 +12,11 @@ class Chord : public NonlinearSolver{
 private:
 public:
     // Constructors and destructors
-	Chord(const std::string &equation,
-	    		double initial,
-				double tolerance,
-				int maxIter,
-				bool verbosity);
+    Chord(const std::vector<std::string> &equation,
+          std::vector<double> initial,
+          double tolerance,
+          int maxIter,
+          bool verbosity);
     virtual ~Chord();
 
     // Public methods

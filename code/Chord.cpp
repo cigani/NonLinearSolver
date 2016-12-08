@@ -33,11 +33,11 @@
 
 #include "Chord.hpp"
 
-Chord::Chord(const std::string &equation,
-		double initial,
-		double tolerance,
-		int maxIter,
-		bool verbosity)
+Chord::Chord(const std::vector<std::string> &equation,
+             std::vector<double> initial,
+             double tolerance,
+             int maxIter,
+             bool verbosity)
 		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
 {}
 

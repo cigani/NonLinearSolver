@@ -17,7 +17,7 @@
  **/
 std::__1::vector<std::__1::vector<double>>
 Jacobian::exprtkJacobian(const std::__1::vector<std::__1::string> &eq,
-                         std::__1::vector<std::__1::vector<double> > variableValues,
+                         std::__1::vector<double> variableValues,
                          int variables) {
 
     std::__1::vector<std::__1::vector<double> > jm(0, std::__1::vector<double>(
@@ -27,7 +27,7 @@ Jacobian::exprtkJacobian(const std::__1::vector<std::__1::string> &eq,
 }
 
 void Jacobian::getJacobianMatrix(const std::__1::vector<std::__1::string> &eq,
-                                 const std::__1::vector<std::__1::vector<double>> &vals,
+                                 const std::__1::vector<double> &vals,
                                  std::__1::vector<std::__1::vector<double>> &JM) {
 
     std::__1::vector<double> Jacobian;

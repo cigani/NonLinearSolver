@@ -19,11 +19,11 @@ public:
     // Public variables
     typedef double (*func1arg) (double);
 
-    double aitkenExprtkSolver(const std::string &eq,
-                              double x0,
-                              double tol,
-                              int nMax,
-                              bool verbose);
+    std::vector<double> aitkenExprtkSolver(const std::vector<std::string> &eq,
+                                           std::vector<double> x0,
+                                           double tol,
+                                           int nMax,
+                                           bool verbose);
 };
     
 #endif /* AITKEN_HPP_ */

@@ -3,8 +3,8 @@
 * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
 */
 
+#include "EquationTools.h"
 #include <cfloat>
-#include "Equations.hpp"
 
 //TODO::  Psuedo Inverse::  J^- = (J^T J)^-1 J^T
 

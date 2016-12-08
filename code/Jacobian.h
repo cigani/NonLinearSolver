@@ -22,6 +22,14 @@ public:
             const std::__1::vector<std::__1::string> &eq,
             std::__1::vector<std::__1::vector<double>> variableValues,
             int variables);
+
+    std::vector<std::vector<double>>
+    exprtkJacobian(const std::vector<std::string> &eq,
+                   std::vector<double> variableValues, int variables);
+
+    void getJacobianMatrix(const std::vector<std::string> &eq,
+                           const std::vector<double> &vals,
+                           std::vector<std::vector<double>> &JM);
 };
 
 

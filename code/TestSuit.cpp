@@ -52,6 +52,7 @@ int main(int argc, char* argv[]) {
 void TestSuit::testAsssertion(const double tol, const double expected,
                               double testNewton, std::string name) {
     if (isnan(testNewton)) { testErrorCode(name); }
+    if (isinf(testNewton)) { testErrorCode(name); }
     if (fabs(expected - testNewton) >= tol) { testErrorCode(name); }
 }
 

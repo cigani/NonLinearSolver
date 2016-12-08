@@ -13,18 +13,18 @@ private:
 	int m;
 public:
     // Constructors and destructors
-    Newton(const std::string &equation,
-    		double initial,
-			double tolerance,
-			int maxIter,
-			bool verbosity);
+	Newton(const std::vector<std::string> &equation,
+		   std::vector<double> initial,
+		   double tolerance,
+		   int maxIter,
+		   bool verbosity);
 
-    Newton(const std::string &equation,
-    		double initial,
-    		double tolerance,
-    		int maxIter,
-    		bool verbosity,
-    		int modifier);
+	Newton(const std::vector<std::string> &equation,
+		   std::vector<double> initial,
+		   double tolerance,
+		   int maxIter,
+		   bool verbosity,
+		   int modifier);
 
     virtual ~Newton();
 

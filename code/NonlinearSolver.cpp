@@ -10,8 +10,9 @@
 
 #include "NonlinearSolver.hpp"
 
-NonlinearSolver::NonlinearSolver(const std::string &equation,
-		double initial,
+NonlinearSolver::NonlinearSolver(
+		const std::vector<std::string> &equation,
+		std::vector<double> initial,
 		double tolerance,
 		int maxIter,
 		bool verbosity) {

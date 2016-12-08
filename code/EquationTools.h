@@ -9,7 +9,13 @@
 #define PCSC_NONLINEAR_SYSTEMS_PROJECT_EQUATIONTOOLS_H
 
 
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+#include <vector>
 #include "Equations.hpp"
+#include "exprtk.hpp"
+#include "EquationsControl.h"
 
 class EquationTools : public Equations {
 
@@ -27,6 +33,16 @@ public:
     std::__1::vector<double>
     subtractVectors(std::__1::vector<double> &v1,
                     std::__1::vector<double> &v2);
+
+    std::__1::vector<double>
+    getSystemEquations(const std::__1::vector<std::__1::string> &eq,
+                       std::__1::vector<double> variableValues);
+
+    void
+    BackwardSolve(std::vector<double> &jacobian,
+                  std::vector<double> &funcSolution,
+                  const int n, double *&x);
+
 };
 
 

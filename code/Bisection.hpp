@@ -17,19 +17,19 @@ private:
 public:
 	virtual ~Bisection();
 
-	Bisection(const std::string &equation,
-			double initial,
-			double tolerance,
-			int maxIter,
-			bool verbosity);
+    Bisection(const std::vector<std::string> &equation,
+              std::vector<double> initial,
+              double tolerance,
+              int maxIter,
+              bool verbosity);
 
-	Bisection(const std::string &equation,
-				double initial,
-				double tolerance,
-				int maxIter,
-				bool verbosity,
-				double lowerBound,
-				double upperBound);
+    Bisection(const std::vector<std::string> &equation,
+              std::vector<double> initial,
+              double tolerance,
+              int maxIter,
+              bool verbosity,
+              double lowerBound,
+              double upperBound);
 
 	double solve();
 };

@@ -8,19 +8,20 @@
 
 class NonlinearSolver {
 protected:
-	std::string eq;
-	double x0;
+    const std::vector<std::string> eq;
+    std::vector<double> x0;
 	double tol;
 	int nMax;
 	bool verbose;
 
 public:
     // Constructors and Destructors
-	NonlinearSolver(const std::string &equation,
-    		double initial,
-    		double tolerance,
-    		int maxIter,
-    		bool verbosity);
+    NonlinearSolver(
+            const std::vector<std::string> &equation,
+            std::vector<double> initial,
+            double tolerance,
+            int maxIter,
+            bool verbosity);
     virtual ~NonlinearSolver();
 
     // Abstract method

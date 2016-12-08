@@ -12,11 +12,11 @@ class FixedPoint : public NonlinearSolver {
 private:
 public:
     // Constructors and destructors
-    FixedPoint(const std::string &equation,
-    		double initial,
-			double tolerance,
-			int maxIter,
-			bool verbosity);
+    FixedPoint(const std::vector<std::string> &equation,
+               std::vector<double> initial,
+               double tolerance,
+               int maxIter,
+               bool verbosity);
     virtual ~FixedPoint();
     
     // Public methods
