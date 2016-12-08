@@ -27,21 +27,19 @@ Jacobian::exprtkJacobian(const std::__1::vector<std::__1::string> &eq,
 }
 
 void Jacobian::getJacobianMatrix(const std::__1::vector<std::__1::string> &eq,
-                                 const std::__1::vector<double> &vals,
+                                 std::__1::vector<double> vals,
                                  std::__1::vector<std::__1::vector<double>> &JM) {
 
     std::__1::vector<double> Jacobian;
-    int n = 0;
 
     for (std::__1::string equation : eq) {
         Jacobian.push_back(
-                getDerivative(equation, vals[n], "x"));
+                getDerivative(equation, vals, "x"));
         Jacobian.push_back(
-                getDerivative(equation, vals[n], "y"));
+                getDerivative(equation, vals, "y"));
         Jacobian.push_back(
-                getDerivative(equation, vals[n], "z"));
+                getDerivative(equation, vals, "z"));
         JM.push_back(Jacobian);
         Jacobian.clear();
-        if (vals.size() != 1) n++;
     }
 }
