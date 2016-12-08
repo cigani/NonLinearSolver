@@ -28,7 +28,7 @@ public:
     virtual std::vector<double> solve() = 0;
 
 	// Methods
-	void printVerbose(int i, double &x);
+	void printVerbose(int i, std::vector<double> &x);
 
 };
     

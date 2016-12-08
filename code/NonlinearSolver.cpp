@@ -25,9 +25,12 @@ NonlinearSolver::NonlinearSolver(
 
 NonlinearSolver::~NonlinearSolver() {}
 
-void NonlinearSolver::printVerbose(int i, double &x) {
-	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-	<< x << std::setprecision(15) << std::endl;
+void NonlinearSolver::printVerbose(int i, std::vector<double> &x) {
+    std::vector<double>::const_iterator c;
+    for (c = x.begin(); c != x.end();
+         ++c) {
+        std::cout << *c << "\n";
+    };
 }
 
 
