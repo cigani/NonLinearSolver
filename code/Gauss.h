@@ -22,9 +22,9 @@ public:
                std::__1::vector<double> &funcSolution, const int k,
                const int n);
 
-    void BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
-                       std::__1::vector<double> &funcSolution, const int n,
-                       double *&x);
+    std::vector<double>
+    BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
+                  std::__1::vector<double> &funcSolution);
 };
 
 

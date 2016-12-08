@@ -16,13 +16,11 @@
 #include <vector>
 #include "string.hpp"
 #include "FixedPoint.hpp"
-#include "Equations.hpp"
 #include "Chord.hpp"
 #include "Newton.hpp"
 #include "Aitken.hpp"
 #include "Bisection.hpp"
-#include "Eigen/Eigen"
-#include "NonlinearSolver.hpp"
+//#include "Eigen/Eigen"
 
 #ifndef NDEBUG
 #define mAssert(condition, message) \

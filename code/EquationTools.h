@@ -38,11 +38,9 @@ public:
     getSystemEquations(const std::__1::vector<std::__1::string> &eq,
                        std::__1::vector<double> variableValues);
 
-    void
-    BackwardSolve(std::vector<double> &jacobian,
-                  std::vector<double> &funcSolution,
-                  const int n, double *&x);
 
+    std::vector<double>
+    addVectors(std::vector<double> &v1, std::vector<double> &v2);
 };
 
 

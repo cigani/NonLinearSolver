@@ -80,6 +80,15 @@ std::__1::vector<double> EquationTools::subtractVectors(
     return result;
 }
 
+std::__1::vector<double> EquationTools::addVectors(
+        std::__1::vector<double> &v1, std::__1::vector<double> &v2) {
+    std::__1::vector<double> result;
+    transform(v1.begin(), v1.end(), v2.begin(),
+              back_inserter(result),
+              [](double v1, double v2) { return (v1 + v2); });
+    return result;
+}
+
 std::__1::vector<double>
 EquationTools::getSystemEquations(const std::__1::vector<std::__1::string> &eq,
                                   std::__1::vector<double> variableValues) {

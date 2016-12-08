@@ -56,9 +56,11 @@ void Gauss::Pivot(std::__1::vector<std::__1::vector<double>> &jacobian,
     jacobian[idx_max] = p;
 }
 
-void Gauss::BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
-                          std::__1::vector<double> &funcSolution,
-                          const int n, double *&x) {
+std::vector<double>
+Gauss::BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
+                     std::__1::vector<double> &funcSolution) {
+    std::vector<double> x(funcSolution.size());
+    int n = (int) funcSolution.size();
     for (int i = n - 1; i >= 0; --i) {
         x[i] = funcSolution[i];
         for (int j = i + 1; j < n; ++j) {
@@ -66,4 +68,5 @@ void Gauss::BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
         }
         x[i] /= jacobian[i][i];
     }
+    return x;
 }

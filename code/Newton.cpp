@@ -36,6 +36,7 @@
 #include "Newton.hpp"
 #include "EquationTools.h"
 #include "Jacobian.h"
+#include "Gauss.h"
 
 Newton::Newton(const std::vector<std::string> &equation,
                std::vector<double> initial,
@@ -61,11 +62,12 @@ Newton::Newton(const std::vector<std::string> &equation,
 Newton::~Newton() {}
 
 double Newton::solve() {
-    std::vector<double> dx, fx0;
+    std::vector<double> dx, fx0, dxyz;
     std::vector<std::vector<double>> dfx0;
     Equations mEquation;
     EquationTools mEquationTools;
     Jacobian mJacobian;
+    Gauss mGauss;
     int i;
 
 //    if (verbose) {
@@ -75,8 +77,10 @@ double Newton::solve() {
     for (i = 1; i <= nMax; i++) {
         fx0 = mEquationTools.getSystemEquations(eq, x0);
         dfx0 = mJacobian.exprtkJacobian(eq, x0, (int) x0.size());
-        dx = fx0 / dfx0;
-        x0 -= m*dx;
+        mGauss.GaussPartialPivoting(dfx0, fx0);
+        dxyz = mGauss.BackwardSolve(dfx0, fx0);
+        dx = mEquationTools.addVectors(fx0, dxyz);
+        x0 = dx;
         if (verbose) {
         	printVerbose(i, x0);
         }
