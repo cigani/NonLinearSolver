@@ -64,6 +64,7 @@ Newton::~Newton() {}
 std::vector<double> Newton::solve() {
     std::vector<double> dx, fx0, dxyz, fxNeg;
     std::vector<std::vector<double>> dfx0;
+    double prevNorm, nextNorm;
     Equations mEquation;
     EquationTools mEquationTools;
     Jacobian mJacobian;
@@ -74,6 +75,7 @@ std::vector<double> Newton::solve() {
 //    }
 
     for (int i = 1; i <= nMax; i++) {
+        prevNorm = mEquationTools.getNorm(x0);
         fx0 = mEquationTools.getSystemEquations(eq, x0);
         dfx0 = mJacobian.exprtkJacobian(eq, x0, (int) x0.size());
         fxNeg = mEquationTools.negateVector(fx0);
@@ -81,9 +83,10 @@ std::vector<double> Newton::solve() {
         dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
         dx = mEquationTools.addVectors(fx0, dxyz);
         x0 = dx;
+        nextNorm = mEquationTools.getNorm(x0);
         //if (verbose) {
         //	printVerbose(i, x0);}
-        if (fabs(dx) < tol) {
+        if (fabs(prevNorm - nextNorm) < tol) {
             return x0;
         }
     }
