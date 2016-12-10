@@ -39,16 +39,19 @@
 #include "Gauss.h"
 
 Newton::Newton(const std::string &equation,
+               const std::string &derivative,
                double initial,
                double tolerance,
                int maxIter,
                bool verbosity)
 	: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
 {
+    df = derivative;
 	m = 1;
 }
 
 Newton::Newton(const std::string &equation,
+               const std::string &derivative,
                double initial,
                double tolerance,
                int maxIter,
@@ -56,6 +59,7 @@ Newton::Newton(const std::string &equation,
                int modifier)
 	: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
 {
+    df = derivative;
 	m = modifier;
 }
 
@@ -72,12 +76,12 @@ double Newton::solve() {
     for (int i = 1; i <= nMax; i++) {
 
         fx0 = mEquation.exprtkGenerate2D(eq, x0);
-        dfx0 = mEquation.exprtkGenerate2DDerivative(eq, x0);
+        dfx0 = mEquation.exprtkGenerate2D(df, x0);
         dx = fx0 / dfx0;
         x0 -= m*dx;
 
         if (verbose) {
-            printVerbose(0, x0);
+            printVerbose(i, x0);
         }
 
         if (fabs(dx) < tol) {

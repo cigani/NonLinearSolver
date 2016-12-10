@@ -21,9 +21,11 @@
 
 class Newton : public NonlinearSolver{
 private:
-	//* The integer value for the modified Newton method.
-	// If m == 1, then the modified Newton method is equivalent to the normal Newton Method.
+	/// The integer value for the modified Newton method. If m == 1, then the modified Newton method is equivalent to the normal Newton Method.
 	int m;
+
+    /// A standard vector holding the strings representing mathematical expressions.
+    std::string df;
 
 public:
 	/*! A constructor to instantiate variables for the Newtwon method.
@@ -35,6 +37,7 @@ public:
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
 	Newton(const std::string &equation,
+           const std::string &derivative,
 		   double initial,
 		   double tolerance,
 		   int maxIter,
@@ -50,6 +53,7 @@ public:
       \param modifier The integer value for the modified Newton method.
     */
 	Newton(const std::string &equation,
+           const std::string &derivative,
 		   double initial,
 		   double tolerance,
 		   int maxIter,

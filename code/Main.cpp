@@ -47,6 +47,7 @@ int main(int argc, char *argv[]) {
 
     std::string mMethod;
     std::string mExpression = "NULL";
+    std::string mDerivative = "NULL";
     double x0 = 0.0;
     int nMax = 1000;
     double tol = 0.001;
@@ -79,6 +80,9 @@ int main(int argc, char *argv[]) {
             } else if (strcmp(argv[i], "-e") == 0) {
                 // Mathematical Expression
                 mExpression = argv[i + 1];
+            } else if (strcmp(argv[i], "-d") == 0) {
+                // Derivative Expression
+                mDerivative = argv[i + 1];
             } else if (strcmp(argv[i], "-xi") == 0) {
                 // Initial Value
                 x0 = std::stod(argv[i + 1]);
@@ -138,8 +142,10 @@ int main(int argc, char *argv[]) {
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
+        mAssert(mDerivative != "NULL",
+                "ERROR: No derivative function provided");
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
-        Newton newton(mExpression, x0, tol, nMax, verbose);
+        Newton newton(mExpression, mDerivative, x0, tol, nMax, verbose);
         double result = newton.solve();
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
@@ -163,6 +169,7 @@ static void show_usage(std::string name) {
               << name
               << " -m %s"
               << " -e '%s'"
+              << " -d '%s'"
               << " -xi %d"
               << " -nmax %i"
               << " -t %d"
@@ -180,6 +187,13 @@ static void show_usage(std::string name) {
               << stringPadding("-e,--expression", 20)
               << stringPadding(
                       "Mathematical expression to solve enclosed in ''", 60)
+              << std::endl
+              << std::endl
+              << "Newton Requirement:\n"
+              << "\t"
+              << stringPadding("-d,--derivative", 20)
+              << stringPadding(
+                      "The derivative to solve enclosed in ''", 60)
               << std::endl
               << std::endl
               << "Optional:\n"
@@ -246,6 +260,7 @@ static void show_methods() {
               << "\t"
               << stringPadding("newton", 20)
               << stringPadding("Newton Method", 40)
+              << std::endl
               << std::endl;
 }
 
