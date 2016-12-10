@@ -107,10 +107,14 @@ EquationTools::getSystemEquations(const std::__1::vector<std::__1::string> &eq,
     return systemReturns;
 }
 
-
+/**
+ *
+ * @param A vector of doubles
+ * @return The Euclidean norm
+ */
 double
 EquationTools::getNorm(std::vector<double> &vec) {
-    std::vector::const_iterator c;
+    std::vector<double>::const_iterator c;
     double result = 0.0;
     for (c = vec.begin(); c != vec.end(); ++c) {
         result += *c * *c;
