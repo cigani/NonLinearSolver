@@ -122,4 +122,9 @@ EquationTools::getNorm(std::vector<double> &vec) {
     return sqrt(result);
 };
 
-
+void printVec(std::vector<double> &dx) {
+    std::vector<double>::const_iterator c;
+    for (c = dx.begin(); c != dx.end();
+         ++c) {
+        std::cout << *c << "\n";
+    };

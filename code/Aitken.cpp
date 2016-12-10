@@ -66,7 +66,7 @@ std::vector<double> Aitken::aitkenExprtkSolver(
 	}
 
 	for ( i = 2; i <= nMax; i++ ) {
-		x2 = mEquation.exprtkGenerate2D(eq, x1);
+        x2 = mEquation.exprtkGenerate2D(singleEq, x1);
         phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + singleValue);
 		if (verbose) {
 			printVerbose(i,x2);
@@ -81,7 +81,8 @@ std::vector<double> Aitken::aitkenExprtkSolver(
 		}
 	}
 	std::cout << "Maximum number of iterations exceeded" << std::endl;
-	return phat;
+    returnVec.push_back(phat);
+    return returnVec;
 }
 
 void Aitken::printVerbose(int i, double &x) {

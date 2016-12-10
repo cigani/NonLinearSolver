@@ -20,6 +20,7 @@
 #include "Newton.hpp"
 #include "Aitken.hpp"
 #include "Bisection.hpp"
+#include "EquationTools.h"
 //#include "Eigen/Eigen"
 
 #ifndef NDEBUG
@@ -53,6 +54,9 @@ int main(int argc, char *argv[]) {
     bool verbose = false;
     double lowerBound = -1.0;
     double upperBound = 1.0;
+    std::vector<std::string> mVectorExpression;
+    std::vector<double> mVectorValues;
+    EquationTools mPrint;
 
     // Parse the command line arguments for flags and values
     for (int i = 1; i < argc; i++) {
@@ -111,38 +115,47 @@ int main(int argc, char *argv[]) {
 
     mAssert(mExpression != "NULL",
             "ERROR: No mathematical expression provided");
-
+    mVectorExpression.push_back(mExpression);
+    mVectorValues.push_back(x0);
     if (boost::iequals(mMethod, "aitken")) {
         std::cout << std::endl << "AITKEN METHOD" << std::endl;
         Aitken aitken;
-        double result = aitken.aitkenExprtkSolver(mExpression, x0, tol, nMax,
-                                                  verbose);
-        std::cout << std::endl << "RESULT: " << result << std::endl
-                  << std::endl;
+        std::vector<double> result = aitken.aitkenExprtkSolver(
+                mVectorExpression, mVectorValues, tol, nMax,
+                verbose);
+        mPrint.printVec(result);
+//        std::cout << std::endl << "RESULT: " << result << std::endl
+//                  << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
-        Bisection bisection(mExpression, x0, tol, nMax, verbose, lowerBound, upperBound);
-        double result = bisection.solve();
-        std::cout << std::endl << "RESULT: " << result << std::endl
-                  << std::endl;
+        Bisection bisection(mVectorExpression, mVectorValues, tol, nMax,
+                            verbose, lowerBound, upperBound);
+        std::vector<double> result = bisection.solve();
+        mPrint.printVec(result);
+//        std::cout << std::endl << "RESULT: " << result << std::endl
+//                  << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
         std::cout << std::endl << "CHORD METHOD" << std::endl;
-        Chord chord(mExpression, x0, tol, nMax, verbose);
-        double result = chord.solve();
-        std::cout << std::endl << "RESULT: " << result << std::endl
-                  << std::endl;
+        Chord chord(mVectorExpression, mVectorValues, tol, nMax, verbose);
+        std::vector<double> result = chord.solve();
+        mPrint.printVec(result);
+//        std::cout << std::endl << "RESULT: " << result << std::endl
+//                  << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
-        FixedPoint fixedPoint(mExpression, x0, tol, nMax, verbose);
-        double result = fixedPoint.solve();
-        std::cout << std::endl << "RESULT: " << result << std::endl
-                  << std::endl;
+        FixedPoint fixedPoint(mVectorExpression, mVectorValues, tol, nMax,
+                              verbose);
+        std::vector<double> result = fixedPoint.solve();
+        mPrint.printVec(result);
+//        std::cout << std::endl << "RESULT: " << result << std::endl
+//                  << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
-        Newton newton(mExpression, x0, tol, nMax, verbose);
-        double result = newton.solve();
-        std::cout << std::endl << "RESULT: " << result << std::endl
-                  << std::endl;
+        Newton newton(mVectorExpression, mVectorValues, tol, nMax, verbose);
+        std::vector<double> result = newton.solve();
+        mPrint.printVec(result);
+//        std::cout << std::endl << "RESULT: " << result << std::endl
+//                  << std::endl;
     } else {
         std::cout << std::endl << "ERROR: No method provided" << std::endl;
         show_usage(argv[0]);

@@ -49,6 +49,8 @@ public:
     double getNorm(std::vector<double> &vec);
 
     std::vector<double> negateVector(std::vector<double> &v1);
+
+    void printVec(std::vector<double> &dx)
 };
 
 
