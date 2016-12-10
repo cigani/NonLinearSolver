@@ -78,6 +78,7 @@ std::vector<double> Newton::solve() {
         prevNorm = mEquationTools.getNorm(x0);
         fx0 = mEquationTools.getSystemEquations(eq, x0);
         dfx0 = mJacobian.exprtkJacobian(eq, x0, (int) x0.size());
+        // negate vector doesnt modify the original vector
         fxNeg = mEquationTools.negateVector(fx0);
         mGauss.GaussPartialPivoting(dfx0, fxNeg);
         dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
