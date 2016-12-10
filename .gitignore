@@ -49,3 +49,5 @@ code/cmake_install.cmake
 code/nonlinear
 code/tests
 pcsc-nonlinear-systems-project.cbp
+
+.DS_Store

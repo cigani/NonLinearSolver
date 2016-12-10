@@ -1,0 +1,58 @@
+\hypertarget{class_equation_tools}{}\section{Equation\+Tools Class Reference}
+\label{class_equation_tools}\index{Equation\+Tools@{Equation\+Tools}}
+Inheritance diagram for Equation\+Tools\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_equation_tools}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$ $>$ \hyperlink{class_equation_tools_a2400ef03ac5def7120afa962f8a2ec0c}{create\+Minor} (unsigned long size)
+\item 
+double \hyperlink{class_equation_tools_afba38557ac202d75d3acb90994020f06}{Determinant} (std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$$>$ \&M, const int size)
+\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Member Function Documentation}
+\index{Equation\+Tools@{Equation\+Tools}!create\+Minor@{create\+Minor}}
+\index{create\+Minor@{create\+Minor}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{create\+Minor(unsigned long size)}{createMinor(unsigned long size)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$ $>$ Equation\+Tools\+::create\+Minor (
+\begin{DoxyParamCaption}
+\item[{unsigned long}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equation_tools_a2400ef03ac5def7120afa962f8a2ec0c}{}\label{class_equation_tools_a2400ef03ac5def7120afa962f8a2ec0c}
+Create a vector$<$vector$>$ to be populated later 
+\begin{DoxyParams}{Parameters}
+{\em size} & -\/ of the Main Vector$<$\+Vector$>$ -\/ 1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A NxN vector$<$vector$>$ of zeros 
+\end{DoxyReturn}
+\index{Equation\+Tools@{Equation\+Tools}!Determinant@{Determinant}}
+\index{Determinant@{Determinant}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{Determinant(std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$$>$ \&\+M, const int size)}{Determinant(std::__1::vector< std::__1::vector< double >> &M, const int size)}}]{\setlength{\rightskip}{0pt plus 5cm}double Equation\+Tools\+::\+Determinant (
+\begin{DoxyParamCaption}
+\item[{std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$$>$ \&}]{M, }
+\item[{const int}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equation_tools_afba38557ac202d75d3acb90994020f06}{}\label{class_equation_tools_afba38557ac202d75d3acb90994020f06}
+Calculate the Det of an input Vector$<$\+Vector$>$ Special Case\+: If it\textquotesingle{}s a 2x2 Matrix we just calculate it in place 
+\begin{DoxyParams}{Parameters}
+{\em M} & -\/ Initial Vector$<$\+Vector$>$ \\
+\hline
+{\em size} & -\/ Size of the $<$Vector$<$\+Vector$>$ \+: M.\+Size() \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The determinant 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/Equation\+Tools.\+h\item 
+code/Equation\+Tools.\+cpp\end{DoxyCompactItemize}

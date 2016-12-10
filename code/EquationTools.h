@@ -1,9 +1,13 @@
-//
-/* AUTHORS:
-* Jaquier, Michael <michael.jaquier@epfl.ch>
-* Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+//! EquationTools.hpp
+/*!
+  \brief A class handling linear algebra operations.
+  \author Jaquier, Michael <michael.jaquier@epfl.ch>
+  \author Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+  \version 1.0
+  \date  10 December 2016
+  \remark Ecole Polytechnic Federal de Lausanne (EPFL)
+  \remark MATH-458 Programming Concepts in Scientific Computing
 */
-//
 
 #ifndef PCSC_NONLINEAR_SYSTEMS_PROJECT_EQUATIONTOOLS_H
 #define PCSC_NONLINEAR_SYSTEMS_PROJECT_EQUATIONTOOLS_H
