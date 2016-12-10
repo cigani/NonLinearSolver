@@ -36,8 +36,8 @@
 
 Bisection::~Bisection() {}
 
-Bisection::Bisection(const std::vector<std::string> &equation,
-                     std::vector<double> initial,
+Bisection::Bisection(const std::string &equation,
+                     double initial,
                      double tolerance,
                      int maxIter,
                      bool verbosity)
@@ -47,8 +47,8 @@ Bisection::Bisection(const std::vector<std::string> &equation,
 	b = 1;
 }
 
-Bisection::Bisection(const std::vector<std::string> &equation,
-                     std::vector<double> initial,
+Bisection::Bisection(const std::string &equation,
+                     double initial,
                      double tolerance,
                      int maxIter,
                      bool verbosity,
@@ -60,7 +60,7 @@ Bisection::Bisection(const std::vector<std::string> &equation,
 	b = upperBound;
 }
 
-std::vector<double> Bisection::solve() {
+double Bisection::solve() {
      double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
      int i;
      Equations mEquation;

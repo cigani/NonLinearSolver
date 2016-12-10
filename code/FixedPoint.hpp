@@ -29,8 +29,8 @@ public:
       \param maxIter The maximum number of iterations.  The method stops once this number is reached.
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
-    FixedPoint(const std::vector<std::string> &equation,
-               std::vector<double> initial,
+    FixedPoint(const std::string &equation,
+               double initial,
                double tolerance,
                int maxIter,
                bool verbosity);
@@ -42,7 +42,7 @@ public:
     /*
       \return The solution to the Fixed Point Method.
     */
-    std::vector<double> solve();
+    double solve();
     
 };
   

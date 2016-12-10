@@ -33,8 +33,8 @@
 
 #include "Chord.hpp"
 
-Chord::Chord(const std::vector<std::string> &equation,
-             std::vector<double> initial,
+Chord::Chord(const std::string &equation,
+             double initial,
              double tolerance,
              int maxIter,
              bool verbosity)
@@ -43,7 +43,7 @@ Chord::Chord(const std::vector<std::string> &equation,
 
 Chord::~Chord() {}
 
-std::vector<double> Chord::solve() {
+double Chord::solve() {
 	double xnew, dx , fx0, fx1;
 	double x1 = x0 + 1;
 	int i;

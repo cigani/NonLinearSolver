@@ -34,8 +34,8 @@ public:
       \param maxIter The maximum number of iterations.  The method stops once this number is reached.
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
-	Newton(const std::vector<std::string> &equation,
-		   std::vector<double> initial,
+	Newton(const std::string &equation,
+		   double initial,
 		   double tolerance,
 		   int maxIter,
 		   bool verbosity);
@@ -49,8 +49,8 @@ public:
       \param verbosity Set to true to print all intermediate and final results onto the console.
       \param modifier The integer value for the modified Newton method.
     */
-	Newton(const std::vector<std::string> &equation,
-		   std::vector<double> initial,
+	Newton(const std::string &equation,
+		   double initial,
 		   double tolerance,
 		   int maxIter,
 		   bool verbosity,
@@ -63,7 +63,7 @@ public:
     /*
       \return The solution to the Newton Method/Modified Newton Method.
     */
-	std::vector<double> solve();
+	double solve();
 };
     
 #endif /* NEWTON_HPP_ */

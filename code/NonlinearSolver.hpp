@@ -20,10 +20,10 @@
 class NonlinearSolver {
 protected:
 	/// A standard vector holding the strings representing mathematical expressions.
-    std::vector<std::string> eq;
+    std::string eq;
 
 	/// A standard vector holding the doubles representing the initial guess of the solution to the equation.
-    std::vector<double> x0;
+    double x0;
 
 	/// The tolerance value.  The method stops once the residual errors fall below this value.
 	double tol;
@@ -44,8 +44,8 @@ public:
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
     NonlinearSolver(
-            const std::vector<std::string> &equation,
-            std::vector<double> initial,
+            const std::string &equation,
+            double initial,
             double tolerance,
             int maxIter,
             bool verbosity);
@@ -54,14 +54,14 @@ public:
     virtual ~NonlinearSolver();
 
     //! A pure virtual solver method for the family of nonlinear solvers.
-    virtual std::vector<double> solve() = 0;
+    virtual double solve() = 0;
 
     /*! A function that takes a constant integer and a vector argument and prints to the console.
     /*
       \param i The current index or iteration to print out to the console.
       \param x The vector that contains current solution of the nonlinear problem.
     */
-	void printVerbose(int i, std::vector<double> &x);
+	void printVerbose(int i, double &x);
 
 };
     
