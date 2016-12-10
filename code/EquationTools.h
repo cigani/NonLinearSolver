@@ -50,7 +50,7 @@ public:
 
     std::vector<double> negateVector(std::vector<double> &v1);
 
-    void printVec(std::vector<double> &dx)
+    void printVec(std::vector<double> &dx);
 };
 
 

@@ -61,7 +61,6 @@ public:
     */
 	void printVerbose(int i, std::vector<double> &x);
 
-	NonlinearSolver();
 };
     
 #endif /* NONLINEARSOLVER_HPP_ */

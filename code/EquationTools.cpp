@@ -120,11 +120,12 @@ EquationTools::getNorm(std::vector<double> &vec) {
         result += *c * *c;
     }
     return sqrt(result);
-};
+}
 
-void printVec(std::vector<double> &dx) {
+void EquationTools::printVec(std::vector<double> &dx) {
     std::vector<double>::const_iterator c;
     for (c = dx.begin(); c != dx.end();
          ++c) {
         std::cout << *c << "\n";
-    };
+    }
+};

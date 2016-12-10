@@ -33,9 +33,5 @@ void NonlinearSolver::printVerbose(int i, std::vector<double> &x) {
     };
 }
 
-NonlinearSolver::NonlinearSolver() {
-
-}
-
 
 
