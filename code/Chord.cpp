@@ -44,29 +44,39 @@ Chord::Chord(const std::vector<std::string> &equation,
 Chord::~Chord() {}
 
 std::vector<double> Chord::solve() {
+    std::vector<double> returnVec;
+    std::vector<double> print;
+    double singleVal = x0.at(0);
+    std::string singleEq = (std::basic_string<char, std::char_traits<char>,
+            std::allocator<char>> &&) eq.at(0);
 	double xnew, dx , fx0, fx1;
-	double x1 = x0 + 1;
+    double x1 = singleVal + 1;
 	int i;
 
 	Equations mEquation;
 
     if (verbose) {
+        print.push_back(x1);
     	printVerbose(0, x0);
-    	printVerbose(1, x1);
+        printVerbose(1, print);
+        print.clear();
     }
 
-    fx0 = mEquation.exprtkGenerate2D(eq, x0);
+    fx0 = mEquation.exprtkGenerate2D(singleEq, singleVal);
     for ( i = 2; i <= nMax; i++ ) {
-    	fx1 = mEquation.exprtkGenerate2D(eq, x1);
-    	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
+        fx1 = mEquation.exprtkGenerate2D(singleEq, x1);
+        dx = fx1 * (x1 - singleVal) / (fx1 - fx0);
     	xnew = x1 - dx;
     	if ( verbose ) {
-    		printVerbose(i, xnew);
+            print.push_back(xnew);
+            printVerbose(i, print);
+            print.clear();
         }
     	if (fabs(dx) < tol ) {
-    		return xnew;
+            returnVec.push_back(xnew);
+            return returnVec;
     	} else {
-    		x0 = x1;
+            singleVal = x1;
     		fx0 = fx1;
     		x1 = xnew;
         }

@@ -36,25 +36,25 @@
 
 Bisection::~Bisection() {}
 
-Bisection::Bisection(const std::vector<std::string> &equation,
+Bisection::Bisection(std::vector<std::string> &eq,
                      std::vector<double> initial,
                      double tolerance,
                      int maxIter,
                      bool verbosity)
-		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+        : NonlinearSolver(eq, initial, tolerance, maxIter, verbosity)
 {
 	a = -1;
 	b = 1;
 }
 
-Bisection::Bisection(const std::vector<std::string> &equation,
+Bisection::Bisection(std::vector<std::string> &eq,
                      std::vector<double> initial,
                      double tolerance,
                      int maxIter,
                      bool verbosity,
                      double lowerBound,
                      double upperBound)
-		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+        : NonlinearSolver(eq, initial, tolerance, maxIter, verbosity)
 {
 	a = lowerBound;
 	b = upperBound;
@@ -62,23 +62,28 @@ Bisection::Bisection(const std::vector<std::string> &equation,
 
 std::vector<double> Bisection::solve() {
      double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
-     int i;
-     Equations mEquation;
+    int i;
+    std::vector<double> returnVec;
+    std::string singleEq = (std::basic_string<char, std::char_traits<char>,
+            std::allocator<char>> &&) eq.at(0);
+    Equations mEquation;
+    std::vector<double> midPointVec;
 
-     sign_fa = getSign(mEquation.exprtkGenerate2D(eq, a));
-     sign_fb = getSign(mEquation.exprtkGenerate2D(eq, b));
+    sign_fa = getSign(mEquation.exprtkGenerate2D(singleEq, a));
+    sign_fb = getSign(mEquation.exprtkGenerate2D(singleEq, b));
 
      assert ( (sign_fa *  sign_fb) < 0 );
 
      for ( i = 1; i <= nMax; i++ ) {
-
+         midPointVec.clear();
          midpoint = a + (b - a)/2.0;
+         midPointVec.push_back(midpoint);
 
          if ( verbose ) {
-        	 printVerbose(i, midpoint);
+             printVerbose(i, midPointVec);
          }
 
-         sign_mp = getSign(mEquation.exprtkGenerate2D(eq, midpoint));
+         sign_mp = getSign(mEquation.exprtkGenerate2D(singleEq, midpoint));
 
          if  ( sign_fa *  sign_mp < 0 ) {
         	 b = midpoint;
@@ -87,20 +92,20 @@ std::vector<double> Bisection::solve() {
         	 a = midpoint;
         	 sign_fa = sign_mp;
          } else {
-        	 return midpoint;
+             return midPointVec;
          }
 
          if (i > 2){
         	 error_est = fabs(midpoint - prev_midpoint);
         	 if ( fabs(error_est) < tol ) {
-        		 return midpoint;
+                 return midPointVec;
         	 }
          }
 
          prev_midpoint = midpoint;
      }
      std::cout << "Maximum number of iterations exceeded" << std::endl;
-     return midpoint;
+    return midPointVec;
 }
 
 double Bisection::getSign(double value){
