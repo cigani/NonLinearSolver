@@ -68,6 +68,7 @@ Newton::~Newton() {}
 std::vector<double> Newton::solve() {
     double dx, fx0, dfx0;
     Expression singleEq = eq.at(0);
+    Expression singleDx = df.at(0);
 
     if (verbose) {
     	printVerbose(0, x0);
@@ -76,7 +77,7 @@ std::vector<double> Newton::solve() {
     for (int i = 1; i <= nMax; i++) {
 
         fx0 = singleEq.evaluate(x0);
-        dfx0 = singleEq.evaluate(x0);
+        dfx0 = singleDx.evaluate(x0);
         dx = fx0 / dfx0;
 
         for(int i=0; i < x0.size(); i++){
