@@ -40,21 +40,21 @@ int main(int argc, char* argv[]) {
     // Tests
     test.testChordSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
                          equations.at(0));
-    test.testNewtonSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
-                          equations.at(0));
-    test.testNewtonWithExprtkPoly(0.0015, mAnswerVector.at(1), 1.1, 1000,
-                                  false,
-                                  equations.at(0));
-    test.testNewtonWithExprtkLog(0.0015, mAnswerVector.at(2), 10.0, 1000,
-                                 false,
-                                 equations.at(2));
-    test.testNewtonWithExprtTrig(0.0015, mAnswerVector.at(3), 1, 1000, false,
-                                 equations.at(3));
-    test.testNewtonWithExprtExp(0.0015, mAnswerVector.at(4), 0.1, 1000, false,
-                                equations.at(4));
-    test.testNewtonWithExprtkPoly(0.00015, mAnswerVector.at(5), 0.0, 1000,
-                                  false,
-                                  equations.at(1));
+//    test.testNewtonSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
+//                          equations.at(0));
+//    test.testNewtonWithExprtkPoly(0.0015, mAnswerVector.at(1), 1.1, 1000,
+//                                  false,
+//                                  equations.at(0));
+//    test.testNewtonWithExprtkLog(0.0015, mAnswerVector.at(2), 10.0, 1000,
+//                                 false,
+//                                 equations.at(2));
+//    test.testNewtonWithExprtTrig(0.0015, mAnswerVector.at(3), 1, 1000, false,
+//                                 equations.at(3));
+//    test.testNewtonWithExprtExp(0.0015, mAnswerVector.at(4), 0.1, 1000, false,
+//                                equations.at(4));
+//    test.testNewtonWithExprtkPoly(0.00015, mAnswerVector.at(5), 0.0, 1000,
+//                                  false,
+//                                  equations.at(1));
     test.testExprtkJacobian();
     test.testDeterm();
     test.testSubtract();
@@ -175,9 +175,13 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
 void TestSuit::testExprtkJacobian() {
     std::vector<std::string> equations;
     Jacobian mEquations;
-    equations.push_back("x^2 + y^4 - z^3 + 10");
+    equations.push_back("x^2 + y^4 - z^5 + 10");
+    equations.push_back("x^3 + y^2 - z^5 - 10");
+    equations.push_back("x^5 + y^3 - z^10 -100");
     std::vector<double> val1{2, 3, 4};
-    std::vector<double> assertResults{4, 108, -48, 75, 2, -1};
+    std::vector<double> assertResults{4, 108, -1280,
+                                      12, 6, -1280,
+                                      80, 27, -2.62144e06};
     int var = 3;
 
     std::vector<std::vector<double>> returns = mEquations.exprtkJacobian(
@@ -189,16 +193,8 @@ void TestSuit::testExprtkJacobian() {
 
     iterateNestedVectors(assertResults, returns, returns_iterator,
                          returns_iterator2);
-
-    equations.push_back("x^3 + y^2 - z^1 + 10");
     std::vector<std::vector<double>> testEquation;
     testEquation = mEquations.exprtkJacobian(equations, val1, var);
-
-    std::vector<std::vector<double> >::const_iterator mReturnsIterator;
-    std::vector<double>::const_iterator mReturnsIterator2;
-
-    iterateNestedVectors(assertResults, testEquation, mReturnsIterator,
-                         mReturnsIterator2);
 }
 
 void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
@@ -216,8 +212,6 @@ void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
             testAsssertion(0.015, assertResults[n++],
                            *returns_iterator2,
                            std::string("Jacobian"));
-            std::cout << *returns_iterator2 << std::endl;
-            Z
         }
     }
 }
