@@ -51,3 +51,10 @@ code/tests
 pcsc-nonlinear-systems-project.cbp
 
 .DS_Store
+.idea/dictionaries/
+.idea/inspectionProfiles/
+code/doxyconfig
+code/eigen-eigen-26667be4f70b/
+code/html/
+code/latex/
+code/scratch

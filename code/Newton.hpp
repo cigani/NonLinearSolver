@@ -27,7 +27,6 @@ private:
 
 public:
 	/*! A constructor to instantiate variables for the Newtwon method.
-    /*
       \param equation A string that contains the mathematical expression for the class to evaluate.
       \param initial The initial guess of the solution to the equation.
       \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
@@ -41,7 +40,6 @@ public:
 		   bool verbosity);
 
 	/*! A contructor to instantiate variables for the modified Newtwon method.
-    /*
       \param equation A string that contains the mathematical expression for the class to evaluate.
       \param initial The initial guess of the solution to the equation.
       \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
@@ -60,7 +58,6 @@ public:
     virtual ~Newton();
 
     /*! A function when called returns the solution to the Newton Method/Modified Newton Method.
-    /*
       \return The solution to the Newton Method/Modified Newton Method.
     */
 	std::vector<double> solve();

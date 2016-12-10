@@ -148,6 +148,12 @@ Equations::getDerivative(const std::string &eq,
     return result;
 }
 
+/**
+ *
+ * @param eq
+ * @param variableValues
+ * @return
+ */
 double
 Equations::getEquations(const std::string &eq,
                         std::vector<double> variableValues) {

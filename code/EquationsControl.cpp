@@ -7,6 +7,7 @@
 
 #include "Equations.hpp"
 
+///
 void EquationsControl::logErrors(const std::__1::string &expr_string,
                                  exprtk::parser<double> &parser) const {
     printf("Error: %s\tExpression: %s\n",
