@@ -5,62 +5,31 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "NonlinearSolver.hpp"
+#include "Equations.hpp"
 
-class Newton {
+class Newton : public NonlinearSolver{
 private:
- // Private variables
-	void printVerbose(int i, double &x);
-
+	int m;
 public:
-    
     // Constructors and destructors
-    Newton();
+    Newton(const std::string &equation,
+    		double initial,
+			double tolerance,
+			int maxIter,
+			bool verbosity);
+
+    Newton(const std::string &equation,
+    		double initial,
+    		double tolerance,
+    		int maxIter,
+    		bool verbosity,
+    		int modifier);
+
     virtual ~Newton();
-    
-    // Public variables
-    typedef double (*func1arg) (double);
 
     // Public methods
-	double newtonSolver(const std::vector<double> &coef,
-						double x0,
-						double tol,
-						int nMax,
-						bool verbose);
-
-	double modifiedNewtonSolver(const std::vector<double> &coef,
-								double x0,
-								double tol,
-								int nMax,
-								int m,
-								bool verbose);
-
-    double adaptiveNewtonSolver ( func1arg f,
-				  func1arg df,
-				  double x0,
-				  double tol,
-				  int nMax,
-				  bool verbose );
-
-    double newtonSystemSolver ( func1arg f,
-				func1arg df,
-				double x0,
-				double tol,
-				int nMax,
-				bool verbose );
-
-    double modifiedNewtonSystemSolver ( func1arg f,
-					func1arg df,
-					double x0,
-					double tol,
-					int nMax,
-					int m,
-					bool verbose );
-
-	double newtonExprtkSolver(const std::string &eq,
-							  double x0,
-							  double tol,
-							  double nMax,
-							  bool verbose);
+	double solve();
 };
     
 #endif /* NEWTON_HPP_ */

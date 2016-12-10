@@ -4,32 +4,23 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <assert.h>
+#include "NonlinearSolver.hpp"
+#include "Equations.hpp"
 
-class Chord {
+class Chord : public NonlinearSolver{
 private:
-	void printVerbose(int i, double &x);
-
 public:
-
     // Constructors and destructors
-    Chord();
+	Chord(const std::string &equation,
+	    		double initial,
+				double tolerance,
+				int maxIter,
+				bool verbosity);
     virtual ~Chord();
-    
-    // Public variables
-    typedef double (*func1arg) (double);
-    
-    // Public methods
-    double chordSolver ( const std::vector<double>& coef,
-    		double x0,
-			double tol,
-			int nMax,
-			bool verbose );
 
-    double chordExprtkSolver(const std::string &eq,
-    		double x0,
-			double tol,
-			double nMax,
-			bool verbose);
+    // Public methods
+    double solve();
 };
     
 #endif /* CHORD_HPP_ */

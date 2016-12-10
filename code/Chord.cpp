@@ -31,49 +31,19 @@
  * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
  */
 
-#include "Equations.hpp"
 #include "Chord.hpp"
 
-Chord::Chord() {}
+Chord::Chord(const std::string &equation,
+		double initial,
+		double tolerance,
+		int maxIter,
+		bool verbosity)
+		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+{}
 
 Chord::~Chord() {}
 
-double Chord::chordSolver(const std::vector<double>& coef,
-                          double x0, double tol,
-                          int nMax, bool verbose) {
-
-    double xnew = 0, dx, fx0, fx1;
-    double x1 = x0 + 1;
-    int i;
-
-    if ( verbose ) {
-    	printVerbose(0, x0);
-    	printVerbose(1, x1);
-    }
-
-    fx0 = Equations::getPolyEquation(coef, x0);
-    for ( i = 2; i <= nMax; i++ ) {
-        fx1 = Equations::getPolyEquation(coef, x1);
-        dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
-        xnew = x1 - dx;
-        if ( verbose ) {
-        	printVerbose(i, xnew);
-        }
-        if ( fabs(dx) < tol ) {
-            return xnew;
-        }
-        else {
-            x0 = x1;
-            fx0 = fx1;
-            x1 = xnew;
-        }
-    }
-    std::cout << "Maximum number of iterations exceeded" << std::endl;
-    return xnew;
-}
-
-double Chord::chordExprtkSolver(const std::string &eq, double x0, double tol,
-                                  double nMax, bool verbose) {
+double Chord::solve() {
 	double xnew, dx , fx0, fx1;
 	double x1 = x0 + 1;
 	int i;
@@ -103,9 +73,4 @@ double Chord::chordExprtkSolver(const std::string &eq, double x0, double tol,
     }
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return x0;
-}
-
-void Chord::printVerbose(int i, double &x) {
-	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-	<< x << std::setprecision(15) << std::endl;
 }

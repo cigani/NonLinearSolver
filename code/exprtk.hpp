@@ -17522,7 +17522,7 @@ namespace exprtk {
             return details::is_true(value());
         }
 
-        inline void register_symbol_table(symbol_table<T> &st) {
+        inline void register_symbol_table(symbol_table<double> st) {
             symbol_table_list_.push_back(st);
         }
 

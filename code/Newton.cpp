@@ -34,66 +34,31 @@
  */
 
 #include "Newton.hpp"
-#include "Equations.hpp"
 
-Newton::Newton() {}
+Newton::Newton(const std::string &equation,
+		double initial,
+		double tolerance,
+		int maxIter,
+		bool verbosity)
+	: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+{
+	m = 1;
+}
+
+Newton::Newton(const std::string &equation,
+		double initial,
+		double tolerance,
+		int maxIter,
+		bool verbosity,
+		int modifier)
+	: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+{
+	m = modifier;
+}
 
 Newton::~Newton() {}
 
-double Newton::newtonSolver(const std::vector<double>& coef, double x0,
-                            double tol, int nMax, bool verbose)
-{
-     double dx, fx0, dfx0;
-     int i;
-
-     if ( verbose ) {
-        printVerbose(0, x0);
-     }
-
-     for ( i = 1; i <= nMax; i++ ) {
-         fx0 = Equations::getPolyEquation(coef, x0);
-         dfx0 = Equations::getPolyDerivative(coef, x0);
-		 dx = fx0 / dfx0;
-         x0 -= dx;
-         if ( verbose ) {
-        	 printVerbose(i, x0);
-         }
-         if ( fabs(dx) < tol ) {
-        	 return x0;
-         }
-     }
-     std::cout << "Maximum number of iterations exceeded" << std::endl;
-     return x0;
-}
-
-double Newton::modifiedNewtonSolver(const std::vector<double>& coef, double x0,
-                                    double tol, int nMax, int m, bool verbose)
-{
-     double dx, fx0, dfx0;
-     int i;
-
-     if ( verbose ) {
-    	 printVerbose(0, x0);
-     }
-
-     for ( i = 1; i <= nMax; i++ ) {
-         fx0 = Equations::getPolyEquation(coef, x0);
-         dfx0 = Equations::getPolyDerivative(coef, x0);
-         dx = fx0 / dfx0;
-         x0 -= m*dx;
-         if ( verbose ) {
-        	 printVerbose(i, x0);
-         }
-         if ( fabs(dx) < tol ) {
-        	 return x0;
-         }
-     }
-     std::cout << "Maximum number of iterations exceeded" << std::endl;
-     return x0;
-}
-
-double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
-                                  double nMax, bool verbose) {
+double Newton::solve() {
     double dx, fx0, dfx0;
     Equations mEquation;
     int i;
@@ -106,7 +71,7 @@ double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
         fx0 = mEquation.exprtkGenerate2D(eq, x0);
         dfx0 = mEquation.exprtkGenerate2DDerivative(eq, x0);
         dx = fx0 / dfx0;
-        x0 -= dx;
+        x0 -= m*dx;
         if (verbose) {
         	printVerbose(i, x0);
         }
@@ -118,7 +83,4 @@ double Newton::newtonExprtkSolver(const std::string &eq, double x0, double tol,
     return x0;
 }
 
-void Newton::printVerbose(int i, double &x) {
-	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-	<< x << std::setprecision(15) << std::endl;
-}
+

@@ -14,38 +14,39 @@
 #include "exprtk.hpp"
 #include <vector>
 
-class TestSuit: Chord {
+
+class TestSuit {
 public:
     void testChordSolver(const double tol, const double expected,
                          const int x0, const int max, const bool verbose,
-                         const std::vector<double> &vector);
+                         std::string &eq);
 
     void testNewtonSolver(const double tol, const double expected,
                           const double x0, const int max, const bool verbose,
-                          const std::vector<double> &vector);
+                          std::string &eq);
 
     void testFixedPointSolver();
 
     void testNewtonWithExprtkPoly(const double tol, const double expected,
                                   const double x0, const int max,
                                   const bool verbose,
-                                  std::string &coefficient);
+                                  std::string &eq);
 
     void testNewtonWithExprtTrig(const double tol, const double expected,
                                  const double x0, const int max,
                                  const bool verbose,
-                                 std::string &coefficient);
+                                 std::string &eq);
 
     void testNewtonWithExprtExp(const double tol, const double expected,
                                 const double x0, const int max,
                                 const bool verbose,
-                                std::string &coefficient);
+                                std::string &eq);
 
 
     void testNewtonWithExprtkLog(const double tol, const double expected,
                                  const double x0, const int max,
                                  const bool verbose,
-                                 std::string &coefficient);
+                                 std::string &eq);
 
     void testExprtkJacobian();
 
@@ -53,19 +54,18 @@ public:
     void iterateVectors(std::vector<std::string> &returns);
 
     void testDeterm();
-
-private:
     //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
-    static void testAsssertion(const double tol, const double expected,
-                               double testNewton, std::string name);
+    void testAsssertion(const double tol, const double expected,
+                        double testNewton, std::string name);
 
-    static void testErrorCode(std::string &ErrorType);
+    void testErrorCode(std::string &ErrorType);
 
     void iterateNestedVectors(const std::vector<double> &assertResults,
                               std::vector<std::vector<double>> &returns,
-                              std::vector<std::__1::vector<double>>::iterator &returns_iterator,
-                              std::vector<double>::iterator &returns_iterator2);
+                              std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
+                              std::vector<double>::const_iterator &returns_iterator2);
 
+    void testSubtract();
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

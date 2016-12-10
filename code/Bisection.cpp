@@ -36,15 +36,31 @@
 
 Bisection::~Bisection() {}
 
-Bisection::Bisection() {}
-
-double Bisection::bisectionSolver ( const std::string &eq,
-		double a,
-		double b,
-		double tol,
-		int nMax,
-		bool verbose )
+Bisection::Bisection(const std::string &equation,
+		double initial,
+		double tolerance,
+		int maxIter,
+		bool verbosity)
+		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
 {
+	a = -1;
+	b = 1;
+}
+
+Bisection::Bisection(const std::string &equation,
+		double initial,
+		double tolerance,
+		int maxIter,
+		bool verbosity,
+		double lowerBound,
+		double upperBound)
+		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+{
+	a = lowerBound;
+	b = upperBound;
+}
+
+double Bisection::solve () {
      double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
      int i;
      Equations mEquation;
@@ -98,10 +114,3 @@ double Bisection::getSign(double value){
 	}
 	return sign;
 }
-
-void Bisection::printVerbose(int i, double &x) {
-	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-	<< x << std::setprecision(15) << std::endl;
-}
-
-

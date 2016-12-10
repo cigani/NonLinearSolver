@@ -5,31 +5,23 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "NonlinearSolver.hpp"
+#include "Equations.hpp"
 
-class FixedPoint {
+class FixedPoint : public NonlinearSolver {
 private:
- // Private variables
-	void printVerbose( int i, double &x );
-
 public:
     // Constructors and destructors
-    FixedPoint();
+    FixedPoint(const std::string &equation,
+    		double initial,
+			double tolerance,
+			int maxIter,
+			bool verbosity);
     virtual ~FixedPoint();
     
-    // Public variables
-    
     // Public methods
-    double fixedPointSolver ( const std::vector<double>& coef,
-    		double x0,
-			double tol,
-			int nMax,
-			bool verbose );
+    double solve();
     
-    double fixedPointExprtkSolver(const std::string &eq,
-    		double x0,
-    		double tol,
-    		int nMax,
-    		bool verbose );
 };
   
 #endif /* FIXEDPOINT_HPP_ */
