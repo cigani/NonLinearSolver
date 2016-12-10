@@ -31,17 +31,17 @@
 #include "Aitken.hpp"
 #include "Equations.hpp"
 
-Aitken::Aitken() {}
+Aitken::Aitken(Expression &equation,
+			   double initial,
+			   double tolerance,
+			   int maxIter,
+			   bool verbosity)
+		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+{}
 
 Aitken::~Aitken() {}
 
-double Aitken::aitkenExprtkSolver(
-		Expression &eq,
-		double x0,
-		double tol,
-		int nMax,
-		bool verbose)
-{
+double Aitken::solve() {
     double x1, x2, phat = 0, phatold;
 	int i;
 	phatold = x0;
@@ -76,8 +76,4 @@ double Aitken::aitkenExprtkSolver(
 	return phat;
 }
 
-void Aitken::printVerbose(int i, double &x) {
-	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-	<< x << std::setprecision(15) << std::endl;
-}
 

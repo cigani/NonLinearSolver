@@ -118,9 +118,8 @@ int main(int argc, char *argv[]) {
 
     if (boost::iequals(mMethod, "aitken")) {
         std::cout << std::endl << "AITKEN METHOD" << std::endl;
-        Aitken aitken;
-        double result = aitken.aitkenExprtkSolver(mExpression, x0, tol, nMax,
-                                                  verbose);
+        Aitken aitken(mExpression, x0, tol, nMax, verbose);
+        double result = aitken.solve();
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
