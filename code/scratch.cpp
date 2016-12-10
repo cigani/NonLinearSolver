@@ -26,10 +26,10 @@ void printVec(std::vector<double> &dx) {
 }
 
 int main() {
-    std::vector<double> dx{1, 2, 3, 4, 5};
-    std::vector<double> mx = negateVector(dx);
-    printVec(dx);
-    printVec(mx);
+    //std::vector<double> dx{1, 2, 3, 4, 5};
+    //std::vector<double> mx = negateVector(dx);
+    //printVec(dx);
+    //printVec(mx);
 
     return 0;
 }
