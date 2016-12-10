@@ -14,4 +14,3 @@ add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
 #        exprtk.hpp string.hpp NonlinearSolver.cpp EquationTools.cpp
 #        Jacobian.cpp EquationsControl.cpp Gauss.cpp)
 #add_executable(scratch scratch.cpp exprtk.hpp Eigen Gauss.cpp)
-

@@ -104,9 +104,9 @@ std::vector<double> Newton::solve() {
 //    Jacobian mJacobian;
 //    Gauss mGauss;
 //
-////    if (verbose) {
-////    	printVerbose(0, x0);
-////    }
+//    if (verbose) {
+//    	printVerbose(0, x0);
+//    }
 //
 //    for (int i = 1; i <= nMax; i++) {
 //        prevNorm = mEquationTools.getNorm(x0);
