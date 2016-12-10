@@ -36,7 +36,8 @@
 
 Bisection::~Bisection() {}
 
-Bisection::Bisection(std::vector<std::string> &eq,
+
+Bisection::Bisection(const std::vector<Expression> &equation,
                      std::vector<double> initial,
                      double tolerance,
                      int maxIter,
@@ -47,7 +48,7 @@ Bisection::Bisection(std::vector<std::string> &eq,
 	b = 1;
 }
 
-Bisection::Bisection(std::vector<std::string> &eq,
+Bisection::Bisection(const std::vector<Expression> &equation,
                      std::vector<double> initial,
                      double tolerance,
                      int maxIter,
@@ -61,51 +62,49 @@ Bisection::Bisection(std::vector<std::string> &eq,
 }
 
 std::vector<double> Bisection::solve() {
-     double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
+    double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
     int i;
     std::vector<double> returnVec;
-    std::string singleEq = (std::basic_string<char, std::char_traits<char>,
-            std::allocator<char>> &&) eq.at(0);
-    Equations mEquation;
-    std::vector<double> midPointVec;
+    Expression singleEq = eq.at(0);
 
-    sign_fa = getSign(mEquation.exprtkGenerate2D(singleEq, a));
-    sign_fb = getSign(mEquation.exprtkGenerate2D(singleEq, b));
+    sign_fa = getSign(singleEq.evaluate(a));
+    sign_fb = getSign(singleEq.evaluate(b));
 
-     assert ( (sign_fa *  sign_fb) < 0 );
+    assert ( (sign_fa *  sign_fb) < 0 );
 
-     for ( i = 1; i <= nMax; i++ ) {
-         midPointVec.clear();
-         midpoint = a + (b - a)/2.0;
-         midPointVec.push_back(midpoint);
+    for ( i = 1; i <= nMax; i++ ) {
+        midpoint = a + (b - a)/2.0;
 
-         if ( verbose ) {
-             printVerbose(i, midPointVec);
-         }
+        if ( verbose ) {
+            printVerbose(i, midpoint);
+        }
 
-         sign_mp = getSign(mEquation.exprtkGenerate2D(singleEq, midpoint));
+        sign_mp = getSign(singleEq.evaluate(midpoint));
 
-         if  ( sign_fa *  sign_mp < 0 ) {
-        	 b = midpoint;
-        	 sign_fb = sign_mp;
-         } else if  ( sign_fb *  sign_mp < 0 ) {
-        	 a = midpoint;
-        	 sign_fa = sign_mp;
-         } else {
-             return midPointVec;
-         }
+        if  ( sign_fa *  sign_mp < 0 ) {
+            b = midpoint;
+            sign_fb = sign_mp;
+        } else if  ( sign_fb *  sign_mp < 0 ) {
+            a = midpoint;
+            sign_fa = sign_mp;
+        } else {
+            returnVec.push_back(midpoint);
+            return returnVec;
+        }
 
-         if (i > 2){
-        	 error_est = fabs(midpoint - prev_midpoint);
-        	 if ( fabs(error_est) < tol ) {
-                 return midPointVec;
-        	 }
-         }
-
+        if (i > 2){
+            error_est = fabs(midpoint - prev_midpoint);
+            if ( fabs(error_est) < tol ) {
+                returnVec.push_back(midpoint);
+                return returnVec;
+            }
+        }
          prev_midpoint = midpoint;
-     }
-     std::cout << "Maximum number of iterations exceeded" << std::endl;
-    return midPointVec;
+    }
+
+    std::cout << "Maximum number of iterations exceeded" << std::endl;
+    returnVec.push_back(midpoint);
+    return returnVec;
 }
 
 double Bisection::getSign(double value){

@@ -16,25 +16,33 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "Expression.hpp"
+#include "NonlinearSolver.hpp"
 
-class Aitken {
-private:
-	void printVerbose(int i, double &x);
-
+class Aitken : public NonlinearSolver{
 public:
+    /*! A constructor to instantiate variables for the Aitken method.
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
+    Aitken(std::vector<Expression> &equation,
+           std::vector<double> initial,
+           double tolerance,
+           int maxIter,
+           bool verbosity);
 
-    // Constructors and destructors
-    Aitken();
+    //! A virtual destructor for the Aitken method.
     virtual ~Aitken();
-    
-    // Public variables
-    typedef double (*func1arg) (double);
 
-    std::vector<double> aitkenExprtkSolver(const std::vector<std::string> &eq,
-                                           std::vector<double> x0,
-                                           double tol,
-                                           int nMax,
-                                           bool verbose);
+    /*! A function when called returns the solution to the Aitken Method.
+     *
+     * \return The solution to the Aitken Method.
+     */
+    std::vector<double> solve();
 };
     
 #endif /* AITKEN_HPP_ */

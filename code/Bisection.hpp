@@ -18,18 +18,15 @@
 #include <cassert>
 #include <cmath>
 #include "NonlinearSolver.hpp"
+#include "Expression.hpp"
 
 class Bisection : public NonlinearSolver{
 private:
-
-	Bisection(std::vector<std::string> &eq, std::vector<double> initial,
-			  double tolerance, int maxIter, bool verbosity);
-
-	/*! A method that returns the sign of an expression evaluated at the provided value.
-            *
-              \param value The value at which to evaluate this object's mathematical expression.
-              \return 1 if the evaluation is positive.  -1 if the evalutaion is negative.
-            */
+    /*! A method that returns the sign of an expression evaluated at the provided value.
+     *
+     * \param value The value at which to evaluate this object's mathematical expression.
+     * \return 1 if the evaluation is positive.  -1 if the evalutaion is negative.
+     */
 	double getSign(double value);
 
     /// The lower bound on the domain where the program looks for the solution.
@@ -42,43 +39,44 @@ public:
     //! A virtual destructor for the Bisection method.
 	virtual ~Bisection();
 
-    /*! A constructor to instantiate variables for the Bisection method.  The default bound is [-1,1].
-    *
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-    */
-    Bisection(const std::vector<std::string> &equation,
-              std::vector<double> initial,
+	/*! A constructor to instantiate variables for the Bisection method.  The default bound is [-1,1].
+     *
+     *  \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
+    Bisection(const std::vector<Expression> &equation,
+			  std::vector<double> initial,
               double tolerance,
               int maxIter,
               bool verbosity);
 
 	/*! A constructor to instantiate variables for the Bisection method.
-    *
-      \param eq A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-      \param lowerBound The lower bound on the domain where the program looks for the solution.
-      \param upperBound The upper bound on the domain where the program looks for the solution.
-    */
-	Bisection(std::vector<std::string> &eq,
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     * \param lowerBound The lower bound on the domain where the program looks for the solution.
+     * \param upperBound The upper bound on the domain where the program looks for the solution.
+     */
+    Bisection(const std::vector<Expression> &equation,
 			  std::vector<double> initial,
-			  double tolerance,
-			  int maxIter,
-			  bool verbosity,
-			  double lowerBound,
-			  double upperBound);
+              double tolerance,
+              int maxIter,
+              bool verbosity,
+              double lowerBound,
+              double upperBound);
 
     /*! A function that returns the solution to the Bisection method.
-    *
-      \return The solution to the Bisection Method.
-    */
+     *
+     * \return The solution to the Bisection Method.
+     */
 	std::vector<double> solve();
+
 };
 
 #endif /* BISECTION_HPP_ */

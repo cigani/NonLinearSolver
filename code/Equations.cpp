@@ -12,6 +12,14 @@ Equations::Equations() {}
 
 Equations::~Equations() {}
 
+/**
+ * * Calculates the value of a polynomial given in the form
+ * (a_0 + a_1*x + a_2*x^2 + a_3*x^3 ... a_n*x^n)
+ * @param coef - Vector of coefficients.
+ * @param value - Initial Value
+ * @return - Symbolic Evaluation
+ */
+
 //TODO: Delete this. Replace with @getEquations method
 double Equations::exprtkGenerate2D(const std::string &eq,
                                    double value) {
@@ -196,4 +204,3 @@ Equations::getEquations(const std::string &eq,
 //     z = 3;
     return expression.value();
 }
-

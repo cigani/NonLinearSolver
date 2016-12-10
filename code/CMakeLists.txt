@@ -9,20 +9,9 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Equations.cpp Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
         string.hpp Eigen Jacobian.cpp EquationTools.cpp EquationsControl.cpp
-        Gauss.cpp)
-add_executable(tests Equations.cpp Newton.cpp TestSuit.cpp TestSuit.h
-        exprtk.hpp string.hpp NonlinearSolver.cpp EquationTools.cpp
-        Jacobian.cpp EquationsControl.cpp Gauss.cpp)
-add_executable(scratch scratch.cpp exprtk.hpp Eigen Gauss.cpp)
-#add_executable(fixedPoint FixedPoint.cpp Equations.cpp Jacobian.cpp
-#        EquationTools.cpp EquationsControl.cpp Gauss.cpp string.hpp
-#        NonlinearSolver.cpp exprtk.hpp FakeMain.cpp)
-#add_executable(chord Chord.cpp Equations.cpp Jacobian.cpp
-#        EquationTools.cpp EquationsControl.cpp Gauss.cpp string.hpp
-#        NonlinearSolver.cpp exprtk.hpp FakeMain.cpp)
-#add_executable(Bisection Bisection.cpp Equations.cpp Jacobian.cpp
-#        EquationTools.cpp EquationsControl.cpp Gauss.cpp string.hpp
-#        NonlinearSolver.cpp exprtk.hpp FakeMain.cpp)
-#add_executable(Aitken Aitken.cpp Equations.cpp Jacobian.cpp
-#        EquationTools.cpp EquationsControl.cpp Gauss.cpp string.hpp
-#        NonlinearSolver.cpp exprtk.hpp FakeMain.cpp)
+        Gauss.cpp Expression.cpp Helper.cpp)
+#add_executable(tests Equations.cpp Newton.cpp TestSuit.cpp TestSuit.h
+#        exprtk.hpp string.hpp NonlinearSolver.cpp EquationTools.cpp
+#        Jacobian.cpp EquationsControl.cpp Gauss.cpp)
+#add_executable(scratch scratch.cpp exprtk.hpp Eigen Gauss.cpp)
+

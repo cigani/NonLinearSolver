@@ -21,34 +21,40 @@
 
 class Newton : public NonlinearSolver{
 private:
-	//* The integer value for the modified Newton method.
-	// If m == 1, then the modified Newton method is equivalent to the normal Newton Method.
+	/// The integer value for the modified Newton method. If m == 1, then the modified Newton method is equivalent to the normal Newton Method.
 	int m;
+
+    /// A standard vector holding the strings representing mathematical expressions.
+    std::vector<Expression> df;
 
 public:
 	/*! A constructor to instantiate variables for the Newtwon method.
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-    */
-	Newton(const std::vector<std::string> &equation,
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
+	Newton(const std::vector<Expression> &equation,
+		   const std::vector<Expression> &derivative,
 		   std::vector<double> initial,
 		   double tolerance,
 		   int maxIter,
 		   bool verbosity);
 
 	/*! A contructor to instantiate variables for the modified Newtwon method.
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-      \param modifier The integer value for the modified Newton method.
-    */
-	Newton(const std::vector<std::string> &equation,
-		   std::vector<double> initial,
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     * \param modifier The integer value for the modified Newton method.
+     */
+	Newton(const std::vector<Expression> &equation,
+           const std::vector<Expression> &derivative,
+           std::vector<double> initial,
 		   double tolerance,
 		   int maxIter,
 		   bool verbosity,
@@ -58,9 +64,12 @@ public:
     virtual ~Newton();
 
     /*! A function when called returns the solution to the Newton Method/Modified Newton Method.
-      \return The solution to the Newton Method/Modified Newton Method.
-    */
-	std::vector<double> solve();
+     *
+     * \return The solution to the Newton Method/Modified Newton Method.
+     */
+    std::vector<double> solve();
+
+    std::vector<double> solveSystem();
 };
     
 #endif /* NEWTON_HPP_ */

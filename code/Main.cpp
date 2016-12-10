@@ -21,6 +21,8 @@
 #include "Aitken.hpp"
 #include "Bisection.hpp"
 #include "EquationTools.h"
+#include "Expression.hpp"
+#include "Helper.hpp"
 //#include "Eigen/Eigen"
 
 #ifndef NDEBUG
@@ -35,26 +37,26 @@
 #define mAssert(condition, message) do { } while (false)
 #endif
 
-std::string stringPadding(std::string original, size_t charCount);
-static void show_usage(std::string name);
-static void show_methods();
-
 int main(int argc, char *argv[]) {
 
+	Helper help(argv[0]);
+
     if (argc < 3) {
-        show_usage(argv[0]);
+    	help.show_usage();
         return 1;
     }
 
     std::string mMethod;
-    std::string mExpression = "NULL";
+    Expression mExpression;
+    Expression mDerivative;
     double x0 = 0.0;
     int nMax = 1000;
     double tol = 0.001;
     bool verbose = false;
     double lowerBound = -1.0;
     double upperBound = 1.0;
-    std::vector<std::string> mVectorExpression;
+    std::vector<Expression> mVectorExpression;
+    std::vector<Expression> mVectorDerivative;
     std::vector<double> mVectorValues;
     EquationTools mPrint;
 
@@ -77,12 +79,15 @@ int main(int argc, char *argv[]) {
                 } else {
                     std::cout << std::endl << "ERROR: Unknown method provided"
                               << std::endl;
-                    show_methods();
+                    help.show_methods();
                     return 1;
                 }
             } else if (strcmp(argv[i], "-e") == 0) {
                 // Mathematical Expression
-                mExpression = argv[i + 1];
+                mExpression.setEquation(argv[i + 1]);
+            } else if (strcmp(argv[i], "-d") == 0) {
+                // Derivative Expression
+                mDerivative.setEquation(argv[i + 1]);
             } else if (strcmp(argv[i], "-xi") == 0) {
                 // Initial Value
                 x0 = std::stod(argv[i + 1]);
@@ -106,160 +111,77 @@ int main(int argc, char *argv[]) {
             } else if ((strcmp(argv[i], "-h") == 0) ||
                        (strcmp(argv[i], "--help") == 0)) {
                 // Print help dialog
-                show_usage(argv[0]);
+                help.show_usage();
             } else {
                 continue;
             }
         }
     }
 
-    mAssert(mExpression != "NULL",
+    mAssert(mExpression.getEquation() != "0",
             "ERROR: No mathematical expression provided");
+
     mVectorExpression.push_back(mExpression);
+    mVectorDerivative.push_back(mDerivative);
     mVectorValues.push_back(x0);
+
     if (boost::iequals(mMethod, "aitken")) {
         std::cout << std::endl << "AITKEN METHOD" << std::endl;
-        Aitken aitken;
-        std::vector<double> result = aitken.aitkenExprtkSolver(
-                mVectorExpression, mVectorValues, tol, nMax,
-                verbose);
+        Aitken aitken(mVectorExpression,
+                      mVectorValues,
+                      tol,
+                      nMax,
+                      verbose);
+        std::vector<double> result = aitken.solve();
         mPrint.printVec(result);
-//        std::cout << std::endl << "RESULT: " << result << std::endl
-//                  << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
-        Bisection bisection(mVectorExpression, mVectorValues, tol, nMax,
-                            verbose, lowerBound, upperBound);
+        Bisection bisection(mVectorExpression,
+                            mVectorValues,
+                            tol,
+                            nMax,
+                            verbose,
+                            lowerBound,
+                            upperBound);
         std::vector<double> result = bisection.solve();
         mPrint.printVec(result);
-//        std::cout << std::endl << "RESULT: " << result << std::endl
-//                  << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
         std::cout << std::endl << "CHORD METHOD" << std::endl;
-        Chord chord(mVectorExpression, mVectorValues, tol, nMax, verbose);
+        Chord chord(mVectorExpression,
+                    mVectorValues,
+                    tol,
+                    nMax,
+                    verbose);
         std::vector<double> result = chord.solve();
         mPrint.printVec(result);
-//        std::cout << std::endl << "RESULT: " << result << std::endl
-//                  << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
-        FixedPoint fixedPoint(mVectorExpression, mVectorValues, tol, nMax,
+        FixedPoint fixedPoint(mVectorExpression,
+                              mVectorValues,
+                              tol,
+                              nMax,
                               verbose);
         std::vector<double> result = fixedPoint.solve();
         mPrint.printVec(result);
-//        std::cout << std::endl << "RESULT: " << result << std::endl
-//                  << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
+        mAssert(mDerivative.getEquation() != "0",
+                "ERROR: No mathematical expression provided");
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
-        Newton newton(mVectorExpression, mVectorValues, tol, nMax, verbose);
+        Newton newton(mVectorExpression,
+                      mVectorDerivative,
+                      mVectorValues,
+                      tol,
+                      nMax,
+                      verbose);
         std::vector<double> result = newton.solve();
         mPrint.printVec(result);
-//        std::cout << std::endl << "RESULT: " << result << std::endl
-//                  << std::endl;
     } else {
         std::cout << std::endl << "ERROR: No method provided" << std::endl;
-        show_usage(argv[0]);
+        help.show_usage();
         return 1;
     }
 
     return 0;
-}
-
-std::string stringPadding(std::string original, size_t charCount) {
-    original.resize(charCount, ' ');
-    return original;
-}
-
-static void show_usage(std::string name) {
-    std::cerr << std::endl
-              << "Usage: "
-              << name
-              << " -m %s"
-              << " -e '%s'"
-              << " -xi %d"
-              << " -nmax %i"
-              << " -t %d"
-              << " -v %b"
-              << " -l %d"
-              << " -u %d"
-              << std::endl
-              << std::endl
-              << "Required:\n"
-              << "\t"
-              << stringPadding("-m,--method", 20)
-              << stringPadding("Specify Non-Linear Solver", 60)
-              << std::endl
-              << "\t"
-              << stringPadding("-e,--expression", 20)
-              << stringPadding(
-                      "Mathematical expression to solve enclosed in ''", 60)
-              << std::endl
-              << std::endl
-              << "Optional:\n"
-              << "\t"
-              << stringPadding("-h,--help", 20)
-              << stringPadding("Show this help message", 60)
-              << std::endl
-              << "\t"
-              << stringPadding("-xi", 20)
-              << stringPadding("Initial guess of the solution [default: 0.0]",
-                               60)
-              << std::endl
-              << "\t"
-              << stringPadding("-nmax", 20)
-              << stringPadding("Maximum number of iterations [default: 1000]",
-                               60)
-              << std::endl
-              << "\t"
-              << stringPadding("-t", 20)
-              << stringPadding("The convergence tolerance [default: 0.001]",
-                               60)
-              << std::endl
-              << "\t"
-              << stringPadding("-v", 20)
-              << stringPadding(
-                      "print all intermediate calculations [default: false]",
-                      60)
-              << std::endl
-              << "\t"
-              << stringPadding("-l", 20)
-              << stringPadding(
-                      "The lower bound of the search interval [default: -1.0]",
-                      60)
-              << std::endl
-              << "\t"
-              << stringPadding("-u", 20)
-              << stringPadding(
-                      "The upper bound of the search interval [default: 1.0]",
-                      60)
-              << std::endl;
-    show_methods();
-}
-
-static void show_methods() {
-    std::cerr << std::endl
-              << "Non-Linear Solvers:"
-              << std::endl
-              << "\t"
-              << stringPadding("aitken", 20)
-              << stringPadding("Aitken Method", 40)
-              << std::endl
-              << "\t"
-              << stringPadding("bisection", 20)
-              << stringPadding("Bisection Method", 40)
-              << std::endl
-              << "\t"
-              << stringPadding("chord", 20)
-              << stringPadding("Chord Method", 40)
-              << std::endl
-              << "\t"
-              << stringPadding("fixedpoint", 20)
-              << stringPadding("Fixed Point Method", 40)
-              << std::endl
-              << "\t"
-              << stringPadding("newton", 20)
-              << stringPadding("Newton Method", 40)
-              << std::endl;
 }
 
 

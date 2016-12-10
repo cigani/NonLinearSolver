@@ -47,6 +47,8 @@ int main(int argc, char* argv[]) {
     // Error Logging
     test.iterateVectors(mErrors);
 
+    return 0;
+
 };
 
 void TestSuit::testAsssertion(const double tol, const double expected,
@@ -213,7 +215,6 @@ void TestSuit::testDeterm() {
     double det = mEquations.Determinant(values, (const int) values.size());
 //    std::cout<<"det" << det << std::endl;
     testAsssertion(0.0015, -20, det, std::string("Determinant"));
-
 }
 
 void TestSuit::testSubtract() {

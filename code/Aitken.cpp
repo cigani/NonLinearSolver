@@ -31,29 +31,33 @@
 #include "Aitken.hpp"
 #include "Equations.hpp"
 
-Aitken::Aitken() {}
+Aitken::Aitken(std::vector<Expression> &equation,
+               std::vector<double> initial,
+               double tolerance,
+               int maxIter,
+               bool verbosity)
+		: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+{}
 
 Aitken::~Aitken() {}
 
-std::vector<double> Aitken::aitkenExprtkSolver(
-		const std::vector<std::string> &eq,
-		std::vector<double> x0,
-		double tol,
-		int nMax,
-		bool verbose)
-{
+std::vector<double> Aitken::solve() {
+
     std::vector<double> returnVec;
-    std::string singleEq = eq.at(0);
+    Expression singleEq = eq.at(0);
+
     double singleValue = x0.at(0);
-	double x1, x2, phat, phatold;
-	int i;
-	Equations mEquation;
+    double x1, x2, phat, phatold;
+    int i;
+
     phatold = singleValue;
+
 	if (verbose) {
         printVerbose(0, x0.at(0));
 	}
 
-    x1 = mEquation.exprtkGenerate2D(singleEq, singleValue);
+	x1 = singleEq.evaluate(x0);
+
 	if (verbose) {
 		printVerbose(1,x1);
 	}
@@ -66,7 +70,7 @@ std::vector<double> Aitken::aitkenExprtkSolver(
 	}
 
 	for ( i = 2; i <= nMax; i++ ) {
-        x2 = mEquation.exprtkGenerate2D(singleEq, x1);
+        x2 = singleEq.evaluate(x1);
         phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + singleValue);
 		if (verbose) {
 			printVerbose(i,x2);
@@ -85,8 +89,4 @@ std::vector<double> Aitken::aitkenExprtkSolver(
     return returnVec;
 }
 
-void Aitken::printVerbose(int i, double &x) {
-	std::cout << std::setw(3) << i << "\t"  << std::setw(20)
-	<< x << std::setprecision(15) << std::endl;
-}
 

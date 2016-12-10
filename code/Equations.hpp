@@ -33,14 +33,17 @@ public:
     double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
 
-    double getDerivative(const std::string &eq,
-                         std::vector<double> variableValues,
-                         std::string withRespectTo);
+private:
+
 
 protected:
 
     double
     getEquations(const std::string &eq, std::vector<double> variableValues);
+
+    double getDerivative(const std::string &eq,
+                         std::vector<double> variableValues,
+                         std::string withRespectTo);
 
 };
 

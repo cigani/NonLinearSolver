@@ -33,7 +33,7 @@
 
 #include "Chord.hpp"
 
-Chord::Chord(const std::vector<std::string> &equation,
+Chord::Chord(std::vector<Expression> &equation,
              std::vector<double> initial,
              double tolerance,
              int maxIter,
@@ -47,13 +47,10 @@ std::vector<double> Chord::solve() {
     std::vector<double> returnVec;
     std::vector<double> print;
     double singleVal = x0.at(0);
-    std::string singleEq = (std::basic_string<char, std::char_traits<char>,
-            std::allocator<char>> &&) eq.at(0);
+    Expression singleEq = eq.at(0);
 	double xnew, dx , fx0, fx1;
     double x1 = singleVal + 1;
 	int i;
-
-	Equations mEquation;
 
     if (verbose) {
         print.push_back(x1);
@@ -62,16 +59,20 @@ std::vector<double> Chord::solve() {
         print.clear();
     }
 
-    fx0 = mEquation.exprtkGenerate2D(singleEq, singleVal);
+    fx0 = singleEq.evaluate(singleVal);
+
     for ( i = 2; i <= nMax; i++ ) {
-        fx1 = mEquation.exprtkGenerate2D(singleEq, x1);
-        dx = fx1 * (x1 - singleVal) / (fx1 - fx0);
+
+    	fx1 = singleEq.evaluate(x1);
+    	dx = fx1 * ( x1 - singleVal ) / ( fx1 - fx0 );
     	xnew = x1 - dx;
+
     	if ( verbose ) {
             print.push_back(xnew);
             printVerbose(i, print);
             print.clear();
         }
+
     	if (fabs(dx) < tol ) {
             returnVec.push_back(xnew);
             return returnVec;

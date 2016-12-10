@@ -8,7 +8,6 @@
 #include <iostream>
 #include "exprtk.hpp"
 
-
 std::__1::vector<double> negateVector(
         std::__1::vector<double> &v1) {
     std::__1::vector<double> result;

@@ -16,14 +16,15 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "Expression.hpp"
 
 class NonlinearSolver {
 protected:
 	/// A standard vector holding the strings representing mathematical expressions.
-    std::vector<std::string> eq;
+	std::vector<Expression> eq;
 
 	/// A standard vector holding the doubles representing the initial guess of the solution to the equation.
-    std::vector<double> x0;
+	std::vector<double>  x0;
 
 	/// The tolerance value.  The method stops once the residual errors fall below this value.
 	double tol;
@@ -36,15 +37,16 @@ protected:
 
 public:
     /*! A contructor to instantiate common variables to the family of nonlinear solvers.
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-    */
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
     NonlinearSolver(
-            const std::vector<std::string> &equation,
-            std::vector<double> initial,
+			const std::vector<Expression> &equation,
+			std::vector<double> initial,
             double tolerance,
             int maxIter,
             bool verbosity);
@@ -56,10 +58,18 @@ public:
     virtual std::vector<double> solve() = 0;
 
     /*! A function that takes a constant integer and a vector argument and prints to the console.
-      \param i The current index or iteration to print out to the console.
-      \param x The vector that contains current solution of the nonlinear problem.
-    */
+     *
+     * \param i The current index or iteration to print out to the console.
+     * \param x The vector that contains current solution of the nonlinear problem.
+     */
 	void printVerbose(int i, std::vector<double> &x);
+
+	/*! A function that takes a constant integer and a vector argument and prints to the console.
+     *
+     * \param i The current index or iteration to print out to the console.
+     * \param x The vector that contains current solution of the nonlinear problem.
+     */
+	void printVerbose(int i, double &x);
 
 };
     
