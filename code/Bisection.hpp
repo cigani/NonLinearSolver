@@ -22,7 +22,7 @@
 class Bisection : public NonlinearSolver{
 private:
     /*! A method that returns the sign of an expression evaluated at the provided value.
-    /*
+    *
       \param value The value at which to evaluate this object's mathematical expression.
       \return 1 if the evaluation is positive.  -1 if the evalutaion is negative.
     */
@@ -38,8 +38,8 @@ public:
     //! A virtual destructor for the Bisection method.
 	virtual ~Bisection();
 
-	/*! A constructor to instantiate variables for the Bisection method.  The default bound is [-1,1].
-    /*
+    /*! A constructor to instantiate variables for the Bisection method.  The default bound is [-1,1].
+    *
       \param equation A string that contains the mathematical expression for the class to evaluate.
       \param initial The initial guess of the solution to the equation.
       \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
@@ -52,8 +52,8 @@ public:
               int maxIter,
               bool verbosity);
 
-	/*! A constructor to instantiate variables for the Bisection method.
-    /*
+    /*! A constructor to instantiate variables for the Bisection method.
+    *
       \param equation A string that contains the mathematical expression for the class to evaluate.
       \param initial The initial guess of the solution to the equation.
       \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
@@ -71,7 +71,7 @@ public:
               double upperBound);
 
     /*! A function that returns the solution to the Bisection method.
-    /*
+    *
       \return The solution to the Bisection Method.
     */
 	std::vector<double> solve();
