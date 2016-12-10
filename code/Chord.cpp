@@ -33,7 +33,7 @@
 
 #include "Chord.hpp"
 
-Chord::Chord(const std::string &equation,
+Chord::Chord(Expression &equation,
              double initial,
              double tolerance,
              int maxIter,
@@ -48,16 +48,14 @@ double Chord::solve() {
 	double x1 = x0 + 1;
 	int i;
 
-	Equations mEquation;
-
     if (verbose) {
     	printVerbose(0, x0);
     	printVerbose(1, x1);
     }
 
-    fx0 = mEquation.exprtkGenerate2D(eq, x0);
+    fx0 = eq.evaluate(x0);
     for ( i = 2; i <= nMax; i++ ) {
-    	fx1 = mEquation.exprtkGenerate2D(eq, x1);
+    	fx1 = eq.evaluate(x1);
     	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
     	xnew = x1 - dx;
     	if ( verbose ) {

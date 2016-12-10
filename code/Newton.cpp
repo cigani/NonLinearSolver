@@ -38,8 +38,8 @@
 #include "Jacobian.h"
 #include "Gauss.h"
 
-Newton::Newton(const std::string &equation,
-               const std::string &derivative,
+Newton::Newton(Expression &equation,
+               Expression &derivative,
                double initial,
                double tolerance,
                int maxIter,
@@ -50,8 +50,8 @@ Newton::Newton(const std::string &equation,
 	m = 1;
 }
 
-Newton::Newton(const std::string &equation,
-               const std::string &derivative,
+Newton::Newton(Expression &equation,
+               Expression &derivative,
                double initial,
                double tolerance,
                int maxIter,
@@ -67,7 +67,6 @@ Newton::~Newton() {}
 
 double Newton::solve() {
     double dx, fx0, dfx0;
-    Equations mEquation;
 
     if (verbose) {
     	printVerbose(0, x0);
@@ -75,8 +74,8 @@ double Newton::solve() {
 
     for (int i = 1; i <= nMax; i++) {
 
-        fx0 = mEquation.exprtkGenerate2D(eq, x0);
-        dfx0 = mEquation.exprtkGenerate2D(df, x0);
+        fx0 = eq.evaluate(x0);
+        dfx0 = df.evaluate(x0);
         dx = fx0 / dfx0;
         x0 -= m*dx;
 

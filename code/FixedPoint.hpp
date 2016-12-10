@@ -29,7 +29,7 @@ public:
       \param maxIter The maximum number of iterations.  The method stops once this number is reached.
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
-    FixedPoint(const std::string &equation,
+    FixedPoint(Expression &equation,
                double initial,
                double tolerance,
                int maxIter,

@@ -36,7 +36,7 @@ Aitken::Aitken() {}
 Aitken::~Aitken() {}
 
 double Aitken::aitkenExprtkSolver(
-		const std::string &eq,
+		Expression &eq,
 		double x0,
 		double tol,
 		int nMax,
@@ -44,13 +44,12 @@ double Aitken::aitkenExprtkSolver(
 {
     double x1, x2, phat = 0, phatold;
 	int i;
-	Equations mEquation;
 	phatold = x0;
 	if (verbose) {
 		printVerbose(0,x0);
 	}
 
-	x1 = mEquation.exprtkGenerate2D(eq, x0);
+	x1 = eq.evaluate(x0);
 	if (verbose) {
 		printVerbose(1,x1);
 	}
@@ -62,7 +61,7 @@ double Aitken::aitkenExprtkSolver(
 	}
 
 	for ( i = 2; i <= nMax; i++ ) {
-		x2 = mEquation.exprtkGenerate2D(eq, x1);
+		x2 = eq.evaluate(x1);
 		phat = x2 - ( x2 - x1 ) * ( x2 - x1 ) / ( x2 - 2 * x1 + x0 );
 		if (verbose) {
 			printVerbose(i,x2);

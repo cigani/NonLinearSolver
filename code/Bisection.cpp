@@ -36,7 +36,7 @@
 
 Bisection::~Bisection() {}
 
-Bisection::Bisection(const std::string &equation,
+Bisection::Bisection(Expression &equation,
                      double initial,
                      double tolerance,
                      int maxIter,
@@ -47,7 +47,7 @@ Bisection::Bisection(const std::string &equation,
 	b = 1;
 }
 
-Bisection::Bisection(const std::string &equation,
+Bisection::Bisection(Expression &equation,
                      double initial,
                      double tolerance,
                      int maxIter,
@@ -63,10 +63,9 @@ Bisection::Bisection(const std::string &equation,
 double Bisection::solve() {
      double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
      int i;
-     Equations mEquation;
 
-     sign_fa = getSign(mEquation.exprtkGenerate2D(eq, a));
-     sign_fb = getSign(mEquation.exprtkGenerate2D(eq, b));
+     sign_fa = getSign(eq.evaluate(a));
+     sign_fb = getSign(eq.evaluate(b));
 
      assert ( (sign_fa *  sign_fb) < 0 );
 
@@ -78,7 +77,7 @@ double Bisection::solve() {
         	 printVerbose(i, midpoint);
          }
 
-         sign_mp = getSign(mEquation.exprtkGenerate2D(eq, midpoint));
+         sign_mp = getSign(eq.evaluate(midpoint));
 
          if  ( sign_fa *  sign_mp < 0 ) {
         	 b = midpoint;

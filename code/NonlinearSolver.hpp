@@ -16,11 +16,12 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "Expression.hpp"
 
 class NonlinearSolver {
 protected:
 	/// A standard vector holding the strings representing mathematical expressions.
-    std::string eq;
+    Expression eq;
 
 	/// A standard vector holding the doubles representing the initial guess of the solution to the equation.
     double x0;
@@ -44,7 +45,7 @@ public:
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
     NonlinearSolver(
-            const std::string &equation,
+            Expression &equation,
             double initial,
             double tolerance,
             int maxIter,

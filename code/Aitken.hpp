@@ -16,6 +16,7 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
+#include "Expression.hpp"
 
 class Aitken {
 private:
@@ -30,7 +31,7 @@ public:
     // Public variables
     typedef double (*func1arg) (double);
 
-    double aitkenExprtkSolver(const std::string &eq,
+    double aitkenExprtkSolver(Expression &eq,
                               double x0,
                               double tol,
                               int nMax,

@@ -11,7 +11,7 @@
 #include "NonlinearSolver.hpp"
 
 NonlinearSolver::NonlinearSolver(
-		const std::string &equation,
+		Expression &equation,
 		double initial,
 		double tolerance,
 		int maxIter,

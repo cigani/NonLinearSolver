@@ -20,6 +20,7 @@
 #include "Newton.hpp"
 #include "Aitken.hpp"
 #include "Bisection.hpp"
+#include "Expression.hpp"
 //#include "Eigen/Eigen"
 
 #ifndef NDEBUG
@@ -46,8 +47,8 @@ int main(int argc, char *argv[]) {
     }
 
     std::string mMethod;
-    std::string mExpression = "NULL";
-    std::string mDerivative = "NULL";
+    Expression mExpression;
+    Expression mDerivative;
     double x0 = 0.0;
     int nMax = 1000;
     double tol = 0.001;
@@ -79,10 +80,10 @@ int main(int argc, char *argv[]) {
                 }
             } else if (strcmp(argv[i], "-e") == 0) {
                 // Mathematical Expression
-                mExpression = argv[i + 1];
+                mExpression.setEquation(argv[i + 1]);
             } else if (strcmp(argv[i], "-d") == 0) {
                 // Derivative Expression
-                mDerivative = argv[i + 1];
+                mDerivative.setEquation(argv[i + 1]);
             } else if (strcmp(argv[i], "-xi") == 0) {
                 // Initial Value
                 x0 = std::stod(argv[i + 1]);
@@ -113,7 +114,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    mAssert(mExpression != "NULL",
+    mAssert(mExpression.getEquation() != "0",
             "ERROR: No mathematical expression provided");
 
     if (boost::iequals(mMethod, "aitken")) {
@@ -142,8 +143,8 @@ int main(int argc, char *argv[]) {
         std::cout << std::endl << "RESULT: " << result << std::endl
                   << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
-        mAssert(mDerivative != "NULL",
-                "ERROR: No derivative function provided");
+        mAssert(mDerivative.getEquation() != "0",
+                "ERROR: No mathematical expression provided");
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
         Newton newton(mExpression, mDerivative, x0, tol, nMax, verbose);
         double result = newton.solve();

@@ -18,6 +18,7 @@
 #include <assert.h>
 #include "NonlinearSolver.hpp"
 #include "Equations.hpp"
+#include "Expression.hpp"
 
 class Chord : public NonlinearSolver{
 public:
@@ -29,7 +30,7 @@ public:
       \param maxIter The maximum number of iterations.  The method stops once this number is reached.
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
-    Chord(const std::string &equation,
+    Chord(Expression &equation,
           double initial,
           double tolerance,
           int maxIter,

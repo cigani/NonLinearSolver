@@ -18,6 +18,7 @@
 #include <cassert>
 #include <cmath>
 #include "NonlinearSolver.hpp"
+#include "Expression.hpp"
 
 class Bisection : public NonlinearSolver{
 private:
@@ -46,7 +47,7 @@ public:
       \param maxIter The maximum number of iterations.  The method stops once this number is reached.
       \param verbosity Set to true to print all intermediate and final results onto the console.
     */
-    Bisection(const std::string &equation,
+    Bisection(Expression &equation,
               double initial,
               double tolerance,
               int maxIter,
@@ -62,7 +63,7 @@ public:
       \param lowerBound The lower bound on the domain where the program looks for the solution.
       \param upperBound The upper bound on the domain where the program looks for the solution.
     */
-    Bisection(const std::string &equation,
+    Bisection(Expression &equation,
               double initial,
               double tolerance,
               int maxIter,
