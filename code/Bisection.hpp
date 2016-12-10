@@ -23,10 +23,10 @@
 class Bisection : public NonlinearSolver{
 private:
     /*! A method that returns the sign of an expression evaluated at the provided value.
-    /*
-      \param value The value at which to evaluate this object's mathematical expression.
-      \return 1 if the evaluation is positive.  -1 if the evalutaion is negative.
-    */
+     *
+     * \param value The value at which to evaluate this object's mathematical expression.
+     * \return 1 if the evaluation is positive.  -1 if the evalutaion is negative.
+     */
 	double getSign(double value);
 
     /// The lower bound on the domain where the program looks for the solution.
@@ -40,13 +40,13 @@ public:
 	virtual ~Bisection();
 
 	/*! A constructor to instantiate variables for the Bisection method.  The default bound is [-1,1].
-    /*
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-    */
+     *
+     *  \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
     Bisection(Expression &equation,
               double initial,
               double tolerance,
@@ -54,15 +54,15 @@ public:
               bool verbosity);
 
 	/*! A constructor to instantiate variables for the Bisection method.
-    /*
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-      \param lowerBound The lower bound on the domain where the program looks for the solution.
-      \param upperBound The upper bound on the domain where the program looks for the solution.
-    */
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     * \param lowerBound The lower bound on the domain where the program looks for the solution.
+     * \param upperBound The upper bound on the domain where the program looks for the solution.
+     */
     Bisection(Expression &equation,
               double initial,
               double tolerance,
@@ -72,9 +72,9 @@ public:
               double upperBound);
 
     /*! A function that returns the solution to the Bisection method.
-    /*
-      \return The solution to the Bisection Method.
-    */
+     *
+     * \return The solution to the Bisection Method.
+     */
 	double solve();
 };
 

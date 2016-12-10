@@ -29,13 +29,13 @@ private:
 
 public:
 	/*! A constructor to instantiate variables for the Newtwon method.
-    /*
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-    */
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
 	Newton(Expression &equation,
 		   Expression &derivative,
 		   double initial,
@@ -44,14 +44,14 @@ public:
 		   bool verbosity);
 
 	/*! A contructor to instantiate variables for the modified Newtwon method.
-    /*
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-      \param modifier The integer value for the modified Newton method.
-    */
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     * \param modifier The integer value for the modified Newton method.
+     */
 	Newton(Expression &equation,
 		   Expression &derivative,
 		   double initial,
@@ -64,9 +64,9 @@ public:
     virtual ~Newton();
 
     /*! A function when called returns the solution to the Newton Method/Modified Newton Method.
-    /*
-      \return The solution to the Newton Method/Modified Newton Method.
-    */
+     *
+     * \return The solution to the Newton Method/Modified Newton Method.
+     */
 	double solve();
 };
     

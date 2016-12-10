@@ -22,13 +22,13 @@
 class FixedPoint : public NonlinearSolver {
 public:
     /*! A constructor to instantiate variables for the Fixed Point method.
-    /*
-      \param equation A string that contains the mathematical expression for the class to evaluate.
-      \param initial The initial guess of the solution to the equation.
-      \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-      \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-      \param verbosity Set to true to print all intermediate and final results onto the console.
-    */
+     *
+     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param initial The initial guess of the solution to the equation.
+     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
+     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
+     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     */
     FixedPoint(Expression &equation,
                double initial,
                double tolerance,
@@ -39,9 +39,9 @@ public:
     virtual ~FixedPoint();
 
     /*! A function that returns the solution to the Fixed Point method.
-    /*
-      \return The solution to the Fixed Point Method.
-    */
+     *
+     * \return The solution to the Fixed Point Method.
+     */
     double solve();
     
 };
