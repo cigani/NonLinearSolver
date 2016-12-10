@@ -8,7 +8,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 
 add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Equations.cpp Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
-        string.hpp EquationsControl.cpp)
+        string.hpp EquationsControl.cpp Expression.cpp Helper.cpp)
         #Eigen Jacobian.cpp EquationTools.cpp EquationsControl.cpp
         #Gauss.cpp)
 
