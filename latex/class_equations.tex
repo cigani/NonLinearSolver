@@ -1,0 +1,68 @@
+\hypertarget{class_equations}{}\section{Equations Class Reference}
+\label{class_equations}\index{Equations@{Equations}}
+Inheritance diagram for Equations\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_equations}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \hyperlink{class_equations_ac5f6066df2ec81262ca5bebd8c29df9f}{exprtk\+Generate2\+D\+Derivative} (const std\+::string \&eq, double value)
+\item 
+double \hyperlink{class_equations_a45d2386ee51c531efa1226c139cb1ae6}{get\+Derivative} (const std\+::string \&eq, std\+::vector$<$ double $>$ variable\+Values, std\+::string with\+Respect\+To)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Equations@{Equations}!exprtk\+Generate2\+D\+Derivative@{exprtk\+Generate2\+D\+Derivative}}
+\index{exprtk\+Generate2\+D\+Derivative@{exprtk\+Generate2\+D\+Derivative}!Equations@{Equations}}
+\subsubsection[{\texorpdfstring{exprtk\+Generate2\+D\+Derivative(const std\+::string \&eq, double value)}{exprtkGenerate2DDerivative(const std::string &eq, double value)}}]{\setlength{\rightskip}{0pt plus 5cm}double Equations\+::exprtk\+Generate2\+D\+Derivative (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{eq, }
+\item[{double}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equations_ac5f6066df2ec81262ca5bebd8c29df9f}{}\label{class_equations_ac5f6066df2ec81262ca5bebd8c29df9f}
+
+\begin{DoxyParams}{Parameters}
+{\em eq} & -\/ String containing the equation to evaluate \\
+\hline
+{\em value} & -\/ value to compute from \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/ Derivative of equation at value. Uses numeric approximation. 
+\end{DoxyReturn}
+\index{Equations@{Equations}!get\+Derivative@{get\+Derivative}}
+\index{get\+Derivative@{get\+Derivative}!Equations@{Equations}}
+\subsubsection[{\texorpdfstring{get\+Derivative(const std\+::string \&eq, std\+::vector$<$ double $>$ variable\+Values, std\+::string with\+Respect\+To)}{getDerivative(const std::string &eq, std::vector< double > variableValues, std::string withRespectTo)}}]{\setlength{\rightskip}{0pt plus 5cm}double Equations\+::get\+Derivative (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{eq, }
+\item[{std\+::vector$<$ double $>$}]{variable\+Values, }
+\item[{std\+::string}]{with\+Respect\+To}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equations_a45d2386ee51c531efa1226c139cb1ae6}{}\label{class_equations_a45d2386ee51c531efa1226c139cb1ae6}
+This is used by  to calculate the \hyperlink{class_jacobian}{Jacobian} 
+\begin{DoxyParams}{Parameters}
+{\em eq} & \\
+\hline
+{\em variable\+Values} & \\
+\hline
+{\em variables} & \\
+\hline
+{\em with\+Respect\+To} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a singlle double (df/(dx\+\_\+i)) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/Equations.\+hpp\item 
+code/Equations.\+cpp\end{DoxyCompactItemize}

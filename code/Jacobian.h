@@ -1,9 +1,13 @@
-//
-/* AUTHORS:
-* Jaquier, Michael <michael.jaquier@epfl.ch>
-* Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+//! Jacobian.hpp
+/*!
+  \brief A class constructing an object containing the Jacobian.
+  \author Jaquier, Michael <michael.jaquier@epfl.ch>
+  \author Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+  \version 1.0
+  \date  10 December 2016
+  \remark Ecole Polytechnic Federal de Lausanne (EPFL)
+  \remark MATH-458 Programming Concepts in Scientific Computing
 */
-//
 
 #ifndef PCSC_NONLINEAR_SYSTEMS_PROJECT_JACOBIAN_H
 #define PCSC_NONLINEAR_SYSTEMS_PROJECT_JACOBIAN_H
@@ -13,15 +17,17 @@
 
 class Jacobian : public Equations {
 
-    void getJacobianMatrix(const std::__1::vector<std::__1::string> &eq,
-                           const std::__1::vector<std::__1::vector<double>> &vals,
-                           std::__1::vector<std::__1::vector<double>> &JM);
-
 public:
-    std::__1::vector<std::__1::vector<double>> exprtkJacobian(
-            const std::__1::vector<std::__1::string> &eq,
-            std::__1::vector<std::__1::vector<double>> variableValues,
-            int variables);
+
+
+    std::vector<std::vector<double>>
+    exprtkJacobian(const std::vector<std::string> &eq,
+                   std::vector<double> variableValues, int variables);
+
+    void
+    getJacobianMatrix(const std::vector<std::string> &eq,
+                      std::vector<double> vals,
+                      std::vector<std::vector<double>> &JM);
 };
 
 

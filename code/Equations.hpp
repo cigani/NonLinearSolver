@@ -1,3 +1,14 @@
+//! Equations.hpp
+/*!
+  \brief A class handling the parsing of the mathematical expression and evaluation.
+  \author Jaquier, Michael <michael.jaquier@epfl.ch>
+  \author Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+  \version 1.0
+  \date  10 December 2016
+  \remark Ecole Polytechnic Federal de Lausanne (EPFL)
+  \remark MATH-458 Programming Concepts in Scientific Computing
+*/
+
 #ifndef EQUATIONS_HPP_
 #define EQUATIONS_HPP_
 
@@ -21,24 +32,18 @@ public:
 
     double exprtkGenerate2DDerivative(const std::string &eq, double value);
 
-    void ExtractMinor(std::vector<std::vector<double>> &M,
-                      const int size,
-                      const int col,
-                      std::vector<std::vector<double>> &minor);
-
-
 
 private:
-    static double getPolyDerivativePrivate(const std::vector<double> &coef,
-                                           double value);
 
-protected:
     double getDerivative(const std::string &eq,
                          std::vector<double> variableValues,
                          std::string withRespectTo);
 
+protected:
 
-    static double jostleInitial(const std::vector<double> &coef, double value);
+    double
+    getEquations(const std::string &eq, std::vector<double> variableValues);
+
 };
 
 #endif /* EQUATIONS_HPP_ */

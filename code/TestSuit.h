@@ -56,7 +56,7 @@ public:
     void testDeterm();
     //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     void testAsssertion(const double tol, const double expected,
-                        double testNewton, std::string name);
+                        std::vector<double> testNewton, std::string name);
 
     void testErrorCode(std::string &ErrorType);
 

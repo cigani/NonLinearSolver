@@ -27,8 +27,8 @@ int main(int argc, char* argv[]) {
 
 
     // Tests
-    test.testChordSolver(0.0015, 3.16227766517654, 3, 1000, false,
-                         mPolyCoefficient);
+    //test.testChordSolver(0.0015, 3.16227766517654, 3, 1000, false,
+//                         mPolyCoefficient);
     test.testNewtonSolver(0.0015, 3.16227766517654, 3, 1000, false,
                           mPolyCoefficient);
     test.testNewtonWithExprtkPoly(0.0015, 3.16227766517654, 1.1, 1000, false,
@@ -52,8 +52,10 @@ int main(int argc, char* argv[]) {
 };
 
 void TestSuit::testAsssertion(const double tol, const double expected,
-                              double testNewton, std::string name) {
+                              std::vector<double> testNewton,
+                              std::string name) {
     if (isnan(testNewton)) { testErrorCode(name); }
+    if (isinf(testNewton)) { testErrorCode(name); }
     if (fabs(expected - testNewton) >= tol) { testErrorCode(name); }
 }
 
@@ -77,7 +79,7 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
                            const bool verbose,
                            std::string &eq) {
     Newton testNewton(eq, x0, tol, max, verbose);
-    double *newtonRealValue = new double;
+    std::vector<double> *newtonRealValue = new double;
     *newtonRealValue = testNewton.solve();
 
     testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));
