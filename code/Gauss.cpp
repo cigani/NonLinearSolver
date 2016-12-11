@@ -8,8 +8,8 @@
 #include "Gauss.h"
 
 void Gauss::GaussPartialPivoting(
-        std::__1::vector<std::__1::vector<double>> &jacobian,
-        std::__1::vector<double> &funcSolutions) {
+        std::vector<std::vector<double>> &jacobian,
+        std::vector<double> &funcSolutions) {
 
     int n = (int) funcSolutions.size();
     {
@@ -31,8 +31,8 @@ void Gauss::GaussPartialPivoting(
     }
 }
 
-void Gauss::Pivot(std::__1::vector<std::__1::vector<double>> &jacobian,
-                  std::__1::vector<double> &funcSolution, const int k,
+void Gauss::Pivot(std::vector<std::vector<double>> &jacobian,
+                  std::vector<double> &funcSolution, const int k,
                   const int n) {
     double max = fabs(jacobian[k][k]);
     int idx_max = k;
@@ -51,14 +51,14 @@ void Gauss::Pivot(std::__1::vector<std::__1::vector<double>> &jacobian,
     funcSolution[idx_max] = t;
 
     // Swap rows in matrix A
-    std::__1::vector<double> p = jacobian[k];
+    std::vector<double> p = jacobian[k];
     jacobian[k] = jacobian[idx_max];
     jacobian[idx_max] = p;
 }
 
 std::vector<double>
-Gauss::BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
-                     std::__1::vector<double> &funcSolution) {
+Gauss::BackwardSolve(std::vector<std::vector<double>> &jacobian,
+                     std::vector<double> &funcSolution) {
     std::vector<double> x(funcSolution.size());
     int n = (int) funcSolution.size();
     for (int i = n - 1; i >= 0; --i) {

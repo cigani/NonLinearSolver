@@ -24,23 +24,23 @@
 class EquationTools : public Equations {
 
     void
-    ExtractMinor(std::__1::vector<std::__1::vector<double>> &M, const int size,
+    ExtractMinor(std::vector<std::vector<double>> &M, const int size,
                  const int col,
-                 std::__1::vector<std::__1::vector<double>> &minor);
+                 std::vector<std::vector<double>> &minor);
 
 public:
-    std::__1::vector<std::__1::vector<double>> createMinor(unsigned long size);
+    std::vector<std::vector<double>> createMinor(unsigned long size);
 
     double
-    Determinant(std::__1::vector<std::__1::vector<double>> &M, const int size);
+    Determinant(std::vector<std::vector<double>> &M, const int size);
 
-    std::__1::vector<double>
-    subtractVectors(std::__1::vector<double> &v1,
-                    std::__1::vector<double> &v2);
+    std::vector<double>
+    subtractVectors(std::vector<double> &v1,
+                    std::vector<double> &v2);
 
-    std::__1::vector<double>
-    getSystemEquations(const std::__1::vector<std::__1::string> &eq,
-                       std::__1::vector<double> variableValues);
+    std::vector<double>
+    getSystemEquations(const std::vector<std::string> &eq,
+                       std::vector<double> variableValues);
 
 
     std::vector<double>

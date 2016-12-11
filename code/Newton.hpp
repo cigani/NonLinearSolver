@@ -69,7 +69,6 @@ public:
      */
     std::vector<double> solve();
 
-    std::vector<double> solveSystem();
 };
     
 #endif /* NEWTON_HPP_ */

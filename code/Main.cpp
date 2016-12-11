@@ -133,7 +133,9 @@ int main(int argc, char *argv[]) {
                       nMax,
                       verbose);
         std::vector<double> result = aitken.solve();
+        std::cout << std::endl << "RESULT" << std::endl;
         mPrint.printVec(result);
+        std::cout << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
         Bisection bisection(mVectorExpression,
@@ -144,7 +146,9 @@ int main(int argc, char *argv[]) {
                             lowerBound,
                             upperBound);
         std::vector<double> result = bisection.solve();
+        std::cout << std::endl << "RESULT" << std::endl;
         mPrint.printVec(result);
+        std::cout << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
         std::cout << std::endl << "CHORD METHOD" << std::endl;
         Chord chord(mVectorExpression,
@@ -153,7 +157,9 @@ int main(int argc, char *argv[]) {
                     nMax,
                     verbose);
         std::vector<double> result = chord.solve();
+        std::cout << std::endl << "RESULT" << std::endl;
         mPrint.printVec(result);
+        std::cout << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
         FixedPoint fixedPoint(mVectorExpression,
@@ -162,7 +168,9 @@ int main(int argc, char *argv[]) {
                               nMax,
                               verbose);
         std::vector<double> result = fixedPoint.solve();
+        std::cout << std::endl << "RESULT" << std::endl;
         mPrint.printVec(result);
+        std::cout << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
         mAssert(mDerivative.getEquation() != "0",
                 "ERROR: No mathematical expression provided");
@@ -174,7 +182,9 @@ int main(int argc, char *argv[]) {
                       nMax,
                       verbose);
         std::vector<double> result = newton.solve();
+        std::cout << std::endl << "RESULT" << std::endl;
         mPrint.printVec(result);
+        std::cout << std::endl;
     } else {
         std::cout << std::endl << "ERROR: No method provided" << std::endl;
         help.show_usage();

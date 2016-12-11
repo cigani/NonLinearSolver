@@ -16,10 +16,10 @@
  * @param col - Column that will act as scalar in Det
  * @param minor - Minor from @createMinor
  */
-void EquationTools::ExtractMinor(std::__1::vector<std::__1::vector<double>> &M,
+void EquationTools::ExtractMinor(std::vector<std::vector<double>> &M,
                                  const int size,
                                  const int col,
-                                 std::__1::vector<std::__1::vector<double>> &minor) {
+                                 std::vector<std::vector<double>> &minor) {
     for (int row = 1; row < size; ++row) {
         for (int k = 0; k < col; ++k) {
             minor[row - 1][k] = M[row][k];
@@ -35,10 +35,10 @@ void EquationTools::ExtractMinor(std::__1::vector<std::__1::vector<double>> &M,
  * @param size - of the Main Vector<Vector> - 1
  * @return A NxN vector<vector> of zeros
  */
-std::__1::vector<std::__1::vector<double>>
+std::vector<std::vector<double>>
 EquationTools::createMinor(unsigned long size) {
-    std::__1::vector<std::__1::vector<double>> minor(size,
-                                                     std::__1::vector<double>(
+    std::vector<std::vector<double>> minor(size,
+                                                     std::vector<double>(
                                                              size));
     return minor;
 }
@@ -51,7 +51,7 @@ EquationTools::createMinor(unsigned long size) {
  * @return The determinant
  */
 double
-EquationTools::Determinant(std::__1::vector<std::__1::vector<double>> &M,
+EquationTools::Determinant(std::vector<std::vector<double>> &M,
                            const int size) {
 
     //TODO: special case for 3x3 matrix. Speeds it up
@@ -61,47 +61,49 @@ EquationTools::Determinant(std::__1::vector<std::__1::vector<double>> &M,
     } else {
         double det = 0;
         for (int col = 0; col < size; ++col) {
-            std::__1::vector<std::__1::vector<double>> minor = createMinor(
+            std::vector<std::vector<double>> minor = createMinor(
                     (unsigned long) size);
             ExtractMinor(M, size, col, minor);
-            det += M[0][col] * std::__1::pow(-1.0, col)
+            det += M[0][col] * std::pow(-1.0, col)
                    * Determinant(minor, size - 1);
         }
         return det;
     }
 }
 
-std::__1::vector<double> EquationTools::subtractVectors(
-        std::__1::vector<double> &v1, std::__1::vector<double> &v2) {
-    std::__1::vector<double> result;
+std::vector<double> EquationTools::subtractVectors(
+        std::vector<double> &v1, std::vector<double> &v2) {
+    std::vector<double> result;
     transform(v1.begin(), v1.end(), v2.begin(),
               back_inserter(result),
               [](double v1, double v2) { return (v1 - v2); });
     return result;
 }
 
-std::__1::vector<double> EquationTools::addVectors(
-        std::__1::vector<double> &v1, std::__1::vector<double> &v2) {
-    std::__1::vector<double> result;
+std::vector<double> EquationTools::addVectors(
+        std::vector<double> &v1, std::vector<double> &v2) {
+    std::vector<double> result;
     transform(v1.begin(), v1.end(), v2.begin(),
               back_inserter(result),
               [](double v1, double v2) { return (v1 + v2); });
     return result;
 }
 
-std::__1::vector<double> EquationTools::negateVector(
-        std::__1::vector<double> &v1) {
-    std::__1::vector<double> result;
+std::vector<double> EquationTools::negateVector(
+        std::vector<double> &v1) {
+    std::vector<double> result;
     transform(v1.begin(), v1.end(), back_inserter(result),
-              [](double v1) { return (-v1); });
+              [](double v1) {
+                  return (-v1);
+              });
     return result;
 }
 
-std::__1::vector<double>
-EquationTools::getSystemEquations(const std::__1::vector<std::__1::string> &eq,
-                                  std::__1::vector<double> variableValues) {
-    std::__1::vector<double> systemReturns;
-    for (std::__1::string equations : eq) {
+std::vector<double>
+EquationTools::getSystemEquations(const std::vector<std::string> &eq,
+                                  std::vector<double> variableValues) {
+    std::vector<double> systemReturns;
+    for (std::string equations : eq) {
         systemReturns.push_back(getEquations(equations, variableValues));
     }
     return systemReturns;

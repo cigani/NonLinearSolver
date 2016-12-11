@@ -56,7 +56,7 @@ std::vector<double> Aitken::solve() {
         printVerbose(0, x0.at(0));
 	}
 
-	x1 = singleEq.evaluate(x0);
+	x1 = singleEq.evaluate(singleValue);
 
 	if (verbose) {
 		printVerbose(1,x1);
@@ -73,7 +73,7 @@ std::vector<double> Aitken::solve() {
         x2 = singleEq.evaluate(x1);
         phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + singleValue);
 		if (verbose) {
-			printVerbose(i,x2);
+			printVerbose(i, phat);
 		}
 		if ( fabs(phatold - phat) < tol ) {
             returnVec.push_back(phat);

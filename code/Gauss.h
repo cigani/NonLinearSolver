@@ -26,16 +26,16 @@ class Gauss : public Equations {
 
 public:
     void
-    GaussPartialPivoting(std::__1::vector<std::__1::vector<double>> &jacobian,
-                         std::__1::vector<double> &funcSolutions);
+    GaussPartialPivoting(std::vector<std::vector<double>> &jacobian,
+                         std::vector<double> &funcSolutions);
 
-    void Pivot(std::__1::vector<std::__1::vector<double>> &jacobian,
-               std::__1::vector<double> &funcSolution, const int k,
+    void Pivot(std::vector<std::vector<double>> &jacobian,
+               std::vector<double> &funcSolution, const int k,
                const int n);
 
     std::vector<double>
-    BackwardSolve(std::__1::vector<std::__1::vector<double>> &jacobian,
-                  std::__1::vector<double> &funcSolution);
+    BackwardSolve(std::vector<std::vector<double>> &jacobian,
+                  std::vector<double> &funcSolution);
 };
 
 
