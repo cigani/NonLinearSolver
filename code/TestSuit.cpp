@@ -21,6 +21,7 @@ int main(int argc, char* argv[]) {
     std::string mExpCoefficient = "exp(x) - 100";
     std::string mNoDerivative = "10";
 
+    // Derivatives
     std::string mPolyDer = "2x";
     std::string mZeroDer = "2x - 3x^2 -6x^5 + 7x^6 + 22*3x^2 -33*6x^5";
     std::string mLogDer = "1/x";
@@ -28,13 +29,14 @@ int main(int argc, char* argv[]) {
     std::string mExpDer = "exp(x)";
     std::string mNoDer = "0.0";
 
+    // Equation Vector
     std::vector<std::string> equations{mPolyCoefficient, mZeroDerivativeCheck,
                                        mLogCoefficient, mTrigCoefficient,
                                        mExpCoefficient, mNoDerivative};
 
+    // Derivative Vector
     std::vector<std::string> derivatives{mPolyDer, mZeroDer, mLogDer, mTrigDer,
                                          mExpDer, mNoDer};
-
 
 
 
@@ -225,10 +227,12 @@ void TestSuit::testExprtkJacobian() {
     testEquation = mEquations.exprtkJacobian(equations, val1, var);
 }
 
-void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
-                                    std::vector<std::vector<double>> &returns,
-                                    std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
-                                    std::vector<double>::const_iterator &returns_iterator2) {
+void TestSuit::iterateNestedVectors(
+        const std::vector<double> &assertResults,
+        std::vector<std::vector<double>> &returns,
+        std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
+        std::vector<double>::const_iterator &returns_iterator2) {
+
     int n = 0;
     for (returns_iterator = returns.begin(); returns_iterator != returns.end();
          ++returns_iterator) {
