@@ -49,7 +49,17 @@ double Expression::evaluate(double &value) {
     return expression.value();
 }
 
-double Expression::evaluate(std::vector<double> &value) {
+std::vector<double> Expression::evaluate(std::vector<double> &value) {
+    std::string mEquation;
+    std::vector<double> mReturns;
+    for (mEquation : equations) {
+        mReturns.push_back(privateEvaluate(mEquation, value));
+    }
+    return mReturns;
+}
+
+double
+Expression::privateEvaluate(std::string &eq, std::vector<double> &value) {
     symbol_table_t symbol_table;
 
     /* Use .at here to make use of the bounds check vectors come with
@@ -73,12 +83,12 @@ double Expression::evaluate(std::vector<double> &value) {
     expression.register_symbol_table(symbol_table);
 
     parser_t parser;
-    parser.compile(equation, expression);
+    parser.compile(eq, expression);
 
-//    if (!parser.compile(equation, expression)) {
-//        logErrors(expr_string, parser);
-//        return __nan();
-//    }
+    if (!parser.compile(eq, expression)) {
+        mEqControl.logErrors(eq, parser);
+        return __nan();
+    }
 
     return expression.value();
 }

@@ -17,6 +17,7 @@
 #include <cmath>
 #include <vector>
 #include "exprtk.hpp"
+#include "EquationsControl.h"
 
 class Expression {
 private:
@@ -24,6 +25,7 @@ private:
     /// A standard string representing mathematical expressions.
     std::string equation;
     std::vector<std::string> equations;
+    EquationsControl mEqControl;
     /// A symbolic table containing the variables.
     typedef exprtk::symbol_table<double> symbol_table_t;
 
@@ -74,8 +76,11 @@ public:
      *
      * \param value A value to evaluate the expression.
      */
-    double evaluate(std::vector<double> &value);
+    std::vector<double> evaluate(std::vector<double> &value);
 
+    double privateEvaluate(std::vector<double> &value);
+
+    double privateEvaluate(std::string &eq, std::vector<double> &value);
 };
 
 #endif /* EXPRESSION_HPP_ */
