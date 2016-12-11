@@ -17,36 +17,36 @@
 
 class TestSuit {
 public:
-    void testChordSolver(const double tol, const double expected,
-                         const int x0, const int max, const bool verbose,
-                         std::string &eq);
+    void testChordSolver(const double tol, const double expected, const int x0,
+                         const int max, const bool verbose, std::string &eq);
 
     void testNewtonSolver(const double tol, const double expected,
-                          const double x0, const int max, const bool verbose,
-                          std::string &eq);
+                          const double x0,
+                          const int max, const bool verbose, std::string &eq,
+                          std::string &der);
 
     void testFixedPointSolver();
 
     void testNewtonWithExprtkPoly(const double tol, const double expected,
                                   const double x0, const int max,
-                                  const bool verbose,
-                                  std::string &eq);
+                                  const bool verbose, std::string &eq,
+                                  std::string &der);
 
     void testNewtonWithExprtTrig(const double tol, const double expected,
                                  const double x0, const int max,
-                                 const bool verbose,
-                                 std::string &eq);
+                                 const bool verbose, std::string &eq,
+                                 std::string &der);
 
     void testNewtonWithExprtExp(const double tol, const double expected,
                                 const double x0, const int max,
                                 const bool verbose,
-                                std::string &eq);
+                                std::string &eq, std::string &der);
 
 
     void testNewtonWithExprtkLog(const double tol, const double expected,
                                  const double x0, const int max,
-                                 const bool verbose,
-                                 std::string &eq);
+                                 const bool verbose, std::string &eq,
+                                 std::string &der);
 
     void testExprtkJacobian();
 
@@ -67,7 +67,7 @@ public:
 
     void testSubtract();
 
-    std::vector<std::string> adaptor(std::string &eq);
+    std::vector<Expression> adaptor(std::string &eq);
 
     std::vector<double> adaptor(double val);
 

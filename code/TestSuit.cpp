@@ -18,43 +18,64 @@ int main(int argc, char* argv[]) {
     std::string mZeroDerivativeCheck = "x^2 - x^3 -x^6 +x^7 +22x^3 -33x^6 +20";
     std::string mLogCoefficient = "log(x) - 10";
     std::string mTrigCoefficient = "cos(2*pi*x) + sin(2*pi*x)";
-    std::string mExpCoefficient = "exp(x) - exp(-3x) + exp(9x)";
+    std::string mExpCoefficient = "exp(x) - 100";
     std::string mNoDerivative = "10";
 
-    std::vector<std::string> equations;
-    equations.push_back(mPolyCoefficient);
-    equations.push_back(mZeroDerivativeCheck);
-    equations.push_back(mLogCoefficient);
-    equations.push_back(mTrigCoefficient);
-    equations.push_back(mExpCoefficient);
-    equations.push_back(mNoDerivative);
+    std::string mPolyDer = "2x";
+    std::string mZeroDer = "2x - 3x^2 -6x^5 + 7x^6 + 22*3x^2 -33*6x^5";
+    std::string mLogDer = "1/x";
+    std::string mTrigDer = "2*pi(cos(2*pi*x) - sin(2*pi*x))";
+    std::string mExpDer = "exp(x)";
+    std::string mNoDer = "0.0";
+
+    std::vector<std::string> equations{mPolyCoefficient, mZeroDerivativeCheck,
+                                       mLogCoefficient, mTrigCoefficient,
+                                       mExpCoefficient, mNoDerivative};
+
+    std::vector<std::string> derivatives{mPolyDer, mZeroDer, mLogDer, mTrigDer,
+                                         mExpDer, mNoDer};
+
+
+
+
+
 
     // Vectors
     const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
     const std::vector<double> mNeverDerivative{10};
-    const std::vector<double> mAnswerVector{3.16227766517654, 3.16227766517654,
+    const std::vector<double> mAnswerVector{3.16227766517654, 1.05686,
                                             22026.4657948162, 0.8749999979997,
-                                            -0.095561, -0.807004,};
-
+                                            4.6052, -0.807004,};
+//
+//    for(int i = 0; i<5; i++){
+//        std::cout<< equations[i] << "\n";
+//        std::cout<< derivatives[i] << "\n";
+//        std::cout<< mAnswerVector[i] << "\n";
+//
+//    }
 
     // Tests
     test.testChordSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
                          equations.at(0));
-//    test.testNewtonSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
-//                          equations.at(0));
-//    test.testNewtonWithExprtkPoly(0.0015, mAnswerVector.at(1), 1.1, 1000,
-//                                  false,
-//                                  equations.at(0));
-//    test.testNewtonWithExprtkLog(0.0015, mAnswerVector.at(2), 10.0, 1000,
-//                                 false,
-//                                 equations.at(2));
-//    test.testNewtonWithExprtTrig(0.0015, mAnswerVector.at(3), 1, 1000, false,
-//                                 equations.at(3));
-//    test.testNewtonWithExprtExp(0.0015, mAnswerVector.at(4), 0.1, 1000, false,
-//                                equations.at(4));
+
+    test.testNewtonSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
+                          equations.at(0), derivatives.at(0));
+
+    test.testNewtonWithExprtkPoly(0.0015, mAnswerVector.at(1), 1.1, 1000,
+                                  false, equations.at(1), derivatives.at(1));
+
+    test.testNewtonWithExprtkLog(0.0015, mAnswerVector.at(2), 10.0, 1000,
+                                 false, equations.at(2), derivatives.at(2));
+
+    test.testNewtonWithExprtTrig(0.0015, mAnswerVector.at(3), 1, 1000, false,
+                                 equations.at(3), derivatives.at(3));
+
+    test.testNewtonWithExprtExp(0.0015, mAnswerVector.at(4), 0, 1000, false,
+                                equations.at(4), derivatives.at(4));
+
 //    test.testNewtonWithExprtkPoly(0.00015, mAnswerVector.at(5), 0.0, 1000,
-//                                  false,
-//                                  equations.at(1));
+//                                  false, equations.at(5), derivatives.at(5));
+
     test.testExprtkJacobian();
     test.testDeterm();
     test.testSubtract();
@@ -78,8 +99,8 @@ void TestSuit::testAsssertion(const double tol, const double expected,
 void TestSuit::testAsssertion(const double tol, const double expected,
                               std::vector<double> testNewton,
                               std::string name) {
-    double test = testNewton.at(0);
 
+    double test = testNewton.at(0);
     if (isnan(test)) { testErrorCode(name); }
     if (isinf(test)) { testErrorCode(name); }
     if (fabs(expected - test) >= tol) { testErrorCode(name); }
@@ -87,10 +108,10 @@ void TestSuit::testAsssertion(const double tol, const double expected,
 
 void
 TestSuit::testChordSolver(const double tol, const double expected,
-                          const int x0, const int max, const bool verbose,
-                          std::string &eq) {
+                          const int x0,
+                          const int max, const bool verbose, std::string &eq) {
 
-    std::vector<std::string> equation = adaptor(eq);
+    std::vector<Expression> equation = adaptor(eq);
     std::vector<double> value = adaptor(x0);
     Chord testChord(equation, value, tol, max, verbose);
     std::vector<double> *chordRealValue = new std::vector<double>;
@@ -103,12 +124,13 @@ TestSuit::testChordSolver(const double tol, const double expected,
 
 void
 TestSuit::testNewtonSolver(const double tol, const double expected,
-                           const double x0, const int max,
-                           const bool verbose,
-                           std::string &eq) {
-    std::vector<std::string> equation = adaptor(eq);
+                           const double x0,
+                           const int max, const bool verbose, std::string &eq,
+                           std::string &der) {
+    std::vector<Expression> equation = adaptor(eq);
+    std::vector<Expression> derivative = adaptor(der);
     std::vector<double> value = adaptor(x0);
-    Newton testNewton(equation, value, tol, max, verbose);
+    Newton testNewton(equation, derivative, value, tol, max, verbose);
     std::vector<double> *newtonRealValue = new std::vector<double>;
     *newtonRealValue = testNewton.solve();
 
@@ -120,26 +142,28 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
 void
 TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
                                    const double x0, const int max,
-                                   const bool verbose,
-                                   std::string &eq) {
-    std::vector<std::string> equation = adaptor(eq);
+                                   const bool verbose, std::string &eq,
+                                   std::string &der) {
+    std::vector<Expression> equation = adaptor(eq);
+    std::vector<Expression> derivative = adaptor(der);
     std::vector<double> value = adaptor(x0);
     std::vector<double> testNewton;
-    Newton mNewton(equation, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
-    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkPoly"));
+    testAsssertion(tol, expected, testNewton, eq);
 }
 
 void
 TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
                                   const double x0, const int max,
-                                  const bool verbose,
-                                  std::string &eq) {
+                                  const bool verbose, std::string &eq,
+                                  std::string &der) {
     std::vector<double> testNewton;
-    std::vector<std::string> equation = adaptor(eq);
+    std::vector<Expression> derivative = adaptor(der);
+    std::vector<Expression> equation = adaptor(eq);
     std::vector<double> value = adaptor(x0);
-    Newton mNewton(equation, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkLog"));
@@ -148,12 +172,13 @@ TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
 void
 TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
                                   const double x0, const int max,
-                                  const bool verbose,
-                                  std::string &eq) {
+                                  const bool verbose, std::string &eq,
+                                  std::string &der) {
     std::vector<double> testNewton;
-    std::vector<std::string> equation = adaptor(eq);
+    std::vector<Expression> equation = adaptor(eq);
+    std::vector<Expression> derivative = adaptor(der);
     std::vector<double> value = adaptor(x0);
-    Newton mNewton(equation, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkTrig"));
@@ -164,11 +189,12 @@ void
 TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
                                  const double x0, const int max,
                                  const bool verbose,
-                                 std::string &eq) {
+                                 std::string &eq, std::string &der) {
     std::vector<double> testNewton;
-    std::vector<std::string> equation = adaptor(eq);
+    std::vector<Expression> equation = adaptor(eq);
+    std::vector<Expression> derivative = adaptor(der);
     std::vector<double> value = adaptor(x0);
-    Newton mNewton(equation, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkExp"));
@@ -259,9 +285,10 @@ void TestSuit::testSubtract() {
     }
 }
 
-std::vector<std::string> TestSuit::adaptor(std::string &eq) {
-    std::vector<std::string> equation;
-    equation.push_back(eq);
+std::vector<Expression> TestSuit::adaptor(std::string &eq) {
+    std::vector<Expression> equation;
+    Expression mEquation = eq;
+    equation.push_back(mEquation);
     return equation;
 }
 
