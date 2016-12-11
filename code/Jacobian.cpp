@@ -45,17 +45,9 @@ void Jacobian::getJacobianMatrix(const std::__1::vector<std::__1::string> &eq,
 }
 
 std::vector<std::vector<double>>
-Jacobian::getJacobianNewton(std::vector<Expression> &eq,
+Jacobian::getJacobianNewton(ExpressionSystem &eq,
                             std::vector<double> vals) {
-    std::vector<std::vector<double>> Jacobian;
-    std::vector<double> mJacobian;
-    Expression mExpression;
-    for (mExpression : eq) {
-        mJacobian.push_back(mExpression.evaluate(vals));
-        Jacobian.push_back(mJacobian);
-        mJacobian.clear();
-    }
-    return Jacobian;
+    return eq.evaluate(vals);
 }
 
 

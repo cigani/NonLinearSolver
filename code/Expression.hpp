@@ -25,7 +25,6 @@ private:
     /// A standard string representing mathematical expressions.
     std::string equation;
     std::vector<std::string> equations;
-    EquationsControl mEqControl;
 
     /// A symbolic table containing the variables.
     typedef exprtk::symbol_table<double> symbol_table_t;
@@ -55,11 +54,11 @@ public:
 
     virtual ~Expression() {}
 
-    /*! A method to set a mathematical expression as a string to this object.
+    virtual /*! A method to set a mathematical expression as a string to this object.
      *
      * \param eq A string that contains the mathematical expression for the class to evaluate.
      */
-    void setEquation(const std::string &eq);
+    void setEquation(const std::string &eq)= 0;
 
     /*! A method to set a mathematical expression as a string to this object.
      *
@@ -73,13 +72,6 @@ public:
      */
     double evaluate(double &value);
 
-    /*! A method to evaluate the mathematical expression in this class.
-     *
-     * \param value A value to evaluate the expression.
-     */
-    std::vector<double> evaluate(std::vector<double> &value);
-
-    double privateEvaluate(std::string &eq, std::vector<double> &value);
 
 
 };
