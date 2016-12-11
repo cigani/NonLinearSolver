@@ -35,6 +35,10 @@ std::string Expression::getEquation(){
     return equation;
 }
 
+std::vector<std::string> Expression::getEquation() {
+    return equations;
+}
+
 double Expression::evaluate(double &value) {
     symbol_table_t symbol_table;
     symbol_table.add_variable("x", value);

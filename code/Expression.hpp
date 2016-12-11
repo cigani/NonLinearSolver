@@ -26,6 +26,7 @@ private:
     std::string equation;
     std::vector<std::string> equations;
     EquationsControl mEqControl;
+
     /// A symbolic table containing the variables.
     typedef exprtk::symbol_table<double> symbol_table_t;
 
@@ -52,7 +53,7 @@ public:
 
     Expression(const std::vector<std::string> &eq);
 
-    virtual ~Expression();
+    virtual ~Expression() {}
 
     /*! A method to set a mathematical expression as a string to this object.
      *
@@ -78,9 +79,9 @@ public:
      */
     std::vector<double> evaluate(std::vector<double> &value);
 
-    double privateEvaluate(std::vector<double> &value);
-
     double privateEvaluate(std::string &eq, std::vector<double> &value);
+
+
 };
 
 #endif /* EXPRESSION_HPP_ */
