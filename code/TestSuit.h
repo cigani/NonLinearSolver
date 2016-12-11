@@ -73,6 +73,11 @@ public:
 
     void testAsssertion(const double tol, const double expected,
                         std::vector<double> testNewton, std::string name);
+
+    void testBisectionWithExprtExp(const double tol, const double expected,
+                                   const double x0, const int max,
+                                   const bool verbose, std::string &eq);
+
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

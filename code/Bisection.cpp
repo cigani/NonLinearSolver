@@ -32,7 +32,6 @@
  */
 
 #include "Bisection.hpp"
-#include "Equations.hpp"
 
 Bisection::~Bisection() {}
 
@@ -62,7 +61,7 @@ Bisection::Bisection(const std::vector<Expression> &equation,
 }
 
 std::vector<double> Bisection::solve() {
-    double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint, error_est;
+    double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint = 0, error_est;
     int i;
     std::vector<double> returnVec;
     Expression singleEq = eq.at(0);
