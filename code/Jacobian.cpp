@@ -53,6 +53,7 @@ Jacobian::getJacobianNewton(std::vector<Expression> &eq,
     for (mExpression : eq) {
         mJacobian.push_back(mExpression.evaluate(vals));
         Jacobian.push_back(mJacobian);
+        mJacobian.clear();
     }
     return Jacobian;
 }
