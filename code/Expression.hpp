@@ -20,9 +20,10 @@
 
 class Expression {
 private:
+
     /// A standard string representing mathematical expressions.
     std::string equation;
-
+    std::vector<std::string> equations;
     /// A symbolic table containing the variables.
     typedef exprtk::symbol_table<double> symbol_table_t;
 
@@ -46,6 +47,8 @@ public:
      * \param verbosity Set to true to print all intermediate and final results onto the console.
      */
     Expression(const std::string &eq);
+
+    Expression(const std::vector<std::string> &eq);
 
     virtual ~Expression();
 

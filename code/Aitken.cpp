@@ -29,7 +29,6 @@
  */
 
 #include "Aitken.hpp"
-#include "Equations.hpp"
 
 Aitken::Aitken(std::vector<Expression> &equation,
                std::vector<double> initial,
@@ -47,7 +46,7 @@ std::vector<double> Aitken::solve() {
     Expression singleEq = eq.at(0);
 
     double singleValue = x0.at(0);
-    double x1, x2, phat, phatold;
+    double x1, x2, phat = 0, phatold;
     int i;
 
     phatold = singleValue;

@@ -20,7 +20,12 @@ Expression::Expression(const std::string &eq) {
     equation = eq;
 }
 
-Expression::~Expression() {}
+Expression::Expression(const std::vector<std::string> &eq) {
+    std::string mEquation;
+    for (mEquation : eq) {
+        equations.push_back(mEquation);
+    }
+}
 
 void Expression::setEquation(const std::string &eq){
     equation = eq;
