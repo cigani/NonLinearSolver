@@ -14,6 +14,7 @@
 
 
 #include "Equations.hpp"
+#include "Expression.hpp"
 
 class Jacobian : public Equations {
 
@@ -28,6 +29,11 @@ public:
     getJacobianMatrix(const std::vector<std::string> &eq,
                       std::vector<double> vals,
                       std::vector<std::vector<double>> &JM);
+
+    std::vector<std::vector<double>>
+    getJacobianNewton(std::vector<Expression> &eq, std::vector<double> vals);
+
+
 };
 
 

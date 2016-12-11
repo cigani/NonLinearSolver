@@ -8,6 +8,7 @@
 #include "Jacobian.h"
 #include "EquationTools.h"
 #include "Bisection.hpp"
+#include "Aitken.hpp"
 
 std::vector<std::string> mErrors;
 
@@ -76,8 +77,12 @@ int main(int argc, char* argv[]) {
     test.testNewtonWithExprtExp(0.0015, mAnswerVector.at(4), 0, 1000, false,
                                 equations.at(4), derivatives.at(4));
 
-    test.testBisectionWithExprtExp(0.0015, mAnswerVector.at(0), 3, 1000, false,
-                                   equations.at(0));
+    test.testBisectionWithExprtPoly(0.0015, mAnswerVector.at(0), 3, 1000,
+                                    false,
+                                    equations.at(0));
+
+    test.testAitkenWithExprtPoly(0.0015, 1.0, 99, 1000, false,
+                                 equations.at(3));
 
 //    test.testNewtonWithExprtkPoly(0.00015, mAnswerVector.at(5), 0.0, 1000,
 //                                  false, equations.at(5), derivatives.at(5));
@@ -207,19 +212,30 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
 }
 
 void
-TestSuit::testBisectionWithExprtExp(const double tol, const double expected,
-                                    const double x0, const int max,
-                                    const bool verbose, std::string &eq) {
+TestSuit::testBisectionWithExprtPoly(const double tol, const double expected,
+                                     const double x0, const int max,
+                                     const bool verbose, std::string &eq) {
     std::vector<double> testBisection;
     std::vector<Expression> equation = adaptor(eq);
     std::vector<double> value = adaptor(x0);
-    std::cout << "Bsection" << "\n";
-    Bisection mBisection(equation, value, tol, max, verbose, -100, 100);
+    Bisection mBisection(equation, value, tol, max, verbose, 0, 100);
     testBisection = mBisection.solve();
 
     testAsssertion(tol, expected, testBisection, std::string("Bisection"));
 }
 
+
+void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
+                                       const double x0, const int max,
+                                       const bool verbose, std::string &eq) {
+    std::vector<double> testAitken;
+    std::vector<Expression> equation = adaptor(eq);
+    std::vector<double> value = adaptor(x0);
+    Aitken mAitken(equation, value, tol, max, verbose);
+    testAitken = mAitken.solve();
+
+    testAsssertion(tol, expected, testAitken, std::string("Aitken"));
+}
 
 void TestSuit::testExprtkJacobian() {
     std::vector<std::string> equations;
