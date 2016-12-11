@@ -26,6 +26,8 @@ public:
     std::vector<std::vector<std::string>> getSystem();
     void print();
     std::string getEquation(int i, int j);
+    int getRows();
+    int getColumns();
 };
 
 

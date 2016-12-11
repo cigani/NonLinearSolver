@@ -54,3 +54,11 @@ void FileReader::print() {
         std::cout << std::endl;
     }
 }
+
+int FileReader::getRows() {
+    return rows;
+}
+
+int FileReader::getColumns() {
+    return columns;
+}

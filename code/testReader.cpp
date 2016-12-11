@@ -3,7 +3,7 @@
 #include <cmath>
 #include <vector>
 #include "string.hpp"
-#include "FileReader.hpp"
+#include "ExpressionSystem.hpp"
 
 int main(int argc, char *argv[]) {
 
@@ -11,8 +11,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    FileReader functions(argv[1]);
-    FileReader jacobian(argv[2]);
+    ExpressionSystem functions(argv[1]);
+    ExpressionSystem jacobian(argv[2]);
 
     std::cout << "F(x)" << std::endl;
     functions.print();
@@ -23,9 +23,9 @@ int main(int argc, char *argv[]) {
 
     std::cout << std::endl;
     std::cout << "F(x) at (0,0)" << std::endl;
-    std::cout << functions.getEquation(0,0) << std::endl;
+    std::cout << functions.getEquation(0,0).getEquation() << std::endl;
     std::cout << "F(x) at (1,0)" << std::endl;
-    std::cout << functions.getEquation(1,0) << std::endl;
+    std::cout << functions.getEquation(1,0).getEquation() << std::endl;
 
     return 0;
 }

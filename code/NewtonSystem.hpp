@@ -11,17 +11,17 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
-#include "NonlinearSolver.hpp"
-#include "Equations.hpp"
+#include "NonlinearSystemsSolver.hpp"
+#include "ExpressionSystem.hpp"
 
-class NewtonSystem : public NonlinearSolver {
+class NewtonSystem : public NonlinearSystemsSolver {
 private:
-    std::vector<std::vector<Expression>> jac;
+    ExpressionSystem jac;
     int m;
 
 public:
-    NewtonSystem(const std::vector<Expression> &equation,
-                 const std::vector<std::vector<Expression>> &derivative,
+    NewtonSystem(ExpressionSystem &equation,
+                 ExpressionSystem &derivative,
                  std::vector<double> initial,
                  double tolerance,
                  int maxIter,
