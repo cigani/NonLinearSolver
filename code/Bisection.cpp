@@ -41,7 +41,7 @@ Bisection::Bisection(const std::vector<Expression> &equation,
                      double tolerance,
                      int maxIter,
                      bool verbosity)
-        : NonlinearSolver(eq, initial, tolerance, maxIter, verbosity)
+        : NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
 {
 	a = -1;
 	b = 1;
@@ -54,7 +54,7 @@ Bisection::Bisection(const std::vector<Expression> &equation,
                      bool verbosity,
                      double lowerBound,
                      double upperBound)
-        : NonlinearSolver(eq, initial, tolerance, maxIter, verbosity)
+        : NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
 {
 	a = lowerBound;
 	b = upperBound;
