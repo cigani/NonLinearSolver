@@ -9,6 +9,8 @@ ExpressionSystem::ExpressionSystem(std::string input) {
     read();
 }
 
+ExpressionSystem::ExpressionSystem() {}
+
 ExpressionSystem::~ExpressionSystem() {};
 
 void ExpressionSystem::read() {
@@ -54,20 +56,8 @@ void ExpressionSystem::print() {
     };
 }
 
-//std::vector<std::vector<double>> ExpressionSystem::evaluate(double &value) {
-//    std::vector<std::vector<double>> results(rows, std::vector<double>(columns));
-//    for (int row = 0; row < rows; ++row) {
-//        for (int col = 0; col < columns; ++col) {
-//            results[row][col] = system[row][col].evaluate(value);
-//        }
-//    }
-//    return results;
-//}
-
 std::vector<std::vector<double>> ExpressionSystem::evaluate(std::vector<double> &value) {
     std::vector<std::vector<double>> results(rows, std::vector<double>(columns));
-    //std::vector<std::vector<Expression>>::iterator row;
-    //std::vector<Expression>::iterator col;
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < columns; ++col) {
              results[row][col] = system[row][col].evaluate(value[col]);

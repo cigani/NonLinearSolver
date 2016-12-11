@@ -19,6 +19,7 @@ private:
 
 public:
     ExpressionSystem(std::string input);
+    ExpressionSystem();
     virtual ~ExpressionSystem();
 
     std::vector<std::vector<Expression>> getSystem();
