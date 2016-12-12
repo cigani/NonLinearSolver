@@ -67,9 +67,9 @@ public:
 
     void testSubtract();
 
-    std::vector<Expression> adaptor(std::string &eq);
+    Expression adaptor(std::string &eq);
 
-    std::vector<double> adaptor(double val);
+    double adaptor(double val);
 
     void testAsssertion(const double tol, const double expected,
                         std::vector<double> testNewton, std::string name);

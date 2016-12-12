@@ -122,10 +122,10 @@ TestSuit::testChordSolver(const double tol, const double expected,
                           const int x0,
                           const int max, const bool verbose, std::string &eq) {
 
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<double> value = adaptor(x0);
+    Expression equation = adaptor(eq);
+    double value = adaptor(x0);
     Chord testChord(equation, value, tol, max, verbose);
-    std::vector<double> *chordRealValue = new std::vector<double>;
+    double *chordRealValue = new double;
     *chordRealValue = testChord.solve();
     testAsssertion(tol, expected, *chordRealValue, std::string("Chord"));
 
@@ -138,11 +138,11 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
                            const double x0,
                            const int max, const bool verbose, std::string &eq,
                            std::string &der) {
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<Expression> derivative = adaptor(der);
-    std::vector<double> value = adaptor(x0);
+    Expression equation = adaptor(eq);
+    Expression derivative = adaptor(der);
+    double value = adaptor(x0);
     Newton testNewton(equation, derivative, value, tol, max, verbose);
-    std::vector<double> *newtonRealValue = new std::vector<double>;
+    double *newtonRealValue = new double;
     *newtonRealValue = testNewton.solve();
 
     testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));
@@ -155,10 +155,10 @@ TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
                                    const double x0, const int max,
                                    const bool verbose, std::string &eq,
                                    std::string &der) {
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<Expression> derivative = adaptor(der);
-    std::vector<double> value = adaptor(x0);
-    std::vector<double> testNewton;
+    Expression equation = adaptor(eq);
+    Expression derivative = adaptor(der);
+    double value = adaptor(x0);
+    double testNewton;
     Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
@@ -170,10 +170,10 @@ TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
                                   const double x0, const int max,
                                   const bool verbose, std::string &eq,
                                   std::string &der) {
-    std::vector<double> testNewton;
-    std::vector<Expression> derivative = adaptor(der);
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<double> value = adaptor(x0);
+    double testNewton;
+    Expression derivative = adaptor(der);
+    Expression equation = adaptor(eq);
+    double value = adaptor(x0);
     Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
@@ -185,10 +185,10 @@ TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
                                   const double x0, const int max,
                                   const bool verbose, std::string &eq,
                                   std::string &der) {
-    std::vector<double> testNewton;
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<Expression> derivative = adaptor(der);
-    std::vector<double> value = adaptor(x0);
+    double testNewton;
+    Expression equation = adaptor(eq);
+    Expression derivative = adaptor(der);
+    double value = adaptor(x0);
     Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
@@ -201,10 +201,10 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
                                  const double x0, const int max,
                                  const bool verbose,
                                  std::string &eq, std::string &der) {
-    std::vector<double> testNewton;
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<Expression> derivative = adaptor(der);
-    std::vector<double> value = adaptor(x0);
+    double testNewton;
+    Expression equation = adaptor(eq);
+    Expression derivative = adaptor(der);
+    double value = adaptor(x0);
     Newton mNewton(equation, derivative, value, tol, max, verbose);
     testNewton = mNewton.solve();
 
@@ -215,9 +215,9 @@ void
 TestSuit::testBisectionWithExprtPoly(const double tol, const double expected,
                                      const double x0, const int max,
                                      const bool verbose, std::string &eq) {
-    std::vector<double> testBisection;
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<double> value = adaptor(x0);
+    double testBisection;
+    Expression equation = adaptor(eq);
+    double value = adaptor(x0);
     Bisection mBisection(equation, value, tol, max, verbose, 0, 100);
     testBisection = mBisection.solve();
 
@@ -228,9 +228,9 @@ TestSuit::testBisectionWithExprtPoly(const double tol, const double expected,
 void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
                                        const double x0, const int max,
                                        const bool verbose, std::string &eq) {
-    std::vector<double> testAitken;
-    std::vector<Expression> equation = adaptor(eq);
-    std::vector<double> value = adaptor(x0);
+    double testAitken;
+    Expression equation = adaptor(eq);
+    double value = adaptor(x0);
     Aitken mAitken(equation, value, tol, max, verbose);
     testAitken = mAitken.solve();
 
@@ -324,16 +324,17 @@ void TestSuit::testSubtract() {
     }
 }
 
-std::vector<Expression> TestSuit::adaptor(std::string &eq) {
-    std::vector<Expression> equation;
+Expression TestSuit::adaptor(std::string &eq) {
+    //std::vector<Expression> equation;
     Expression mEquation = eq;
-    equation.push_back(mEquation);
-    return equation;
+    //equation.push_back(mEquation);
+    return mEquation;
 }
 
-std::vector<double> TestSuit::adaptor(double val) {
-    std::vector<double> values;
-    values.push_back(val);
+double TestSuit::adaptor(double val) {
+    //std::vector<double> values;
+    //values.push_back(val);
+    double values = val;
     return values;
 }
 
