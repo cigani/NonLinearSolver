@@ -55,10 +55,6 @@ int main(int argc, char *argv[]) {
     bool verbose = false;
     double lowerBound = -1.0;
     double upperBound = 1.0;
-    std::vector<Expression> mVectorExpression;
-    std::vector<Expression> mVectorDerivative;
-    std::vector<double> mVectorValues;
-    EquationTools mPrint;
 
     // Parse the command line arguments for flags and values
     for (int i = 1; i < argc; i++) {
@@ -121,69 +117,65 @@ int main(int argc, char *argv[]) {
     mAssert(mExpression.getEquation() != "0",
             "ERROR: No mathematical expression provided");
 
-    mVectorExpression.push_back(mExpression);
-    mVectorDerivative.push_back(mDerivative);
-    mVectorValues.push_back(x0);
-
     if (boost::iequals(mMethod, "aitken")) {
         std::cout << std::endl << "AITKEN METHOD" << std::endl;
-        Aitken aitken(mVectorExpression,
-                      mVectorValues,
+        Aitken aitken(mExpression,
+                      x0,
                       tol,
                       nMax,
                       verbose);
-        std::vector<double> result = aitken.solve();
+        double result = aitken.solve();
         std::cout << std::endl << "RESULT" << std::endl;
-        mPrint.printVec(result);
+        std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
-        Bisection bisection(mVectorExpression,
-                            mVectorValues,
+        Bisection bisection(mExpression,
+                            x0,
                             tol,
                             nMax,
                             verbose,
                             lowerBound,
                             upperBound);
-        std::vector<double> result = bisection.solve();
+        double result = bisection.solve();
         std::cout << std::endl << "RESULT" << std::endl;
-        mPrint.printVec(result);
+        std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
         std::cout << std::endl << "CHORD METHOD" << std::endl;
-        Chord chord(mVectorExpression,
-                    mVectorValues,
+        Chord chord(mExpression,
+                    x0,
                     tol,
                     nMax,
                     verbose);
-        std::vector<double> result = chord.solve();
+        double result = chord.solve();
         std::cout << std::endl << "RESULT" << std::endl;
-        mPrint.printVec(result);
+        std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
-        FixedPoint fixedPoint(mVectorExpression,
-                              mVectorValues,
+        FixedPoint fixedPoint(mExpression,
+                              x0,
                               tol,
                               nMax,
                               verbose);
-        std::vector<double> result = fixedPoint.solve();
+        double result = fixedPoint.solve();
         std::cout << std::endl << "RESULT" << std::endl;
-        mPrint.printVec(result);
+        std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "newton")) {
         mAssert(mDerivative.getEquation() != "0",
                 "ERROR: No mathematical expression provided");
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
-        Newton newton(mVectorExpression,
-                      mVectorDerivative,
-                      mVectorValues,
+        Newton newton(mExpression,
+                      mDerivative,
+                      x0,
                       tol,
                       nMax,
                       verbose);
-        std::vector<double> result = newton.solve();
+        double result = newton.solve();
         std::cout << std::endl << "RESULT" << std::endl;
-        mPrint.printVec(result);
+        std::cout << result << std::endl;
         std::cout << std::endl;
     } else {
         std::cout << std::endl << "ERROR: No method provided" << std::endl;

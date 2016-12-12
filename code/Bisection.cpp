@@ -36,8 +36,8 @@
 Bisection::~Bisection() {}
 
 
-Bisection::Bisection(const std::vector<Expression> &equation,
-                     std::vector<double> initial,
+Bisection::Bisection(Expression &equation,
+                     double initial,
                      double tolerance,
                      int maxIter,
                      bool verbosity)
@@ -47,8 +47,8 @@ Bisection::Bisection(const std::vector<Expression> &equation,
 	b = 1;
 }
 
-Bisection::Bisection(const std::vector<Expression> &equation,
-                     std::vector<double> initial,
+Bisection::Bisection(Expression &equation,
+                     double initial,
                      double tolerance,
                      int maxIter,
                      bool verbosity,
@@ -60,14 +60,12 @@ Bisection::Bisection(const std::vector<Expression> &equation,
 	b = upperBound;
 }
 
-std::vector<double> Bisection::solve() {
+double Bisection::solve() {
     double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint = 0, error_est;
     int i;
-    std::vector<double> returnVec;
-    Expression singleEq = eq.at(0);
 
-    sign_fa = getSign(singleEq.evaluate(a));
-    sign_fb = getSign(singleEq.evaluate(b));
+    sign_fa = getSign(eq.evaluate(a));
+    sign_fb = getSign(eq.evaluate(b));
 
     assert ( (sign_fa *  sign_fb) < 0 );
 
@@ -78,7 +76,7 @@ std::vector<double> Bisection::solve() {
             printVerbose(i, midpoint);
         }
 
-        sign_mp = getSign(singleEq.evaluate(midpoint));
+        sign_mp = getSign(eq.evaluate(midpoint));
 
         if  ( sign_fa *  sign_mp < 0 ) {
             b = midpoint;
@@ -87,23 +85,20 @@ std::vector<double> Bisection::solve() {
             a = midpoint;
             sign_fa = sign_mp;
         } else {
-            returnVec.push_back(midpoint);
-            return returnVec;
+            return midpoint;
         }
 
         if (i > 2){
             error_est = fabs(midpoint - prev_midpoint);
             if ( fabs(error_est) < tol ) {
-                returnVec.push_back(midpoint);
-                return returnVec;
+                return midpoint;
             }
         }
          prev_midpoint = midpoint;
     }
 
     std::cout << "Maximum number of iterations exceeded" << std::endl;
-    returnVec.push_back(midpoint);
-    return returnVec;
+    return midpoint;
 }
 
 double Bisection::getSign(double value){

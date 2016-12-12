@@ -65,15 +65,3 @@ std::vector<std::vector<double>> ExpressionSystem::evaluate(std::vector<double> 
     }
     return results;
 }
-
-double ExpressionSystem::getNorm(std::vector<double> &value) {
-    std::vector<std::vector<Expression>>::iterator row;
-    std::vector<Expression>::iterator col;
-    double result = 0.0;
-    for (row = system.begin(); row != system.end(); ++row) {
-        for (col = row->begin(); col != row->end(); ++col) {
-            result += (*col).evaluate(value) * (*col).evaluate(value);
-        }
-    }
-    return sqrt(result);
-}

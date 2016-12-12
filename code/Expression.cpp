@@ -16,17 +16,20 @@ Expression::Expression() {
     equation = "0";
 }
 
-// Univeriate
+// Univariate
 Expression::Expression(const std::string &eq) {
     equation = eq;
 }
 
 // Systems
 Expression::Expression(const std::vector<std::string> &eq) {
-    std::string mEquation;
-    for (mEquation : eq) {
+    for (std::string mEquation : eq) {
         equations.push_back(mEquation);
     }
+}
+
+void Expression::setEquation(const std::string &eq) {
+    equation = eq;
 }
 
 std::string Expression::getEquation(){

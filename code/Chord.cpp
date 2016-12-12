@@ -33,8 +33,8 @@
 
 #include "Chord.hpp"
 
-Chord::Chord(std::vector<Expression> &equation,
-             std::vector<double> initial,
+Chord::Chord(Expression &equation,
+             double initial,
              double tolerance,
              int maxIter,
              bool verbosity)
@@ -43,45 +43,35 @@ Chord::Chord(std::vector<Expression> &equation,
 
 Chord::~Chord() {}
 
-std::vector<double> Chord::solve() {
-    std::vector<double> returnVec;
-    std::vector<double> print;
-    double singleVal = x0.at(0);
-    Expression singleEq = eq.at(0);
+double Chord::solve() {
 	double xnew, dx , fx0, fx1;
-    double x1 = singleVal + 1;
+    double x1 = x0 + 1;
 	int i;
 
     if (verbose) {
-        print.push_back(x1);
     	printVerbose(0, x0);
-        printVerbose(1, print);
-        print.clear();
     }
 
-    fx0 = singleEq.evaluate(singleVal);
+    fx0 = eq.evaluate(x0);
 
     for ( i = 2; i <= nMax; i++ ) {
 
-    	fx1 = singleEq.evaluate(x1);
-    	dx = fx1 * ( x1 - singleVal ) / ( fx1 - fx0 );
+    	fx1 = eq.evaluate(x1);
+    	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
     	xnew = x1 - dx;
 
     	if ( verbose ) {
-            print.push_back(xnew);
-            printVerbose(i, print);
-            print.clear();
+            printVerbose(i, xnew);
         }
 
     	if (fabs(dx) < tol ) {
-            returnVec.push_back(xnew);
-            return returnVec;
+            return xnew;
     	} else {
-            singleVal = x1;
+            x0 = x1;
     		fx0 = fx1;
     		x1 = xnew;
         }
     }
     std::cout << "Maximum number of iterations exceeded" << std::endl;
-    return x0;
+    return xnew;
 }

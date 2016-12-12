@@ -30,8 +30,8 @@
 
 #include "Aitken.hpp"
 
-Aitken::Aitken(std::vector<Expression> &equation,
-               std::vector<double> initial,
+Aitken::Aitken(Expression &equation,
+               double initial,
                double tolerance,
                int maxIter,
                bool verbosity)
@@ -40,52 +40,45 @@ Aitken::Aitken(std::vector<Expression> &equation,
 
 Aitken::~Aitken() {}
 
-std::vector<double> Aitken::solve() {
+double Aitken::solve() {
 
-    std::vector<double> returnVec;
-    Expression singleEq = eq.at(0);
-
-    double singleValue = x0.at(0);
     double x1, x2, phat = 0, phatold;
     int i;
 
-    phatold = singleValue;
+    phatold = x0;
 
 	if (verbose) {
-        printVerbose(0, x0.at(0));
+        printVerbose(0, phatold);
 	}
 
-	x1 = singleEq.evaluate(singleValue);
+	x1 = eq.evaluate(x0);
 
 	if (verbose) {
-		printVerbose(1,x1);
+		printVerbose(1, x1);
 	}
 
-    if (fabs(x1 - singleValue) < tol) {
-        returnVec.push_back(x1);
-        return returnVec;
+    if (fabs(x1 - x0) < tol) {
+        return x1;
 	} else {
-        singleValue = x1;
+        x0 = x1;
 	}
 
 	for ( i = 2; i <= nMax; i++ ) {
-        x2 = singleEq.evaluate(x1);
-        phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + singleValue);
+        x2 = eq.evaluate(x1);
+        phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
 		if (verbose) {
 			printVerbose(i, phat);
 		}
 		if ( fabs(phatold - phat) < tol ) {
-            returnVec.push_back(phat);
-            return returnVec;
+            return phat;
 		} else {
             phatold = phat;
-            singleValue = x1;
+            x0 = x1;
             x1 = x2;
 		}
 	}
 	std::cout << "Maximum number of iterations exceeded" << std::endl;
-    returnVec.push_back(phat);
-    return returnVec;
+    return phat;
 }
 
 

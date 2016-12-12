@@ -25,7 +25,6 @@ public:
     std::vector<std::vector<Expression>> getSystem();
     void print();
     Expression getEquation(int i, int j);
-    double getNorm(std::vector<double> &value);
     std::vector<std::vector<double>> evaluate(std::vector<double> &value);
 
 };

@@ -54,11 +54,11 @@ public:
 
     virtual ~Expression() {}
 
-    virtual /*! A method to set a mathematical expression as a string to this object.
+    /*! A method to set a mathematical expression as a string to this object.
      *
      * \param eq A string that contains the mathematical expression for the class to evaluate.
      */
-    void setEquation(const std::string &eq)= 0;
+    void setEquation(const std::string &eq);
 
     /*! A method to set a mathematical expression as a string to this object.
      *
@@ -71,8 +71,6 @@ public:
      * \param value A value to evaluate the expression.
      */
     double evaluate(double &value);
-
-
 
 };
 

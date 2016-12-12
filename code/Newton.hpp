@@ -25,7 +25,7 @@ private:
 	int m;
 
     /// A standard vector holding the strings representing mathematical expressions.
-    std::vector<Expression> df;
+    Expression df;
 
 public:
 	/*! A constructor to instantiate variables for the Newtwon method.
@@ -36,9 +36,9 @@ public:
      * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
      * \param verbosity Set to true to print all intermediate and final results onto the console.
      */
-	Newton(const std::vector<Expression> &equation,
-		   const std::vector<Expression> &derivative,
-		   std::vector<double> initial,
+	Newton(Expression &equation,
+           Expression &derivative,
+		   double initial,
 		   double tolerance,
 		   int maxIter,
 		   bool verbosity);
@@ -52,9 +52,9 @@ public:
      * \param verbosity Set to true to print all intermediate and final results onto the console.
      * \param modifier The integer value for the modified Newton method.
      */
-	Newton(const std::vector<Expression> &equation,
-           const std::vector<Expression> &derivative,
-           std::vector<double> initial,
+	Newton(Expression &equation,
+           Expression &derivative,
+           double initial,
 		   double tolerance,
 		   int maxIter,
 		   bool verbosity,
@@ -67,7 +67,7 @@ public:
      *
      * \return The solution to the Newton Method/Modified Newton Method.
      */
-    std::vector<double> solve();
+    double solve();
 
 };
     

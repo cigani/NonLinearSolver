@@ -30,8 +30,8 @@ public:
      * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
      * \param verbosity Set to true to print all intermediate and final results onto the console.
      */
-    Chord(std::vector<Expression> &equation,
-          std::vector<double> initial,
+    Chord(Expression &equation,
+          double initial,
           double tolerance,
           int maxIter,
           bool verbosity);
@@ -43,7 +43,7 @@ public:
      *
      * \return The solution to the Chord Method.
      */
-    std::vector<double> solve();
+    double solve();
 
 };
     

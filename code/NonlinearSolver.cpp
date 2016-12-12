@@ -11,8 +11,8 @@
 #include "NonlinearSolver.hpp"
 
 NonlinearSolver::NonlinearSolver(
-		const std::vector<Expression> &equation,
-		std::vector<double> initial,
+		Expression &equation,
+		double initial,
 		double tolerance,
 		int maxIter,
 		bool verbosity) {
