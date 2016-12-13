@@ -35,35 +35,19 @@ std::vector<double> NewtonSystem::solve() {
 
     for (int i = 1; i <= nMax; i++) {
         prevNorm = mEquationTools.getNorm(v0);
-
-//        fx0 = system.evaluate(v0);
-
         std::vector<std::vector<double>> matrixfx0 = system.evaluate(v0);
-
         fx0 = convertMatrix2Vector(matrixfx0);
-
         std::vector<std::vector<double>> fx0Pure = system.evaluate(v0);
-        iteratate(fx0, std::string("fx0"));
-        iteratate(fx0Pure, std::string("fx0Pure"));
-        //printVerbose(0, fx0);
         dfx0 = jac.evaluate(v0);
-        iteratate(dfx0, std::string("dfx0"));
         fxNeg = mEquationTools.negateVector(fx0);
-        iteratate(fxNeg, std::string("fxNeg"));
         mGauss.GaussPartialPivoting(dfx0, fxNeg);
         dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
-        iteratate(dxyz, std::string("dxyz"));
         dx = mEquationTools.addVectors(fx0, dxyz);
-        iteratate(dx, std::string("dx"));
         v0 = dx;
-
         nextNorm = mEquationTools.getNorm(v0);
-
         if (verbose) { printVerbose(i, v0); }
-
         if (fabs(prevNorm - nextNorm) < tol) { return v0; }
     }
-
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return v0;
 }
@@ -71,13 +55,10 @@ std::vector<double> NewtonSystem::solve() {
 std::vector<double> NewtonSystem::convertMatrix2Vector(const std::vector<std::vector<double>> &fx0) const {
     std::vector<std::vector<double>>::const_iterator it;
     std::vector<double>::const_iterator it2;
-
     std::vector<double> returns;
-
     for (it = fx0.begin(); it != fx0.end(); ++it) {
-            for (it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
-                returns.push_back(*it2);
-            }
+        for (it2 = (*it).begin();
+             it2 != (*it).end(); ++it2) { returns.push_back(*it2); }
         }
     return returns;
 }

@@ -37,6 +37,7 @@ protected:
 	bool verbose;
 
 public:
+
     /*! A contructor to instantiate common variables to the family of nonlinear solvers.
      *
      * \param equation A string that contains the mathematical expression for the class to evaluate.

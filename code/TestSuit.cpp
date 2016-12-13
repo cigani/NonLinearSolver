@@ -257,26 +257,21 @@ void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
 void TestSuit::testSystems() {
     ExpressionSystem expressionSystem("_equations.txt");
     ExpressionSystem derivativeSystem("_derivative.txt");
-    std::vector<double> vals{1, 3};
-
-    // Need to do " ' ' " because the gets return ' ' around the equations.
+    std::vector<double> expectedVals{2, 5};
+    std::vector<double> expectedDerdouble{1, 0.333333, -1, 2};
+    std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
+    std::vector<double> valz{3, 2};
     std::vector<std::string> expected{"x+y/3", "-x+2y"};
+
     Expression mExp = expressionSystem.getEquation(0, 0);
     Expression mExp2 = expressionSystem.getEquation(1, 0);
     std::vector<std::string> actual{mExp.getEquation(), mExp2.getEquation()};
     testAsssertion(expected, actual, std::string("Test Systems"));
 
-    std::vector<std::vector<double>> mEval = expressionSystem.evaluate(vals);
+    std::vector<std::vector<double>> mEval = expressionSystem.evaluate(valz);
     std::vector<std::vector<double> >::const_iterator returns_iterator;
     std::vector<double>::const_iterator returns_iterator2;
-    std::vector<double> expectedVals{2, 5};
 
-    iterateNestedVectors(expectedVals, mEval,
-                         returns_iterator,
-                         returns_iterator2, std::string("Test"));
-
-    std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
-    std::vector<double> expectedDerdouble{1, 0.333333, -1, 2};
     Expression mdExp = derivativeSystem.getEquation(0, 0);
     Expression mdExp2 = derivativeSystem.getEquation(0, 1);
     Expression mdExp3 = derivativeSystem.getEquation(1, 0);
@@ -288,7 +283,6 @@ void TestSuit::testSystems() {
                                        mdExp3.getEquation(),
                                        mdExp4.getEquation()};
     testAsssertion(expectedDer, actualDer, std::string("Derivative Systems"));
-    std::vector<double> valz{3, 2};
     std::vector<double> evaluatedDer{mdExp.evaluate(valz),
                                      mdExp2.evaluate(valz),
                                      mdExp3.evaluate(valz),
@@ -299,6 +293,23 @@ void TestSuit::testSystems() {
     NewtonSystem newtonSystem(expressionSystem, derivativeSystem, valz,
                               0.0001, 50, false);
     newtonSystem.solve();
+    ExpressionSystem expressionSystem2("_equationNonLinear");
+    ExpressionSystem derivativeSystem2("_derivativeNonLinear");
+    NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, valz,
+                               0.0001, 500, true);
+    Expression mdExpz = derivativeSystem2.getEquation(0, 0);
+    Expression mdExp2z = derivativeSystem2.getEquation(0, 1);
+    Expression mdExp3z = derivativeSystem2.getEquation(1, 0);
+    Expression mdExp4z = derivativeSystem2.getEquation(1, 1);
+    std::vector<double> evaluatedDer2{mdExpz.evaluate(valz),
+                                      mdExp2z.evaluate(valz),
+                                      mdExp3z.evaluate(valz),
+                                      mdExp4z.evaluate(valz)};
+    iteratate(evaluatedDer2, std::string("der"));
+
+    //newtonSystem2.solve();
+
+
 
 
 }
@@ -405,3 +416,12 @@ double TestSuit::adaptor(double val) {
     return values;
 }
 
+void
+TestSuit::iteratate(std::vector<double> &fxNeg, std::string name) const {
+    std::__1::vector<double>::const_iterator returns_iterator;
+
+    for (returns_iterator = fxNeg.begin(); returns_iterator != fxNeg.end();
+         ++returns_iterator) {
+        std::__1::cout << name << " | " << *returns_iterator << "\n";
+    }
+}

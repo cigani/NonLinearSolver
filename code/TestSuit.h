@@ -90,6 +90,8 @@ public:
     void
     testAsssertion(std::vector<double> expected, std::vector<double> actual,
                    std::string name);
+
+    void iteratate(std::vector<double> &fxNeg, std::string name) const;
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
