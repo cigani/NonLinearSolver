@@ -88,8 +88,8 @@ public:
                         std::vector<std::string> actual, std::string name);
 
     void
-    testAssertion(std::vector<double> expected, std::vector<double> actual,
-                  std::string name);
+    testAsssertion(std::vector<double> expected, std::vector<double> actual,
+                   std::string name);
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

@@ -37,13 +37,19 @@ std::vector<double> NewtonSystem::solve() {
         prevNorm = mEquationTools.getNorm(v0);
 
         fx0 = system.evaluate(v0).at(0);
+        std::vector<std::vector<double>> fx0Pure = system.evaluate(v0);
+        iteratate(fx0, std::string("fx0"));
+        iteratate(fx0Pure, std::string("fx0Pure"));
+        //printVerbose(0, fx0);
         dfx0 = jac.evaluate(v0);
-
+        iteratate(dfx0, std::string("dfx0"));
         fxNeg = mEquationTools.negateVector(fx0);
+        iteratate(fxNeg, std::string("fxNeg"));
         mGauss.GaussPartialPivoting(dfx0, fxNeg);
-
         dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
+        iteratate(dxyz, std::string("dxyz"));
         dx = mEquationTools.addVectors(fx0, dxyz);
+        iteratate(dx, std::string("dx"));
         v0 = dx;
 
         nextNorm = mEquationTools.getNorm(v0);
@@ -55,4 +61,28 @@ std::vector<double> NewtonSystem::solve() {
 
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return v0;
+}
+
+void
+NewtonSystem::iteratate(std::vector<double> &fxNeg, std::string name) const {
+    std::__1::vector<double>::const_iterator returns_iterator;
+
+    for (returns_iterator = fxNeg.begin(); returns_iterator != fxNeg.end();
+         ++returns_iterator) {
+        std::__1::cout << name << " | " << *returns_iterator << "\n";
+    }
+}
+
+void NewtonSystem::iteratate(std::vector<std::vector<double>> &dfx0,
+                             std::string name) const {
+    std::__1::vector<std::vector<double>>::const_iterator returns_iterator;
+    std::__1::vector<double>::const_iterator returns_iterator2;
+    for (returns_iterator = dfx0.begin(); returns_iterator != dfx0.end();
+         ++returns_iterator) {
+        for (returns_iterator2 = (*returns_iterator).begin();
+             returns_iterator2 != (*returns_iterator).end();
+             ++returns_iterator2) {
+            std::__1::cout << name << " | " << *returns_iterator2 << "\n";
+        }
+    }
 }

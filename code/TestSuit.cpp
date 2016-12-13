@@ -9,6 +9,7 @@
 #include "EquationTools.h"
 #include "Bisection.hpp"
 #include "Aitken.hpp"
+#include "NewtonSystem.hpp"
 
 std::vector<std::string> mErrors;
 
@@ -120,9 +121,9 @@ void TestSuit::testAsssertion(std::vector<std::string> expected,
     }
 }
 
-void TestSuit::testAssertion(std::vector<double> expected,
-                             std::vector<double> actual,
-                             std::string name) {
+void TestSuit::testAsssertion(std::vector<double> expected,
+                              std::vector<double> actual,
+                              std::string name) {
     for (unsigned long i = 0; i < actual.size(); i++) {
         double evaluate = expected.at(i) - actual.at(i);
         if (fabs(evaluate) > 0.0015) {
@@ -292,8 +293,13 @@ void TestSuit::testSystems() {
                                      mdExp2.evaluate(valz),
                                      mdExp3.evaluate(valz),
                                      mdExp4.evaluate(valz)};
-    testAssertion(expectedDerdouble, evaluatedDer,
-                  std::string("Derivative Return"));
+    testAsssertion(expectedDerdouble, evaluatedDer,
+                   std::string("Derivative Return"));
+
+    NewtonSystem newtonSystem(expressionSystem, derivativeSystem, valz,
+                              0.0001, 5, false);
+    newtonSystem.solve();
+
 
 }
 

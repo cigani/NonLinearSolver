@@ -31,6 +31,12 @@ public:
     virtual ~NewtonSystem();
 
     std::vector<double> solve();
+
+    void iteratate(std::vector<std::vector<double>> &dfx0,
+                   std::string name) const;
+
+    void iteratate(std::vector<double> &fxNeg, std::string name) const;
+
 };
 
 
