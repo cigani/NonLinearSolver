@@ -17,14 +17,15 @@
 #include <cmath>
 #include <vector>
 #include "Expression.hpp"
+#include "ExpressionSystem.hpp"
 
 class NonlinearSystemsSolver {
 protected:
 	/// A standard vector holding the strings representing mathematical expressions.
-	ExpressionSystem eq;
+	ExpressionSystem system;
 
 	/// A standard vector holding the doubles representing the initial guess of the solution to the equation.
-	std::vector<double>  x0;
+	std::vector<double> v0;
 
 	/// The tolerance value.  The method stops once the residual errors fall below this value.
 	double tol;
@@ -45,7 +46,7 @@ public:
      * \param verbosity Set to true to print all intermediate and final results onto the console.
      */
     NonlinearSystemsSolver(
-			ExpressionSystem &equation,
+			ExpressionSystem &sys,
 			std::vector<double> initial,
             double tolerance,
             int maxIter,
@@ -62,7 +63,7 @@ public:
      * \param i The current index or iteration to print out to the console.
      * \param x The vector that contains current solution of the nonlinear problem.
      */
-	void printVerbose(int i, std::vector<double> &x);
+	void printVerbose(int i, std::vector<double> &v);
 
 };
     

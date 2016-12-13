@@ -12,6 +12,7 @@
 #include <cmath>
 #include <vector>
 #include "NonlinearSystemsSolver.hpp"
+#include "Expression.hpp"
 #include "ExpressionSystem.hpp"
 
 class NewtonSystem : public NonlinearSystemsSolver {
@@ -20,8 +21,8 @@ private:
     int m;
 
 public:
-    NewtonSystem(ExpressionSystem &equation,
-                 ExpressionSystem &derivative,
+    NewtonSystem(ExpressionSystem &system,
+                 ExpressionSystem &jacobian,
                  std::vector<double> initial,
                  double tolerance,
                  int maxIter,

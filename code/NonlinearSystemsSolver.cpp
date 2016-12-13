@@ -11,13 +11,13 @@
 #include "NonlinearSystemsSolver.hpp"
 
 NonlinearSystemsSolver::NonlinearSystemsSolver(
-		ExpressionSystem &equation,
+		ExpressionSystem &sys,
 		std::vector<double> initial,
 		double tolerance,
 		int maxIter,
 		bool verbosity) {
-	eq = equation;
-	x0 = initial;
+	system = sys;
+	v0 = initial;
 	tol = tolerance;
 	nMax = maxIter;
 	verbose = verbosity;
@@ -25,9 +25,9 @@ NonlinearSystemsSolver::NonlinearSystemsSolver(
 
 NonlinearSystemsSolver::~NonlinearSystemsSolver() {}
 
-void NonlinearSystemsSolver::printVerbose(int i, std::vector<double> &x) {
+void NonlinearSystemsSolver::printVerbose(int i, std::vector<double> &v) {
 	std::vector<double>::const_iterator c;
-	for (c = x.begin(); c != x.end(); ++c) {
+	for (c = v.begin(); c != v.end(); ++c) {
 		std::cout << std::setw(3) << i << "\t" << std::setw(20)
                   << std::setprecision(15) << *c << "\n";
 	};
