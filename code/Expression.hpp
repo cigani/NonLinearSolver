@@ -72,6 +72,8 @@ public:
      */
     double evaluate(double &value);
 
+    double evaluate(std::vector<double> &value);
+
 };
 
 #endif /* EXPRESSION_HPP_ */

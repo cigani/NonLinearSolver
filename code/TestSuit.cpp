@@ -252,7 +252,7 @@ void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
 
 void TestSuit::testSystems() {
     ExpressionSystem expressionSystem("_equations.txt");
-    std::vector<double> vals{1, 2};
+    std::vector<double> vals{1, 3};
 
     // Need to do " ' ' " because the gets return ' ' around the equations.
     std::vector<std::string> expected{"'x+y/3'", "'-x+2y'"};
@@ -264,7 +264,7 @@ void TestSuit::testSystems() {
     std::vector<std::vector<double>> mEval = expressionSystem.evaluate(vals);
     std::vector<std::vector<double> >::const_iterator returns_iterator;
     std::vector<double>::const_iterator returns_iterator2;
-    std::vector<double> expectedVals{3, 2};
+    std::vector<double> expectedVals{2, 5};
 
     iterateNestedVectors(expectedVals, mEval, returns_iterator,
                          returns_iterator2);
@@ -299,7 +299,7 @@ void TestSuit::testExprtkJacobian() {
 void TestSuit::iterateNestedVectors(
         const std::vector<double> &assertResults,
         std::vector<std::vector<double>> &returns,
-        std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
+        std::vector<std::vector<double>>::const_iterator returns_iterator,
         std::vector<double>::const_iterator &returns_iterator2) {
 
     int n = 0;
@@ -313,7 +313,7 @@ void TestSuit::iterateNestedVectors(
             testAsssertion(0.015, assertResults[n++],
                            *returns_iterator2,
                            std::string("Jacobian"));
-            std::cout << *returns_iterator2 << "\n";
+            std::cout << "HELLO!" << *returns_iterator2 << "\n";
         }
     }
 }

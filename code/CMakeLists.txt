@@ -16,4 +16,4 @@ add_executable(tests TestSuit.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Gauss.cpp Expression.cpp ExpressionSystem.cpp)
 add_executable(scratch scratch.cpp exprtk.hpp Eigen Gauss.cpp)
 
-add_executable(testReader testReader.cpp FileReader.cpp)
+add_executable(testReader testReader.cpp ExpressionSystem.cpp Expression.cpp)
