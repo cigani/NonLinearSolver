@@ -297,7 +297,7 @@ void TestSuit::testSystems() {
                    std::string("Derivative Return"));
 
     NewtonSystem newtonSystem(expressionSystem, derivativeSystem, valz,
-                              0.0001, 5, false);
+                              0.0001, 50, false);
     newtonSystem.solve();
 
 

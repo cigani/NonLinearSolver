@@ -36,7 +36,12 @@ std::vector<double> NewtonSystem::solve() {
     for (int i = 1; i <= nMax; i++) {
         prevNorm = mEquationTools.getNorm(v0);
 
-        fx0 = system.evaluate(v0).at(0);
+//        fx0 = system.evaluate(v0);
+
+        std::vector<std::vector<double>> matrixfx0 = system.evaluate(v0);
+
+        fx0 = convertMatrix2Vector(matrixfx0);
+
         std::vector<std::vector<double>> fx0Pure = system.evaluate(v0);
         iteratate(fx0, std::string("fx0"));
         iteratate(fx0Pure, std::string("fx0Pure"));
@@ -61,6 +66,20 @@ std::vector<double> NewtonSystem::solve() {
 
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return v0;
+}
+
+std::vector<double> NewtonSystem::convertMatrix2Vector(const std::vector<std::vector<double>> &fx0) const {
+    std::vector<std::vector<double>>::const_iterator it;
+    std::vector<double>::const_iterator it2;
+
+    std::vector<double> returns;
+
+    for (it = fx0.begin(); it != fx0.end(); ++it) {
+            for (it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
+                returns.push_back(*it2);
+            }
+        }
+    return returns;
 }
 
 void

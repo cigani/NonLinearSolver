@@ -37,6 +37,7 @@ public:
 
     void iteratate(std::vector<double> &fxNeg, std::string name) const;
 
+    std::vector<double> convertMatrix2Vector(const std::vector<std::vector<double>> &fx0) const;
 };
 
 
