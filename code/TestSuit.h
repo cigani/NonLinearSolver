@@ -12,6 +12,7 @@
 #include "FixedPoint.hpp"
 #include <assert.h>
 #include "exprtk.hpp"
+#include "ExpressionSystem.hpp"
 #include <vector>
 
 
@@ -81,6 +82,11 @@ public:
     void testAitkenWithExprtPoly(const double tol, const double expected,
                                    const double x0, const int max,
                                    const bool verbose, std::string &eq);
+
+    void testSystems();
+
+    void testAsssertion(std::vector<std::string> expected,
+                        std::vector<std::string> actual, std::string name);
 
 };
 

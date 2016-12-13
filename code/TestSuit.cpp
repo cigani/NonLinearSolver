@@ -90,8 +90,10 @@ int main(int argc, char* argv[]) {
     test.testExprtkJacobian();
     test.testDeterm();
     test.testSubtract();
+    test.testSystems();
     // Error Logging
     test.iterateVectors(mErrors);
+
 
     return 0;
 
@@ -115,6 +117,17 @@ void TestSuit::testAsssertion(const double tol, const double expected,
     if (isnan(test)) { testErrorCode(name); }
     if (isinf(test)) { testErrorCode(name); }
     if (fabs(expected - test) >= tol) { testErrorCode(name); }
+}
+
+void TestSuit::testAsssertion(std::vector<std::string> expected,
+                              std::vector<std::string> actual,
+                              std::string name) {
+    for (int i = 0; i < actual.size(); i++) {
+        if (expected[i] != actual[i]) {
+            testErrorCode(name);
+            std::cout << expected[i] << " | " << actual[i] << "\n";
+        }
+    }
 }
 
 void
@@ -237,6 +250,27 @@ void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
     testAsssertion(tol, expected, testAitken, std::string("Aitken"));
 }
 
+void TestSuit::testSystems() {
+    ExpressionSystem expressionSystem("_equations.txt");
+    std::vector<double> vals{1, 2};
+
+    // Need to do " ' ' " because the gets return ' ' around the equations.
+    std::vector<std::string> expected{"'x+y/3'", "'-x+2y'"};
+    Expression mExp = expressionSystem.getEquation(0, 0);
+    Expression mExp2 = expressionSystem.getEquation(1, 0);
+    std::vector<std::string> actual{mExp.getEquation(), mExp2.getEquation()};
+    testAsssertion(expected, actual, std::string("Test Systems"));
+
+    std::vector<std::vector<double>> mEval = expressionSystem.evaluate(vals);
+    std::vector<std::vector<double> >::const_iterator returns_iterator;
+    std::vector<double>::const_iterator returns_iterator2;
+    std::vector<double> expectedVals{3, 2};
+
+    iterateNestedVectors(expectedVals, mEval, returns_iterator,
+                         returns_iterator2);
+
+}
+
 void TestSuit::testExprtkJacobian() {
     std::vector<std::string> equations;
     Jacobian mEquations;
@@ -256,10 +290,10 @@ void TestSuit::testExprtkJacobian() {
     std::vector<std::vector<double> >::const_iterator returns_iterator;
     std::vector<double>::const_iterator returns_iterator2;
 
-    iterateNestedVectors(assertResults, returns, returns_iterator,
-                         returns_iterator2);
-    std::vector<std::vector<double>> testEquation;
-    testEquation = mEquations.exprtkJacobian(equations, val1, var);
+//    iterateNestedVectors(assertResults, returns, returns_iterator,
+//                         returns_iterator2);
+//    std::vector<std::vector<double>> testEquation;
+//    testEquation = mEquations.exprtkJacobian(equations, val1, var);
 }
 
 void TestSuit::iterateNestedVectors(
@@ -279,6 +313,7 @@ void TestSuit::iterateNestedVectors(
             testAsssertion(0.015, assertResults[n++],
                            *returns_iterator2,
                            std::string("Jacobian"));
+            std::cout << *returns_iterator2 << "\n";
         }
     }
 }
