@@ -252,6 +252,7 @@ void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
 
 void TestSuit::testSystems() {
     ExpressionSystem expressionSystem("_equations.txt");
+    ExpressionSystem derivativeSystem("_derivative.txt");
     std::vector<double> vals{1, 3};
 
     // Need to do " ' ' " because the gets return ' ' around the equations.
@@ -269,6 +270,20 @@ void TestSuit::testSystems() {
     iterateNestedVectors(expectedVals, mEval,
                          returns_iterator,
                          returns_iterator2, std::string("Test"));
+
+    std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
+    Expression mdExp = derivativeSystem.getEquation(0, 0);
+    Expression mdExp2 = derivativeSystem.getEquation(0, 1);
+    Expression mdExp3 = derivativeSystem.getEquation(1, 0);
+    Expression mdExp4 = derivativeSystem.getEquation(1, 1);
+//    std::cout << mdExp.getEquation() << mdExp2.getEquation()
+//              << mdExp3.getEquation() << mdExp4.getEquation()<< "\n";
+    std::vector<std::string> actualDer{mdExp.getEquation(),
+                                       mdExp2.getEquation(),
+                                       mdExp3.getEquation(),
+                                       mdExp4.getEquation()};
+    testAsssertion(expectedDer, actualDer, std::string("Derivative Systems"));
+
 
 }
 
@@ -291,10 +306,10 @@ void TestSuit::testExprtkJacobian() {
     std::vector<std::vector<double> >::const_iterator returns_iterator;
     std::vector<double>::const_iterator returns_iterator2;
 
-//    iterateNestedVectors(assertResults, returns, returns_iterator,
-//                         returns_iterator2);
-//    std::vector<std::vector<double>> testEquation;
-//    testEquation = mEquations.exprtkJacobian(equations, val1, var);
+    iterateNestedVectors(assertResults, returns, returns_iterator,
+                         returns_iterator2);
+    std::vector<std::vector<double>> testEquation;
+    testEquation = mEquations.exprtkJacobian(equations, val1, var);
 }
 
 void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
@@ -314,7 +329,7 @@ void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
             testAsssertion(0.015, assertResults[n++],
                            *returns_iterator2,
                            name);
-            std::cout << *returns_iterator2 << "\n";
+            //std::cout << *returns_iterator2 << "\n";
         }
     }
 }
