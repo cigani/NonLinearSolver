@@ -74,9 +74,6 @@ public:
 
     double adaptor(double val);
 
-    void testAsssertion(const double tol, const double expected,
-                        std::vector<double> testNewton, std::string name);
-
     void testBisectionWithExprtPoly(const double tol, const double expected,
                                     const double x0, const int max,
                                     const bool verbose, std::string &eq);
@@ -90,6 +87,9 @@ public:
     void testAsssertion(std::vector<std::string> expected,
                         std::vector<std::string> actual, std::string name);
 
+    void
+    testAssertion(std::vector<double> expected, std::vector<double> actual,
+                  std::string name);
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

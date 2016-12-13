@@ -109,16 +109,6 @@ void TestSuit::testAsssertion(const double tol, const double expected,
     if (fabs(expected - test) >= tol) { testErrorCode(name); }
 }
 
-void TestSuit::testAsssertion(const double tol, const double expected,
-                              std::vector<double> testNewton,
-                              std::string name) {
-
-    double test = testNewton.at(0);
-    if (isnan(test)) { testErrorCode(name); }
-    if (isinf(test)) { testErrorCode(name); }
-    if (fabs(expected - test) >= tol) { testErrorCode(name); }
-}
-
 void TestSuit::testAsssertion(std::vector<std::string> expected,
                               std::vector<std::string> actual,
                               std::string name) {
@@ -126,6 +116,19 @@ void TestSuit::testAsssertion(std::vector<std::string> expected,
         if (expected[i] != actual[i]) {
             testErrorCode(name);
             std::cout << expected[i] << " | " << actual[i] << "\n";
+        }
+    }
+}
+
+void TestSuit::testAssertion(std::vector<double> expected,
+                             std::vector<double> actual,
+                             std::string name) {
+    for (unsigned long i = 0; i < actual.size(); i++) {
+        double evaluate = expected.at(i) - actual.at(i);
+        if (fabs(evaluate) > 0.0015) {
+            testErrorCode(name);
+            std::cout << "Expected: " << expected[i] << " | "
+                      << "Actual: " << actual[i] << "\n";
         }
     }
 }
@@ -272,6 +275,7 @@ void TestSuit::testSystems() {
                          returns_iterator2, std::string("Test"));
 
     std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
+    std::vector<double> expectedDerdouble{1, 0.333333, -1, 2};
     Expression mdExp = derivativeSystem.getEquation(0, 0);
     Expression mdExp2 = derivativeSystem.getEquation(0, 1);
     Expression mdExp3 = derivativeSystem.getEquation(1, 0);
@@ -283,7 +287,13 @@ void TestSuit::testSystems() {
                                        mdExp3.getEquation(),
                                        mdExp4.getEquation()};
     testAsssertion(expectedDer, actualDer, std::string("Derivative Systems"));
-
+    std::vector<double> valz{3, 2};
+    std::vector<double> evaluatedDer{mdExp.evaluate(valz),
+                                     mdExp2.evaluate(valz),
+                                     mdExp3.evaluate(valz),
+                                     mdExp4.evaluate(valz)};
+    testAssertion(expectedDerdouble, evaluatedDer,
+                  std::string("Derivative Return"));
 
 }
 
