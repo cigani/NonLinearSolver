@@ -105,7 +105,6 @@ int main(int argc, char *argv[]) {
                 // Initial Value
                 xv.push_back(std::stod(argv[i + 1]));
                 xv.push_back(std::stod(argv[i + 2]));
-                xv.push_back(std::stod(argv[i + 3]));
             } else if (strcmp(argv[i], "-nmax") == 0) {
                 // Maximum number of iterations. Default 1000
                 nMax = std::stoi(argv[i + 1]);
@@ -205,13 +204,16 @@ int main(int argc, char *argv[]) {
         std::cout << std::endl;
     } else if ((boost::iequals(mMethod, "newton"))&&(systemFlag)) {
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
+
         NewtonSystem newtonSystem(mSystem,
                                   mJacobian,
                                   xv,
                                   tol,
                                   nMax,
                                   verbose);
+
         std::vector<double> result = newtonSystem.solve();
+
         std::cout << std::endl << "RESULT" << std::endl;
         std::vector<double>::const_iterator c;
         for (c = result.begin(); c != result.end(); ++c) {
