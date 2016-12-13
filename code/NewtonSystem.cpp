@@ -40,10 +40,8 @@ std::vector<double> NewtonSystem::solve() {
         std::vector<std::vector<double>> fx0Pure = system.evaluate(v0);
         dfx0 = jac.evaluate(v0);
         fxNeg = mEquationTools.negateVector(fx0);
-        mGauss.GaussPartialPivoting(dfx0, fxNeg);
-        dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
-        iteratate(dxyz, std::string("dz"));
-        dx = mEquationTools.addVectors(fx0, dxyz);
+        dxyz = mGauss.solveSystem(dfx0, fxNeg, system.getColumns());
+        dx = mEquationTools.addVectors(v0, dxyz);
         v0 = dx;
         nextNorm = mEquationTools.getNorm(v0);
         if (verbose) { printVerbose(i, v0); }

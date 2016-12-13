@@ -72,3 +72,7 @@ std::vector<std::vector<double>> ExpressionSystem::evaluate(std::vector<double> 
     }
     return results;
 }
+
+int ExpressionSystem::getColumns() {
+    return columns;
+}

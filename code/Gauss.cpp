@@ -7,66 +7,46 @@
 
 #include "Gauss.h"
 
-void Gauss::GaussPartialPivoting(
-        std::vector<std::vector<double>> &jacobian,
-        std::vector<double> &funcSolutions) {
+std::vector<double> Gauss::solveSystem(std::vector<std::vector<double>> &jacobian,
+                                       std::vector<double> &funcSolution, int degree) {
+    int N=degree+1, i, j, k;
+    std::vector< std::vector<double> > A = jacobian;
 
-    int n = (int) funcSolutions.size();
-    {
-        for (int k = 0; k < n; ++k) {
-            Pivot(jacobian, funcSolutions, k, n);
+    std::vector<std::vector<double>>::iterator it;
+    i=0;
+    for (it = A.begin(); it != A.end(); ++it) {
+        (*it).push_back(funcSolution[i]);
+        ++i;
+    }
 
-            for (int i = k + 1; i < n; ++i) {
-                double m = jacobian[i][k] / jacobian[k][k];
-                for (int j = k + 1; j < n; ++j) {
-                    jacobian[i][j] -= m * jacobian[k][j];
+    std::vector<double> a(N);
+    for (i=0;i<N;i++){                 //First, pivot the Matrix
+        for (k=i+1;k<N;k++){
+            if (A[i][i]<A[k][i]){
+                for (j=0;j<=N;j++){
+                    double temp=A[i][j];
+                    A[i][j]=A[k][j];
+                    A[k][j]=temp;
                 }
-                funcSolutions[i] -= m * funcSolutions[k];
-            }
-            // Zero out below
-            for (int i = k + 1; i < n; ++i) {
-                jacobian[i][k] = 0;
             }
         }
     }
-}
-
-void Gauss::Pivot(std::vector<std::vector<double>> &jacobian,
-                  std::vector<double> &funcSolution, const int k,
-                  const int n) {
-    double max = fabs(jacobian[k][k]);
-    int idx_max = k;
-
-    for (int i = k + 1; i < n; ++i) {
-        double ev = fabs(jacobian[i][k]);
-        if (ev > max) {
-            max = ev;
-            idx_max = i;
+    for (i=0;i<N-1;i++){               //Loop over elements to perform Gaussian Elimination
+        for (k=i+1;k<N;k++){
+            double t=A[k][i]/A[i][i];
+            for (j=0;j<=N;j++){
+                A[k][j]=A[k][j]-t*A[i][j];
+            }
         }
     }
-
-    // Swap values in rhs b
-    double t = funcSolution[k];
-    funcSolution[k] = funcSolution[idx_max];
-    funcSolution[idx_max] = t;
-
-    // Swap rows in matrix A
-    std::vector<double> p = jacobian[k];
-    jacobian[k] = jacobian[idx_max];
-    jacobian[idx_max] = p;
-}
-
-std::vector<double>
-Gauss::BackwardSolve(std::vector<std::vector<double>> &jacobian,
-                     std::vector<double> &funcSolution) {
-    std::vector<double> x(funcSolution.size());
-    int n = (int) funcSolution.size();
-    for (int i = n - 1; i >= 0; --i) {
-        x[i] = funcSolution[i];
-        for (int j = i + 1; j < n; ++j) {
-            x[i] -= jacobian[i][j] * x[j];
+    for (i=N-1;i>=0;i--){              //back-substitution
+        a[i]=A[i][N];
+        for (j=0;j<N;j++){
+            if (j!=i){
+                a[i]=a[i]-A[i][j]*a[j];
+            }
         }
-        x[i] /= jacobian[i][i];
+        a[i]=a[i]/A[i][i];
     }
-    return x;
+    return a;
 }

@@ -296,7 +296,7 @@ void TestSuit::testSystems() {
     newtonSystem.solve();
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
-    NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, valz,
+    NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, val2,
                                0.0001, 5, true);
     Expression mdExpz = derivativeSystem2.getEquation(0, 0);
     Expression mdExp2z = derivativeSystem2.getEquation(0, 1);

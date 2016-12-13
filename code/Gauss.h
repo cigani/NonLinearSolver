@@ -25,17 +25,9 @@
 class Gauss : public Equations {
 
 public:
-    void
-    GaussPartialPivoting(std::vector<std::vector<double>> &jacobian,
-                         std::vector<double> &funcSolutions);
 
-    void Pivot(std::vector<std::vector<double>> &jacobian,
-               std::vector<double> &funcSolution, const int k,
-               const int n);
-
-    std::vector<double>
-    BackwardSolve(std::vector<std::vector<double>> &jacobian,
-                  std::vector<double> &funcSolution);
+    std::vector<double> solveSystem(std::vector<std::vector<double>> &jacobian,
+                                    std::vector<double> &funcSolution, int degree);
 };
 
 

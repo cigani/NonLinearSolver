@@ -27,6 +27,8 @@ public:
     Expression getEquation(int i, int j);
     std::vector<std::vector<double>> evaluate(std::vector<double> &value);
 
+    int getColumns();
+
 };
 
 
