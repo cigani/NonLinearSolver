@@ -33,10 +33,6 @@ void NonlinearSystemsSolver::printVerbose(int i, std::vector<double> &x) {
 	};
 }
 
-void NonlinearSystemsSolver::printVerbose(int i, double &x) {
-    std::cout << std::setw(3) << i << "\t" << std::setw(20)
-              << x << std::setprecision(15) << std::endl;
-}
 
 
 

@@ -44,25 +44,21 @@ Chord::Chord(Expression &equation,
 Chord::~Chord() {}
 
 double Chord::solve() {
+
 	double xnew, dx , fx0, fx1;
     double x1 = x0 + 1;
 	int i;
 
-    if (verbose) {
-    	printVerbose(0, x0);
-    }
+    if (verbose) { printVerbose(0, x0); }
 
     fx0 = eq.evaluate(x0);
 
     for ( i = 2; i <= nMax; i++ ) {
-
     	fx1 = eq.evaluate(x1);
     	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
     	xnew = x1 - dx;
 
-    	if ( verbose ) {
-            printVerbose(i, xnew);
-        }
+    	if ( verbose ) { printVerbose(i, xnew); }
 
     	if (fabs(dx) < tol ) {
             return xnew;

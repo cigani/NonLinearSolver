@@ -47,15 +47,11 @@ double Aitken::solve() {
 
     phatold = x0;
 
-	if (verbose) {
-        printVerbose(0, phatold);
-	}
+	if (verbose) { printVerbose(0, phatold); }
 
 	x1 = eq.evaluate(x0);
 
-	if (verbose) {
-		printVerbose(1, x1);
-	}
+	if (verbose) { printVerbose(1, x1); }
 
     if (fabs(x1 - x0) < tol) {
         return x1;
@@ -66,9 +62,9 @@ double Aitken::solve() {
 	for ( i = 2; i <= nMax; i++ ) {
         x2 = eq.evaluate(x1);
         phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
-		if (verbose) {
-			printVerbose(i, phat);
-		}
+
+		if (verbose) { printVerbose(i, phat); }
+
 		if ( fabs(phatold - phat) < tol ) {
             return phat;
 		} else {
@@ -77,6 +73,7 @@ double Aitken::solve() {
             x1 = x2;
 		}
 	}
+
 	std::cout << "Maximum number of iterations exceeded" << std::endl;
     return phat;
 }

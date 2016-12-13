@@ -64,13 +64,6 @@ public:
      */
 	void printVerbose(int i, std::vector<double> &x);
 
-	/*! A function that takes a constant integer and a vector argument and prints to the console.
-     *
-     * \param i The current index or iteration to print out to the console.
-     * \param x The vector that contains current solution of the nonlinear problem.
-     */
-	void printVerbose(int i, double &x);
-
 };
     
 #endif /* NONLINEARSYSTEMSSOLVER_HPP_ */

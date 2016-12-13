@@ -66,11 +66,10 @@ Newton::Newton(Expression &equation,
 Newton::~Newton() {}
 
 double Newton::solve() {
+
     double dx, fx0, dfx0;
 
-    if (verbose) {
-    	printVerbose(0, x0);
-    }
+    if (verbose) { printVerbose(0, x0); }
 
     for (int i = 1; i <= nMax; i++) {
 
@@ -80,14 +79,11 @@ double Newton::solve() {
 
         x0 -= m*dx;
 
-        if (verbose) {
-            printVerbose(i, x0);
-        }
+        if (verbose) { printVerbose(i, x0); }
 
-        if (fabs(dx) < tol) {
-            return x0;
-        }
+        if (fabs(dx) < tol) { return x0; }
     }
+
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return x0;
 }

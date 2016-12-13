@@ -61,6 +61,7 @@ Bisection::Bisection(Expression &equation,
 }
 
 double Bisection::solve() {
+
     double sign_fa, sign_fb, sign_mp, midpoint, prev_midpoint = 0, error_est;
     int i;
 
@@ -72,9 +73,7 @@ double Bisection::solve() {
     for ( i = 1; i <= nMax; i++ ) {
         midpoint = a + (b - a)/2.0;
 
-        if ( verbose ) {
-            printVerbose(i, midpoint);
-        }
+        if ( verbose ) { printVerbose(i, midpoint); }
 
         sign_mp = getSign(eq.evaluate(midpoint));
 
