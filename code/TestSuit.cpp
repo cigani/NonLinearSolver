@@ -261,6 +261,7 @@ void TestSuit::testSystems() {
     std::vector<double> expectedDerdouble{1, 0.333333, -1, 2};
     std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
     std::vector<double> valz{3, 2};
+    std::vector<double> val2{0, 0};
     std::vector<std::string> expected{"x+y/3", "-x+2y"};
 
     Expression mExp = expressionSystem.getEquation(0, 0);
@@ -301,17 +302,13 @@ void TestSuit::testSystems() {
     Expression mdExp2z = derivativeSystem2.getEquation(0, 1);
     Expression mdExp3z = derivativeSystem2.getEquation(1, 0);
     Expression mdExp4z = derivativeSystem2.getEquation(1, 1);
-    std::vector<double> evaluatedDer2{mdExpz.evaluate(valz),
-                                      mdExp2z.evaluate(valz),
-                                      mdExp3z.evaluate(valz),
-                                      mdExp4z.evaluate(valz)};
+    std::vector<double> evaluatedDer2{mdExpz.evaluate(val2),
+                                      mdExp2z.evaluate(val2),
+                                      mdExp3z.evaluate(val2),
+                                      mdExp4z.evaluate(val2)};
     iteratate(evaluatedDer2, std::string("der"));
 
-    //newtonSystem2.solve();
-
-
-
-
+    newtonSystem2.solve();
 }
 
 void TestSuit::testExprtkJacobian() {
