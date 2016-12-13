@@ -261,7 +261,7 @@ void TestSuit::testSystems() {
     std::vector<double> expectedDerdouble{1, 0.333333, -1, 2};
     std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
     std::vector<double> valz{3, 2};
-    std::vector<double> val2{0, 0};
+    std::vector<double> val2{0.1, 0.1};
     std::vector<std::string> expected{"x+y/3", "-x+2y"};
 
     Expression mExp = expressionSystem.getEquation(0, 0);
@@ -297,7 +297,7 @@ void TestSuit::testSystems() {
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
     NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, valz,
-                               0.0001, 500, true);
+                               0.0001, 5, true);
     Expression mdExpz = derivativeSystem2.getEquation(0, 0);
     Expression mdExp2z = derivativeSystem2.getEquation(0, 1);
     Expression mdExp3z = derivativeSystem2.getEquation(1, 0);

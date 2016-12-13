@@ -42,6 +42,7 @@ std::vector<double> NewtonSystem::solve() {
         fxNeg = mEquationTools.negateVector(fx0);
         mGauss.GaussPartialPivoting(dfx0, fxNeg);
         dxyz = mGauss.BackwardSolve(dfx0, fxNeg);
+        iteratate(dxyz, std::string("dz"));
         dx = mEquationTools.addVectors(fx0, dxyz);
         v0 = dx;
         nextNorm = mEquationTools.getNorm(v0);
