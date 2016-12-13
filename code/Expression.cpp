@@ -51,7 +51,6 @@ double Expression::evaluate(double &value) {
 }
 
 double Expression::evaluate(std::vector<double> &value) {
-    std::cout << "I've been called!" << std::endl;
     symbol_table_t symbol_table;
     double x = value.at(0);
     symbol_table.add_variable("x", x);

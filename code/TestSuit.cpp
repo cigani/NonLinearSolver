@@ -255,7 +255,7 @@ void TestSuit::testSystems() {
     std::vector<double> vals{1, 3};
 
     // Need to do " ' ' " because the gets return ' ' around the equations.
-    std::vector<std::string> expected{"'x+y/3'", "'-x+2y'"};
+    std::vector<std::string> expected{"x+y/3", "-x+2y"};
     Expression mExp = expressionSystem.getEquation(0, 0);
     Expression mExp2 = expressionSystem.getEquation(1, 0);
     std::vector<std::string> actual{mExp.getEquation(), mExp2.getEquation()};
@@ -266,8 +266,9 @@ void TestSuit::testSystems() {
     std::vector<double>::const_iterator returns_iterator2;
     std::vector<double> expectedVals{2, 5};
 
-    iterateNestedVectors(expectedVals, mEval, returns_iterator,
-                         returns_iterator2);
+    iterateNestedVectors(expectedVals, mEval,
+                         returns_iterator,
+                         returns_iterator2, std::string("Test"));
 
 }
 
@@ -296,11 +297,11 @@ void TestSuit::testExprtkJacobian() {
 //    testEquation = mEquations.exprtkJacobian(equations, val1, var);
 }
 
-void TestSuit::iterateNestedVectors(
-        const std::vector<double> &assertResults,
-        std::vector<std::vector<double>> &returns,
-        std::vector<std::vector<double>>::const_iterator returns_iterator,
-        std::vector<double>::const_iterator &returns_iterator2) {
+void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
+                                    std::vector<std::vector<double>> &returns,
+                                    std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
+                                    std::vector<double>::const_iterator &returns_iterator2,
+                                    std::string name) {
 
     int n = 0;
     for (returns_iterator = returns.begin(); returns_iterator != returns.end();
@@ -312,8 +313,8 @@ void TestSuit::iterateNestedVectors(
             // Prefix vs Postfix ++;
             testAsssertion(0.015, assertResults[n++],
                            *returns_iterator2,
-                           std::string("Jacobian"));
-            std::cout << "HELLO!" << *returns_iterator2 << "\n";
+                           name);
+            std::cout << *returns_iterator2 << "\n";
         }
     }
 }

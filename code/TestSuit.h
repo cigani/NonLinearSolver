@@ -17,6 +17,7 @@
 
 
 class TestSuit {
+
 public:
     void testChordSolver(const double tol, const double expected, const int x0,
                          const int max, const bool verbose, std::string &eq);
@@ -64,7 +65,8 @@ public:
     void iterateNestedVectors(const std::vector<double> &assertResults,
                               std::vector<std::vector<double>> &returns,
                               std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
-                              std::vector<double>::const_iterator &returns_iterator2);
+                              std::vector<double>::const_iterator &returns_iterator2,
+                              std::string name = std::string("Jacobian"));
 
     void testSubtract();
 
