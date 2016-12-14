@@ -19,7 +19,7 @@ std::vector<double> Gauss::solveSystem(std::vector<std::vector<double>> &jacobia
         ++i;
     }
 
-    std::vector<double> a(N);
+    std::vector<double> a((unsigned long) N);
     for (i=0;i<N;i++){                 //First, pivot the Matrix
         for (k=i+1;k<N;k++){
             if (A[i][i]<A[k][i]){
