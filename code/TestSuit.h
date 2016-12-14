@@ -92,6 +92,8 @@ public:
                    std::string name);
 
     void iteratate(std::vector<double> &fxNeg, std::string name) const;
+
+    void testNonLinearSystems();
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

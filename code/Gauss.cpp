@@ -31,7 +31,8 @@ std::vector<double> Gauss::solveSystem(std::vector<std::vector<double>> &jacobia
             }
         }
     }
-    for (i=0;i<N-1;i++){               //Loop over elements to perform Gaussian Elimination
+    for (i = 0; i < N -
+                    1; i++) {  //Loop over elements to perform Gaussian Elimination
         for (k=i+1;k<N;k++){
             double t=A[k][i]/A[i][i];
             for (j=0;j<=N;j++){

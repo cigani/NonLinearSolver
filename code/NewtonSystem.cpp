@@ -37,7 +37,6 @@ std::vector<double> NewtonSystem::solve() {
         prevNorm = mEquationTools.getNorm(v0);
         std::vector<std::vector<double>> matrixfx0 = system.evaluate(v0);
         fx0 = convertMatrix2Vector(matrixfx0);
-        std::vector<std::vector<double>> fx0Pure = system.evaluate(v0);
         dfx0 = jac.evaluate(v0);
         fxNeg = mEquationTools.negateVector(fx0);
         dxyz = mGauss.solveSystem(dfx0, fxNeg, system.getColumns());
