@@ -58,10 +58,11 @@ public:
 
     void testErrorCode(std::string &ErrorType);
 
-    void iterateNestedVectors(const std::vector<double> &assertResults,
-                              std::vector<std::vector<double>> &returns,
-                              std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
-                              std::vector<double>::const_iterator &returns_iterator2,
+    template<typename T>
+    void iterateNestedVectors(const std::vector<T> &assertResults,
+                              std::vector<std::vector<T>> &returns,
+                              typename std::vector<std::__1::vector<T>>::const_iterator returns_iterator,
+                              typename std::vector<T>::const_iterator &returns_iterator2,
                               std::string name = std::string("Jacobian"));
 
     void testSubtract();
@@ -87,9 +88,11 @@ public:
     testAsssertion(std::vector<double> expected, std::vector<double> actual,
                    std::string name);
 
-    void iteratate(std::vector<double> &fxNeg, std::string name) const;
+    template<typename T>
+    void iteratate(std::vector<T> &fxNeg, std::string name) const;
 
     void testNonLinearSystems();
+
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

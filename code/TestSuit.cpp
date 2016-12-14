@@ -327,9 +327,10 @@ void TestSuit::testSubtract() {
     }
 }
 
+template<typename T>
 void
-TestSuit::iteratate(std::vector<double> &fxNeg, std::string name) const {
-    std::__1::vector<double>::const_iterator returns_iterator;
+TestSuit::iteratate(std::vector<T> &fxNeg, std::string name) const {
+    typename std::__1::vector<T>::const_iterator returns_iterator;
 
     for (returns_iterator = fxNeg.begin(); returns_iterator != fxNeg.end();
          ++returns_iterator) {
@@ -337,11 +338,13 @@ TestSuit::iteratate(std::vector<double> &fxNeg, std::string name) const {
     }
 }
 
-void TestSuit::iterateNestedVectors(const std::vector<double> &assertResults,
-                                    std::vector<std::vector<double>> &returns,
-                                    std::vector<std::__1::vector<double>>::const_iterator returns_iterator,
-                                    std::vector<double>::const_iterator &returns_iterator2,
-                                    std::string name) {
+template<typename T>
+void TestSuit::iterateNestedVectors(
+        const std::vector<T> &assertResults,
+        std::vector<std::vector<T>> &returns,
+        typename std::vector<std::vector<T>>::const_iterator returns_iterator,
+        typename std::vector<T>::const_iterator &returns_iterator2,
+        std::string name) {
 
     int n = 0;
     for (returns_iterator = returns.begin(); returns_iterator != returns.end();

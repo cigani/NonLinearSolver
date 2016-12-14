@@ -65,6 +65,7 @@ EquationTools::Determinant(std::vector<std::vector<double>> &M,
 /// \param v1
 /// \param v2
 /// \return
+
 std::vector<double> EquationTools::subtractVectors(
         std::vector<double> &v1, std::vector<double> &v2) {
     std::vector<double> result;
@@ -113,12 +114,4 @@ EquationTools::getNorm(std::vector<double> &vec) {
         result += *c * *c;
     }
     return sqrt(result);
-}
-
-void EquationTools::printVec(std::vector<double> &dx) {
-    std::vector<double>::const_iterator c;
-    for (c = dx.begin(); c != dx.end();
-         ++c) {
-        std::cout << *c << "\n";
-    }
 };
