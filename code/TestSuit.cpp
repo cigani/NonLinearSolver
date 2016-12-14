@@ -5,7 +5,6 @@
 
 #include <cfloat>
 #include "TestSuit.h"
-#include "Jacobian.h"
 #include "EquationTools.h"
 #include "Bisection.hpp"
 #include "Aitken.hpp"
@@ -74,10 +73,6 @@ int main(int argc, char* argv[]) {
     test.testAitkenWithExprtPoly(0.0015, 1.0, 99, 1000, false,
                                  equations.at(3));
 
-//    test.testNewtonWithExprtkPoly(0.00015, mAnswerVector.at(5), 0.0, 1000,
-//                                  false, equations.at(5), derivatives.at(5));
-
-    test.testExprtkJacobian();
     test.testDeterm();
     test.testSubtract();
     test.testSystems();
@@ -85,7 +80,6 @@ int main(int argc, char* argv[]) {
 
     // Error Logging
     test.iterateVectors(mErrors);
-
 
     return 0;
 
@@ -299,31 +293,6 @@ void TestSuit::testNonLinearSystems() {
     resultNewton = newtonSystem2.solve();
 
     testAsssertion(expected, resultNewton, std::string("NonLinear System"));
-}
-
-void TestSuit::testExprtkJacobian() {
-    std::vector<std::string> equations;
-    Jacobian mEquations;
-    equations.push_back("x^2 + y^4 - z^5 + 10");
-    equations.push_back("x^3 + y^2 - z^5 - 10");
-    equations.push_back("x^5 + y^3 - z^10 -100");
-    std::vector<double> val1{2, 3, 4};
-    std::vector<double> assertResults{4, 108, -1280,
-                                      12, 6, -1280,
-                                      80, 27, -2.62144e06};
-    int var = 3;
-
-    std::vector<std::vector<double>> returns = mEquations.exprtkJacobian(
-            equations, val1,
-            var);
-
-    std::vector<std::vector<double> >::const_iterator returns_iterator;
-    std::vector<double>::const_iterator returns_iterator2;
-
-    iterateNestedVectors(assertResults, returns, returns_iterator,
-                         returns_iterator2);
-    std::vector<std::vector<double>> testEquation;
-    testEquation = mEquations.exprtkJacobian(equations, val1, var);
 }
 
 void TestSuit::testErrorCode(std::string &ErrorType) {

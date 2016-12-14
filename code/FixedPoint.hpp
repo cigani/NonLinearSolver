@@ -17,7 +17,7 @@
 #include <cmath>
 #include <vector>
 #include "NonlinearSolver.hpp"
-#include "Equations.hpp"
+
 
 class FixedPoint : public NonlinearSolver {
 public:

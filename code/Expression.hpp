@@ -74,6 +74,7 @@ public:
 
     double evaluate(std::vector<double> &value);
 
+    double deriv(std::vector<double> &value, std::string withrespect);
 };
 
 #endif /* EXPRESSION_HPP_ */

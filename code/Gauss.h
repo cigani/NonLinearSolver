@@ -19,13 +19,16 @@
 #ifndef PCSC_NONLINEAR_SYSTEMS_PROJECT_GAUSS_H
 #define PCSC_NONLINEAR_SYSTEMS_PROJECT_GAUSS_H
 
+#import <vector>
 
-#include "Equations.hpp"
-
-class Gauss : public Equations {
+class Gauss {
 
 public:
-
+    /// \brief Generates a solution to Av = b. For vector (v).
+    /// \param jacobian  The Jacobian (A)
+    /// \param funcSolution The vector of solutions (b)
+    /// \param degree Size of the vectors
+    /// \return The Vector (v) solved
     std::vector<double> solveSystem(std::vector<std::vector<double>> &jacobian,
                                     std::vector<double> &funcSolution, int degree);
 };

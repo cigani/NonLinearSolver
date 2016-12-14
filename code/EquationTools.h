@@ -17,12 +17,18 @@
 #include <iomanip>
 #include <cmath>
 #include <vector>
-#include "Equations.hpp"
 #include "exprtk.hpp"
 #include "EquationsControl.h"
 
-class EquationTools : public Equations {
-
+class EquationTools {
+    /**
+ * Extract the Minor for a given Matrix. Edits the given Matrix via Refrence
+ *
+ * @param M - Given Matrix
+ * @param size - Size of Matrix (in our case M.Size());
+ * @param col - Column that will act as scalar in Det
+ * @param minor - Minor from @createMinor
+ */
     void
     ExtractMinor(std::vector<std::vector<double>> &M, const int size,
                  const int col,
@@ -37,10 +43,6 @@ public:
     std::vector<double>
     subtractVectors(std::vector<double> &v1,
                     std::vector<double> &v2);
-
-    std::vector<double>
-    getSystemEquations(const std::vector<std::string> &eq,
-                       std::vector<double> variableValues);
 
 
     std::vector<double>

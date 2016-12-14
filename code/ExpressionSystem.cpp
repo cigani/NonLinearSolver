@@ -58,16 +58,9 @@ void ExpressionSystem::print() {
 
 std::vector<std::vector<double>> ExpressionSystem::evaluate(std::vector<double> &value) {
     std::vector<std::vector<double>> results(rows, std::vector<double>(columns));
-//    std::cout << "CountROW: " << rows << std::endl;
-//    std::cout << "CountCOL: " << columns << std::endl;
     for (int row = 0; row < rows; ++row) {
         for (int col = 0; col < columns; ++col) {
-//            std::cout << std::endl;
-//            std::cout << "ROW: " << row << std::endl;
-//            std::cout << "COL: " << col << std::endl;
-//            std::cout << "VAL: " << value[0] << " " << value[1] << std::endl;
             results[row][col] = system[row][col].evaluate(value);
-//            std::cout << "RESULT: " << results[row][col] << std::endl;
         }
     }
     return results;
@@ -75,4 +68,17 @@ std::vector<std::vector<double>> ExpressionSystem::evaluate(std::vector<double> 
 
 int ExpressionSystem::getColumns() {
     return columns;
+}
+
+std::vector<std::vector<double>>
+ExpressionSystem::jacobian(std::vector<double> &value) {
+    std::vector<std::vector<double>> results(rows,
+                                             std::vector<double>(columns));
+    std::vector<std::string> vars{"x", "y", "z"};
+    for (int row = 0; row < rows; ++row) {
+        for (int col = 0; col < columns; ++col) {
+            results[row][col] = system[row][col].deriv(value, vars[col]);
+        }
+    }
+    return results;
 }

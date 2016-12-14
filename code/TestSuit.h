@@ -6,7 +6,7 @@
 #ifndef PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
 #define PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
 
-#include "Equations.hpp"
+
 #include "Chord.hpp"
 #include "Newton.hpp"
 #include "FixedPoint.hpp"
@@ -26,8 +26,6 @@ public:
                           const double x0,
                           const int max, const bool verbose, std::string &eq,
                           std::string &der);
-
-    void testFixedPointSolver();
 
     void testNewtonWithExprtkPoly(const double tol, const double expected,
                                   const double x0, const int max,
@@ -50,13 +48,11 @@ public:
                                  const bool verbose, std::string &eq,
                                  std::string &der);
 
-    void testExprtkJacobian();
-
 
     void iterateVectors(std::vector<std::string> &returns);
 
     void testDeterm();
-    //const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
+
     void testAsssertion(const double tol, const double expected,
                         const double &testNewton, std::string name);
 

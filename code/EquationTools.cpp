@@ -5,17 +5,9 @@
 */
 //
 
-#include "Equations.hpp"
 #include "EquationTools.h"
 
-/**
- * Extract the Minor for a given Matrix. Edits the given Matrix via Refrence
- *
- * @param M - Given Matrix
- * @param size - Size of Matrix (in our case M.Size());
- * @param col - Column that will act as scalar in Det
- * @param minor - Minor from @createMinor
- */
+
 void EquationTools::ExtractMinor(std::vector<std::vector<double>> &M,
                                  const int size,
                                  const int col,
@@ -54,8 +46,6 @@ double
 EquationTools::Determinant(std::vector<std::vector<double>> &M,
                            const int size) {
 
-    //TODO: special case for 3x3 matrix. Speeds it up
-
     if (size == 2) {
         return M[0][0] * M[1][1] - M[0][1] * M[1][0];
     } else {
@@ -71,6 +61,10 @@ EquationTools::Determinant(std::vector<std::vector<double>> &M,
     }
 }
 
+/// \brief Subtract two vectors point wise
+/// \param v1
+/// \param v2
+/// \return
 std::vector<double> EquationTools::subtractVectors(
         std::vector<double> &v1, std::vector<double> &v2) {
     std::vector<double> result;
@@ -80,6 +74,10 @@ std::vector<double> EquationTools::subtractVectors(
     return result;
 }
 
+/// \brief Add two vectors point wise
+/// \param v1
+/// \param v2
+/// \return
 std::vector<double> EquationTools::addVectors(
         std::vector<double> &v1, std::vector<double> &v2) {
     std::vector<double> result;
@@ -89,6 +87,9 @@ std::vector<double> EquationTools::addVectors(
     return result;
 }
 
+/// \brief Transform the vector into its negative (V)*(-1) point wise.
+/// \param v1
+/// \return
 std::vector<double> EquationTools::negateVector(
         std::vector<double> &v1) {
     std::vector<double> result;
@@ -97,16 +98,6 @@ std::vector<double> EquationTools::negateVector(
                   return (-v1);
               });
     return result;
-}
-
-std::vector<double>
-EquationTools::getSystemEquations(const std::vector<std::string> &eq,
-                                  std::vector<double> variableValues) {
-    std::vector<double> systemReturns;
-    for (std::string equations : eq) {
-        systemReturns.push_back(getEquations(equations, variableValues));
-    }
-    return systemReturns;
 }
 
 /**

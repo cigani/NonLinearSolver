@@ -34,9 +34,6 @@
  */
 
 #include "Newton.hpp"
-#include "EquationTools.h"
-#include "Jacobian.h"
-#include "Gauss.h"
 
 Newton::Newton(Expression &equation,
                Expression &derivative,

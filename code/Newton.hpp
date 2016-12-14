@@ -17,7 +17,6 @@
 #include <cmath>
 #include <vector>
 #include "NonlinearSolver.hpp"
-#include "Equations.hpp"
 
 class Newton : public NonlinearSolver{
 private:

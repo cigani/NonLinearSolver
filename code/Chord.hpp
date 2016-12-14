@@ -17,7 +17,6 @@
 #include <vector>
 #include <assert.h>
 #include "NonlinearSolver.hpp"
-#include "Equations.hpp"
 #include "Expression.hpp"
 
 class Chord : public NonlinearSolver{

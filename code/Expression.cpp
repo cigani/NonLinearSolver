@@ -72,3 +72,25 @@ double Expression::evaluate(std::vector<double> &value) {
 
     return expression.value();
 }
+
+double Expression::deriv(std::vector<double> &value, std::string withrespect) {
+    symbol_table_t symbol_table;
+    double x = value.at(0);
+    symbol_table.add_variable("x", x);
+    if (value.size() != 1) {
+        double y = value[1];
+        symbol_table.add_variable("y", y);
+        if (value.size() == 3) {
+            double z = value[2];
+            symbol_table.add_variable("z", z);
+        }
+    }
+    symbol_table.add_constants();
+
+    expression_t expression;
+    expression.register_symbol_table(symbol_table);
+
+    parser_t parser;
+    parser.compile(equation, expression);
+    return exprtk::derivative(expression, withrespect);
+}
