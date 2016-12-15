@@ -34,24 +34,18 @@ double Aitken::solve() {
 
 	x1 = eq.evaluate(x0);
 
-    if (fabs(x1 - x0) < tol) {
-        return x1;
-	} else {
-        x0 = x1;
-	}
-
-	for ( i = 2; i <= nMax; i++ ) {
+	for ( i = 1; i <= nMax; i++ ) {
         x2 = eq.evaluate(x1);
         phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
 
-		if (verbose) { printVerbose(i-1, phat); }
+		if (verbose) { printVerbose(i, phat); }
 
 		if ( fabs(phatold - phat) < tol ) {
             return phat;
 		} else {
             phatold = phat;
             x0 = x1;
-            x1 = x2;
+            x1 = phat;
 		}
 	}
 
