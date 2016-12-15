@@ -40,7 +40,7 @@ public:
 
     /*! A contructor to instantiate common variables to the family of nonlinear solvers.
      *
-     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param sys An ExpressionSystem object containing the system of equations.
      * \param initial The initial guess of the solution to the equation.
      * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
      * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
@@ -62,7 +62,7 @@ public:
     /*! A function that takes a constant integer and a vector argument and prints to the console.
      *
      * \param i The current index or iteration to print out to the console.
-     * \param x The vector that contains current solution of the nonlinear problem.
+     * \param v The vector that contains current solution of the nonlinear problem.
      */
 	void printVerbose(int i, std::vector<double> &v);
 

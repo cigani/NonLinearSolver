@@ -69,6 +69,12 @@ public:
      */
     double evaluate(double &value);
 
+    /*! A method to evaluate the mathematical expression in this class with vectors.
+     *
+     * \param value A vector of values.
+     */
+    double evaluate(std::vector<double> &value);
+
     /*! A method to evaluate the derivative of the Expression class.
      *
      * \param value A value to evaluate the expression.
