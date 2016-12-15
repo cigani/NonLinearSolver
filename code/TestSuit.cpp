@@ -143,7 +143,7 @@ TestSuit::testNewtonSolver(const double tol, const double expected,
     Expression equation = adaptor(eq);
     Expression derivative = adaptor(der);
     double value = adaptor(x0);
-    Newton testNewton(equation, derivative, value, tol, max, verbose);
+    Newton testNewton(equation, derivative, value, tol, max, verbose, 1);
     double *newtonRealValue = new double;
     *newtonRealValue = testNewton.solve();
 
@@ -161,7 +161,7 @@ TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
     Expression derivative = adaptor(der);
     double value = adaptor(x0);
     double testNewton;
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose, 1);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, eq);
@@ -176,7 +176,7 @@ TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
     Expression derivative = adaptor(der);
     Expression equation = adaptor(eq);
     double value = adaptor(x0);
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose, 1);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkLog"));
@@ -191,7 +191,7 @@ TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
     Expression equation = adaptor(eq);
     Expression derivative = adaptor(der);
     double value = adaptor(x0);
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose, 1);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkTrig"));
@@ -207,7 +207,7 @@ TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
     Expression equation = adaptor(eq);
     Expression derivative = adaptor(der);
     double value = adaptor(x0);
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equation, derivative, value, tol, max, verbose, 1);
     testNewton = mNewton.solve();
 
     testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkExp"));
@@ -273,7 +273,7 @@ void TestSuit::testSystems() {
                    std::string("Derivative Return"));
 
     NewtonSystem newtonSystem(expressionSystem, derivativeSystem, valz,
-                              0.0001, 500, false);
+                              0.0001, 500, false, 1);
 
     resultNewton = newtonSystem.solve();
 
@@ -289,7 +289,7 @@ void TestSuit::testNonLinearSystems() {
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
     NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, val2,
-                               0.0001, 500, false);
+                               0.0001, 500, false, 1);
     resultNewton = newtonSystem2.solve();
 
     testAsssertion(expected, resultNewton, std::string("NonLinear System"));

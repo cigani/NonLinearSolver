@@ -51,8 +51,6 @@ double Aitken::solve() {
 
 	x1 = eq.evaluate(x0);
 
-	if (verbose) { printVerbose(1, x1); }
-
     if (fabs(x1 - x0) < tol) {
         return x1;
 	} else {
@@ -63,14 +61,14 @@ double Aitken::solve() {
         x2 = eq.evaluate(x1);
         phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
 
-		if (verbose) { printVerbose(i, phat); }
+		if (verbose) { printVerbose(i-1, phat); }
 
 		if ( fabs(phatold - phat) < tol ) {
             return phat;
 		} else {
             phatold = phat;
             x0 = x1;
-            x1 = phat;
+            x1 = x2;
 		}
 	}
 

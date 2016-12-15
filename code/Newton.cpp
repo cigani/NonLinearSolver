@@ -78,7 +78,7 @@ double Newton::solve() {
 
         if (verbose) { printVerbose(i, x0); }
 
-        if (fabs(dx) < tol) { return x0; }
+        if (fabs(m*dx) < tol) { return x0; }
     }
 
     std::cout << "Maximum number of iterations exceeded" << std::endl;

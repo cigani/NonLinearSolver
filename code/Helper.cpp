@@ -28,6 +28,7 @@ void Helper::show_usage() {
               << " -v %b"
               << " -l %d"
               << " -u %d"
+              << " -mod %i"
               << std::endl
               << std::endl
               << "System of Equations Usage: "
@@ -39,6 +40,7 @@ void Helper::show_usage() {
               << " -nmax %i"
               << " -t %d"
               << " -v %b"
+              << " -mod %i"
               << std::endl
               << std::endl
               << "Scalar Nonlinear Solver Requirement: \n"
@@ -111,6 +113,12 @@ void Helper::show_usage() {
               << stringPadding(
                       "The upper bound of the search interval [default: 1.0]",
                       60)
+              << std::endl
+              << "\t"
+              << stringPadding("-mod", 20)
+              << stringPadding(
+                    "The multiplicity of the root of the equation for the modified newton method [default: 1]",
+                    60)
               << std::endl;
     show_methods();
 }
