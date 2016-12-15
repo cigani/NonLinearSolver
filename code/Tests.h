@@ -66,8 +66,10 @@ private:
     // Expected Results
     const std::vector<double> expectedresult{3.16227766517654, 1.05686,
                                             22026.4657948162, 0.8749999979997,
-                                            4.6052, -0.807004, 0.0};
+                                            4.6052, -0.807004, 3.14159265330048};
 public:
+    std::vector<std::string> mErrors;
+
     void testChordSolver(const double x0);
     void testNewtonSolver(const double x0);
     void testNewtonWithExprtkPoly(const double x0);
@@ -79,7 +81,7 @@ public:
     void testAsssertion(const double expected, const double &result,
                         std::string name);
 
-    void testErrorCode(std::string &ErrorType)const;
+    void testErrorCode(std::string &ErrorType);
     void testSubtract();
     void testBisectionWithExprtPoly(const double x0);
     void testAitkenWithExprtPoly(const double x0);
@@ -88,12 +90,12 @@ public:
                         std::vector<std::string> actual, std::string name);
     void
     testAsssertion(std::vector<double> expected, std::vector<double> actual,
-                   std::string name) const;
+                   std::string name);
     void testNonLinearSystems();
     void iterateVectors(std::vector<std::string> &returns);
     void testLinearSystem();
 
-    void testSystemsJacobian() const;
+    void testSystemsJacobian();
 
     void testFixedPointWithExprtPoly(const double x0);
 };

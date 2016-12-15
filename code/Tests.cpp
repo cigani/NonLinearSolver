@@ -6,7 +6,7 @@
 */
 
 
-std::vector<std::string> mErrors;
+
 int main(int argc, char* argv[]) {
     TestSuit test;
 
@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
     test.testSystemsJacobian();
 
     // Error Logging
-    test.iterateVectors(mErrors);
+    test.iterateVectors(test.mErrors);
 
     return 0;
 
@@ -56,7 +56,7 @@ void TestSuit::testAsssertion(std::vector<std::string> expected,
 
 void TestSuit::testAsssertion(std::vector<double> expected,
                               std::vector<double> actual,
-                              std::string name) const {
+                              std::string name) {
     for (unsigned long i = 0; i < actual.size(); i++) {
         double evaluate = expected.at(i) - actual.at(i);
         if (fabs(evaluate) > tolerance) {
@@ -223,7 +223,7 @@ void TestSuit::testNonLinearSystems() {
 
 }
 
-void TestSuit::testSystemsJacobian() const {
+void TestSuit::testSystemsJacobian() {
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
     std::__1::vector<double> values{1, 1};
@@ -274,7 +274,7 @@ void TestSuit::iterateVectors(std::vector<std::string> &returns) {
     } else std::cout << "~~~ No Errors ~~~" << std::endl;
 }
 
-void TestSuit::testErrorCode(std::string &ErrorType)const {
+void TestSuit::testErrorCode(std::string &ErrorType) {
     mErrors.push_back(ErrorType);
 }
 
