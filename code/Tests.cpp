@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
     test.testSystemsLoading();
     test.testNonLinearSystems();
     test.testLinearSystem();
+    test.testSystemsJacobian();
 
     // Error Logging
     test.iterateVectors(mErrors);
@@ -185,21 +186,45 @@ void TestSuit::testLinearSystem() {
 void TestSuit::testNonLinearSystems() {
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
-    std::__1::vector<double> values{270, 270.1};
+    std::__1::vector<double> values{270.8, 270.1};
     std::vector<double> expected{2.44710116609237, 1.83532587456419};
     std::vector<double> expectedModified{0.0, 0.0};
     std::vector<double> result, modifiedResult;
+
     NewtonSystem newtonSystem(expressionSystem2, derivativeSystem2, values,
                               tolerance, maxIter, verbosity, 1);
     NewtonSystem newtonSystemModified(expressionSystem2, derivativeSystem2,
                                       values,
                                       tolerance, maxIter, verbosity, 4);
+
     result = newtonSystem.solve();
     modifiedResult = newtonSystemModified.solve();
+
     testAsssertion(expected, result, std::string("NonLinear System"));
     // With a high mod it skips to the next zero of the function.
     testAsssertion(expectedModified, modifiedResult,
                    std::string("NonLinear System Modified"));
+
+}
+
+void TestSuit::testSystemsJacobian() const {
+    ExpressionSystem expressionSystem2("_equationNonLinear");
+    ExpressionSystem derivativeSystem2("_derivativeNonLinear");
+    std::__1::vector<double> values{1, 1};
+    auto vullture = expressionSystem2.jacobian(values);
+    auto valt = derivativeSystem2.evaluate(values);
+    for (auto i : valt) {
+        for (auto k: i) {
+            std::__1::cout << k << std::__1::endl;
+        }
+    }
+    std::cout << "\n" << std::endl;
+    for (auto i : vullture) {
+        std::cout << i.size() << "Size \n";
+        for (auto k: i) {
+            std::__1::cout << k << std::__1::endl;
+        }
+    }
 }
 
 void TestSuit::testDeterm() {

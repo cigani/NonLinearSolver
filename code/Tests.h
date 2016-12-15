@@ -85,6 +85,7 @@ public:
     void iterateVectors(std::vector<std::string> &returns);
     void testLinearSystem();
 
+    void testSystemsJacobian() const;
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
