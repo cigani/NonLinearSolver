@@ -86,7 +86,7 @@ void TestSuit::testNewtonSolver(const double x0) {
     delete (newtonRealValue);
 
     Newton testNewtonModified(equations.at(0), derivatives.at(0), x0,
-                              tolerance, maxIter + 50000, verbosity, 3);
+                              tolerance, maxIter * 50, verbosity, 3);
     double *testNewtonModifiedValue = new double;
     *testNewtonModifiedValue = testNewtonModified.solve();
     testAsssertion(expectedresult.at(0), *testNewtonModifiedValue,
