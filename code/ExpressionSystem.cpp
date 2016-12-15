@@ -2,6 +2,7 @@
 // Created by Alexander Lorkowski on 12/11/16.
 //
 
+#include <cassert>
 #include "ExpressionSystem.hpp"
 
 ExpressionSystem::ExpressionSystem(std::string input) {
@@ -18,6 +19,7 @@ void ExpressionSystem::read() {
     columns = 0;
     int count = 0;
     std::ifstream fin(filename);
+    assert(fin.is_open());
     std::string line;
     while (std::getline(fin, line)) {         // for each line
         std::vector<Expression> lineData;    // create a new row

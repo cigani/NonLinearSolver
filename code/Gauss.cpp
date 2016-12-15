@@ -5,6 +5,7 @@
 */
 //
 
+#include <iostream>
 #include "Gauss.h"
 
 std::vector<double> Gauss::solveSystem(std::vector<std::vector<double>> &jacobian,
@@ -19,35 +20,37 @@ std::vector<double> Gauss::solveSystem(std::vector<std::vector<double>> &jacobia
         ++i;
     }
 
-    std::vector<double> a((unsigned long) N);
-    for (i=0;i<N;i++){                 //First, pivot the Matrix
-        for (k=i+1;k<N;k++){
-            if (A[i][i]<A[k][i]){
-                for (j=0;j<=N;j++){
-                    double temp=A[i][j];
-                    A[i][j]=A[k][j];
-                    A[k][j]=temp;
+    std::vector<double> a(N);
+    for (i = 0; i < N; ++i){                 //First, pivot the Matrix
+        for (k = i+1; k < N; ++k){
+            if (A[i][i] < A[k][i]){
+                for (j=0; j <= N; ++j){
+                    double temp = A[i][j];
+                    A[i][j] = A[k][j];
+                    A[k][j] = temp;
                 }
             }
         }
     }
-    for (i = 0; i < N -
-                    1; i++) {  //Loop over elements to perform Gaussian Elimination
-        for (k=i+1;k<N;k++){
+
+    for (i = 0; i < N - 1; ++i) {  //Loop over elements to perform Gaussian Elimination
+        for (k=i+1; k < N; ++k){
             double t=A[k][i]/A[i][i];
-            for (j=0;j<=N;j++){
+            for (j=0; j <= N; ++j){
                 A[k][j]=A[k][j]-t*A[i][j];
             }
         }
     }
-    for (i=N-1;i>=0;i--){              //back-substitution
+
+    for (i=N-1; i >= 0; --i){              //back-substitution
         a[i]=A[i][N];
-        for (j=0;j<N;j++){
+        for (j=0; j < N; ++j){
             if (j!=i){
-                a[i]=a[i]-A[i][j]*a[j];
+                a[i] = a[i]-A[i][j]*a[j];
             }
         }
         a[i]=a[i]/A[i][i];
     }
+
     return a;
 }

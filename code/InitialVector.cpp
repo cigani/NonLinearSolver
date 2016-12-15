@@ -2,6 +2,7 @@
 // Created by Alexander Lorkowski on 12/11/16.
 //
 
+#include <cassert>
 #include <sstream>
 #include "InitialVector.hpp"
 
@@ -18,6 +19,7 @@ void InitialVector::read() {
     rows = 0;
     columns = 0;
     std::ifstream fin(filename);
+    assert(fin.is_open());
     std::string line;
     while (std::getline(fin, line)) {                       // for each line
         mInitialVector.push_back(std::stod(line));          // add to the current row
