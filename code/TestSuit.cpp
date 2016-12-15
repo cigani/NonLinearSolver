@@ -1,17 +1,12 @@
+#include "TestSuit.h"
+
 /* AUTHORS:
 * Jaquier, Michael <michael.jaquier@epfl.ch>
 * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
 */
 
-#include <cfloat>
-#include "TestSuit.h"
-#include "EquationTools.h"
-#include "Bisection.hpp"
-#include "Aitken.hpp"
-#include "NewtonSystem.hpp"
 
 std::vector<std::string> mErrors;
-
 int main(int argc, char* argv[]) {
     TestSuit test;
 
@@ -39,8 +34,9 @@ int main(int argc, char* argv[]) {
 
     test.testDeterm();
     test.testSubtract();
-    test.testSystems();
+    test.testSystemsLoading();
     test.testNonLinearSystems();
+    test.testLinearSystem();
 
     // Error Logging
     test.iterateVectors(mErrors);
@@ -83,8 +79,7 @@ void TestSuit::testAsssertion(std::vector<double> expected,
     }
 }
 
-void
-TestSuit::testChordSolver(const int x0) {
+void TestSuit::testChordSolver(const int x0) {
 
     Chord testChord(equations.at(0), x0, tolerance, maxIter, verbosity);
     double *chordRealValue = new double;
@@ -95,8 +90,7 @@ TestSuit::testChordSolver(const int x0) {
 
 };
 
-void
-TestSuit::testNewtonSolver(const double x0) {
+void TestSuit::testNewtonSolver(const double x0) {
     Newton testNewton(equations.at(0), derivatives.at(0), x0, tolerance, maxIter, verbosity);
     double *newtonRealValue = new double;
     *newtonRealValue = testNewton.solve();
@@ -106,8 +100,7 @@ TestSuit::testNewtonSolver(const double x0) {
     delete (newtonRealValue);
 }
 
-void
-TestSuit::testNewtonWithExprtkPoly(const double x0) {
+void TestSuit::testNewtonWithExprtkPoly(const double x0) {
     double testNewton;
     Newton mNewton(equations.at(1), derivatives.at(1), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
@@ -115,8 +108,7 @@ TestSuit::testNewtonWithExprtkPoly(const double x0) {
     testAsssertion(tolerance, expectedresult.at(1), testNewton, std::string("ExPolu"));
 }
 
-void
-TestSuit::testNewtonWithExprtkLog(const double x0) {
+void TestSuit::testNewtonWithExprtkLog(const double x0) {
     double testNewton;
     Newton mNewton(equations.at(2), derivatives.at(2), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
@@ -124,8 +116,7 @@ TestSuit::testNewtonWithExprtkLog(const double x0) {
     testAsssertion(tolerance, expectedresult.at(2), testNewton, std::string("NewtonExprtkLog"));
 }
 
-void
-TestSuit::testNewtonWithExprtTrig(const double x0) {
+void TestSuit::testNewtonWithExprtTrig(const double x0) {
     double testNewton;
     Newton mNewton(equations.at(3), derivatives.at(3), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
@@ -134,8 +125,7 @@ TestSuit::testNewtonWithExprtTrig(const double x0) {
 
 }
 
-void
-TestSuit::testNewtonWithExprtExp(const double x0) {
+void TestSuit::testNewtonWithExprtExp(const double x0) {
     double testNewton;
     Newton mNewton(equations.at(4), derivatives.at(4), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
@@ -143,8 +133,7 @@ TestSuit::testNewtonWithExprtExp(const double x0) {
     testAsssertion(tolerance, expectedresult.at(4), testNewton, std::string("NewtonExprtkExp"));
 }
 
-void
-TestSuit::testBisectionWithExprtPoly(const double x0) {
+void TestSuit::testBisectionWithExprtPoly(const double x0) {
     double testBisection;
     Bisection mBisection(equations.at(0), x0, tolerance, maxIter, verbosity, 0, 100);
     testBisection = mBisection.solve();
@@ -161,64 +150,70 @@ void TestSuit::testAitkenWithExprtPoly(const double x0) {
     testAsssertion(tolerance, 1.0, testAitken, std::string("Aitken"));
 }
 
-void TestSuit::testSystems() {
+void TestSuit::testSystemsLoading() {
     ExpressionSystem expressionSystem("_equations.txt");
     ExpressionSystem derivativeSystem("_derivative.txt");
-    std::vector<double> expectedVals{2, 5};
-    std::vector<double> expectedDerdouble{1, 0.333333, -1, 2};
-    std::vector<std::string> expectedDer{"1", "1/3", "-1", "2"};
-    std::vector<double> valz{3, 2};
-    std::vector<std::string> expected{"x+y/3", "-x+2y"};
-    std::vector<double> resultNewton;
-    std::vector<double> expectedArray{0.0, 0.0};
+    std::vector<double> expectedDerivativeValue{1, 0.333333, -1, 2};
+    std::vector<std::string> expectedDerivativeFunction{"1", "1/3", "-1", "2"};
+    std::vector<std::string> expectedEquationFunction{"x+y/3", "-x+2y"};
 
     Expression mExp = expressionSystem.getEquation(0, 0);
     Expression mExp2 = expressionSystem.getEquation(1, 0);
-    std::vector<std::string> actual{mExp.getEquation(), mExp2.getEquation()};
-    testAsssertion(expected, actual, std::string("Test Systems"));
+    std::vector<std::string> actualEquation{mExp.getEquation(),
+                                            mExp2.getEquation()};
 
     Expression mdExp = derivativeSystem.getEquation(0, 0);
     Expression mdExp2 = derivativeSystem.getEquation(0, 1);
     Expression mdExp3 = derivativeSystem.getEquation(1, 0);
     Expression mdExp4 = derivativeSystem.getEquation(1, 1);
-    std::vector<std::string> actualDer{mdExp.getEquation(),
-                                       mdExp2.getEquation(),
-                                       mdExp3.getEquation(),
-                                       mdExp4.getEquation()};
-    testAsssertion(expectedDer, actualDer, std::string("Derivative Systems"));
+    std::vector<std::string> actualDerivative{mdExp.getEquation(),
+                                              mdExp2.getEquation(),
+                                              mdExp3.getEquation(),
+                                              mdExp4.getEquation()};
 
-    std::vector<double> evaluatedDer{mdExp.evaluate(valz),
-                                     mdExp2.evaluate(valz),
-                                     mdExp3.evaluate(valz),
-                                     mdExp4.evaluate(valz)};
-    testAsssertion(expectedDerdouble, evaluatedDer,
+    std::vector<double> value{3, 2};
+    std::vector<double> evaluatedDer{mdExp.evaluate(value),
+                                     mdExp2.evaluate(value),
+                                     mdExp3.evaluate(value),
+                                     mdExp4.evaluate(value)};
+
+
+    testAsssertion(expectedEquationFunction, actualEquation,
+                   std::string("Test Systems"));
+    testAsssertion(expectedDerivativeFunction, actualDerivative,
+                   std::string("Derivative Systems"));
+    testAsssertion(expectedDerivativeValue, evaluatedDer,
                    std::string("Derivative Return"));
-
-    NewtonSystem newtonSystem(expressionSystem, derivativeSystem, valz,
-                              0.0001, 500, false);
-
-    resultNewton = newtonSystem.solve();
-
-    testAsssertion(expectedArray, resultNewton, std::string("NewtonSystem"));
 
 }
 
+void TestSuit::testLinearSystem() {
+    ExpressionSystem expressionSystem("_equations.txt");
+    ExpressionSystem derivativeSystem("_derivative.txt");
+    std::vector<double> values{3, 2};
+    std::vector<double> expectedArray{0.0, 0.0};
+    std::vector<double> resultNewton;
+    NewtonSystem newtonSystem(expressionSystem, derivativeSystem, values,
+                              tolerance, maxIter, verbosity);
+
+    resultNewton = newtonSystem.solve();
+
+    testAsssertion(expectedArray, resultNewton,
+                   std::__1::string("NewtonSystem"));
+}
+
 void TestSuit::testNonLinearSystems() {
-    std::__1::vector<double> val2{10, 6.1};
+    std::__1::vector<double> values{10, 6.1};
     std::vector<double> expected{2.44710116609237, 1.83532587456419};
     std::vector<double> resultNewton;
 
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
-    NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, val2,
-                               0.0001, 500, false);
+    NewtonSystem newtonSystem2(expressionSystem2, derivativeSystem2, values,
+                               tolerance, maxIter, verbosity);
     resultNewton = newtonSystem2.solve();
 
     testAsssertion(expected, resultNewton, std::string("NonLinear System"));
-}
-
-void TestSuit::testErrorCode(std::string &ErrorType) {
-    mErrors.push_back(ErrorType);
 }
 
 void TestSuit::testDeterm() {
@@ -231,9 +226,9 @@ void TestSuit::testDeterm() {
     values.push_back(val2);
     values.push_back(val3);
     values.push_back(val4);
+
     EquationTools mEquations;
     double det = mEquations.Determinant(values, (const int) values.size());
-//    std::cout<<"det" << det << std::endl;
     testAsssertion(0.0015, -20, det, std::string("Determinant"));
 }
 
@@ -249,41 +244,6 @@ void TestSuit::testSubtract() {
     }
 }
 
-template<typename T>
-void
-TestSuit::iteratate(std::vector<T> &fxNeg, std::string name) const {
-    typename std::__1::vector<T>::const_iterator returns_iterator;
-
-    for (returns_iterator = fxNeg.begin(); returns_iterator != fxNeg.end();
-         ++returns_iterator) {
-        std::__1::cout << name << " | " << *returns_iterator << "\n";
-    }
-}
-
-template<typename T>
-void TestSuit::iterateNestedVectors(
-        const std::vector<T> &assertResults,
-        std::vector<std::vector<T>> &returns,
-        typename std::vector<std::vector<T>>::const_iterator returns_iterator,
-        typename std::vector<T>::const_iterator &returns_iterator2,
-        std::string name) {
-
-    int n = 0;
-    for (returns_iterator = returns.begin(); returns_iterator != returns.end();
-         ++returns_iterator) {
-        for (returns_iterator2 = (*returns_iterator).begin();
-             returns_iterator2 != (*returns_iterator).end();
-             ++returns_iterator2) {
-            // This is an interesting trick to inc while still evaluating
-            // Prefix vs Postfix ++;
-            testAsssertion(0.015, assertResults[n++],
-                           *returns_iterator2,
-                           name);
-            //std::cout << *returns_iterator2 << "\n";
-        }
-    }
-}
-
 void TestSuit::iterateVectors(std::vector<std::string> &returns) {
 
     if (returns.size() != 0) {
@@ -293,16 +253,7 @@ void TestSuit::iterateVectors(std::vector<std::string> &returns) {
     } else std::cout << "~~~ No Errors ~~~" << std::endl;
 }
 
-double TestSuit::adaptor(double val) {
-    //std::vector<double> values;
-    //values.push_back(val);
-    double values = val;
-    return values;
+void TestSuit::testErrorCode(std::string &ErrorType) {
+    mErrors.push_back(ErrorType);
 }
 
-Expression TestSuit::adaptor(std::string &eq) {
-    //std::vector<Expression> equation;
-    Expression mEquation = eq;
-    //equation.push_back(mEquation);
-    return mEquation;
-}
