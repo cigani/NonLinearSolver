@@ -86,6 +86,8 @@ public:
     void testLinearSystem();
 
     void testSystemsJacobian() const;
+
+    void testFixedPointWithExprtPoly(const double x0);
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H

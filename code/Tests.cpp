@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
     test.testNewtonWithExprtExp(0.0);
     test.testBisectionWithExprtPoly(3.0);
     test.testAitkenWithExprtPoly(99.0);
+    test.testFixedPointWithExprtPoly(99.0);
     test.testDeterm();
     test.testSubtract();
     test.testSystemsLoading();
@@ -132,6 +133,13 @@ void TestSuit::testAitkenWithExprtPoly(const double x0) {
     Aitken mAitken(equations.at(3), x0, tolerance, maxIter, verbosity);
     testAitken = mAitken.solve();
     testAsssertion(1.0, testAitken, std::string("Aitken"));
+}
+
+void TestSuit::testFixedPointWithExprtPoly(const double x0) {
+    double testFixedPoint;
+    FixedPoint mFixedPoint(equations.at(3), x0, tolerance, maxIter, verbosity);
+    testFixedPoint = mFixedPoint.solve();
+    testAsssertion(1.0, testFixedPoint, std::string("Aitken"));
 }
 
 void TestSuit::testSystemsLoading() {
