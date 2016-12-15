@@ -10,46 +10,68 @@
 #include "Chord.hpp"
 #include "Newton.hpp"
 #include "FixedPoint.hpp"
-#include <assert.h>
 #include "exprtk.hpp"
 #include "ExpressionSystem.hpp"
+#include "TestSuit.h"
+#include "EquationTools.h"
+#include "Bisection.hpp"
+#include "Aitken.hpp"
+#include "NewtonSystem.hpp"
 #include <vector>
+#include <cfloat>
+#include <assert.h>
 
 
 class TestSuit {
+private:
 
+    // Default Parameters
+    const double tolerance = 0.0015;
+    const int maxIter = 1000;
+    const bool verbosity = false;
+
+    // Equations
+    Expression mPolyCoefficient = Expression("x^2 -10");
+    Expression mZeroDerivativeCheck = Expression("x^2 - x^3 -x^6 +x^7 +22x^3 -33x^6 +20");
+    Expression mLogCoefficient = Expression("log(x) - 10");
+    Expression mTrigCoefficient = Expression("cos(2*pi*x) + sin(2*pi*x)");
+    Expression mExpCoefficient = Expression("exp(x) - 100");
+    Expression mNoDerivative = Expression("10");
+
+    // Derivatives
+    Expression mPolyDer = Expression("2x");
+    Expression mZeroDer = Expression("2x - 3x^2 -6x^5 + 7x^6 + 22*3x^2 -33*6x^5");
+    Expression mLogDer = Expression("1/x");
+    Expression mTrigDer = Expression("2*pi(cos(2*pi*x) - sin(2*pi*x))");
+    Expression mExpDer = Expression("exp(x)");
+    Expression mNoDer = Expression("0.0");
+
+    // Equation Vector
+    std::vector<Expression> equations{mPolyCoefficient, mZeroDerivativeCheck,
+                                       mLogCoefficient, mTrigCoefficient,
+                                       mExpCoefficient, mNoDerivative};
+
+    // Derivative Vector
+    std::vector<Expression> derivatives{mPolyDer, mZeroDer, mLogDer, mTrigDer,
+                                         mExpDer, mNoDer};
+
+    // Expected Results
+    const std::vector<double> expectedresult{3.16227766517654, 1.05686,
+                                            22026.4657948162, 0.8749999979997,
+                                            4.6052, -0.807004};
 public:
-    void testChordSolver(const double tol, const double expected, const int x0,
-                         const int max, const bool verbose, std::string &eq);
+    void testChordSolver(const int x0);
 
-    void testNewtonSolver(const double tol, const double expected,
-                          const double x0,
-                          const int max, const bool verbose, std::string &eq,
-                          std::string &der);
+    void testNewtonSolver(const double x0);
 
-    void testNewtonWithExprtkPoly(const double tol, const double expected,
-                                  const double x0, const int max,
-                                  const bool verbose, std::string &eq,
-                                  std::string &der);
+    void testNewtonWithExprtkPoly(const double x0);
 
-    void testNewtonWithExprtTrig(const double tol, const double expected,
-                                 const double x0, const int max,
-                                 const bool verbose, std::string &eq,
-                                 std::string &der);
+    void testNewtonWithExprtTrig(const double x0);
 
-    void testNewtonWithExprtExp(const double tol, const double expected,
-                                const double x0, const int max,
-                                const bool verbose,
-                                std::string &eq, std::string &der);
+    void testNewtonWithExprtExp(const double x0);
 
 
-    void testNewtonWithExprtkLog(const double tol, const double expected,
-                                 const double x0, const int max,
-                                 const bool verbose, std::string &eq,
-                                 std::string &der);
-
-
-    void iterateVectors(std::vector<std::string> &returns);
+    void testNewtonWithExprtkLog(const double x0);
 
     void testDeterm();
 
@@ -58,28 +80,13 @@ public:
 
     void testErrorCode(std::string &ErrorType);
 
-    template<typename T>
-    void iterateNestedVectors(const std::vector<T> &assertResults,
-                              std::vector<std::vector<T>> &returns,
-                              typename std::vector<std::__1::vector<T>>::const_iterator returns_iterator,
-                              typename std::vector<T>::const_iterator &returns_iterator2,
-                              std::string name = std::string("Jacobian"));
-
     void testSubtract();
 
-    Expression adaptor(std::string &eq);
+    void testBisectionWithExprtPoly(const double x0);
 
-    double adaptor(double val);
+    void testAitkenWithExprtPoly(const double x0);
 
-    void testBisectionWithExprtPoly(const double tol, const double expected,
-                                    const double x0, const int max,
-                                    const bool verbose, std::string &eq);
-
-    void testAitkenWithExprtPoly(const double tol, const double expected,
-                                   const double x0, const int max,
-                                   const bool verbose, std::string &eq);
-
-    void testSystems();
+    void testSystemsLoading();
 
     void testAsssertion(std::vector<std::string> expected,
                         std::vector<std::string> actual, std::string name);
@@ -88,11 +95,11 @@ public:
     testAsssertion(std::vector<double> expected, std::vector<double> actual,
                    std::string name);
 
-    template<typename T>
-    void iteratate(std::vector<T> &fxNeg, std::string name) const;
-
     void testNonLinearSystems();
 
+    void iterateVectors(std::vector<std::string> &returns);
+
+    void testLinearSystem();
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
