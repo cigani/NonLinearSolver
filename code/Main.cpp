@@ -23,6 +23,7 @@
 #include "Helper.hpp"
 #include "ExpressionSystem.hpp"
 #include "NewtonSystem.hpp"
+#include "InitialVector.hpp"
 //#include "Eigen/Eigen"
 
 #ifndef NDEBUG
@@ -51,7 +52,7 @@ int main(int argc, char *argv[]) {
     Expression mDerivative;
     ExpressionSystem mSystem;
     ExpressionSystem mJacobian;
-    InitialVector mVector;
+    InitialVector mInitialVector;
     double x0 = 0.0;
     int nMax = 1000;
     double tol = 0.001;
@@ -61,7 +62,7 @@ int main(int argc, char *argv[]) {
 
     bool systemFlag = false;
     bool jacobianFlag = false;
-    std::vector<double> xv;
+    bool vectorFlag = false;
 
     // Parse the command line arguments for flags and values
     for (int i = 1; i < argc; i++) {
@@ -85,14 +86,6 @@ int main(int argc, char *argv[]) {
                     help.show_methods();
                     return 1;
                 }
-            } else if (strcmp(argv[i], "-f") == 0) {
-                // System of Equations
-                mSystem = ExpressionSystem(argv[i + 1]);
-                systemFlag = true;
-            } else if (strcmp(argv[i], "-j") == 0) {
-                // Jacobian
-                mJacobian = ExpressionSystem(argv[i + 1]);
-                jacobianFlag = true;
             } else if (strcmp(argv[i], "-e") == 0) {
                 // Mathematical Expression
                 mExpression.setEquation(argv[i + 1]);
@@ -102,10 +95,18 @@ int main(int argc, char *argv[]) {
             } else if (strcmp(argv[i], "-xi") == 0) {
                 // Initial Value
                 x0 = std::stod(argv[i + 1]);
+            } else if (strcmp(argv[i], "-f") == 0) {
+                // System of Equations
+                mSystem = ExpressionSystem(argv[i + 1]);
+                systemFlag = true;
+            } else if (strcmp(argv[i], "-j") == 0) {
+                // Jacobian
+                mJacobian = ExpressionSystem(argv[i + 1]);
+                jacobianFlag = true;
             } else if (strcmp(argv[i], "-xv") == 0) {
                 // Initial Value
-                xv.push_back(std::stod(argv[i + 1]));
-                xv.push_back(std::stod(argv[i + 2]));
+                mInitialVector = InitialVector(argv[i + 1]);
+                vectorFlag = true;
             } else if (strcmp(argv[i], "-nmax") == 0) {
                 // Maximum number of iterations. Default 1000
                 nMax = std::stoi(argv[i + 1]);
@@ -137,8 +138,6 @@ int main(int argc, char *argv[]) {
         mAssert(mExpression.getEquation() != "0",
                 "ERROR: No mathematical expression provided");
     } else {
-        mAssert(jacobianFlag,
-                "ERROR: No jacobian provided");
         mAssert(boost::iequals(mMethod, "newton"),
                 "ERROR: Only the Newton method is available for evaluating systems of equations.");
     }
@@ -219,11 +218,16 @@ int main(int argc, char *argv[]) {
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if ((boost::iequals(mMethod, "newton"))&&(systemFlag)) {
+        mAssert(jacobianFlag,
+                "ERROR: No jacobian provided");
+        mAssert(vectorFlag,
+                "ERROR: No initial vector provided");
+
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
 
         NewtonSystem newtonSystem(mSystem,
                                   mJacobian,
-                                  xv,
+                                  mInitialVector.getValues(),
                                   tol,
                                   nMax,
                                   verbose);
@@ -231,9 +235,9 @@ int main(int argc, char *argv[]) {
         std::vector<double> result = newtonSystem.solve();
 
         std::cout << std::endl << "RESULT" << std::endl;
-        std::vector<double>::const_iterator c;
-        for (c = result.begin(); c != result.end(); ++c) {
-            std::cout << std::setprecision(15) << *c << "\n";
+        std::vector<double>::const_iterator it;
+        for (it = result.begin(); it != result.end(); ++it) {
+            std::cout << std::setprecision(15) << *it << "\n";
         };
         std::cout << std::endl;
     } else {
