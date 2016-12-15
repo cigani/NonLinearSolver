@@ -12,6 +12,7 @@
  */
 
 #include "Newton.hpp"
+#include "Exception.hpp"
 
 Newton::Newton(Expression &equation,
                Expression &derivative,
@@ -50,7 +51,21 @@ double Newton::solve() {
 
         fx0 = eq.evaluate(x0);
         dfx0 = df.evaluate(x0);
-        dx = fx0 / dfx0;
+
+        try {
+            dx = fx0 / dfx0;
+            if (!std::isfinite(dx)) {
+                throw Exception("dx",
+                                "The derivative is 0.  Shifting value by with a random double drawn from [0,1].");
+            }
+        }catch (Exception& error) {
+            if (verbose) { error.PrintDebug(); }
+            srand(time(NULL));
+            double randdouble = (double)(rand() % 100 + 1)/100;
+            x0 += randdouble;
+            if (verbose) { printVerbose(i, x0); }
+            continue;
+        }
 
         x0 -= (double)m * dx;
 

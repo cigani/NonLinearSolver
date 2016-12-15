@@ -12,6 +12,7 @@
  */
 
 #include "Aitken.hpp"
+#include "Exception.hpp"
 
 Aitken::Aitken(Expression &equation,
                double initial,
@@ -36,7 +37,16 @@ double Aitken::solve() {
 
 	for ( i = 1; i <= nMax; i++ ) {
         x2 = eq.evaluate(x1);
-        phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
+
+        try {
+            phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
+            if (isnan(phat)) {
+                throw Exception("phat", "The denominator has become 0.  Returning last valid solution.");
+            }
+        } catch (Exception& error) {
+            error.PrintDebug();
+            return phatold;
+        }
 
 		if (verbose) { printVerbose(i, phat); }
 

@@ -10,10 +10,10 @@ add_executable(RunMain Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
         string.hpp EquationTools.cpp
         Gauss.cpp Expression.cpp Helper.cpp ExpressionSystem.cpp
-        NewtonSystem.cpp NonlinearSystemsSolver.cpp InitialVector.cpp)
+        NewtonSystem.cpp NonlinearSystemsSolver.cpp InitialVector.cpp Exception.cpp)
 add_executable(RunFunctionTests Tests.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
         string.hpp EquationTools.cpp
         Gauss.cpp Expression.cpp ExpressionSystem.cpp
-        NewtonSystem.cpp NonlinearSystemsSolver.cpp InitialVector.cpp)
+        NewtonSystem.cpp NonlinearSystemsSolver.cpp InitialVector.cpp Exception.cpp)
 
