@@ -48,7 +48,7 @@ public:
      */
     NonlinearSystemsSolver(
 			ExpressionSystem &sys,
-			std::vector<double> initial,
+			std::vector<double> &initial,
             double tolerance,
             int maxIter,
             bool verbosity);

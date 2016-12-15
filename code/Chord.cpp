@@ -53,7 +53,7 @@ double Chord::solve() {
 
     fx0 = eq.evaluate(x0);
 
-    for ( i = 2; i <= nMax; i++ ) {
+    for ( i = 1; i <= nMax; i++ ) {
     	fx1 = eq.evaluate(x1);
     	dx = fx1 * ( x1 - x0 ) / ( fx1 - fx0 );
     	xnew = x1 - dx;
@@ -68,6 +68,7 @@ double Chord::solve() {
     		x1 = xnew;
         }
     }
+
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return xnew;
 }

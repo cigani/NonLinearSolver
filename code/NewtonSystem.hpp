@@ -30,10 +30,11 @@ public:
     /// \param verbosity -  Print intermediate steps
     NewtonSystem(ExpressionSystem &system,
                  ExpressionSystem &jacobian,
-                 std::vector<double> initial,
+                 std::vector<double> &initial,
                  double tolerance,
                  int maxIter,
-                 bool verbosity);
+                 bool verbosity,
+                 int mod);
 
     virtual ~NewtonSystem();
 

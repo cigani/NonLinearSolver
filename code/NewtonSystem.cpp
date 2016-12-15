@@ -10,14 +10,15 @@
 
 NewtonSystem::NewtonSystem(ExpressionSystem &sys,
                            ExpressionSystem &jacobian,
-                           std::vector<double> initial,
+                           std::vector<double> &initial,
                            double tolerance,
                            int maxIter,
-                           bool verbosity)
+                           bool verbosity,
+                           int mod)
         : NonlinearSystemsSolver(sys, initial, tolerance, maxIter, verbosity)
 {
     jac = jacobian;
-    m = 1;
+    m = mod;
 }
 
 NewtonSystem::~NewtonSystem() {}

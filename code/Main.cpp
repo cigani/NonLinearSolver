@@ -59,6 +59,7 @@ int main(int argc, char *argv[]) {
     bool verbose = false;
     double lowerBound = -1.0;
     double upperBound = 1.0;
+    int mod = 1;
 
     bool systemFlag = false;
     bool jacobianFlag = false;
@@ -124,6 +125,9 @@ int main(int argc, char *argv[]) {
             } else if (strcmp(argv[i], "-u") == 0) {
                 // Upper bound of the search interval
                 upperBound = std::stod(argv[i + 1]);
+            } else if (strcmp(argv[i], "-mod") == 0) {
+                // Newton modifier
+                mod = std::stoi(argv[i + 1]);
             } else if ((strcmp(argv[i], "-h") == 0) ||
                        (strcmp(argv[i], "--help") == 0)) {
                 // Print help dialog
@@ -210,7 +214,8 @@ int main(int argc, char *argv[]) {
                       x0,
                       tol,
                       nMax,
-                      verbose);
+                      verbose,
+                      mod);
 
         double result = newton.solve();
 
@@ -225,12 +230,15 @@ int main(int argc, char *argv[]) {
 
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
 
+        std::vector<double> initial = mInitialVector.getValues();
+
         NewtonSystem newtonSystem(mSystem,
                                   mJacobian,
-                                  mInitialVector.getValues(),
+                                  initial,
                                   tol,
                                   nMax,
-                                  verbose);
+                                  verbose,
+                                  mod);
 
         std::vector<double> result = newtonSystem.solve();
 
