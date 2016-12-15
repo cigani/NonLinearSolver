@@ -1,9 +1,14 @@
-//
-/* AUTHORS:
-* Jaquier, Michael <michael.jaquier@epfl.ch>
-* Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
-*/
-//
+/*
+ * Gauss.cpp
+ *
+ * DESCRIPTION: Gaussian elimination for systems of equations.
+ *
+ * Created on: December 10, 2016
+ *
+ * AUTHORS:
+ * Jaquier, Michael <michael.jaquier@epfl.ch>
+ * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+ */
 
 #include <iostream>
 #include "Gauss.h"

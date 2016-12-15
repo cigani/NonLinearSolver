@@ -1,6 +1,14 @@
-//
-// Created by Alexander Lorkowski on 12/11/16.
-//
+/*
+ * InitialVector.cpp
+ *
+ * DESCRIPTION: Class responsible from reading a file and putting it into a vector.
+ *
+ * Created on: December 14, 2016
+ *
+ * AUTHORS:
+ * Jaquier, Michael <michael.jaquier@epfl.ch>
+ * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+ */
 
 #include <cassert>
 #include <sstream>
@@ -40,8 +48,4 @@ void InitialVector::print() {
     for (row = mInitialVector.begin(); row != mInitialVector.end(); ++row) {
             std::cout << (*row) << std::endl;
     };
-}
-
-int InitialVector::getRows() {
-    return rows;
 }

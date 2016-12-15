@@ -28,19 +28,16 @@ public:
     InitialVector();
     virtual ~InitialVector();
 
-    /// Method to return the vector compromising the system of equations.
+    /// Method to return the values contained in the vector.
     std::vector<double> getValues();
 
     /// Method to print out the equations
     void print();
 
     /// \brief Method to return an individual equation from the system matrix
-    /// \param i  The column
-    /// \param j  The row
+    /// \param i  The index of the value to be returned.
     /// \return  Returns a Expression which contains a single equation.
     double getValue(int i);
-
-    int getRows();
 };
 
 

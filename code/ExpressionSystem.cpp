@@ -1,6 +1,14 @@
-//
-// Created by Alexander Lorkowski on 12/11/16.
-//
+/*
+ * ExpressionSystem.cpp
+ *
+ * DESCRIPTION: Reads file into a matrix of Expressions.
+ *
+ * Created on: December 11, 2016
+ *
+ * AUTHORS:
+ * Jaquier, Michael <michael.jaquier@epfl.ch>
+ * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+ */
 
 #include <cassert>
 #include "ExpressionSystem.hpp"

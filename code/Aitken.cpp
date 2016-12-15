@@ -4,24 +4,7 @@
  * DESCRIPTION: Acceleration technique applied to the fixed point method to find the 
  *              roots of an arbitrary nonlinear function
  *
- * INPUTS:
- *          g        iteration function
- *                   must take single argument of type double and return
- *                   single value of type double
- *          x0       initial guess for location of fixed point
- *                   type: double
- *          tol      absolute error convergence tolerance
- *                   type: double
- *          nMax     maximum number of iterations to achieve convergence
- *                   type: int
- *          verbose  print intermediate results (default false)
- *                   type: boolean
- *
- * OUTPUT:
- *          point    approximate location of fixed point
- *                   type: double
- *
- * Created on: November 21, 2015
+ * Created on: November 21, 2016
  *
  * AUTHORS:
  * Jaquier, Michael <michael.jaquier@epfl.ch>

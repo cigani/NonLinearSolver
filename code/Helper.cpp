@@ -1,6 +1,14 @@
-//
-// Created by Alexander Lorkowski on 12/10/16.
-//
+/*
+ * Helper.cpp
+ *
+ * DESCRIPTION: Class responsible for displaying the help dialog.
+ *
+ * Created on: December 10, 2016
+ *
+ * AUTHORS:
+ * Jaquier, Michael <michael.jaquier@epfl.ch>
+ * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+ */
 
 #include "Helper.hpp"
 

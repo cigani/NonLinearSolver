@@ -24,7 +24,6 @@ private:
 
     /// A standard string representing mathematical expressions.
     std::string equation;
-    std::vector<std::string> equations;
 
     /// A symbolic table containing the variables.
     typedef exprtk::symbol_table<double> symbol_table_t;
@@ -50,8 +49,6 @@ public:
      */
     Expression(const std::string &eq);
 
-    Expression(const std::vector<std::string> &eq);
-
     virtual ~Expression() {}
 
     /*! A method to set a mathematical expression as a string to this object.
@@ -72,8 +69,11 @@ public:
      */
     double evaluate(double &value);
 
-    double evaluate(std::vector<double> &value);
-
+    /*! A method to evaluate the derivative of the Expression class.
+     *
+     * \param value A value to evaluate the expression.
+     * \param withrespect The variable to differentiate with respect to.
+     */
     double deriv(std::vector<double> &value, std::string withrespect);
 };
 

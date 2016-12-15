@@ -1,5 +1,5 @@
 /*
- * EquationParser.cpp
+ * Expression.cpp
  *
  * DESCRIPTION: Parses the string into a symbolic table.
  *
@@ -19,13 +19,6 @@ Expression::Expression() {
 // Univariate
 Expression::Expression(const std::string &eq) {
     equation = eq;
-}
-
-// Systems
-Expression::Expression(const std::vector<std::string> &eq) {
-    for (std::string mEquation : eq) {
-        equations.push_back(mEquation);
-    }
 }
 
 void Expression::setEquation(const std::string &eq) {

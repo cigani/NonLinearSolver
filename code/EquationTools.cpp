@@ -1,9 +1,14 @@
-//
-/* AUTHORS:
-* Jaquier, Michael <michael.jaquier@epfl.ch>
-* Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
-*/
-//
+/*
+ * EquationTools.cpp
+ *
+ * DESCRIPTION: Various linear algebra tools.
+ *
+ * Created on: December 14, 2016
+ *
+ * AUTHORS:
+ * Jaquier, Michael <michael.jaquier@epfl.ch>
+ * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+ */
 
 #include "EquationTools.h"
 

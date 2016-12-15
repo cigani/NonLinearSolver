@@ -1,4 +1,10 @@
-/*
+/* NewtonSystem.cpp
+ *
+ * DESCRIPTION: Returns the root of an arbitrary system of nonlinear equations using
+ *              Newton's method or the modified Newton's method
+ *
+ * Created on: November 21, 2016
+ *
  * AUTHORS:
  * Jaquier, Michael <michael.jaquier@epfl.ch>
  * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>

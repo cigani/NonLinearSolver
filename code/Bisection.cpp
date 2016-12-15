@@ -4,27 +4,7 @@
  * DESCRIPTION: Returns the root of an arbitrary nonlinear function using
  *                          the bisection method
  *
- * INPUTS:
- *          f        function whose root is to be determined
- *                   must take single argument of type double and return
- *                   single value of type double
- *          a        left bound of interval known to contain root
- *                   type: double
- *          b       right bound of interval known to contain root
- *                   type: double
- *          tol     absolute error convergence tolerance
- *                   type: double
- *          nMax maximum number of iterations to achieve convergence
- *                   type: int
- *          verbose  print intermediate results (default false)
- *                       type: bool
- *
- * OUTPUT:
- *          root   approximate location of root
- *                   type: double
- *
- *
- * Created on: November 27, 2015
+ * Created on: November 27, 2016
  *
  * AUTHORS:
  * Jaquier, Michael <michael.jaquier@epfl.ch>

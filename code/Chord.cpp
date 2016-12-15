@@ -4,26 +4,6 @@
  * DESCRIPTION: Returns the root of an arbitrary nonlinear function using
  *              the secant method
  *
- * INPUTS:
- *          f        function whose root is to be determined
- *                   must take single argument of type double and return
- *                   single value of type double
- *          x0       one initial guess for location of root
- *                   type: double
- *          x1       another initial guess for location of root
- *                   type: double
- *          tol      absolute error convergence tolerance
- *                   type: double
- *          nMax     maximum number of iterations to achieve convergence
- *                   type: int
- *          verbose  print intermediate results (default false)
- *                   type: bool
- *
- * OUTPUT:
- *          root     approximate location of root
- *                   type: double
- *
- *
  * Created on: November 27, 2015
  *
  * AUTHORS:
