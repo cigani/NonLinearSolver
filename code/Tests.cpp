@@ -55,7 +55,7 @@ void TestSuit::testAsssertion(std::vector<std::string> expected,
 
 void TestSuit::testAsssertion(std::vector<double> expected,
                               std::vector<double> actual,
-                              std::string name) {
+                              std::string name) const {
     for (unsigned long i = 0; i < actual.size(); i++) {
         double evaluate = expected.at(i) - actual.at(i);
         if (fabs(evaluate) > tolerance) {
@@ -211,20 +211,15 @@ void TestSuit::testSystemsJacobian() const {
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
     std::__1::vector<double> values{1, 1};
-    auto vullture = expressionSystem2.jacobian(values);
-    auto valt = derivativeSystem2.evaluate(values);
-    for (auto i : valt) {
-        for (auto k: i) {
-            std::__1::cout << k << std::__1::endl;
-        }
-    }
-    std::cout << "\n" << std::endl;
-    for (auto i : vullture) {
-        std::cout << i.size() << "Size \n";
-        for (auto k: i) {
-            std::__1::cout << k << std::__1::endl;
-        }
-    }
+    auto numericjacobian = expressionSystem2.jacobian(values);
+    auto truejacobian = derivativeSystem2.evaluate(values);
+    std::vector<double> vectornumericjacobian = convert.convertMatrix2Vector(
+            numericjacobian);
+    std::vector<double> vectortruejacobian = convert.convertMatrix2Vector(
+            truejacobian);
+    testAsssertion(vectortruejacobian, vectornumericjacobian,
+                   std::string("Jacobian"));
+
 }
 
 void TestSuit::testDeterm() {
@@ -263,7 +258,7 @@ void TestSuit::iterateVectors(std::vector<std::string> &returns) {
     } else std::cout << "~~~ No Errors ~~~" << std::endl;
 }
 
-void TestSuit::testErrorCode(std::string &ErrorType) {
+void TestSuit::testErrorCode(std::string &ErrorType)const {
     mErrors.push_back(ErrorType);
 }
 

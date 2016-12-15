@@ -14,11 +14,13 @@
 #include "NonlinearSystemsSolver.hpp"
 #include "Expression.hpp"
 #include "ExpressionSystem.hpp"
+#include "EquationTools.h"
 
 class NewtonSystem : public NonlinearSystemsSolver {
 private:
     ExpressionSystem jac;
     int m;
+    EquationTools convert;
 
 public:
     /// \brief Newton - solver for a system of equations.
@@ -42,11 +44,6 @@ public:
     /// \brief solves the system of equations uses recurisve calls to Expression class
     /// \return returns a vector of solutions
     std::vector<double> solve();
-
-    /// \brief Converts a nested vectors to a single vector
-    /// \param fx0
-    /// \return A single vector [ ex., Matrix[2][2] -> Vector[4] ]
-    std::vector<double> convertMatrix2Vector(const std::vector<std::vector<double>> &fx0) const;
 
     /// \brief Applies the newton modification to each element
     /// \param dxyz
