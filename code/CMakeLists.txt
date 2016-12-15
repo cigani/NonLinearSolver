@@ -6,15 +6,16 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")
 # As you solve exercises, you need to add them here.
 # The syntax is add_executable(executable_name source_file_name)
 
-add_executable(nonlinear Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
+add_executable(RunMain Main.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
         string.hpp Eigen EquationTools.cpp EquationsControl.cpp
-        Gauss.cpp Expression.cpp Helper.cpp ExpressionSystem.cpp NewtonSystem.cpp
-        NonlinearSystemsSolver.cpp InitialVector.cpp InitialVector.hpp)
-add_executable(tests TestSuit.cpp Chord.cpp Newton.cpp FixedPoint.cpp
+        Gauss.cpp Expression.cpp Helper.cpp ExpressionSystem.cpp
+        NewtonSystem.cpp NonlinearSystemsSolver.cpp InitialVector.cpp
+        InitialVector.hpp)
+add_executable(RunFunctionTests Tests.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         Aitken.cpp exprtk.hpp Bisection.cpp NonlinearSolver.cpp
         string.hpp Eigen EquationTools.cpp EquationsControl.cpp
-        Gauss.cpp Expression.cpp ExpressionSystem.cpp NewtonSystem.cpp NonlinearSystemsSolver.cpp)
-add_executable(scratch scratch.cpp exprtk.hpp Eigen Gauss.cpp)
-
-add_executable(testReader testReader.cpp ExpressionSystem.cpp Expression.cpp InitialVector.cpp)
+        Gauss.cpp Expression.cpp ExpressionSystem.cpp
+        NewtonSystem.cpp NonlinearSystemsSolver.cpp)
+add_executable(RunReaderTests testReader.cpp ExpressionSystem.cpp
+        Expression.cpp InitialVector.cpp)
