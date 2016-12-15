@@ -43,7 +43,13 @@ std::vector<double> NewtonSystem::solve() {
         dfx0 = jac.evaluate(v0);
         fxNeg = mEquationTools.negateVector(fx0);
         dxyz = mGauss.solveSystem(dfx0, fxNeg, system.getColumns());
+
+        if (m!=1) {
+            applyModifier(dxyz);
+        }
+
         dx = mEquationTools.addVectors(v0, dxyz);
+
         v0 = dx;
 
         nextNorm = mEquationTools.getNorm(v0);
@@ -66,6 +72,13 @@ std::vector<double> NewtonSystem::convertMatrix2Vector(const std::vector<std::ve
              it2 != (*it).end(); ++it2) { returns.push_back(*it2); }
         }
     return returns;
+}
+
+void NewtonSystem::applyModifier(std::vector<double> &dxyz) {
+    std::vector<double>::iterator it;
+    for (it = dxyz.begin(); it != dxyz.end(); ++it) {
+        *it = m * (*it);
+    }
 }
 
 void

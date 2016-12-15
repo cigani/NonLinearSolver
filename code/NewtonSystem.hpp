@@ -57,6 +57,10 @@ public:
     /// \param fx0
     /// \return A single vector [ ex., Matrix[2][2] -> Vector[4] ]
     std::vector<double> convertMatrix2Vector(const std::vector<std::vector<double>> &fx0) const;
+
+    /// \brief Applies the newton modification to each element
+    /// \param dxyz
+    void applyModifier(std::vector<double> &dxyz);
 };
 
 
