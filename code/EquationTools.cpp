@@ -62,9 +62,9 @@ EquationTools::Determinant(std::vector<std::vector<double>> &M,
 }
 
 /// \brief Subtract two vectors point wise
-/// \param v1
-/// \param v2
-/// \return
+/// \param v1 - A Vector of doubles
+/// \param v2 - A Same or Other vector of doubles
+/// \return  Vector 1 - Vector 2
 
 std::vector<double> EquationTools::subtractVectors(
         std::vector<double> &v1, std::vector<double> &v2) {
@@ -76,9 +76,9 @@ std::vector<double> EquationTools::subtractVectors(
 }
 
 /// \brief Add two vectors point wise
-/// \param v1
-/// \param v2
-/// \return
+/// \param v1 - A Vector of doubles
+/// \param v2 - A Same or Other vector of doubles
+/// \return Vector 1 + Vector 2
 std::vector<double> EquationTools::addVectors(
         std::vector<double> &v1, std::vector<double> &v2) {
     std::vector<double> result;
@@ -89,8 +89,8 @@ std::vector<double> EquationTools::addVectors(
 }
 
 /// \brief Transform the vector into its negative (V)*(-1) point wise.
-/// \param v1
-/// \return
+/// \param v1 - A Cector of doubles
+/// \return The negative of the vector (V)*(-1)
 std::vector<double> EquationTools::negateVector(
         std::vector<double> &v1) {
     std::vector<double> result;
