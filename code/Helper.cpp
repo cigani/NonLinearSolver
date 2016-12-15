@@ -17,7 +17,7 @@ std::string Helper::stringPadding(std::string original, size_t charCount) {
 
 void Helper::show_usage() {
     std::cerr << std::endl
-              << "Usage: "
+              << "Scalar Usage: "
               << programName
               << " -m %s"
               << " -e '%s'"
@@ -30,7 +30,18 @@ void Helper::show_usage() {
               << " -u %d"
               << std::endl
               << std::endl
-              << "Required:\n"
+              << "System of Equations Usage: "
+              << programName
+              << " -f %s"
+              << " -j '%s'"
+              << " -xv '%s'"
+              << " -m %s"
+              << " -nmax %i"
+              << " -t %d"
+              << " -v %b"
+              << std::endl
+              << std::endl
+              << "Scalar Nonlinear Solver Requirement: \n"
               << "\t"
               << stringPadding("-m,--method", 20)
               << stringPadding("Specify Non-Linear Solver", 60)
@@ -40,12 +51,27 @@ void Helper::show_usage() {
               << stringPadding(
                       "Mathematical expression to solve enclosed in ''", 60)
               << std::endl
-              << std::endl
-              << "Newton Requirement:\n"
               << "\t"
               << stringPadding("-d,--derivative", 20)
               << stringPadding(
-                      "The derivative to solve enclosed in ''", 60)
+                      "The derivative to solve enclosed in '' [only for the Newton Method]", 60)
+              << std::endl
+              << std::endl
+              << "System of Equations Requirement:\n"
+              << "\t"
+              << stringPadding("-f", 20)
+              << stringPadding(
+                    "File containing the system of equations", 60)
+              << std::endl
+              << "\t"
+              << stringPadding("-j", 20)
+              << stringPadding(
+                    "File containing the jacobian of the system of equations", 60)
+              << std::endl
+              << "\t"
+              << stringPadding("-f", 20)
+              << stringPadding(
+                    "File containing the initial iteration vector", 60)
               << std::endl
               << std::endl
               << "Optional:\n"
