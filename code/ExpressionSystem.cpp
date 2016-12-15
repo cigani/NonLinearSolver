@@ -42,8 +42,8 @@ std::vector<std::vector<Expression>> ExpressionSystem::getSystem() {
     return system;
 }
 
-Expression ExpressionSystem::getEquation(int i, int j) {
-    return system.at(i).at(j);
+Expression ExpressionSystem::getEquation(int col, int row) {
+    return system.at(col).at(row);
 }
 
 void ExpressionSystem::print() {
@@ -68,7 +68,7 @@ std::vector<std::vector<double>> ExpressionSystem::evaluate(std::vector<double> 
     return results;
 }
 
-int ExpressionSystem::getColumns() {
+unsigned long ExpressionSystem::getColumns() {
     return columns;
 }
 

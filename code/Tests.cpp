@@ -84,6 +84,13 @@ void TestSuit::testNewtonSolver(const double x0) {
     testAsssertion(expectedresult.at(0), *newtonRealValue,
                    std::string("PolyNewton"));
     delete (newtonRealValue);
+
+    Newton testNewtonModified(equations.at(0), derivatives.at(0), x0,
+                              tolerance, maxIter, verbosity, 3);
+    double *testNewtonModifiedValue = new double;
+    *testNewtonModifiedValue = testNewtonModified.solve();
+    testAsssertion(expectedresult.at(0), *testNewtonModifiedValue,
+                   std::string("PolyNewtonModified"));
 }
 
 void TestSuit::testNewtonWithExprtkPoly(const double x0) {

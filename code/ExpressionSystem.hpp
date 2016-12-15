@@ -23,10 +23,9 @@ private:
     std::string filename;
     void read();
 
-    EquationsControl eqControl;
     /// Rows and columns present in the matrix
-    int rows;
-    int columns;
+    unsigned long rows;
+    unsigned long columns;
 
 public:
     ///Constructor to generate the system of equations
@@ -41,22 +40,25 @@ public:
     void print();
 
     /// \brief Method to return an individual equation from the system matrix
-    /// \param i  The column
-    /// \param j  The row
+    /// \param col  The column
+    /// \param row  The row
     /// \return  Returns a Expression which contains a single equation.
-    Expression getEquation(int i, int j);
+    Expression getEquation(int col, int row);
 
     /// \brief Evaluates the matrix of equations with the given values
     /// \param value Vector of values used to evaluate the function
     /// \return Returns a matrix which represents the evaluation
     std::vector<std::vector<double>> evaluate(std::vector<double> &value);
 
-    int getColumns();
 
     /// \brief Generates a Numeric APPROXIMATION of the jacobian
     /// \param value Vector Values to evaluate the numeric Jacobian at
     /// \return A numeric APROXIMATION of the Jacobian at a set of points
     std::vector<std::vector<double>> jacobian(std::vector<double> &value);
+
+    /// \brief Used for sizing calculations
+    /// \return The number of columns in the equations
+    unsigned long getColumns();
 };
 
 
