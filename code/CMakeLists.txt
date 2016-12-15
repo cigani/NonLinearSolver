@@ -17,5 +17,4 @@ add_executable(RunFunctionTests Tests.cpp Chord.cpp Newton.cpp FixedPoint.cpp
         string.hpp EquationTools.cpp
         Gauss.cpp Expression.cpp ExpressionSystem.cpp
         NewtonSystem.cpp NonlinearSystemsSolver.cpp)
-add_executable(RunReaderTests testReader.cpp ExpressionSystem.cpp
-        Expression.cpp InitialVector.cpp)
+
