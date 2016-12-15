@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['eq',['eq',['../class_nonlinear_solver.html#aa3e3d193935e13c42599301497cb064d',1,'NonlinearSolver']]],
-  ['equations',['Equations',['../class_equations.html',1,'']]],
+  ['eq',['eq',['../class_nonlinear_solver.html#aad588fc96d07cf310a13ae11b51ce550',1,'NonlinearSolver']]],
   ['equationscontrol',['EquationsControl',['../class_equations_control.html',1,'']]],
   ['equationtools',['EquationTools',['../class_equation_tools.html',1,'']]],
-  ['exprtkgenerate2dderivative',['exprtkGenerate2DDerivative',['../class_equations.html#ac5f6066df2ec81262ca5bebd8c29df9f',1,'Equations']]],
-  ['exprtkjacobian',['exprtkJacobian',['../class_jacobian.html#ad90460a8e616121cdb4c0d7bb6fbde2d',1,'Jacobian']]]
+  ['evaluate',['evaluate',['../class_expression.html#ad834721c6b104c69934b5ac180d08de0',1,'Expression::evaluate(double &amp;value)'],['../class_expression.html#a22213c980205c9ed34235bfec6c101a8',1,'Expression::evaluate(std::vector&lt; double &gt; &amp;value)'],['../class_expression_system.html#adb8ad5aa9fa197661d80551bf7ffeb34',1,'ExpressionSystem::evaluate()']]],
+  ['expression',['Expression',['../class_expression.html',1,'Expression'],['../class_expression.html#afcf87716bf0abfe8d414c92529e1564a',1,'Expression::Expression()'],['../class_expression.html#ac05f006f37112e1f86b3de925d5e5aca',1,'Expression::Expression(const std::string &amp;eq)']]],
+  ['expressionsystem',['ExpressionSystem',['../class_expression_system.html',1,'ExpressionSystem'],['../class_expression_system.html#a008b0717293f7cb6aafd808c40cc805b',1,'ExpressionSystem::ExpressionSystem()']]]
 ];

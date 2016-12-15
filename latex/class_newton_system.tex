@@ -1,0 +1,101 @@
+\hypertarget{class_newton_system}{}\section{Newton\+System Class Reference}
+\label{class_newton_system}\index{Newton\+System@{Newton\+System}}
+Inheritance diagram for Newton\+System\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_newton_system}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_newton_system_a0b9c529d0f7357b70bfb67edad9627e6}{Newton\+System} (\hyperlink{class_expression_system}{Expression\+System} \&\hyperlink{class_nonlinear_systems_solver_ad58bb6449941acd3f88bc5647b4c8068}{system}, \hyperlink{class_expression_system}{Expression\+System} \&jacobian, std\+::vector$<$ double $>$ \&initial, double tolerance, int max\+Iter, bool verbosity, int mod)
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_newton}{Newton} -\/ solver for a system of equations. \end{DoxyCompactList}\item 
+virtual \hyperlink{class_newton_system_aef07a5a77f0a12fb18493239e38c816b}{$\sim$\+Newton\+System} ()\hypertarget{class_newton_system_aef07a5a77f0a12fb18493239e38c816b}{}\label{class_newton_system_aef07a5a77f0a12fb18493239e38c816b}
+
+\begin{DoxyCompactList}\small\item\em A virtual destructor for the \hyperlink{class_newton}{Newton} System method. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{class_newton_system_ad75a80fbdf3598310c5e9497a7aad5d7}{solve} ()
+\begin{DoxyCompactList}\small\item\em solves the system of equations uses recursive calls to \hyperlink{class_expression}{Expression} class \end{DoxyCompactList}\item 
+void \hyperlink{class_newton_system_a06277d1bff35436d6ef260a9ecb4117c}{apply\+Modifier} (std\+::vector$<$ double $>$ \&dxyz)
+\begin{DoxyCompactList}\small\item\em Applies the newton modification to each element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Newton\+System@{Newton\+System}!Newton\+System@{Newton\+System}}
+\index{Newton\+System@{Newton\+System}!Newton\+System@{Newton\+System}}
+\subsubsection[{\texorpdfstring{Newton\+System(\+Expression\+System \&system, Expression\+System \&jacobian, std\+::vector$<$ double $>$ \&initial, double tolerance, int max\+Iter, bool verbosity, int mod)}{NewtonSystem(ExpressionSystem &system, ExpressionSystem &jacobian, std::vector< double > &initial, double tolerance, int maxIter, bool verbosity, int mod)}}]{\setlength{\rightskip}{0pt plus 5cm}Newton\+System\+::\+Newton\+System (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression\+System} \&}]{system, }
+\item[{{\bf Expression\+System} \&}]{jacobian, }
+\item[{std\+::vector$<$ double $>$ \&}]{initial, }
+\item[{double}]{tolerance, }
+\item[{int}]{max\+Iter, }
+\item[{bool}]{verbosity, }
+\item[{int}]{mod}
+\end{DoxyParamCaption}
+)}\hypertarget{class_newton_system_a0b9c529d0f7357b70bfb67edad9627e6}{}\label{class_newton_system_a0b9c529d0f7357b70bfb67edad9627e6}
+
+
+\hyperlink{class_newton}{Newton} -\/ solver for a system of equations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em system} & -\/ The system of equations \\
+\hline
+{\em jacobian} & -\/ The jacobian of the system \\
+\hline
+{\em initial} & -\/ Initial guess provided by user \\
+\hline
+{\em tolerance} & -\/ The numeric tolerance allowed for the solution \\
+\hline
+{\em max\+Iter} & -\/ The maximum iterations allowed for a solution \\
+\hline
+{\em verbosity} & -\/ Print intermediate steps \\
+\hline
+{\em mod} & -\/ Set the modifying power of the Steps. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Newton\+System@{Newton\+System}!apply\+Modifier@{apply\+Modifier}}
+\index{apply\+Modifier@{apply\+Modifier}!Newton\+System@{Newton\+System}}
+\subsubsection[{\texorpdfstring{apply\+Modifier(std\+::vector$<$ double $>$ \&dxyz)}{applyModifier(std::vector< double > &dxyz)}}]{\setlength{\rightskip}{0pt plus 5cm}void Newton\+System\+::apply\+Modifier (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{dxyz}
+\end{DoxyParamCaption}
+)}\hypertarget{class_newton_system_a06277d1bff35436d6ef260a9ecb4117c}{}\label{class_newton_system_a06277d1bff35436d6ef260a9ecb4117c}
+
+
+Applies the newton modification to each element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dxyz} & \\
+\hline
+\end{DoxyParams}
+\index{Newton\+System@{Newton\+System}!solve@{solve}}
+\index{solve@{solve}!Newton\+System@{Newton\+System}}
+\subsubsection[{\texorpdfstring{solve()}{solve()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ Newton\+System\+::solve (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_newton_system_ad75a80fbdf3598310c5e9497a7aad5d7}{}\label{class_newton_system_ad75a80fbdf3598310c5e9497a7aad5d7}
+
+
+solves the system of equations uses recursive calls to \hyperlink{class_expression}{Expression} class 
+
+\begin{DoxyReturn}{Returns}
+returns a vector of solutions 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_nonlinear_systems_solver_a9067a4fa26bce4b2aa359cfccd93c84f}{Nonlinear\+Systems\+Solver}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/Newton\+System.\+hpp\item 
+code/Newton\+System.\+cpp\end{DoxyCompactItemize}

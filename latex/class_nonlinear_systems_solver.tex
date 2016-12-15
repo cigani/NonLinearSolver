@@ -1,0 +1,124 @@
+\hypertarget{class_nonlinear_systems_solver}{}\section{Nonlinear\+Systems\+Solver Class Reference}
+\label{class_nonlinear_systems_solver}\index{Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}}
+
+
+\hyperlink{_nonlinear_systems_solver_8hpp_source}{Nonlinear\+Systems\+Solver.\+hpp}.  
+
+
+
+
+{\ttfamily \#include $<$Nonlinear\+Systems\+Solver.\+hpp$>$}
+
+Inheritance diagram for Nonlinear\+Systems\+Solver\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_nonlinear_systems_solver}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_nonlinear_systems_solver_a39b82503490941b7972fde0cfbd28ca0}{Nonlinear\+Systems\+Solver} (\hyperlink{class_expression_system}{Expression\+System} \&sys, std\+::vector$<$ double $>$ \&initial, double tolerance, int max\+Iter, bool verbosity)
+\item 
+virtual \hyperlink{class_nonlinear_systems_solver_a7a2bc7ca31192bf419d595abd887bd11}{$\sim$\+Nonlinear\+Systems\+Solver} ()\hypertarget{class_nonlinear_systems_solver_a7a2bc7ca31192bf419d595abd887bd11}{}\label{class_nonlinear_systems_solver_a7a2bc7ca31192bf419d595abd887bd11}
+
+\begin{DoxyCompactList}\small\item\em A virtual destructor for the family of nonlinear solvers. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ double $>$ \hyperlink{class_nonlinear_systems_solver_a9067a4fa26bce4b2aa359cfccd93c84f}{solve} ()=0\hypertarget{class_nonlinear_systems_solver_a9067a4fa26bce4b2aa359cfccd93c84f}{}\label{class_nonlinear_systems_solver_a9067a4fa26bce4b2aa359cfccd93c84f}
+
+\begin{DoxyCompactList}\small\item\em A pure virtual solver method for the family of nonlinear solvers. \end{DoxyCompactList}\item 
+void \hyperlink{class_nonlinear_systems_solver_ad071f60a5c0e9d714450ff71942891f4}{print\+Verbose} (int i, std\+::vector$<$ double $>$ \&v)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_expression_system}{Expression\+System} \hyperlink{class_nonlinear_systems_solver_ad58bb6449941acd3f88bc5647b4c8068}{system}\hypertarget{class_nonlinear_systems_solver_ad58bb6449941acd3f88bc5647b4c8068}{}\label{class_nonlinear_systems_solver_ad58bb6449941acd3f88bc5647b4c8068}
+
+\begin{DoxyCompactList}\small\item\em A standard vector holding the strings representing mathematical expressions. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{class_nonlinear_systems_solver_a9733d9d1f170044dbefe980945070ba3}{v0}\hypertarget{class_nonlinear_systems_solver_a9733d9d1f170044dbefe980945070ba3}{}\label{class_nonlinear_systems_solver_a9733d9d1f170044dbefe980945070ba3}
+
+\begin{DoxyCompactList}\small\item\em A standard vector holding the doubles representing the initial guess of the solution to the equation. \end{DoxyCompactList}\item 
+double \hyperlink{class_nonlinear_systems_solver_a526132d9a95f69bd0e84682f61b5e732}{tol}\hypertarget{class_nonlinear_systems_solver_a526132d9a95f69bd0e84682f61b5e732}{}\label{class_nonlinear_systems_solver_a526132d9a95f69bd0e84682f61b5e732}
+
+\begin{DoxyCompactList}\small\item\em The tolerance value. The method stops once the residual errors fall below this value. \end{DoxyCompactList}\item 
+int \hyperlink{class_nonlinear_systems_solver_aa0075f162a80bd76fb2b05947f880eb3}{n\+Max}\hypertarget{class_nonlinear_systems_solver_aa0075f162a80bd76fb2b05947f880eb3}{}\label{class_nonlinear_systems_solver_aa0075f162a80bd76fb2b05947f880eb3}
+
+\begin{DoxyCompactList}\small\item\em The maximum number of iterations. The method stops once this number is reached. \end{DoxyCompactList}\item 
+bool \hyperlink{class_nonlinear_systems_solver_a3080b2ab66741d474b5a9a4f2244b5a7}{verbose}\hypertarget{class_nonlinear_systems_solver_a3080b2ab66741d474b5a9a4f2244b5a7}{}\label{class_nonlinear_systems_solver_a3080b2ab66741d474b5a9a4f2244b5a7}
+
+\begin{DoxyCompactList}\small\item\em Set to true to print all intermediate and final results onto the console. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{_nonlinear_systems_solver_8hpp_source}{Nonlinear\+Systems\+Solver.\+hpp}. 
+
+An abstract class for the family of solvers of nonlinear systems. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}!Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}}
+\index{Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}!Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}}
+\subsubsection[{\texorpdfstring{Nonlinear\+Systems\+Solver(\+Expression\+System \&sys, std\+::vector$<$ double $>$ \&initial, double tolerance, int max\+Iter, bool verbosity)}{NonlinearSystemsSolver(ExpressionSystem &sys, std::vector< double > &initial, double tolerance, int maxIter, bool verbosity)}}]{\setlength{\rightskip}{0pt plus 5cm}Nonlinear\+Systems\+Solver\+::\+Nonlinear\+Systems\+Solver (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression\+System} \&}]{sys, }
+\item[{std\+::vector$<$ double $>$ \&}]{initial, }
+\item[{double}]{tolerance, }
+\item[{int}]{max\+Iter, }
+\item[{bool}]{verbosity}
+\end{DoxyParamCaption}
+)}\hypertarget{class_nonlinear_systems_solver_a39b82503490941b7972fde0cfbd28ca0}{}\label{class_nonlinear_systems_solver_a39b82503490941b7972fde0cfbd28ca0}
+A contructor to instantiate common variables to the family of nonlinear solvers.
+
+
+\begin{DoxyParams}{Parameters}
+{\em sys} & An \hyperlink{class_expression_system}{Expression\+System} object containing the system of equations. \\
+\hline
+{\em initial} & The initial guess of the solution to the equation. \\
+\hline
+{\em tolerance} & The tolerance value. The method stops once the residual errors fall below this value. \\
+\hline
+{\em max\+Iter} & The maximum number of iterations. The method stops once this number is reached. \\
+\hline
+{\em verbosity} & Set to true to print all intermediate and final results onto the console. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}!print\+Verbose@{print\+Verbose}}
+\index{print\+Verbose@{print\+Verbose}!Nonlinear\+Systems\+Solver@{Nonlinear\+Systems\+Solver}}
+\subsubsection[{\texorpdfstring{print\+Verbose(int i, std\+::vector$<$ double $>$ \&v)}{printVerbose(int i, std::vector< double > &v)}}]{\setlength{\rightskip}{0pt plus 5cm}void Nonlinear\+Systems\+Solver\+::print\+Verbose (
+\begin{DoxyParamCaption}
+\item[{int}]{i, }
+\item[{std\+::vector$<$ double $>$ \&}]{v}
+\end{DoxyParamCaption}
+)}\hypertarget{class_nonlinear_systems_solver_ad071f60a5c0e9d714450ff71942891f4}{}\label{class_nonlinear_systems_solver_ad071f60a5c0e9d714450ff71942891f4}
+A function that takes a constant integer and a vector argument and prints to the console.
+
+
+\begin{DoxyParams}{Parameters}
+{\em i} & The current index or iteration to print out to the console. \\
+\hline
+{\em v} & The vector that contains current solution of the nonlinear problem. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/Nonlinear\+Systems\+Solver.\+hpp\item 
+code/Nonlinear\+Systems\+Solver.\+cpp\end{DoxyCompactItemize}

@@ -18,23 +18,23 @@ Inheritance diagram for Nonlinear\+Solver\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{class_nonlinear_solver_a92d6163471127bbada316c89e1d2a887}{Nonlinear\+Solver} (const std\+::vector$<$ std\+::string $>$ \&equation, std\+::vector$<$ double $>$ initial, double tolerance, int max\+Iter, bool verbosity)
+\hyperlink{class_nonlinear_solver_af47ece967a93e6cfaf5b46bff22f6279}{Nonlinear\+Solver} (\hyperlink{class_expression}{Expression} \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)
 \item 
 virtual \hyperlink{class_nonlinear_solver_ad29eabca357434c5e40764a80ee8482f}{$\sim$\+Nonlinear\+Solver} ()\hypertarget{class_nonlinear_solver_ad29eabca357434c5e40764a80ee8482f}{}\label{class_nonlinear_solver_ad29eabca357434c5e40764a80ee8482f}
 
 \begin{DoxyCompactList}\small\item\em A virtual destructor for the family of nonlinear solvers. \end{DoxyCompactList}\item 
-virtual std\+::vector$<$ double $>$ \hyperlink{class_nonlinear_solver_a93fe2135eed6993bb2707865c191f90a}{solve} ()=0\hypertarget{class_nonlinear_solver_a93fe2135eed6993bb2707865c191f90a}{}\label{class_nonlinear_solver_a93fe2135eed6993bb2707865c191f90a}
+virtual double \hyperlink{class_nonlinear_solver_a72180277586bd7ec915cc4a806f62bb9}{solve} ()=0\hypertarget{class_nonlinear_solver_a72180277586bd7ec915cc4a806f62bb9}{}\label{class_nonlinear_solver_a72180277586bd7ec915cc4a806f62bb9}
 
 \begin{DoxyCompactList}\small\item\em A pure virtual solver method for the family of nonlinear solvers. \end{DoxyCompactList}\item 
-void \hyperlink{class_nonlinear_solver_a48afde9fa4ded898744d57691920d514}{print\+Verbose} (int i, std\+::vector$<$ double $>$ \&x)
+void \hyperlink{class_nonlinear_solver_ac27b68fb52e995ee5204b255460a3e13}{print\+Verbose} (int i, double \&x)
 \end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ std\+::string $>$ \hyperlink{class_nonlinear_solver_aa3e3d193935e13c42599301497cb064d}{eq}\hypertarget{class_nonlinear_solver_aa3e3d193935e13c42599301497cb064d}{}\label{class_nonlinear_solver_aa3e3d193935e13c42599301497cb064d}
+\hyperlink{class_expression}{Expression} \hyperlink{class_nonlinear_solver_aad588fc96d07cf310a13ae11b51ce550}{eq}\hypertarget{class_nonlinear_solver_aad588fc96d07cf310a13ae11b51ce550}{}\label{class_nonlinear_solver_aad588fc96d07cf310a13ae11b51ce550}
 
 \begin{DoxyCompactList}\small\item\em A standard vector holding the strings representing mathematical expressions. \end{DoxyCompactList}\item 
-std\+::vector$<$ double $>$ \hyperlink{class_nonlinear_solver_aa212aef76ebc599db6f0348c7df79c79}{x0}\hypertarget{class_nonlinear_solver_aa212aef76ebc599db6f0348c7df79c79}{}\label{class_nonlinear_solver_aa212aef76ebc599db6f0348c7df79c79}
+double \hyperlink{class_nonlinear_solver_a0af503b5f79fd74a61b1ba8c956e9a06}{x0}\hypertarget{class_nonlinear_solver_a0af503b5f79fd74a61b1ba8c956e9a06}{}\label{class_nonlinear_solver_a0af503b5f79fd74a61b1ba8c956e9a06}
 
 \begin{DoxyCompactList}\small\item\em A standard vector holding the doubles representing the initial guess of the solution to the equation. \end{DoxyCompactList}\item 
 double \hyperlink{class_nonlinear_solver_a8fa50d85cb58f69da6cddf52a2b950af}{tol}\hypertarget{class_nonlinear_solver_a8fa50d85cb58f69da6cddf52a2b950af}{}\label{class_nonlinear_solver_a8fa50d85cb58f69da6cddf52a2b950af}
@@ -72,16 +72,18 @@ M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing
 \subsection{Constructor \& Destructor Documentation}
 \index{Nonlinear\+Solver@{Nonlinear\+Solver}!Nonlinear\+Solver@{Nonlinear\+Solver}}
 \index{Nonlinear\+Solver@{Nonlinear\+Solver}!Nonlinear\+Solver@{Nonlinear\+Solver}}
-\subsubsection[{\texorpdfstring{Nonlinear\+Solver(const std\+::vector$<$ std\+::string $>$ \&equation, std\+::vector$<$ double $>$ initial, double tolerance, int max\+Iter, bool verbosity)}{NonlinearSolver(const std::vector< std::string > &equation, std::vector< double > initial, double tolerance, int maxIter, bool verbosity)}}]{\setlength{\rightskip}{0pt plus 5cm}Nonlinear\+Solver\+::\+Nonlinear\+Solver (
+\subsubsection[{\texorpdfstring{Nonlinear\+Solver(\+Expression \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)}{NonlinearSolver(Expression &equation, double initial, double tolerance, int maxIter, bool verbosity)}}]{\setlength{\rightskip}{0pt plus 5cm}Nonlinear\+Solver\+::\+Nonlinear\+Solver (
 \begin{DoxyParamCaption}
-\item[{const std\+::vector$<$ std\+::string $>$ \&}]{equation, }
-\item[{std\+::vector$<$ double $>$}]{initial, }
+\item[{{\bf Expression} \&}]{equation, }
+\item[{double}]{initial, }
 \item[{double}]{tolerance, }
 \item[{int}]{max\+Iter, }
 \item[{bool}]{verbosity}
 \end{DoxyParamCaption}
-)}\hypertarget{class_nonlinear_solver_a92d6163471127bbada316c89e1d2a887}{}\label{class_nonlinear_solver_a92d6163471127bbada316c89e1d2a887}
-A contructor to instantiate common variables to the family of nonlinear solvers. /$\ast$ 
+)}\hypertarget{class_nonlinear_solver_af47ece967a93e6cfaf5b46bff22f6279}{}\label{class_nonlinear_solver_af47ece967a93e6cfaf5b46bff22f6279}
+A contructor to instantiate common variables to the family of nonlinear solvers.
+
+
 \begin{DoxyParams}{Parameters}
 {\em equation} & A string that contains the mathematical expression for the class to evaluate. \\
 \hline
@@ -99,13 +101,15 @@ A contructor to instantiate common variables to the family of nonlinear solvers.
 \subsection{Member Function Documentation}
 \index{Nonlinear\+Solver@{Nonlinear\+Solver}!print\+Verbose@{print\+Verbose}}
 \index{print\+Verbose@{print\+Verbose}!Nonlinear\+Solver@{Nonlinear\+Solver}}
-\subsubsection[{\texorpdfstring{print\+Verbose(int i, std\+::vector$<$ double $>$ \&x)}{printVerbose(int i, std::vector< double > &x)}}]{\setlength{\rightskip}{0pt plus 5cm}void Nonlinear\+Solver\+::print\+Verbose (
+\subsubsection[{\texorpdfstring{print\+Verbose(int i, double \&x)}{printVerbose(int i, double &x)}}]{\setlength{\rightskip}{0pt plus 5cm}void Nonlinear\+Solver\+::print\+Verbose (
 \begin{DoxyParamCaption}
 \item[{int}]{i, }
-\item[{std\+::vector$<$ double $>$ \&}]{x}
+\item[{double \&}]{x}
 \end{DoxyParamCaption}
-)}\hypertarget{class_nonlinear_solver_a48afde9fa4ded898744d57691920d514}{}\label{class_nonlinear_solver_a48afde9fa4ded898744d57691920d514}
-A function that takes a constant integer and a vector argument and prints to the console. /$\ast$ 
+)}\hypertarget{class_nonlinear_solver_ac27b68fb52e995ee5204b255460a3e13}{}\label{class_nonlinear_solver_ac27b68fb52e995ee5204b255460a3e13}
+A function that takes a constant integer and a vector argument and prints to the console.
+
+
 \begin{DoxyParams}{Parameters}
 {\em i} & The current index or iteration to print out to the console. \\
 \hline

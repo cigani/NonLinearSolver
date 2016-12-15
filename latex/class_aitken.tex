@@ -1,11 +1,100 @@
 \hypertarget{class_aitken}{}\section{Aitken Class Reference}
 \label{class_aitken}\index{Aitken@{Aitken}}
-\subsection*{Public Types}
-\begin{DoxyCompactItemize}
-\end{DoxyCompactItemize}
+
+
+\hyperlink{_aitken_8hpp_source}{Aitken.\+hpp}.  
+
+
+
+
+{\ttfamily \#include $<$Aitken.\+hpp$>$}
+
+Inheritance diagram for Aitken\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_aitken}
+\end{center}
+\end{figure}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_aitken_a4a67b211a085f7acbc059575427b543b}{Aitken} (\hyperlink{class_expression}{Expression} \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)
+\item 
+virtual \hyperlink{class_aitken_a1d89b3f0a4748c6aa71fa6324707f93b}{$\sim$\+Aitken} ()\hypertarget{class_aitken_a1d89b3f0a4748c6aa71fa6324707f93b}{}\label{class_aitken_a1d89b3f0a4748c6aa71fa6324707f93b}
+
+\begin{DoxyCompactList}\small\item\em A virtual destructor for the \hyperlink{class_aitken}{Aitken} method. \end{DoxyCompactList}\item 
+double \hyperlink{class_aitken_a2fc0237c34ae1d84e02f92d1d28614e9}{solve} ()
 \end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{_aitken_8hpp_source}{Aitken.\+hpp}. 
+
+A class constructing an object capable of solving nonlinear systems with the \hyperlink{class_aitken}{Aitken} method. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Aitken@{Aitken}!Aitken@{Aitken}}
+\index{Aitken@{Aitken}!Aitken@{Aitken}}
+\subsubsection[{\texorpdfstring{Aitken(\+Expression \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)}{Aitken(Expression &equation, double initial, double tolerance, int maxIter, bool verbosity)}}]{\setlength{\rightskip}{0pt plus 5cm}Aitken\+::\+Aitken (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression} \&}]{equation, }
+\item[{double}]{initial, }
+\item[{double}]{tolerance, }
+\item[{int}]{max\+Iter, }
+\item[{bool}]{verbosity}
+\end{DoxyParamCaption}
+)}\hypertarget{class_aitken_a4a67b211a085f7acbc059575427b543b}{}\label{class_aitken_a4a67b211a085f7acbc059575427b543b}
+A constructor to instantiate variables for the \hyperlink{class_aitken}{Aitken} method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em equation} & A string that contains the mathematical expression for the class to evaluate. \\
+\hline
+{\em initial} & The initial guess of the solution to the equation. \\
+\hline
+{\em tolerance} & The tolerance value. The method stops once the residual errors fall below this value. \\
+\hline
+{\em max\+Iter} & The maximum number of iterations. The method stops once this number is reached. \\
+\hline
+{\em verbosity} & Set to true to print all intermediate and final results onto the console. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Aitken@{Aitken}!solve@{solve}}
+\index{solve@{solve}!Aitken@{Aitken}}
+\subsubsection[{\texorpdfstring{solve()}{solve()}}]{\setlength{\rightskip}{0pt plus 5cm}double Aitken\+::solve (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_aitken_a2fc0237c34ae1d84e02f92d1d28614e9}{}\label{class_aitken_a2fc0237c34ae1d84e02f92d1d28614e9}
+A function when called returns the solution to the \hyperlink{class_aitken}{Aitken} Method.
+
+\begin{DoxyReturn}{Returns}
+The solution to the \hyperlink{class_aitken}{Aitken} Method. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_nonlinear_solver_a72180277586bd7ec915cc4a806f62bb9}{Nonlinear\+Solver}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

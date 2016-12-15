@@ -1,5 +1,14 @@
 \hypertarget{class_chord}{}\section{Chord Class Reference}
 \label{class_chord}\index{Chord@{Chord}}
+
+
+\hyperlink{_chord_8hpp_source}{Chord.\+hpp}.  
+
+
+
+
+{\ttfamily \#include $<$Chord.\+hpp$>$}
+
 Inheritance diagram for Chord\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,10 +18,83 @@ Inheritance diagram for Chord\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ double $>$ \hyperlink{class_chord_afeef60163eedd77ce2dc75e704c267dd}{solve} ()\hypertarget{class_chord_afeef60163eedd77ce2dc75e704c267dd}{}\label{class_chord_afeef60163eedd77ce2dc75e704c267dd}
+\hyperlink{class_chord_a276152dc216ada11e924b9ddac8b6260}{Chord} (\hyperlink{class_expression}{Expression} \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)
+\item 
+virtual \hyperlink{class_chord_ac1ed7ca66d87b80a1a98e6981b5e6b9e}{$\sim$\+Chord} ()\hypertarget{class_chord_ac1ed7ca66d87b80a1a98e6981b5e6b9e}{}\label{class_chord_ac1ed7ca66d87b80a1a98e6981b5e6b9e}
 
-\begin{DoxyCompactList}\small\item\em A pure virtual solver method for the family of nonlinear solvers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A virtual destructor for the \hyperlink{class_chord}{Chord} method. \end{DoxyCompactList}\item 
+double \hyperlink{class_chord_a984ae41890e938218b3820ff429ad69e}{solve} ()
+\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{_chord_8hpp_source}{Chord.\+hpp}. 
+
+A class constructing an object capable of solving nonlinear systems with the \hyperlink{class_chord}{Chord} method. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Chord@{Chord}!Chord@{Chord}}
+\index{Chord@{Chord}!Chord@{Chord}}
+\subsubsection[{\texorpdfstring{Chord(\+Expression \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)}{Chord(Expression &equation, double initial, double tolerance, int maxIter, bool verbosity)}}]{\setlength{\rightskip}{0pt plus 5cm}Chord\+::\+Chord (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression} \&}]{equation, }
+\item[{double}]{initial, }
+\item[{double}]{tolerance, }
+\item[{int}]{max\+Iter, }
+\item[{bool}]{verbosity}
+\end{DoxyParamCaption}
+)}\hypertarget{class_chord_a276152dc216ada11e924b9ddac8b6260}{}\label{class_chord_a276152dc216ada11e924b9ddac8b6260}
+A constructor to instantiate variables for the \hyperlink{class_chord}{Chord} method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em equation} & A string that contains the mathematical expression for the class to evaluate. \\
+\hline
+{\em initial} & The initial guess of the solution to the equation. \\
+\hline
+{\em tolerance} & The tolerance value. The method stops once the residual errors fall below this value. \\
+\hline
+{\em max\+Iter} & The maximum number of iterations. The method stops once this number is reached. \\
+\hline
+{\em verbosity} & Set to true to print all intermediate and final results onto the console. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Chord@{Chord}!solve@{solve}}
+\index{solve@{solve}!Chord@{Chord}}
+\subsubsection[{\texorpdfstring{solve()}{solve()}}]{\setlength{\rightskip}{0pt plus 5cm}double Chord\+::solve (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_chord_a984ae41890e938218b3820ff429ad69e}{}\label{class_chord_a984ae41890e938218b3820ff429ad69e}
+A function that returns the solution to the \hyperlink{class_chord}{Chord} method.
+
+\begin{DoxyReturn}{Returns}
+The solution to the \hyperlink{class_chord}{Chord} Method. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_nonlinear_solver_a72180277586bd7ec915cc4a806f62bb9}{Nonlinear\+Solver}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

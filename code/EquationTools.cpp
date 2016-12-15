@@ -108,7 +108,7 @@ std::vector<double> EquationTools::negateVector(
 
 /**
  *
- * @param A vector of doubles
+ * @param vec A vector of doubles
  * @return The Euclidean norm
  */
 double

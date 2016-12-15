@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7enonlinearsolver',['~NonlinearSolver',['../class_nonlinear_solver.html#ad29eabca357434c5e40764a80ee8482f',1,'NonlinearSolver']]]
+  ['helper',['Helper',['../class_helper.html#a900451b12f8e4c9ff5b17625446a245a',1,'Helper']]]
 ];

@@ -1,0 +1,153 @@
+\hypertarget{class_expression}{}\section{Expression Class Reference}
+\label{class_expression}\index{Expression@{Expression}}
+
+
+\hyperlink{_expression_8hpp_source}{Expression.\+hpp}.  
+
+
+
+
+{\ttfamily \#include $<$Expression.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_expression_afcf87716bf0abfe8d414c92529e1564a}{Expression} ()
+\item 
+\hyperlink{class_expression_ac05f006f37112e1f86b3de925d5e5aca}{Expression} (const std\+::string \&eq)
+\item 
+void \hyperlink{class_expression_acc1a1e38586e589a03cd1f1d9a3e38e0}{set\+Equation} (const std\+::string \&eq)
+\item 
+std\+::string \hyperlink{class_expression_a0c596f459d98b7825e436e3477069ec7}{get\+Equation} ()
+\item 
+double \hyperlink{class_expression_ad834721c6b104c69934b5ac180d08de0}{evaluate} (double \&value)
+\item 
+double \hyperlink{class_expression_a22213c980205c9ed34235bfec6c101a8}{evaluate} (std\+::vector$<$ double $>$ \&value)
+\item 
+double \hyperlink{class_expression_a7e3cec0588a3dee8a90621aed69ee009}{deriv} (std\+::vector$<$ double $>$ \&value, std\+::string withrespect)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{_expression_8hpp_source}{Expression.\+hpp}. 
+
+A class handling the parsing of the mathematical expression and evaluation. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Expression@{Expression}!Expression@{Expression}}
+\index{Expression@{Expression}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{Expression()}{Expression()}}]{\setlength{\rightskip}{0pt plus 5cm}Expression\+::\+Expression (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_afcf87716bf0abfe8d414c92529e1564a}{}\label{class_expression_afcf87716bf0abfe8d414c92529e1564a}
+A constructor to instantiate the container for the parsed expression. \index{Expression@{Expression}!Expression@{Expression}}
+\index{Expression@{Expression}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{Expression(const std\+::string \&eq)}{Expression(const std::string &eq)}}]{\setlength{\rightskip}{0pt plus 5cm}Expression\+::\+Expression (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{eq}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_ac05f006f37112e1f86b3de925d5e5aca}{}\label{class_expression_ac05f006f37112e1f86b3de925d5e5aca}
+A constructor to instantiate the container for the parsed expression.
+
+
+\begin{DoxyParams}{Parameters}
+{\em eq} & A string that contains the mathematical expression for the class to evaluate. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Expression@{Expression}!deriv@{deriv}}
+\index{deriv@{deriv}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{deriv(std\+::vector$<$ double $>$ \&value, std\+::string withrespect)}{deriv(std::vector< double > &value, std::string withrespect)}}]{\setlength{\rightskip}{0pt plus 5cm}double Expression\+::deriv (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{value, }
+\item[{std\+::string}]{withrespect}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_a7e3cec0588a3dee8a90621aed69ee009}{}\label{class_expression_a7e3cec0588a3dee8a90621aed69ee009}
+A method to evaluate the derivative of the \hyperlink{class_expression}{Expression} class.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A value to evaluate the expression. \\
+\hline
+{\em withrespect} & The variable to differentiate with respect to. \\
+\hline
+\end{DoxyParams}
+\index{Expression@{Expression}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{evaluate(double \&value)}{evaluate(double &value)}}]{\setlength{\rightskip}{0pt plus 5cm}double Expression\+::evaluate (
+\begin{DoxyParamCaption}
+\item[{double \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_ad834721c6b104c69934b5ac180d08de0}{}\label{class_expression_ad834721c6b104c69934b5ac180d08de0}
+A method to evaluate the mathematical expression in this class.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A value to evaluate the expression. \\
+\hline
+\end{DoxyParams}
+\index{Expression@{Expression}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{evaluate(std\+::vector$<$ double $>$ \&value)}{evaluate(std::vector< double > &value)}}]{\setlength{\rightskip}{0pt plus 5cm}double Expression\+::evaluate (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_a22213c980205c9ed34235bfec6c101a8}{}\label{class_expression_a22213c980205c9ed34235bfec6c101a8}
+A method to evaluate the mathematical expression in this class with vectors.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & A vector of values. \\
+\hline
+\end{DoxyParams}
+\index{Expression@{Expression}!get\+Equation@{get\+Equation}}
+\index{get\+Equation@{get\+Equation}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{get\+Equation()}{getEquation()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::string Expression\+::get\+Equation (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_a0c596f459d98b7825e436e3477069ec7}{}\label{class_expression_a0c596f459d98b7825e436e3477069ec7}
+A method to return a mathematical expression as a string to this object.
+
+\begin{DoxyReturn}{Returns}
+The mathematical expression assigned to this object. 
+\end{DoxyReturn}
+\index{Expression@{Expression}!set\+Equation@{set\+Equation}}
+\index{set\+Equation@{set\+Equation}!Expression@{Expression}}
+\subsubsection[{\texorpdfstring{set\+Equation(const std\+::string \&eq)}{setEquation(const std::string &eq)}}]{\setlength{\rightskip}{0pt plus 5cm}void Expression\+::set\+Equation (
+\begin{DoxyParamCaption}
+\item[{const std\+::string \&}]{eq}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_acc1a1e38586e589a03cd1f1d9a3e38e0}{}\label{class_expression_acc1a1e38586e589a03cd1f1d9a3e38e0}
+A method to set a mathematical expression as a string to this object.
+
+
+\begin{DoxyParams}{Parameters}
+{\em eq} & A string that contains the mathematical expression for the class to evaluate. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/Expression.\+hpp\item 
+code/Expression.\+cpp\end{DoxyCompactItemize}

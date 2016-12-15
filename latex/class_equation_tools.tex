@@ -1,29 +1,106 @@
 \hypertarget{class_equation_tools}{}\section{Equation\+Tools Class Reference}
 \label{class_equation_tools}\index{Equation\+Tools@{Equation\+Tools}}
-Inheritance diagram for Equation\+Tools\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{class_equation_tools}
-\end{center}
-\end{figure}
+
+
+Equation\+Tools.\+hpp.  
+
+
+
+
+{\ttfamily \#include $<$Equation\+Tools.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$ $>$ \hyperlink{class_equation_tools_a2400ef03ac5def7120afa962f8a2ec0c}{create\+Minor} (unsigned long size)
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_equation_tools_a1c4fc9f9b40d7951d2507f4519f78bc2}{create\+Minor} (unsigned long size)
 \item 
-double \hyperlink{class_equation_tools_afba38557ac202d75d3acb90994020f06}{Determinant} (std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$$>$ \&M, const int size)
-\end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+double \hyperlink{class_equation_tools_a6bf149cf279a8fe4ab3b8759b4493878}{Determinant} (std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&M, const int size)
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_equation_tools_a54bd03c010750aa6686253bcec951c88}{subtract\+Vectors} (std\+::vector$<$ double $>$ \&v1, std\+::vector$<$ double $>$ \&v2)
+\begin{DoxyCompactList}\small\item\em Subtract two vectors point wise. \end{DoxyCompactList}\item 
+std\+::vector$<$ double $>$ \hyperlink{class_equation_tools_aae5459f604226de23ee6d9682f2aade8}{add\+Vectors} (std\+::vector$<$ double $>$ \&v1, std\+::vector$<$ double $>$ \&v2)
+\begin{DoxyCompactList}\small\item\em Add two vectors point wise. \end{DoxyCompactList}\item 
+double \hyperlink{class_equation_tools_a4f34553fca5396a6bdb77bc265e7ddb7}{get\+Norm} (std\+::vector$<$ double $>$ \&vec)
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_equation_tools_a8f8c215f13782636f54dc3a2b2bfc136}{negate\+Vector} (std\+::vector$<$ double $>$ \&v1)
+\begin{DoxyCompactList}\small\item\em Transform the vector into its negative (V)$\ast$(-\/1) point wise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ double $>$ \hyperlink{class_equation_tools_aa5c6c5caf7829370a28ef782262fe45e}{convert\+Matrix2\+Vector} (std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&fx0)
+\begin{DoxyCompactList}\small\item\em Converts a nested vectors to a single vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Equation\+Tools.\+hpp. 
+
+A class handling linear algebra operations. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
 
 
 \subsection{Member Function Documentation}
+\index{Equation\+Tools@{Equation\+Tools}!add\+Vectors@{add\+Vectors}}
+\index{add\+Vectors@{add\+Vectors}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{add\+Vectors(std\+::vector$<$ double $>$ \&v1, std\+::vector$<$ double $>$ \&v2)}{addVectors(std::vector< double > &v1, std::vector< double > &v2)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ Equation\+Tools\+::add\+Vectors (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{v1, }
+\item[{std\+::vector$<$ double $>$ \&}]{v2}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equation_tools_aae5459f604226de23ee6d9682f2aade8}{}\label{class_equation_tools_aae5459f604226de23ee6d9682f2aade8}
+
+
+Add two vectors point wise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & -\/ A Vector of doubles \\
+\hline
+{\em v2} & -\/ A Same or Other vector of doubles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector 1 + Vector 2 
+\end{DoxyReturn}
+\index{Equation\+Tools@{Equation\+Tools}!convert\+Matrix2\+Vector@{convert\+Matrix2\+Vector}}
+\index{convert\+Matrix2\+Vector@{convert\+Matrix2\+Vector}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{convert\+Matrix2\+Vector(std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&fx0)}{convertMatrix2Vector(std::vector< std::vector< double >> &fx0)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ Equation\+Tools\+::convert\+Matrix2\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{fx0}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{class_equation_tools_aa5c6c5caf7829370a28ef782262fe45e}{}\label{class_equation_tools_aa5c6c5caf7829370a28ef782262fe45e}
+
+
+Converts a nested vectors to a single vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em fx0} & -\/ A matrix to be converted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A single vector \mbox{[} ex., Matrix\mbox{[}2\mbox{]}\mbox{[}2\mbox{]} -\/$>$ Vector\mbox{[}4\mbox{]} \mbox{]} 
+\end{DoxyReturn}
 \index{Equation\+Tools@{Equation\+Tools}!create\+Minor@{create\+Minor}}
 \index{create\+Minor@{create\+Minor}!Equation\+Tools@{Equation\+Tools}}
-\subsubsection[{\texorpdfstring{create\+Minor(unsigned long size)}{createMinor(unsigned long size)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$ $>$ Equation\+Tools\+::create\+Minor (
+\subsubsection[{\texorpdfstring{create\+Minor(unsigned long size)}{createMinor(unsigned long size)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::vector$<$ double $>$ $>$ Equation\+Tools\+::create\+Minor (
 \begin{DoxyParamCaption}
 \item[{unsigned long}]{size}
 \end{DoxyParamCaption}
-)}\hypertarget{class_equation_tools_a2400ef03ac5def7120afa962f8a2ec0c}{}\label{class_equation_tools_a2400ef03ac5def7120afa962f8a2ec0c}
+)}\hypertarget{class_equation_tools_a1c4fc9f9b40d7951d2507f4519f78bc2}{}\label{class_equation_tools_a1c4fc9f9b40d7951d2507f4519f78bc2}
 Create a vector$<$vector$>$ to be populated later 
 \begin{DoxyParams}{Parameters}
 {\em size} & -\/ of the Main Vector$<$\+Vector$>$ -\/ 1 \\
@@ -34,12 +111,12 @@ A NxN vector$<$vector$>$ of zeros
 \end{DoxyReturn}
 \index{Equation\+Tools@{Equation\+Tools}!Determinant@{Determinant}}
 \index{Determinant@{Determinant}!Equation\+Tools@{Equation\+Tools}}
-\subsubsection[{\texorpdfstring{Determinant(std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$$>$ \&\+M, const int size)}{Determinant(std::__1::vector< std::__1::vector< double >> &M, const int size)}}]{\setlength{\rightskip}{0pt plus 5cm}double Equation\+Tools\+::\+Determinant (
+\subsubsection[{\texorpdfstring{Determinant(std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&\+M, const int size)}{Determinant(std::vector< std::vector< double >> &M, const int size)}}]{\setlength{\rightskip}{0pt plus 5cm}double Equation\+Tools\+::\+Determinant (
 \begin{DoxyParamCaption}
-\item[{std\+::\+\_\+\+\_\+1\+::vector$<$ std\+::\+\_\+\+\_\+1\+::vector$<$ double $>$$>$ \&}]{M, }
+\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{M, }
 \item[{const int}]{size}
 \end{DoxyParamCaption}
-)}\hypertarget{class_equation_tools_afba38557ac202d75d3acb90994020f06}{}\label{class_equation_tools_afba38557ac202d75d3acb90994020f06}
+)}\hypertarget{class_equation_tools_a6bf149cf279a8fe4ab3b8759b4493878}{}\label{class_equation_tools_a6bf149cf279a8fe4ab3b8759b4493878}
 Calculate the Det of an input Vector$<$\+Vector$>$ Special Case\+: If it\textquotesingle{}s a 2x2 Matrix we just calculate it in place 
 \begin{DoxyParams}{Parameters}
 {\em M} & -\/ Initial Vector$<$\+Vector$>$ \\
@@ -49,6 +126,62 @@ Calculate the Det of an input Vector$<$\+Vector$>$ Special Case\+: If it\textquo
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
 The determinant 
+\end{DoxyReturn}
+\index{Equation\+Tools@{Equation\+Tools}!get\+Norm@{get\+Norm}}
+\index{get\+Norm@{get\+Norm}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{get\+Norm(std\+::vector$<$ double $>$ \&vec)}{getNorm(std::vector< double > &vec)}}]{\setlength{\rightskip}{0pt plus 5cm}double Equation\+Tools\+::get\+Norm (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{vec}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equation_tools_a4f34553fca5396a6bdb77bc265e7ddb7}{}\label{class_equation_tools_a4f34553fca5396a6bdb77bc265e7ddb7}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & A vector of doubles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Euclidean norm 
+\end{DoxyReturn}
+\index{Equation\+Tools@{Equation\+Tools}!negate\+Vector@{negate\+Vector}}
+\index{negate\+Vector@{negate\+Vector}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{negate\+Vector(std\+::vector$<$ double $>$ \&v1)}{negateVector(std::vector< double > &v1)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ Equation\+Tools\+::negate\+Vector (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{v1}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equation_tools_a8f8c215f13782636f54dc3a2b2bfc136}{}\label{class_equation_tools_a8f8c215f13782636f54dc3a2b2bfc136}
+
+
+Transform the vector into its negative (V)$\ast$(-\/1) point wise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & -\/ A Cector of doubles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The negative of the vector (V)$\ast$(-\/1) 
+\end{DoxyReturn}
+\index{Equation\+Tools@{Equation\+Tools}!subtract\+Vectors@{subtract\+Vectors}}
+\index{subtract\+Vectors@{subtract\+Vectors}!Equation\+Tools@{Equation\+Tools}}
+\subsubsection[{\texorpdfstring{subtract\+Vectors(std\+::vector$<$ double $>$ \&v1, std\+::vector$<$ double $>$ \&v2)}{subtractVectors(std::vector< double > &v1, std::vector< double > &v2)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ Equation\+Tools\+::subtract\+Vectors (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{v1, }
+\item[{std\+::vector$<$ double $>$ \&}]{v2}
+\end{DoxyParamCaption}
+)}\hypertarget{class_equation_tools_a54bd03c010750aa6686253bcec951c88}{}\label{class_equation_tools_a54bd03c010750aa6686253bcec951c88}
+
+
+Subtract two vectors point wise. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v1} & -\/ A Vector of doubles \\
+\hline
+{\em v2} & -\/ A Same or Other vector of doubles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector 1 -\/ Vector 2 
 \end{DoxyReturn}
 
 

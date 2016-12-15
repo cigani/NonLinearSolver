@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['exprtkgenerate2dderivative',['exprtkGenerate2DDerivative',['../class_equations.html#ac5f6066df2ec81262ca5bebd8c29df9f',1,'Equations']]],
-  ['exprtkjacobian',['exprtkJacobian',['../class_jacobian.html#ad90460a8e616121cdb4c0d7bb6fbde2d',1,'Jacobian']]]
+  ['chord',['Chord',['../class_chord.html#a276152dc216ada11e924b9ddac8b6260',1,'Chord']]],
+  ['convertmatrix2vector',['convertMatrix2Vector',['../class_equation_tools.html#aa5c6c5caf7829370a28ef782262fe45e',1,'EquationTools']]],
+  ['createminor',['createMinor',['../class_equation_tools.html#a1c4fc9f9b40d7951d2507f4519f78bc2',1,'EquationTools']]]
 ];

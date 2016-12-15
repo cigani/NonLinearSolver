@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['jacobian',['Jacobian',['../class_jacobian.html',1,'']]]
+  ['helper',['Helper',['../class_helper.html',1,'Helper'],['../class_helper.html#a900451b12f8e4c9ff5b17625446a245a',1,'Helper::Helper()']]]
 ];

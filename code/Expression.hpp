@@ -35,17 +35,13 @@ private:
     typedef exprtk::parser<double> parser_t;
 
 public:
-    /*! A constructor to instantiate common variables to the family of nonlinear solvers.
+    /*! A constructor to instantiate the container for the parsed expression.
      */
     Expression();
 
-    /*! A constructor to instantiate common variables to the family of nonlinear solvers.
+    /*! A constructor to instantiate the container for the parsed expression.
      *
-     * \param equation A string that contains the mathematical expression for the class to evaluate.
-     * \param initial The initial guess of the solution to the equation.
-     * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
-     * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
-     * \param verbosity Set to true to print all intermediate and final results onto the console.
+     * \param eq A string that contains the mathematical expression for the class to evaluate.
      */
     Expression(const std::string &eq);
 
@@ -57,7 +53,7 @@ public:
      */
     void setEquation(const std::string &eq);
 
-    /*! A method to set a mathematical expression as a string to this object.
+    /*! A method to return a mathematical expression as a string to this object.
      *
      * \return The mathematical expression assigned to this object.
      */

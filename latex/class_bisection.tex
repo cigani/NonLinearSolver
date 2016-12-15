@@ -1,5 +1,14 @@
 \hypertarget{class_bisection}{}\section{Bisection Class Reference}
 \label{class_bisection}\index{Bisection@{Bisection}}
+
+
+\hyperlink{_bisection_8hpp_source}{Bisection.\+hpp}.  
+
+
+
+
+{\ttfamily \#include $<$Bisection.\+hpp$>$}
+
 Inheritance diagram for Bisection\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,10 +18,117 @@ Inheritance diagram for Bisection\+:\begin{figure}[H]
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-std\+::vector$<$ double $>$ \hyperlink{class_bisection_a745b39896b95c5e3360d91a85718ae2d}{solve} ()\hypertarget{class_bisection_a745b39896b95c5e3360d91a85718ae2d}{}\label{class_bisection_a745b39896b95c5e3360d91a85718ae2d}
+virtual \hyperlink{class_bisection_a44d6c2c0a557a6540980c23ef7eaa6a4}{$\sim$\+Bisection} ()\hypertarget{class_bisection_a44d6c2c0a557a6540980c23ef7eaa6a4}{}\label{class_bisection_a44d6c2c0a557a6540980c23ef7eaa6a4}
 
-\begin{DoxyCompactList}\small\item\em A pure virtual solver method for the family of nonlinear solvers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A virtual destructor for the \hyperlink{class_bisection}{Bisection} method. \end{DoxyCompactList}\item 
+\hyperlink{class_bisection_afef6fa8f828ffa4f46e26189425421bf}{Bisection} (\hyperlink{class_expression}{Expression} \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)
+\item 
+\hyperlink{class_bisection_a38ccdd59524e49ec73ee437f9daa5033}{Bisection} (\hyperlink{class_expression}{Expression} \&equation, double initial, double tolerance, int max\+Iter, bool verbosity, double lower\+Bound, double upper\+Bound)
+\item 
+double \hyperlink{class_bisection_a14e36ab0143cf54dc71f2c9da238fe15}{solve} ()
+\end{DoxyCompactItemize}
 \subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\hyperlink{_bisection_8hpp_source}{Bisection.\+hpp}. 
+
+A class constructing an object capable of solving nonlinear systems with the \hyperlink{class_bisection}{Bisection} method. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Bisection@{Bisection}!Bisection@{Bisection}}
+\index{Bisection@{Bisection}!Bisection@{Bisection}}
+\subsubsection[{\texorpdfstring{Bisection(\+Expression \&equation, double initial, double tolerance, int max\+Iter, bool verbosity)}{Bisection(Expression &equation, double initial, double tolerance, int maxIter, bool verbosity)}}]{\setlength{\rightskip}{0pt plus 5cm}Bisection\+::\+Bisection (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression} \&}]{equation, }
+\item[{double}]{initial, }
+\item[{double}]{tolerance, }
+\item[{int}]{max\+Iter, }
+\item[{bool}]{verbosity}
+\end{DoxyParamCaption}
+)}\hypertarget{class_bisection_afef6fa8f828ffa4f46e26189425421bf}{}\label{class_bisection_afef6fa8f828ffa4f46e26189425421bf}
+A constructor to instantiate variables for the \hyperlink{class_bisection}{Bisection} method. The default bound is \mbox{[}-\/1,1\mbox{]}.
+
+
+\begin{DoxyParams}{Parameters}
+{\em equation} & A string that contains the mathematical expression for the class to evaluate. \\
+\hline
+{\em initial} & The initial guess of the solution to the equation. \\
+\hline
+{\em tolerance} & The tolerance value. The method stops once the residual errors fall below this value. \\
+\hline
+{\em max\+Iter} & The maximum number of iterations. The method stops once this number is reached. \\
+\hline
+{\em verbosity} & Set to true to print all intermediate and final results onto the console. \\
+\hline
+\end{DoxyParams}
+\index{Bisection@{Bisection}!Bisection@{Bisection}}
+\index{Bisection@{Bisection}!Bisection@{Bisection}}
+\subsubsection[{\texorpdfstring{Bisection(\+Expression \&equation, double initial, double tolerance, int max\+Iter, bool verbosity, double lower\+Bound, double upper\+Bound)}{Bisection(Expression &equation, double initial, double tolerance, int maxIter, bool verbosity, double lowerBound, double upperBound)}}]{\setlength{\rightskip}{0pt plus 5cm}Bisection\+::\+Bisection (
+\begin{DoxyParamCaption}
+\item[{{\bf Expression} \&}]{equation, }
+\item[{double}]{initial, }
+\item[{double}]{tolerance, }
+\item[{int}]{max\+Iter, }
+\item[{bool}]{verbosity, }
+\item[{double}]{lower\+Bound, }
+\item[{double}]{upper\+Bound}
+\end{DoxyParamCaption}
+)}\hypertarget{class_bisection_a38ccdd59524e49ec73ee437f9daa5033}{}\label{class_bisection_a38ccdd59524e49ec73ee437f9daa5033}
+A constructor to instantiate variables for the \hyperlink{class_bisection}{Bisection} method.
+
+
+\begin{DoxyParams}{Parameters}
+{\em equation} & A string that contains the mathematical expression for the class to evaluate. \\
+\hline
+{\em initial} & The initial guess of the solution to the equation. \\
+\hline
+{\em tolerance} & The tolerance value. The method stops once the residual errors fall below this value. \\
+\hline
+{\em max\+Iter} & The maximum number of iterations. The method stops once this number is reached. \\
+\hline
+{\em verbosity} & Set to true to print all intermediate and final results onto the console. \\
+\hline
+{\em lower\+Bound} & The lower bound on the domain where the program looks for the solution. \\
+\hline
+{\em upper\+Bound} & The upper bound on the domain where the program looks for the solution. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\index{Bisection@{Bisection}!solve@{solve}}
+\index{solve@{solve}!Bisection@{Bisection}}
+\subsubsection[{\texorpdfstring{solve()}{solve()}}]{\setlength{\rightskip}{0pt plus 5cm}double Bisection\+::solve (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [virtual]}}\hypertarget{class_bisection_a14e36ab0143cf54dc71f2c9da238fe15}{}\label{class_bisection_a14e36ab0143cf54dc71f2c9da238fe15}
+A function that returns the solution to the \hyperlink{class_bisection}{Bisection} method.
+
+\begin{DoxyReturn}{Returns}
+The solution to the \hyperlink{class_bisection}{Bisection} Method. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{class_nonlinear_solver_a72180277586bd7ec915cc4a806f62bb9}{Nonlinear\+Solver}.
+
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

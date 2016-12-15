@@ -1,15 +1,68 @@
 \hypertarget{class_gauss}{}\section{Gauss Class Reference}
 \label{class_gauss}\index{Gauss@{Gauss}}
-Inheritance diagram for Gauss\+:\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[height=3.000000cm]{class_gauss}
-\end{center}
-\end{figure}
+
+
+Gauss.\+hpp.  
+
+
+
+
+{\ttfamily \#include $<$Gauss.\+h$>$}
+
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
-\end{DoxyCompactItemize}
-\subsection*{Additional Inherited Members}
+\item 
+std\+::vector$<$ double $>$ \hyperlink{class_gauss_a47211d56c21c8279ca1349dccb03d77e}{solve\+System} (std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&jacobian, std\+::vector$<$ double $>$ \&func\+Solution, int degree)
+\begin{DoxyCompactList}\small\item\em Generates a solution to Av = b. For vector (v). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Gauss.\+hpp. 
+
+A class containing the routine for Gaussian elimination. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Member Function Documentation}
+\index{Gauss@{Gauss}!solve\+System@{solve\+System}}
+\index{solve\+System@{solve\+System}!Gauss@{Gauss}}
+\subsubsection[{\texorpdfstring{solve\+System(std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&jacobian, std\+::vector$<$ double $>$ \&func\+Solution, int degree)}{solveSystem(std::vector< std::vector< double >> &jacobian, std::vector< double > &funcSolution, int degree)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ double $>$ Gauss\+::solve\+System (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ std\+::vector$<$ double $>$$>$ \&}]{jacobian, }
+\item[{std\+::vector$<$ double $>$ \&}]{func\+Solution, }
+\item[{int}]{degree}
+\end{DoxyParamCaption}
+)}\hypertarget{class_gauss_a47211d56c21c8279ca1349dccb03d77e}{}\label{class_gauss_a47211d56c21c8279ca1349dccb03d77e}
+
+
+Generates a solution to Av = b. For vector (v). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jacobian} & The Jacobian (A) \\
+\hline
+{\em func\+Solution} & The vector of solutions (b) \\
+\hline
+{\em degree} & Size of the vectors \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Vector (v) solved 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

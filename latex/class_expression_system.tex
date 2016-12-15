@@ -1,0 +1,135 @@
+\hypertarget{class_expression_system}{}\section{Expression\+System Class Reference}
+\label{class_expression_system}\index{Expression\+System@{Expression\+System}}
+
+
+\hyperlink{_expression_system_8hpp_source}{Expression\+System.\+hpp}.  
+
+
+
+
+{\ttfamily \#include $<$Expression\+System.\+hpp$>$}
+
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_expression_system_a008b0717293f7cb6aafd808c40cc805b}{Expression\+System} (std\+::string input)\hypertarget{class_expression_system_a008b0717293f7cb6aafd808c40cc805b}{}\label{class_expression_system_a008b0717293f7cb6aafd808c40cc805b}
+
+\begin{DoxyCompactList}\small\item\em Constructor to generate the system of equations. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ \hyperlink{class_expression}{Expression} $>$ $>$ \hyperlink{class_expression_system_a3d6806b0492c2e5f67aab0932eedf61a}{get\+System} ()\hypertarget{class_expression_system_a3d6806b0492c2e5f67aab0932eedf61a}{}\label{class_expression_system_a3d6806b0492c2e5f67aab0932eedf61a}
+
+\begin{DoxyCompactList}\small\item\em Method to return the vector compromising the system of equations. \end{DoxyCompactList}\item 
+void \hyperlink{class_expression_system_a44cbd0462d855756ca2640c9dbb10965}{print} ()\hypertarget{class_expression_system_a44cbd0462d855756ca2640c9dbb10965}{}\label{class_expression_system_a44cbd0462d855756ca2640c9dbb10965}
+
+\begin{DoxyCompactList}\small\item\em Method to print out the equations. \end{DoxyCompactList}\item 
+\hyperlink{class_expression}{Expression} \hyperlink{class_expression_system_a9b90526a70c5b8c823c7d9e76a969182}{get\+Equation} (int col, int row)
+\begin{DoxyCompactList}\small\item\em Method to return an individual equation from the system matrix. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_expression_system_adb8ad5aa9fa197661d80551bf7ffeb34}{evaluate} (std\+::vector$<$ double $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Evaluates the matrix of equations with the given values. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::vector$<$ double $>$ $>$ \hyperlink{class_expression_system_a998e156508feb8700024858f97368e3d}{jacobian} (std\+::vector$<$ double $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Generates a Numeric A\+P\+P\+R\+O\+X\+I\+M\+A\+T\+I\+ON of the jacobian. \end{DoxyCompactList}\item 
+unsigned long \hyperlink{class_expression_system_a7781ceb2775aeaae0f7ed6d304ff7397}{get\+Columns} ()
+\begin{DoxyCompactList}\small\item\em Used for sizing calculations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\hyperlink{_expression_system_8hpp_source}{Expression\+System.\+hpp}. 
+
+A class responsible for storing a matrix of \hyperlink{class_expression}{Expression} objects. \begin{DoxyAuthor}{Author}
+Jaquier, Michael \href{mailto:michael.jaquier@epfl.ch}{\tt michael.\+jaquier@epfl.\+ch} 
+
+Lorkowski, Alexander \href{mailto:alexander.lorkowski@epfl.ch}{\tt alexander.\+lorkowski@epfl.\+ch} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+10 December 2016 
+\end{DoxyDate}
+\begin{DoxyRemark}{Remarks}
+Ecole Polytechnic Federal de Lausanne (E\+P\+FL) 
+
+M\+A\+T\+H-\/458 Programming Concepts in Scientific Computing 
+\end{DoxyRemark}
+
+
+\subsection{Member Function Documentation}
+\index{Expression\+System@{Expression\+System}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!Expression\+System@{Expression\+System}}
+\subsubsection[{\texorpdfstring{evaluate(std\+::vector$<$ double $>$ \&value)}{evaluate(std::vector< double > &value)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::vector$<$ double $>$ $>$ Expression\+System\+::evaluate (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_system_adb8ad5aa9fa197661d80551bf7ffeb34}{}\label{class_expression_system_adb8ad5aa9fa197661d80551bf7ffeb34}
+
+
+Evaluates the matrix of equations with the given values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Vector of values used to evaluate the function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a matrix which represents the evaluation 
+\end{DoxyReturn}
+\index{Expression\+System@{Expression\+System}!get\+Columns@{get\+Columns}}
+\index{get\+Columns@{get\+Columns}!Expression\+System@{Expression\+System}}
+\subsubsection[{\texorpdfstring{get\+Columns()}{getColumns()}}]{\setlength{\rightskip}{0pt plus 5cm}unsigned long Expression\+System\+::get\+Columns (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_system_a7781ceb2775aeaae0f7ed6d304ff7397}{}\label{class_expression_system_a7781ceb2775aeaae0f7ed6d304ff7397}
+
+
+Used for sizing calculations. 
+
+\begin{DoxyReturn}{Returns}
+The number of columns in the equations 
+\end{DoxyReturn}
+\index{Expression\+System@{Expression\+System}!get\+Equation@{get\+Equation}}
+\index{get\+Equation@{get\+Equation}!Expression\+System@{Expression\+System}}
+\subsubsection[{\texorpdfstring{get\+Equation(int col, int row)}{getEquation(int col, int row)}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Expression} Expression\+System\+::get\+Equation (
+\begin{DoxyParamCaption}
+\item[{int}]{col, }
+\item[{int}]{row}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_system_a9b90526a70c5b8c823c7d9e76a969182}{}\label{class_expression_system_a9b90526a70c5b8c823c7d9e76a969182}
+
+
+Method to return an individual equation from the system matrix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em col} & The column \\
+\hline
+{\em row} & The row \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Returns a \hyperlink{class_expression}{Expression} which contains a single equation. 
+\end{DoxyReturn}
+\index{Expression\+System@{Expression\+System}!jacobian@{jacobian}}
+\index{jacobian@{jacobian}!Expression\+System@{Expression\+System}}
+\subsubsection[{\texorpdfstring{jacobian(std\+::vector$<$ double $>$ \&value)}{jacobian(std::vector< double > &value)}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ std\+::vector$<$ double $>$ $>$ Expression\+System\+::jacobian (
+\begin{DoxyParamCaption}
+\item[{std\+::vector$<$ double $>$ \&}]{value}
+\end{DoxyParamCaption}
+)}\hypertarget{class_expression_system_a998e156508feb8700024858f97368e3d}{}\label{class_expression_system_a998e156508feb8700024858f97368e3d}
+
+
+Generates a Numeric A\+P\+P\+R\+O\+X\+I\+M\+A\+T\+I\+ON of the jacobian. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Vector Values to evaluate the numeric Jacobian at \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A numeric A\+P\+R\+O\+X\+I\+M\+A\+T\+I\+ON of the Jacobian at a set of points 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+code/Expression\+System.\+hpp\item 
+code/Expression\+System.\+cpp\end{DoxyCompactItemize}

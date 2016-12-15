@@ -18,8 +18,13 @@
 
 class NewtonSystem : public NonlinearSystemsSolver {
 private:
+    /// An object that contains the jacobian of the system.
     ExpressionSystem jac;
+
+    /// The modification parameter for the modified newton method.
     int m;
+
+    /// A class containing linear algebra operators.
     EquationTools convert;
 
 public:
@@ -39,9 +44,10 @@ public:
                  bool verbosity,
                  int mod);
 
+    //! A virtual destructor for the Newton System method.
     virtual ~NewtonSystem();
 
-    /// \brief solves the system of equations uses recurisve calls to Expression class
+    /// \brief solves the system of equations uses recursive calls to Expression class
     /// \return returns a vector of solutions
     std::vector<double> solve();
 

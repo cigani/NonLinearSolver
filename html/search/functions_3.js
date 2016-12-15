@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['getderivative',['getDerivative',['../class_equations.html#a45d2386ee51c531efa1226c139cb1ae6',1,'Equations']]]
+  ['deriv',['deriv',['../class_expression.html#a7e3cec0588a3dee8a90621aed69ee009',1,'Expression']]],
+  ['determinant',['Determinant',['../class_equation_tools.html#a6bf149cf279a8fe4ab3b8759b4493878',1,'EquationTools']]]
 ];
