@@ -86,11 +86,11 @@ void TestSuit::testNewtonSolver(const double x0) {
                    std::string("PolyNewton"));
     delete (newtonRealValue);
 
-    Newton testNewtonModified(equations.at(0), derivatives.at(0), x0,
-                              tolerance, maxIter * 65, verbosity, 3);
+    Newton testNewtonModified(equations.at(6), derivatives.at(6), x0,
+                              tolerance, maxIter, verbosity, 2);
     double *testNewtonModifiedValue = new double;
     *testNewtonModifiedValue = testNewtonModified.solve();
-    testAsssertion(expectedresult.at(0), *testNewtonModifiedValue,
+    testAsssertion(expectedresult.at(6), *testNewtonModifiedValue,
                    std::string("PolyNewtonModified"));
     delete testNewtonModifiedValue;
 }

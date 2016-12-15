@@ -41,6 +41,7 @@ private:
     Expression mTrigCoefficient = Expression("cos(2*pi*x) + sin(2*pi*x)");
     Expression mExpCoefficient = Expression("exp(x) - 100");
     Expression mNoDerivative = Expression("10");
+    Expression mPolyMultiplicity = Expression("sin(x)^2");
 
     // Derivatives
     Expression mPolyDer = Expression("2x");
@@ -49,20 +50,23 @@ private:
     Expression mTrigDer = Expression("2*pi(cos(2*pi*x) - sin(2*pi*x))");
     Expression mExpDer = Expression("exp(x)");
     Expression mNoDer = Expression("0.0");
+    Expression mPolyMultiplicityDer = Expression("2*sin(x)*cos(x)");
 
     // Equation Vector
     std::vector<Expression> equations{mPolyCoefficient, mZeroDerivativeCheck,
                                        mLogCoefficient, mTrigCoefficient,
-                                       mExpCoefficient, mNoDerivative};
+                                       mExpCoefficient, mNoDerivative,
+                                      mPolyMultiplicity};
 
     // Derivative Vector
     std::vector<Expression> derivatives{mPolyDer, mZeroDer, mLogDer, mTrigDer,
-                                         mExpDer, mNoDer};
+                                         mExpDer, mNoDer,
+                                        mPolyMultiplicityDer};
 
     // Expected Results
     const std::vector<double> expectedresult{3.16227766517654, 1.05686,
                                             22026.4657948162, 0.8749999979997,
-                                            4.6052, -0.807004};
+                                            4.6052, -0.807004, 0.0};
 public:
     void testChordSolver(const double x0);
     void testNewtonSolver(const double x0);
