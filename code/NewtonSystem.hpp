@@ -28,6 +28,7 @@ public:
     /// \param tolerance -  The numeric tolerance allowed for the solution
     /// \param maxIter -  The maximum iterations allowed for a solution
     /// \param verbosity -  Print intermediate steps
+    /// \param mod - Set the modifying power of the Steps.
     NewtonSystem(ExpressionSystem &system,
                  ExpressionSystem &jacobian,
                  std::vector<double> &initial,
@@ -41,17 +42,6 @@ public:
     /// \brief solves the system of equations uses recurisve calls to Expression class
     /// \return returns a vector of solutions
     std::vector<double> solve();
-
-    /// \brief Printing out the intermediate steps for debugging
-    /// \param dfx0
-    /// \param name
-    void iteratate(std::vector<std::vector<double>> &dfx0,
-                   std::string name) const;
-
-    /// \brief Printing out the intermediate steps for debugging
-    /// \param fxNeg
-    /// \param name
-    void iteratate(std::vector<double> &fxNeg, std::string name) const;
 
     /// \brief Converts a nested vectors to a single vector
     /// \param fx0

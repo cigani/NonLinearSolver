@@ -21,12 +21,6 @@
 
 class EquationsControl {
 
-public:
-    /// \brief Logs any errors detected during parsing.
-    /// \param expr_string
-    /// \param parser
-    void logErrors(const std::__1::string &expr_string,
-                   exprtk::parser<double> &parser) const;
 };
 
 

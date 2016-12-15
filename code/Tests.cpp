@@ -185,18 +185,20 @@ void TestSuit::testLinearSystem() {
 void TestSuit::testNonLinearSystems() {
     ExpressionSystem expressionSystem2("_equationNonLinear");
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
-    std::__1::vector<double> values{10, 6.1};
+    std::__1::vector<double> values{270, 270.1};
     std::vector<double> expected{2.44710116609237, 1.83532587456419};
+    std::vector<double> expectedModified{0.0, 0.0};
     std::vector<double> result, modifiedResult;
     NewtonSystem newtonSystem(expressionSystem2, derivativeSystem2, values,
                               tolerance, maxIter, verbosity, 1);
     NewtonSystem newtonSystemModified(expressionSystem2, derivativeSystem2,
                                       values,
-                                      tolerance, maxIter, verbosity, 5);
+                                      tolerance, maxIter, verbosity, 4);
     result = newtonSystem.solve();
     modifiedResult = newtonSystemModified.solve();
     testAsssertion(expected, result, std::string("NonLinear System"));
-    testAsssertion(expected, modifiedResult,
+    // With a high mod it skips to the next zero of the function.
+    testAsssertion(expectedModified, modifiedResult,
                    std::string("NonLinear System Modified"));
 }
 

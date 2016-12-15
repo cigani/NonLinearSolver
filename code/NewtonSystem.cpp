@@ -81,26 +81,3 @@ void NewtonSystem::applyModifier(std::vector<double> &dxyz) {
     }
 }
 
-void
-NewtonSystem::iteratate(std::vector<double> &fxNeg, std::string name) const {
-    std::__1::vector<double>::const_iterator returns_iterator;
-
-    for (returns_iterator = fxNeg.begin(); returns_iterator != fxNeg.end();
-         ++returns_iterator) {
-        std::__1::cout << name << " | " << *returns_iterator << "\n";
-    }
-}
-
-void NewtonSystem::iteratate(std::vector<std::vector<double>> &dfx0,
-                             std::string name) const {
-    std::__1::vector<std::vector<double>>::const_iterator returns_iterator;
-    std::__1::vector<double>::const_iterator returns_iterator2;
-    for (returns_iterator = dfx0.begin(); returns_iterator != dfx0.end();
-         ++returns_iterator) {
-        for (returns_iterator2 = (*returns_iterator).begin();
-             returns_iterator2 != (*returns_iterator).end();
-             ++returns_iterator2) {
-            std::__1::cout << name << " | " << *returns_iterator2 << "\n";
-        }
-    }
-}

@@ -23,6 +23,7 @@ private:
     std::string filename;
     void read();
 
+    EquationsControl eqControl;
     /// Rows and columns present in the matrix
     int rows;
     int columns;
