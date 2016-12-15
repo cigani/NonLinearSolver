@@ -74,11 +74,11 @@ double Newton::solve() {
         dfx0 = df.evaluate(x0);
         dx = fx0 / dfx0;
 
-        x0 -= m*dx;
+        x0 -= (double)m * dx;
 
         if (verbose) { printVerbose(i, x0); }
 
-        if (fabs(m*dx) < tol) { return x0; }
+        if (fabs((double)m * dx) < tol) { return x0; }
     }
 
     std::cout << "Maximum number of iterations exceeded" << std::endl;
