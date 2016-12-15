@@ -12,7 +12,7 @@
 #include "FixedPoint.hpp"
 #include "exprtk.hpp"
 #include "ExpressionSystem.hpp"
-#include "TestSuit.h"
+#include "Tests.h"
 #include "EquationTools.h"
 #include "Bisection.hpp"
 #include "Aitken.hpp"
@@ -20,6 +20,7 @@
 #include <vector>
 #include <cfloat>
 #include <assert.h>
+#include "string.hpp"
 
 
 class TestSuit {
@@ -60,45 +61,28 @@ private:
                                             22026.4657948162, 0.8749999979997,
                                             4.6052, -0.807004};
 public:
-    void testChordSolver(const int x0);
-
+    void testChordSolver(const double x0);
     void testNewtonSolver(const double x0);
-
     void testNewtonWithExprtkPoly(const double x0);
-
     void testNewtonWithExprtTrig(const double x0);
-
     void testNewtonWithExprtExp(const double x0);
-
-
     void testNewtonWithExprtkLog(const double x0);
-
     void testDeterm();
 
-    void testAsssertion(const double tol, const double expected,
-                        const double &testNewton, std::string name);
-
+    void testAsssertion(const double expected, const double &result,
+                        std::string name);
     void testErrorCode(std::string &ErrorType);
-
     void testSubtract();
-
     void testBisectionWithExprtPoly(const double x0);
-
     void testAitkenWithExprtPoly(const double x0);
-
     void testSystemsLoading();
-
     void testAsssertion(std::vector<std::string> expected,
                         std::vector<std::string> actual, std::string name);
-
     void
     testAsssertion(std::vector<double> expected, std::vector<double> actual,
                    std::string name);
-
     void testNonLinearSystems();
-
     void iterateVectors(std::vector<std::string> &returns);
-
     void testLinearSystem();
 };
 
