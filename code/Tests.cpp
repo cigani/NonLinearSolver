@@ -187,11 +187,17 @@ void TestSuit::testNonLinearSystems() {
     ExpressionSystem derivativeSystem2("_derivativeNonLinear");
     std::__1::vector<double> values{10, 6.1};
     std::vector<double> expected{2.44710116609237, 1.83532587456419};
-    std::vector<double> result;
+    std::vector<double> result, modifiedResult;
     NewtonSystem newtonSystem(expressionSystem2, derivativeSystem2, values,
                               tolerance, maxIter, verbosity, 1);
+    NewtonSystem newtonSystemModified(expressionSystem2, derivativeSystem2,
+                                      values,
+                                      tolerance, maxIter, verbosity, 5);
     result = newtonSystem.solve();
+    modifiedResult = newtonSystemModified.solve();
     testAsssertion(expected, result, std::string("NonLinear System"));
+    testAsssertion(expected, modifiedResult,
+                   std::string("NonLinear System Modified"));
 }
 
 void TestSuit::testDeterm() {

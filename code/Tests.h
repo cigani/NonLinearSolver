@@ -84,6 +84,7 @@ public:
     void testNonLinearSystems();
     void iterateVectors(std::vector<std::string> &returns);
     void testLinearSystem();
+
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
