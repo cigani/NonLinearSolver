@@ -31,9 +31,9 @@ NewtonSystem::~NewtonSystem() {}
 
 std::vector<double> NewtonSystem::solve() {
 
-    std::vector<double> dx, fx0, dxyz, fxNeg;
+    std::vector<double> dx, fx0, dxyz, fxNeg, pv0, diff;
     std::vector<std::vector<double>> dfx0;
-    double prevNorm, nextNorm;
+    double nextNorm;
 
     EquationTools mEquationTools;
     Gauss mGauss;
@@ -42,7 +42,7 @@ std::vector<double> NewtonSystem::solve() {
 
     for (int i = 1; i <= nMax; i++) {
 
-        prevNorm = mEquationTools.getNorm(v0);
+        pv0 = v0;
         std::vector<std::vector<double>> matrixfx0 = system.evaluate(v0);
         fx0 = convert.convertMatrix2Vector(matrixfx0);
         dfx0 = jac.evaluate(v0);
@@ -57,11 +57,13 @@ std::vector<double> NewtonSystem::solve() {
 
         v0 = dx;
 
-        nextNorm = mEquationTools.getNorm(v0);
+        diff = mEquationTools.subtractVectors(v0, pv0);
+
+        nextNorm = mEquationTools.getNorm(diff);
 
         if (verbose) { printVerbose(i, v0); }
 
-        if (fabs(prevNorm - nextNorm) < tol) { return v0; }
+        if (nextNorm < tol) { return v0; }
     }
 
     std::cout << "Maximum number of iterations exceeded" << std::endl;

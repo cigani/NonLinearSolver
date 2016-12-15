@@ -151,8 +151,8 @@ void TestSuit::testFixedPointWithExprtPoly(const double x0) {
 }
 
 void TestSuit::testSystemsLoading() {
-    ExpressionSystem expressionSystem("_equations.txt");
-    ExpressionSystem derivativeSystem("_derivative.txt");
+    ExpressionSystem expressionSystem("testfiles/_equations.txt");
+    ExpressionSystem derivativeSystem("testfiles/_derivative.txt");
     std::vector<double> expectedDerivativeValue{1, 0.333333, -1, 2};
     std::vector<std::string> expectedDerivativeFunction{"1", "1/3", "-1", "2"};
     std::vector<std::string> expectedEquationFunction{"x+y/3", "-x+2y"};
@@ -188,8 +188,8 @@ void TestSuit::testSystemsLoading() {
 }
 
 void TestSuit::testLinearSystem() {
-    ExpressionSystem expressionSystem("_equations.txt");
-    ExpressionSystem derivativeSystem("_derivative.txt");
+    ExpressionSystem expressionSystem("testfiles/_equations.txt");
+    ExpressionSystem derivativeSystem("testfiles/_derivative.txt");
     std::vector<double> values{3, 2};
     std::vector<double> expected{0.0, 0.0};
     std::vector<double> result;
@@ -200,8 +200,8 @@ void TestSuit::testLinearSystem() {
 }
 
 void TestSuit::testNonLinearSystems() {
-    ExpressionSystem expressionSystem2("_equationNonLinear");
-    ExpressionSystem derivativeSystem2("_derivativeNonLinear");
+    ExpressionSystem expressionSystem2("testfiles/_equationNonLinear");
+    ExpressionSystem derivativeSystem2("testfiles/_derivativeNonLinear");
     std::__1::vector<double> values{270.8, 270.1};
     std::vector<double> expected{2.44710116609237, 1.83532587456419};
     std::vector<double> expectedModified{0.0, 0.0};
@@ -224,8 +224,8 @@ void TestSuit::testNonLinearSystems() {
 }
 
 void TestSuit::testSystemsJacobian() {
-    ExpressionSystem expressionSystem2("_equationNonLinear");
-    ExpressionSystem derivativeSystem2("_derivativeNonLinear");
+    ExpressionSystem expressionSystem2("testfiles/_equationNonLinear");
+    ExpressionSystem derivativeSystem2("testfiles/_derivativeNonLinear");
     std::__1::vector<double> values{1, 1};
     auto numericjacobian = expressionSystem2.jacobian(values);
     auto truejacobian = derivativeSystem2.evaluate(values);
