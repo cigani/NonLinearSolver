@@ -83,7 +83,7 @@ void Helper::show_usage() {
               << std::endl
               << "\t"
               << stringPadding("-xi", 20)
-              << stringPadding("Initial guess of the solution [default: 0.0]",
+              << stringPadding("Initial guess of the solution [default: 1.0]",
                                60)
               << std::endl
               << "\t"

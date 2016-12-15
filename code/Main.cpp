@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
     ExpressionSystem mSystem;
     ExpressionSystem mJacobian;
     InitialVector mInitialVector;
-    double x0 = 0.0;
+    double x0 = 1.0;
     int nMax = 1000;
     double tol = 0.001;
     bool verbose = false;
