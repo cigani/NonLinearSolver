@@ -40,7 +40,7 @@ double Aitken::solve() {
 
         try {
             phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
-            if (isnan(phat)) {
+            if (!std::isfinite(phat)) {
                 throw Exception("phat", "The denominator has become 0.  Returning last valid solution.");
             }
         } catch (Exception& error) {
