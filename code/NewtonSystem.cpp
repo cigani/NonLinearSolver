@@ -77,7 +77,7 @@ std::vector<double> NewtonSystem::convertMatrix2Vector(const std::vector<std::ve
 void NewtonSystem::applyModifier(std::vector<double> &dxyz) {
     std::vector<double>::iterator it;
     for (it = dxyz.begin(); it != dxyz.end(); ++it) {
-        *it = m * (*it);
+        *it = (double)m * (*it);
     }
 }
 
