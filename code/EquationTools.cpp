@@ -115,3 +115,15 @@ EquationTools::getNorm(std::vector<double> &vec) {
     }
     return sqrt(result);
 };
+
+std::vector<double> EquationTools::convertMatrix2Vector(
+        std::vector<std::vector<double>> &fx0) {
+    std::vector<std::vector<double>>::iterator it;
+    std::vector<double>::iterator it2;
+    std::vector<double> returns;
+    for (it = fx0.begin(); it != fx0.end(); ++it) {
+        for (it2 = (*it).begin();
+             it2 != (*it).end(); ++it2) { returns.push_back(*it2); }
+    }
+    return returns;
+}

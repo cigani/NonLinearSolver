@@ -8,6 +8,7 @@
  * Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
  */
 
+#include "NewtonSystem.hpp"
 #include "NonlinearSystemsSolver.hpp"
 
 NonlinearSystemsSolver::NonlinearSystemsSolver(
@@ -33,9 +34,3 @@ void NonlinearSystemsSolver::printVerbose(int i, std::vector<double> &v) {
 	};
     std::cout << std::endl;
 }
-
-
-
-
-
-

@@ -52,6 +52,11 @@ public:
 
     std::vector<double> negateVector(std::vector<double> &v1);
 
+    /// \brief Converts a nested vectors to a single vector
+    /// \param fx0
+    /// \return A single vector [ ex., Matrix[2][2] -> Vector[4] ]
+    static std::vector<double>
+    convertMatrix2Vector(std::vector<std::vector<double>> &fx0);
 };
 
 

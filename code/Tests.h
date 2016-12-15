@@ -26,6 +26,9 @@
 class TestSuit {
 private:
 
+    //Tools
+    EquationTools convert;
+
     // Default Parameters
     const double tolerance = 0.0015;
     const int maxIter = 1000;
@@ -71,7 +74,8 @@ public:
 
     void testAsssertion(const double expected, const double &result,
                         std::string name);
-    void testErrorCode(std::string &ErrorType);
+
+    void testErrorCode(std::string &ErrorType)const;
     void testSubtract();
     void testBisectionWithExprtPoly(const double x0);
     void testAitkenWithExprtPoly(const double x0);
@@ -80,7 +84,7 @@ public:
                         std::vector<std::string> actual, std::string name);
     void
     testAsssertion(std::vector<double> expected, std::vector<double> actual,
-                   std::string name);
+                   std::string name) const;
     void testNonLinearSystems();
     void iterateVectors(std::vector<std::string> &returns);
     void testLinearSystem();
