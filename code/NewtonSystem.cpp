@@ -34,18 +34,24 @@ std::vector<double> NewtonSystem::solve() {
     if (verbose) { printVerbose(0, v0); }
 
     for (int i = 1; i <= nMax; i++) {
+
         prevNorm = mEquationTools.getNorm(v0);
         std::vector<std::vector<double>> matrixfx0 = system.evaluate(v0);
+
         fx0 = convertMatrix2Vector(matrixfx0);
         dfx0 = jac.evaluate(v0);
         fxNeg = mEquationTools.negateVector(fx0);
         dxyz = mGauss.solveSystem(dfx0, fxNeg, system.getColumns());
         dx = mEquationTools.addVectors(v0, dxyz);
         v0 = dx;
+
         nextNorm = mEquationTools.getNorm(v0);
+
         if (verbose) { printVerbose(i, v0); }
+
         if (fabs(prevNorm - nextNorm) < tol) { return v0; }
     }
+
     std::cout << "Maximum number of iterations exceeded" << std::endl;
     return v0;
 }

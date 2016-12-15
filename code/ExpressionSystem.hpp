@@ -1,6 +1,13 @@
-//
-// Created by Alexander Lorkowski on 12/11/16.
-//
+//! ExpressionSystem.hpp
+/*!
+  \brief A class responsible for storing a matrix of Expression objects.
+  \author Jaquier, Michael <michael.jaquier@epfl.ch>
+  \author Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
+  \version 1.0
+  \date  10 December 2016
+  \remark Ecole Polytechnic Federal de Lausanne (EPFL)
+  \remark MATH-458 Programming Concepts in Scientific Computing
+*/
 
 #ifndef EXPRESSIONSYSTEM_HPP_
 #define EXPRESSIONSYSTEM_HPP_
@@ -46,7 +53,7 @@ public:
 
     int getColumns();
 
-    /// \brief Generates a Numeric APROXIMATION of the jacobian
+    /// \brief Generates a Numeric APPROXIMATION of the Jacobian
     /// \param value Vector Values to evaluate the numeric Jacobian at
     /// \return A numeric APROXIMATION of the Jacobian at a set of points
     std::vector<std::vector<double>> jacobian(std::vector<double> &value);

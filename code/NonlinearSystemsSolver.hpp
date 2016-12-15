@@ -1,6 +1,6 @@
 //! NonlinearSystemsSolver.hpp
 /*!
-  \brief An abstract class for the family of nonlinear solvers.
+  \brief An abstract class for the family of solvers of nonlinear systems.
   \author Jaquier, Michael <michael.jaquier@epfl.ch>
   \author Lorkowski, Alexander <alexander.lorkowski@epfl.ch>
   \version 1.0

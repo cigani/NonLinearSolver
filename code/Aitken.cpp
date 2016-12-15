@@ -70,7 +70,7 @@ double Aitken::solve() {
 		} else {
             phatold = phat;
             x0 = x1;
-            x1 = x2;
+            x1 = phat;
 		}
 	}
 

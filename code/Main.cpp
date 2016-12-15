@@ -51,6 +51,7 @@ int main(int argc, char *argv[]) {
     Expression mDerivative;
     ExpressionSystem mSystem;
     ExpressionSystem mJacobian;
+    InitialVector mVector;
     double x0 = 0.0;
     int nMax = 1000;
     double tol = 0.001;
@@ -144,17 +145,21 @@ int main(int argc, char *argv[]) {
 
     if (boost::iequals(mMethod, "aitken")) {
         std::cout << std::endl << "AITKEN METHOD" << std::endl;
+
         Aitken aitken(mExpression,
                       x0,
                       tol,
                       nMax,
                       verbose);
+
         double result = aitken.solve();
+
         std::cout << std::endl << "RESULT" << std::endl;
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
+
         Bisection bisection(mExpression,
                             x0,
                             tol,
@@ -162,29 +167,37 @@ int main(int argc, char *argv[]) {
                             verbose,
                             lowerBound,
                             upperBound);
+
         double result = bisection.solve();
+
         std::cout << std::endl << "RESULT" << std::endl;
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
         std::cout << std::endl << "CHORD METHOD" << std::endl;
+
         Chord chord(mExpression,
                     x0,
                     tol,
                     nMax,
                     verbose);
+
         double result = chord.solve();
+
         std::cout << std::endl << "RESULT" << std::endl;
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
+
         FixedPoint fixedPoint(mExpression,
                               x0,
                               tol,
                               nMax,
                               verbose);
+
         double result = fixedPoint.solve();
+
         std::cout << std::endl << "RESULT" << std::endl;
         std::cout << result << std::endl;
         std::cout << std::endl;
@@ -192,13 +205,16 @@ int main(int argc, char *argv[]) {
         mAssert(mDerivative.getEquation() != "0",
                 "ERROR: No mathematical expression provided");
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
+
         Newton newton(mExpression,
                       mDerivative,
                       x0,
                       tol,
                       nMax,
                       verbose);
+
         double result = newton.solve();
+
         std::cout << std::endl << "RESULT" << std::endl;
         std::cout << result << std::endl;
         std::cout << std::endl;
