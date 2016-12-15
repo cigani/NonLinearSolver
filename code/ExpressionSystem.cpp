@@ -75,12 +75,12 @@ int ExpressionSystem::getColumns() {
 std::vector<std::vector<double>>
 ExpressionSystem::jacobian(std::vector<double> &value) {
     std::vector<std::vector<double>> results(rows,
-                                             std::vector<double>(columns));
+                                             std::vector<double>(rows));
     std::vector<std::string> vars{"x", "y", "z"};
-    for (int row = 0; row < rows; ++row) {
-        for (int col = 0; col < columns; ++col) {
+    for (int row = 0; row < rows; row++) {
+        for (int col = 0; col < rows; col++) {
             std::cout << "Column \t" << col << "\t Row: \t" << row << "\n";
-            results[row][col] = system[row][col].deriv(value, vars[col]);
+            results[row][col] = system[row][0].deriv(value, vars[col]);
         }
     }
     return results;
