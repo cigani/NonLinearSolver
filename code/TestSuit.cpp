@@ -16,62 +16,26 @@ int main(int argc, char* argv[]) {
     TestSuit test;
 
     // Equations
-    std::string mPolyCoefficient = "x^2 -10";
-    std::string mZeroDerivativeCheck = "x^2 - x^3 -x^6 +x^7 +22x^3 -33x^6 +20";
-    std::string mLogCoefficient = "log(x) - 10";
-    std::string mTrigCoefficient = "cos(2*pi*x) + sin(2*pi*x)";
-    std::string mExpCoefficient = "exp(x) - 100";
-    std::string mNoDerivative = "10";
 
-    // Derivatives
-    std::string mPolyDer = "2x";
-    std::string mZeroDer = "2x - 3x^2 -6x^5 + 7x^6 + 22*3x^2 -33*6x^5";
-    std::string mLogDer = "1/x";
-    std::string mTrigDer = "2*pi(cos(2*pi*x) - sin(2*pi*x))";
-    std::string mExpDer = "exp(x)";
-    std::string mNoDer = "0.0";
 
-    // Equation Vector
-    std::vector<std::string> equations{mPolyCoefficient, mZeroDerivativeCheck,
-                                       mLogCoefficient, mTrigCoefficient,
-                                       mExpCoefficient, mNoDerivative};
-
-    // Derivative Vector
-    std::vector<std::string> derivatives{mPolyDer, mZeroDer, mLogDer, mTrigDer,
-                                         mExpDer, mNoDer};
-
-    // Vectors
-    const std::vector<double> mTestVector{3.0, -4.0, 10.0, -22.0, 10.0, -2.0};
-    const std::vector<double> mNeverDerivative{10};
-    const std::vector<double> mAnswerVector{3.16227766517654, 1.05686,
-                                            22026.4657948162, 0.8749999979997,
-                                            4.6052, -0.807004};
+    // Vector
 
     // Tests
-    test.testChordSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
-                         equations.at(0));
+    test.testChordSolver(3.0);
 
-    test.testNewtonSolver(0.0015, mAnswerVector.at(0), 3, 1000, false,
-                          equations.at(0), derivatives.at(0));
+    test.testNewtonSolver(3.0);
 
-    test.testNewtonWithExprtkPoly(0.0015, mAnswerVector.at(1), 1.1, 1000,
-                                  false, equations.at(1), derivatives.at(1));
+    test.testNewtonWithExprtkPoly(3.0);
 
-    test.testNewtonWithExprtkLog(0.0015, mAnswerVector.at(2), 10.0, 1000,
-                                 false, equations.at(2), derivatives.at(2));
+    test.testNewtonWithExprtkLog(10.0);
 
-    test.testNewtonWithExprtTrig(0.0015, mAnswerVector.at(3), 1, 1000, false,
-                                 equations.at(3), derivatives.at(3));
+    test.testNewtonWithExprtTrig(1.0);
 
-    test.testNewtonWithExprtExp(0.0015, mAnswerVector.at(4), 0, 1000, false,
-                                equations.at(4), derivatives.at(4));
+    test.testNewtonWithExprtExp(0.0);
 
-    test.testBisectionWithExprtPoly(0.0015, mAnswerVector.at(0), 3, 1000,
-                                    false,
-                                    equations.at(0));
+    test.testBisectionWithExprtPoly(3.0);
 
-    test.testAitkenWithExprtPoly(0.0015, 1.0, 99, 1000, false,
-                                 equations.at(3));
+    test.testAitkenWithExprtPoly(99.0);
 
     test.testDeterm();
     test.testSubtract();
@@ -120,123 +84,81 @@ void TestSuit::testAsssertion(std::vector<double> expected,
 }
 
 void
-TestSuit::testChordSolver(const double tol, const double expected,
-                          const int x0,
-                          const int max, const bool verbose, std::string &eq) {
+TestSuit::testChordSolver(const int x0) {
 
-    Expression equation = adaptor(eq);
-    double value = adaptor(x0);
-    Chord testChord(equation, value, tol, max, verbose);
+    Chord testChord(equations.at(0), x0, tolerance, maxIter, verbosity);
     double *chordRealValue = new double;
     *chordRealValue = testChord.solve();
-    testAsssertion(tol, expected, *chordRealValue, std::string("Chord"));
+    testAsssertion(tolerance, expectedresult.at(0), *chordRealValue, std::string("Chord"));
 
     delete (chordRealValue);
 
 };
 
 void
-TestSuit::testNewtonSolver(const double tol, const double expected,
-                           const double x0,
-                           const int max, const bool verbose, std::string &eq,
-                           std::string &der) {
-    Expression equation = adaptor(eq);
-    Expression derivative = adaptor(der);
-    double value = adaptor(x0);
-    Newton testNewton(equation, derivative, value, tol, max, verbose);
+TestSuit::testNewtonSolver(const double x0) {
+    Newton testNewton(equations.at(0), derivatives.at(0), x0, tolerance, maxIter, verbosity);
     double *newtonRealValue = new double;
     *newtonRealValue = testNewton.solve();
 
-    testAsssertion(tol, expected, *newtonRealValue, std::string("PolyNewton"));
+    testAsssertion(tolerance, expectedresult.at(0), *newtonRealValue, std::string("PolyNewton"));
 
     delete (newtonRealValue);
 }
 
 void
-TestSuit::testNewtonWithExprtkPoly(const double tol, const double expected,
-                                   const double x0, const int max,
-                                   const bool verbose, std::string &eq,
-                                   std::string &der) {
-    Expression equation = adaptor(eq);
-    Expression derivative = adaptor(der);
-    double value = adaptor(x0);
+TestSuit::testNewtonWithExprtkPoly(const double x0) {
     double testNewton;
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equations.at(1), derivatives.at(1), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
 
-    testAsssertion(tol, expected, testNewton, eq);
+    testAsssertion(tolerance, expectedresult.at(1), testNewton, std::string("ExPolu"));
 }
 
 void
-TestSuit::testNewtonWithExprtkLog(const double tol, const double expected,
-                                  const double x0, const int max,
-                                  const bool verbose, std::string &eq,
-                                  std::string &der) {
+TestSuit::testNewtonWithExprtkLog(const double x0) {
     double testNewton;
-    Expression derivative = adaptor(der);
-    Expression equation = adaptor(eq);
-    double value = adaptor(x0);
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equations.at(2), derivatives.at(2), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
 
-    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkLog"));
+    testAsssertion(tolerance, expectedresult.at(2), testNewton, std::string("NewtonExprtkLog"));
 }
 
 void
-TestSuit::testNewtonWithExprtTrig(const double tol, const double expected,
-                                  const double x0, const int max,
-                                  const bool verbose, std::string &eq,
-                                  std::string &der) {
+TestSuit::testNewtonWithExprtTrig(const double x0) {
     double testNewton;
-    Expression equation = adaptor(eq);
-    Expression derivative = adaptor(der);
-    double value = adaptor(x0);
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equations.at(3), derivatives.at(3), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
 
-    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkTrig"));
+    testAsssertion(tolerance, expectedresult.at(3), testNewton, std::string("NewtonExprtkTrig"));
 
 }
 
 void
-TestSuit::testNewtonWithExprtExp(const double tol, const double expected,
-                                 const double x0, const int max,
-                                 const bool verbose,
-                                 std::string &eq, std::string &der) {
+TestSuit::testNewtonWithExprtExp(const double x0) {
     double testNewton;
-    Expression equation = adaptor(eq);
-    Expression derivative = adaptor(der);
-    double value = adaptor(x0);
-    Newton mNewton(equation, derivative, value, tol, max, verbose);
+    Newton mNewton(equations.at(4), derivatives.at(4), x0, tolerance, maxIter, verbosity);
     testNewton = mNewton.solve();
 
-    testAsssertion(tol, expected, testNewton, std::string("NewtonExprtkExp"));
+    testAsssertion(tolerance, expectedresult.at(4), testNewton, std::string("NewtonExprtkExp"));
 }
 
 void
-TestSuit::testBisectionWithExprtPoly(const double tol, const double expected,
-                                     const double x0, const int max,
-                                     const bool verbose, std::string &eq) {
+TestSuit::testBisectionWithExprtPoly(const double x0) {
     double testBisection;
-    Expression equation = adaptor(eq);
-    double value = adaptor(x0);
-    Bisection mBisection(equation, value, tol, max, verbose, 0, 100);
+    Bisection mBisection(equations.at(0), x0, tolerance, maxIter, verbosity, 0, 100);
     testBisection = mBisection.solve();
 
-    testAsssertion(tol, expected, testBisection, std::string("Bisection"));
+    testAsssertion(tolerance, expectedresult.at(0), testBisection, std::string("Bisection"));
 }
 
 
-void TestSuit::testAitkenWithExprtPoly(const double tol, const double expected,
-                                       const double x0, const int max,
-                                       const bool verbose, std::string &eq) {
+void TestSuit::testAitkenWithExprtPoly(const double x0) {
     double testAitken;
-    Expression equation = adaptor(eq);
-    double value = adaptor(x0);
-    Aitken mAitken(equation, value, tol, max, verbose);
+    Aitken mAitken(equations.at(3), x0, tolerance, maxIter, verbosity);
     testAitken = mAitken.solve();
 
-    testAsssertion(tol, expected, testAitken, std::string("Aitken"));
+    testAsssertion(tolerance, 1.0, testAitken, std::string("Aitken"));
 }
 
 void TestSuit::testSystems() {
