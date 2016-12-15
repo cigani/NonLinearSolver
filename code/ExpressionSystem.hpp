@@ -13,7 +13,6 @@
 #define EXPRESSIONSYSTEM_HPP_
 
 #include "Expression.hpp"
-#include "FileReader.hpp"
 #include <vector>
 
 class ExpressionSystem {
@@ -53,7 +52,7 @@ public:
 
     int getColumns();
 
-    /// \brief Generates a Numeric APPROXIMATION of the Jacobian
+    /// \brief Generates a Numeric APPROXIMATION of the jacobian
     /// \param value Vector Values to evaluate the numeric Jacobian at
     /// \return A numeric APROXIMATION of the Jacobian at a set of points
     std::vector<std::vector<double>> jacobian(std::vector<double> &value);

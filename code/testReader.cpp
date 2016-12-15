@@ -4,6 +4,7 @@
 #include <vector>
 #include "string.hpp"
 #include "ExpressionSystem.hpp"
+#include "InitialVector.hpp"
 
 int main(int argc, char *argv[]) {
 
@@ -13,6 +14,7 @@ int main(int argc, char *argv[]) {
 
     ExpressionSystem functions(argv[1]);
     ExpressionSystem jacobian(argv[2]);
+    InitialVector initialVector(argv[3]);
 
     std::cout << "F(x)" << std::endl;
     functions.print();
@@ -22,15 +24,17 @@ int main(int argc, char *argv[]) {
     jacobian.print();
 
     std::cout << std::endl;
+    std::cout << "x" << std::endl;
+    initialVector.print();
+
+    std::cout << std::endl;
     std::cout << "F(x) at (0,0)" << std::endl;
     std::cout << functions.getEquation(0,0).getEquation() << std::endl;
     std::cout << "F(x) at (1,0)" << std::endl;
     std::cout << functions.getEquation(1,0).getEquation() << std::endl;
 
 
-    std::vector<double> value;
-    value.push_back(1);
-    value.push_back(3);
+    std::vector<double> value = initialVector.getValues();
     std::vector<std::vector<double>> results = functions.evaluate(value);
     std::cout << std::endl;
     std::cout << "F(1)" << std::endl;
