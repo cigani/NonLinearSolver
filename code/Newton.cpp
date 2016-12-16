@@ -60,7 +60,7 @@ double Newton::solve() {
             }
         }catch (Exception& error) {
             if (verbose) { error.PrintDebug(); }
-            srand(time(NULL));
+            srand((unsigned int) time(NULL));
             double randdouble = (double)(rand() % 100 + 1)/100;
             x0 += randdouble;
             if (verbose) { printVerbose(i, x0); }
