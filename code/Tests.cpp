@@ -17,8 +17,10 @@ int main(int argc, char* argv[]) {
     test.testNewtonWithExprtkLog(10.0);
     test.testNewtonWithExprtTrig(1.0);
     test.testNewtonWithExprtExp(0.0);
+    test.testNewtonSolverExprtkZeroDerivative(0.0);
     test.testBisectionWithExprtPoly(3.0);
     test.testAitkenWithExprtPoly(99.0);
+    test.testAitkenWithExprtZeroDerivative(99.0);
     test.testFixedPointWithExprtPoly(99.0);
     test.testDeterm();
     test.testSubtract();
@@ -95,6 +97,16 @@ void TestSuit::testNewtonSolver(const double x0) {
     delete testNewtonModifiedValue;
 }
 
+void TestSuit::testNewtonSolverExprtkZeroDerivative(const double x0) {
+    Newton testNewton(equations.at(2), derivatives.at(2), x0, tolerance,
+                      maxIter, verbosity);
+    double *newtonRealValue = new double;
+    *newtonRealValue = testNewton.solve();
+    testAsssertion(expectedresult.at(2), *newtonRealValue,
+                   std::string("PolyNewton"));
+    delete (newtonRealValue);
+}
+
 void TestSuit::testNewtonWithExprtkPoly(const double x0) {
     double testNewton;
     Newton mNewton(equations.at(1), derivatives.at(1), x0, tolerance, maxIter, verbosity);
@@ -141,6 +153,13 @@ void TestSuit::testAitkenWithExprtPoly(const double x0) {
     Aitken mAitken(equations.at(3), x0, tolerance, maxIter, verbosity);
     testAitken = mAitken.solve();
     testAsssertion(1.0, testAitken, std::string("Aitken"));
+}
+
+void TestSuit::testAitkenWithExprtZeroDerivative(const double x0) {
+    double testAitken;
+    Aitken mAitken(equations.at(2), x0, tolerance, maxIter, verbosity);
+    testAitken = mAitken.solve();
+    testAsssertion(99.0, testAitken, std::string("Aitken"));
 }
 
 void TestSuit::testFixedPointWithExprtPoly(const double x0) {

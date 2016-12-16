@@ -98,6 +98,10 @@ public:
     void testSystemsJacobian();
 
     void testFixedPointWithExprtPoly(const double x0);
+
+    void testAitkenWithExprtZeroDerivative(const double x0);
+
+    void testNewtonSolverExprtkZeroDerivative(const double x0);
 };
 
 #endif //PCSC_NONLINEAR_SYSTEMS_PROJECT_TESTSUIT_H
