@@ -20,11 +20,11 @@
 
 class NonlinearSolver {
 protected:
-	/// A standard vector holding the strings representing mathematical expressions.
+	/// An object of the Expression class holding the strings representing mathematical expressions.
     Expression eq;
 
-	/// A standard vector holding the doubles representing the initial guess of the solution to the equation.
-	double  x0;
+	/// A doubles representing the initial guess of the solution to the equation.
+	double x0;
 
 	/// The tolerance value.  The method stops once the residual errors fall below this value.
 	double tol;
@@ -60,7 +60,7 @@ public:
     /*! A function that takes a constant integer and a vector argument and prints to the console.
      *
      * \param i The current index or iteration to print out to the console.
-     * \param x The vector that contains current solution of the nonlinear problem.
+     * \param x The current solution of the nonlinear problem.
      */
 	void printVerbose(int i, double &x);
 

@@ -45,7 +45,7 @@ double Aitken::solve() {
                 throw Exception("phat", "The denominator has become 0.  Returning last valid solution.");
             }
         } catch (Exception& error) {
-            error.PrintDebug();
+            if (verbose) { error.PrintDebug(); }
             return phatold;
         }
 

@@ -14,18 +14,28 @@ class InitialVector {
 private:
     /// System of <doubles> expressions.
     std::vector<double> mInitialVector;
+
     /// Filename to load our matrix from.
     std::string filename;
+
+    /// Method to read files called in the constructor.
     void read();
 
-    /// Rows and columns present in the matrix
+    /// Number of rows present in the matrix
     int rows;
+
+    /// Number of columns present in the matrix
     int columns;
 
 public:
-    ///Constructor to generate the system of equations
+    /// \brief Constructor to generate the system of equations
+    /// \param input - The file name containing equations.
     InitialVector(std::string input);
+
+    ///Constructor to generate the system of equations
     InitialVector();
+
+    //! A virtual destructor for the Initial Vector class.
     virtual ~InitialVector();
 
     /// Method to return the values contained in the vector.
