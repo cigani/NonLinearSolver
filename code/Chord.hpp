@@ -23,7 +23,7 @@ class Chord : public NonlinearSolver{
 public:
     /*! A constructor to instantiate variables for the Chord method.
      *
-     * \param equation A string that contains the mathematical expression for the class to evaluate.
+     * \param equation An object of the Expression class that contains the mathematical expression for the class to evaluate.
      * \param initial The initial guess of the solution to the equation.
      * \param tolerance The tolerance value.  The method stops once the residual errors fall below this value.
      * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
