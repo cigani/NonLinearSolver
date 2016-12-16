@@ -206,7 +206,7 @@ int main(int argc, char *argv[]) {
         std::cout << std::endl;
     } else if ((boost::iequals(mMethod, "newton"))&&(!systemFlag)) {
         mAssert(mDerivative.getEquation() != "0",
-                "ERROR: No mathematical expression provided");
+                "ERROR: No derivative provided");
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
 
         Newton newton(mExpression,

@@ -33,14 +33,14 @@ double Aitken::solve() {
 
 	if (verbose) { printVerbose(0, phatold); }
 
-	x1 = eq.evaluate(x0);
+	x1 = eq.evaluate(x0);  // Any iterative method can be used.  Here we use fixed point method.
 
 	for ( i = 1; i <= nMax; i++ ) {
         x2 = eq.evaluate(x1);
 
         try {
             phat = x2 - (x2 - x1) * (x2 - x1) / (x2 - 2 * x1 + x0);
-            if (!std::isfinite(phat)) {
+            if (!std::isfinite(phat)) {  // For when x2 = x0 = -x1 caused by the previous iteration having x0 = -x1.
                 throw Exception("phat", "The denominator has become 0.  Returning last valid solution.");
             }
         } catch (Exception& error) {

@@ -20,7 +20,7 @@ std::vector<double> Gauss::solveSystem(std::vector<std::vector<double>> &jacobia
 
     std::vector<std::vector<double>>::iterator it;
     i=0;
-    for (it = A.begin(); it != A.end(); ++it) {
+    for (it = A.begin(); it != A.end(); ++it) {  // Augment the matrix before preceding
         (*it).push_back(funcSolution[i]);
         ++i;
     }
