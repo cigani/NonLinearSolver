@@ -34,6 +34,8 @@ private:
     typedef exprtk::parser<double> parser_t;
 
     expression_t expression_;
+    //parser_t parser_;
+    //symbol_table_t symbol_table_;
     double x_, y_, z_;
 
 public:

@@ -34,10 +34,12 @@ Expression::Expression(const std::string &eq)
     expression_.register_symbol_table(symbol_table);
 
     parser_t parser;
-    if (!parser.compile(equation, expression_)) {
-        // error... throw an exception or perform some
-        // kind of error handling.
-    }
+//    if (!parser.compile(equation, expression_))
+//    {
+//        // error... throw an exception or perform some
+//        // kind of error handling.
+//    }
+    parser.compile(equation, expression_);
 }
 
 std::string Expression::getEquation(){
@@ -46,7 +48,7 @@ std::string Expression::getEquation(){
 
 double Expression::evaluate(double &value) {
     x_ = value;
-    std::cout << expression_.value() << "\t" << x_ << "\n";
+    std::cout << expression_.value() << "\t" << x_ << "\t" << "\n";
     return expression_.value();
 
 }
@@ -60,30 +62,12 @@ double Expression::evaluate(std::vector<double> &value) {
         case 1 :
             x_ = value[0];
         default :
-            break;
+            std::cout << "BROKEN EVALUATE MATE" << "\n";
     }
 
     return expression_.value();
 }
 
 double Expression::deriv(std::vector<double> &value, std::string withrespect) {
-    symbol_table_t symbol_table;
-    double x = value.at(0);
-    symbol_table.add_variable("x", x);
-    if (value.size() != 1) {
-        double y = value[1];
-        symbol_table.add_variable("y", y);
-        if (value.size() == 3) {
-            double z = value[2];
-            symbol_table.add_variable("z", z);
-        }
-    }
-    symbol_table.add_constants();
-
-    expression_t expression;
-    expression.register_symbol_table(symbol_table);
-
-    parser_t parser;
-    parser.compile(equation, expression);
-    return exprtk::derivative(expression, withrespect);
+    return exprtk::derivative(expression_, withrespect);
 }

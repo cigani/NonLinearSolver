@@ -23,7 +23,7 @@ Newton::Newton(Expression &equation,
         : NonlinearSolver(equation, initial, tolerance, maxIter, verbosity),
           df(derivative)
 {
-    df = derivative;
+    //df = derivative;
 	m = 1;
 }
 
@@ -37,7 +37,7 @@ Newton::Newton(Expression &equation,
         : NonlinearSolver(equation, initial, tolerance, maxIter, verbosity),
           df(derivative)
 {
-    df = derivative;
+    //df = derivative;
 	m = modifier;
 }
 

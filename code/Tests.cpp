@@ -12,8 +12,8 @@ int main(int argc, char* argv[]) {
 
     // Tests
 //    test.testChordSolver(3.0);
-    test.testNewtonSolver(3.0);
-//    test.testNewtonWithExprtkPoly(3.0);
+    //   test.testNewtonSolver(3.0);
+    test.testNewtonWithExprtkPoly(3.0);
 //    test.testNewtonWithExprtkLog(10.0);
 //    test.testNewtonWithExprtTrig(1.0);
 //    test.testNewtonWithExprtExp(0.0);
@@ -109,9 +109,10 @@ void TestSuit::testNewtonSolverExprtkZeroDerivative(const double x0) {
 
 void TestSuit::testNewtonWithExprtkPoly(const double x0) {
     double testNewton;
-    Newton mNewton(equations.at(1), derivatives.at(1), x0, tolerance, maxIter, verbosity);
+    Newton mNewton(equations.at(0), derivatives.at(0), x0, tolerance, maxIter,
+                   verbosity);
     testNewton = mNewton.solve();
-    testAsssertion(expectedresult.at(1), testNewton, std::string("ExPolu"));
+    testAsssertion(expectedresult.at(0), testNewton, std::string("ExPoly"));
 }
 
 void TestSuit::testNewtonWithExprtkLog(const double x0) {
