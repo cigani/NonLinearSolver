@@ -44,12 +44,9 @@ public:
      * \param maxIter The maximum number of iterations.  The method stops once this number is reached.
      * \param verbosity Set to true to print all intermediate and final results onto the console.
      */
-    NonlinearSolver(
-			Expression &equation,
-			double initial,
-            double tolerance,
-            int maxIter,
-            bool verbosity);
+	NonlinearSolver(Expression &equation, double initial,
+					double tolerance, int maxIter,
+					bool verbosity);
 
     //! A virtual destructor for the family of nonlinear solvers.
     virtual ~NonlinearSolver();

@@ -57,7 +57,7 @@ Expression ExpressionSystem::getEquation(int col, int row) {
 void ExpressionSystem::print() {
     std::vector<std::vector<Expression>>::iterator row;
     std::vector<Expression>::iterator col;
-    Expression value;
+    //Expression value;
 
     for (row = system.begin(); row != system.end(); ++row) {
         for (col = row->begin(); col != row->end(); ++col) {

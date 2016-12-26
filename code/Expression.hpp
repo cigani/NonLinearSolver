@@ -17,7 +17,6 @@
 #include <cmath>
 #include <vector>
 #include "exprtk.hpp"
-#include "EquationsControl.h"
 
 class Expression {
 private:
@@ -34,10 +33,13 @@ private:
     /// Parsed equations with the symbol table loaded.
     typedef exprtk::parser<double> parser_t;
 
+    expression_t expression_;
+    double x_, y_, z_;
+
 public:
     /*! A constructor to instantiate the container for the parsed expression.
      */
-    Expression();
+    //Expression();
 
     /*! A constructor to instantiate the container for the parsed expression.
      *

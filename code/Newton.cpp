@@ -20,7 +20,8 @@ Newton::Newton(Expression &equation,
                double tolerance,
                int maxIter,
                bool verbosity)
-	: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+        : NonlinearSolver(equation, initial, tolerance, maxIter, verbosity),
+          df(derivative)
 {
     df = derivative;
 	m = 1;
@@ -33,7 +34,8 @@ Newton::Newton(Expression &equation,
                int maxIter,
                bool verbosity,
                int modifier)
-	: NonlinearSolver(equation, initial, tolerance, maxIter, verbosity)
+        : NonlinearSolver(equation, initial, tolerance, maxIter, verbosity),
+          df(derivative)
 {
     df = derivative;
 	m = modifier;

@@ -18,7 +18,6 @@
 #include <cmath>
 #include <vector>
 #include "exprtk.hpp"
-#include "EquationsControl.h"
 
 class EquationTools {
     /**

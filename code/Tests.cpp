@@ -11,23 +11,23 @@ int main(int argc, char* argv[]) {
     TestSuit test;
 
     // Tests
-    test.testChordSolver(3.0);
+//    test.testChordSolver(3.0);
     test.testNewtonSolver(3.0);
-    test.testNewtonWithExprtkPoly(3.0);
-    test.testNewtonWithExprtkLog(10.0);
-    test.testNewtonWithExprtTrig(1.0);
-    test.testNewtonWithExprtExp(0.0);
-    test.testNewtonSolverExprtkZeroDerivative(0.0);
-    test.testBisectionWithExprtPoly(3.0);
-    test.testAitkenWithExprtPoly(99.0);
-    test.testAitkenWithExprtZeroDerivative(99.0);
-    test.testFixedPointWithExprtPoly(99.0);
-    test.testDeterm();
-    test.testSubtract();
-    test.testSystemsLoading();
-    test.testNonLinearSystems();
-    test.testLinearSystem();
-    test.testSystemsJacobian();
+//    test.testNewtonWithExprtkPoly(3.0);
+//    test.testNewtonWithExprtkLog(10.0);
+//    test.testNewtonWithExprtTrig(1.0);
+//    test.testNewtonWithExprtExp(0.0);
+//    test.testNewtonSolverExprtkZeroDerivative(0.0);
+//    test.testBisectionWithExprtPoly(3.0);
+//    test.testAitkenWithExprtPoly(99.0);
+//    test.testAitkenWithExprtZeroDerivative(99.0);
+//    test.testFixedPointWithExprtPoly(99.0);
+//    test.testDeterm();
+//    test.testSubtract();
+//    test.testSystemsLoading();
+//    test.testNonLinearSystems();
+//    test.testLinearSystem();
+//    test.testSystemsJacobian();
 
     // Error Logging
     test.iterateVectors(test.mErrors);
@@ -40,8 +40,8 @@ void TestSuit::testAsssertion(const double expected, const double &result,
                               std::string name) {
 
     double test = result;
-    if (isnan(test)) { testErrorCode(name); }
-    if (isinf(test)) { testErrorCode(name); }
+    if (std::isnan(test)) { testErrorCode(name); }
+    if (std::isinf(test)) { testErrorCode(name); }
     if (fabs(expected - test) >= tolerance) { testErrorCode(name); }
 }
 

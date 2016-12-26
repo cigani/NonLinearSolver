@@ -10,13 +10,10 @@
 
 #include "NonlinearSolver.hpp"
 
-NonlinearSolver::NonlinearSolver(
-		Expression &equation,
-		double initial,
-		double tolerance,
-		int maxIter,
-		bool verbosity) {
-	eq = equation;
+NonlinearSolver::NonlinearSolver(Expression &equation, double initial,
+								 double tolerance, int maxIter,
+								 bool verbosity) : eq(equation) {
+	//eq = equation;
 	x0 = initial;
 	tol = tolerance;
 	nMax = maxIter;
