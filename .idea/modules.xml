@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/pcsc-nonlinear-systems-project.iml" filepath="$PROJECT_DIR$/.idea/pcsc-nonlinear-systems-project.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/NonLinearSolver.iml" filepath="$PROJECT_DIR$/.idea/NonLinearSolver.iml" />
     </modules>
   </component>
 </project>
