@@ -11,23 +11,23 @@ int main(int argc, char* argv[]) {
     TestSuit test;
 
     // Tests
-//    test.testChordSolver(3.0);
-    //   test.testNewtonSolver(3.0);
+    test.testChordSolver(3.0);
+    test.testNewtonSolver(3.0);
     test.testNewtonWithExprtkPoly(3.0);
-//    test.testNewtonWithExprtkLog(10.0);
-//    test.testNewtonWithExprtTrig(1.0);
-//    test.testNewtonWithExprtExp(0.0);
-//    test.testNewtonSolverExprtkZeroDerivative(0.0);
-//    test.testBisectionWithExprtPoly(3.0);
-//    test.testAitkenWithExprtPoly(99.0);
-//    test.testAitkenWithExprtZeroDerivative(99.0);
-//    test.testFixedPointWithExprtPoly(99.0);
-//    test.testDeterm();
-//    test.testSubtract();
-//    test.testSystemsLoading();
-//    test.testNonLinearSystems();
-//    test.testLinearSystem();
-//    test.testSystemsJacobian();
+    test.testNewtonWithExprtkLog(10.0);
+    test.testNewtonWithExprtTrig(1.0);
+    test.testNewtonWithExprtExp(0.0);
+    test.testNewtonSolverExprtkZeroDerivative(0.0);
+    test.testBisectionWithExprtPoly(3.0);
+    test.testAitkenWithExprtPoly(99.0);
+    test.testAitkenWithExprtZeroDerivative(99.0);
+    test.testFixedPointWithExprtPoly(99.0);
+    test.testDeterm();
+    test.testSubtract();
+    test.testSystemsLoading();
+    test.testNonLinearSystems();
+    test.testLinearSystem();
+    test.testSystemsJacobian();
 
     // Error Logging
     test.iterateVectors(test.mErrors);
@@ -246,7 +246,7 @@ void TestSuit::testNonLinearSystems() {
 void TestSuit::testSystemsJacobian() {
     ExpressionSystem expressionSystem2("testfiles/_equationNonLinear");
     ExpressionSystem derivativeSystem2("testfiles/_derivativeNonLinear");
-    std::__1::vector<double> values{1, 1};
+    std::vector<double> values{1, 1};
     auto numericjacobian = expressionSystem2.jacobian(values);
     auto truejacobian = derivativeSystem2.evaluate(values);
     std::vector<double> vectornumericjacobian = convert.convertMatrix2Vector(
@@ -254,7 +254,7 @@ void TestSuit::testSystemsJacobian() {
     std::vector<double> vectortruejacobian = convert.convertMatrix2Vector(
             truejacobian);
     testAsssertion(vectortruejacobian, vectornumericjacobian,
-                   std::string("Jacobian"));
+                   std::string("Jacobian Systems"));
 
 }
 

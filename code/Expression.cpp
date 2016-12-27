@@ -67,13 +67,20 @@ double Expression::evaluate(const std::vector<double>& values)
         case 3 : var_[e_z].get() = values[e_z];
         case 2 : var_[e_y].get() = values[e_y];
         case 1 : var_[e_x].get() = values[e_x];
-        default: std::cout << "EVALUATE BROKEN MATE" << "\n";
+        default:break;
     }
 
     return expression_.value();
 }
 
 double Expression::deriv(std::vector<double> &value, std::string withrespect) {
+    switch (value.size())
+    {
+        case 3 : var_[e_z].get() = value[e_z];
+        case 2 : var_[e_y].get() = value[e_y];
+        case 1 : var_[e_x].get() = value[e_x];
+        default:break;
+    }
     return exprtk::derivative(expression_, withrespect);
 }
 
