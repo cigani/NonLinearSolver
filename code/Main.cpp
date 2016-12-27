@@ -48,8 +48,8 @@ int main(int argc, char *argv[]) {
     }
 
     std::string mMethod;
-    Expression mExpression;
-    Expression mDerivative;
+    //Expression mExpression;
+    //Expression mDerivative;
     ExpressionSystem mSystem;
     ExpressionSystem mJacobian;
     InitialVector mInitialVector;
@@ -89,10 +89,10 @@ int main(int argc, char *argv[]) {
                 }
             } else if (strcmp(argv[i], "-e") == 0) {
                 // Mathematical Expression
-                mExpression.setEquation(argv[i + 1]);
+                Expression mExpression(argv[i + 1]);
             } else if (strcmp(argv[i], "-d") == 0) {
                 // Derivative Expression
-                mDerivative.setEquation(argv[i + 1]);
+                Expression mDerivative(argv[i + 1]);
             } else if (strcmp(argv[i], "-xi") == 0) {
                 // Initial Value
                 x0 = std::stod(argv[i + 1]);
@@ -138,13 +138,13 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    if (!systemFlag) {
-        mAssert(mExpression.getEquation() != "0",
-                "ERROR: No mathematical expression provided");
-    } else {
-        mAssert(boost::iequals(mMethod, "newton"),
-                "ERROR: Only the Newton method is available for evaluating systems of equations.");
-    }
+//    if (!systemFlag) {
+//        mAssert(mExpression.getEquation() != "0",
+//                "ERROR: No mathematical expression provided");
+//    } else {
+//        mAssert(boost::iequals(mMethod, "newton"),
+//                "ERROR: Only the Newton method is available for evaluating systems of equations.");
+//    }
 
     if (boost::iequals(mMethod, "aitken")) {
         std::cout << std::endl << "AITKEN METHOD" << std::endl;

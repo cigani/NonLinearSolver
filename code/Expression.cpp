@@ -17,52 +17,54 @@
 //}
 
 void Expression::setEquation(const std::string &eq) {
-    equation = eq;
+    equation_ = eq;
 }
 
 Expression::Expression(const std::string &eq)
-        : equation(eq),
-          x_(0.0), y_(0.0), z_(0.0) {
-    equation = eq;
+        : equation_(eq) {
+    equation_ = eq;
 
     symbol_table_t symbol_table;
-    symbol_table.add_variable("x", x_);
-    symbol_table.add_variable("y", y_);
-    symbol_table.add_variable("z", z_);
+    symbol_table.create_variable("x", 0.0);
+    symbol_table.create_variable("y", 0.0);
+    symbol_table.create_variable("z", 0.0);
     symbol_table.add_constants();
+
+    var_.push_back(
+            (std::reference_wrapper<T> &&) (symbol_table.variable_ref("x")));
+    var_.push_back(
+            (std::reference_wrapper<T> &&) (symbol_table.variable_ref("y")));
+    var_.push_back(
+            (std::reference_wrapper<T> &&) (symbol_table.variable_ref("z")));
 
     expression_.register_symbol_table(symbol_table);
 
     parser_t parser;
-//    if (!parser.compile(equation, expression_))
-//    {
-//        // error... throw an exception or perform some
-//        // kind of error handling.
-//    }
-    parser.compile(equation, expression_);
+
+    if (!parser.compile(equation_, expression_))
+    {
+        printf("ERROR - Failed to compile: %s\n",equation_.c_str());
+    }
 }
 
 std::string Expression::getEquation(){
-    return equation;
+    return equation_;
 }
 
-double Expression::evaluate(double &value) {
-    x_ = value;
-    std::cout << expression_.value() << "\t" << x_ << "\t" << "\n";
+double Expression::evaluate(const double &x)
+{
+    var_[e_x].get() = x;
     return expression_.value();
-
 }
 
-double Expression::evaluate(std::vector<double> &value) {
-    switch (value.size()) {
-        case 3 :
-            z_ = value[2];
-        case 2 :
-            y_ = value[1];
-        case 1 :
-            x_ = value[0];
-        default :
-            std::cout << "BROKEN EVALUATE MATE" << "\n";
+double Expression::evaluate(const std::vector<double>& values)
+{
+    switch (values.size())
+    {
+        case 3 : var_[e_z].get() = values[e_z];
+        case 2 : var_[e_y].get() = values[e_y];
+        case 1 : var_[e_x].get() = values[e_x];
+        default: std::cout << "EVALUATE BROKEN MATE" << "\n";
     }
 
     return expression_.value();
@@ -71,3 +73,5 @@ double Expression::evaluate(std::vector<double> &value) {
 double Expression::deriv(std::vector<double> &value, std::string withrespect) {
     return exprtk::derivative(expression_, withrespect);
 }
+
+

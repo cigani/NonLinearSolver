@@ -14,31 +14,29 @@
 
 #include <iostream>
 #include <iomanip>
+#include <functional>
 #include <cmath>
+#include <cstdio>
 #include <vector>
 #include "exprtk.hpp"
 
+
+
+
 class Expression {
-private:
 
-    /// A standard string representing mathematical expressions.
-    std::string equation;
-
-    /// A symbolic table containing the variables.
-    typedef exprtk::symbol_table<double> symbol_table_t;
-
-    /// An adapter for the symbol table.
-    typedef exprtk::expression<double> expression_t;
-
-    /// Parsed equations with the symbol table loaded.
-    typedef exprtk::parser<double> parser_t;
-
-    expression_t expression_;
-    //parser_t parser_;
-    //symbol_table_t symbol_table_;
-    double x_, y_, z_;
 
 public:
+
+    /// A symbolic table containing the variables.
+    /// An adapter for the symbol table.
+    /// Parsed equations with the symbol table loaded.
+    typedef double T;
+    typedef exprtk::parser<T>             parser_t;
+    typedef exprtk::expression<T>     expression_t;
+    typedef exprtk::symbol_table<T> symbol_table_t;
+    enum var_index { e_x = 0, e_y = 1, e_z = 2 };
+
     /*! A constructor to instantiate the container for the parsed expression.
      */
     //Expression();
@@ -67,13 +65,12 @@ public:
      *
      * \param value A value to evaluate the expression.
      */
-    double evaluate(double &value);
-
+     double evaluate(const double &x);
     /*! A method to evaluate the mathematical expression in this class with vectors.
      *
      * \param value A vector of values.
      */
-    double evaluate(std::vector<double> &value);
+    double evaluate(const std::vector<double>& values);
 
     /*! A method to evaluate the derivative of the Expression class.
      *
@@ -81,6 +78,15 @@ public:
      * \param withrespect The variable to differentiate with respect to.
      */
     double deriv(std::vector<double> &value, std::string withrespect);
+
+
+private:
+
+    std::string  equation_;
+    expression_t expression_;
+    std::vector<std::reference_wrapper<T>> var_;
 };
+
+
 
 #endif /* EXPRESSION_HPP_ */
