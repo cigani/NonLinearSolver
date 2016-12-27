@@ -35,7 +35,7 @@ private:
     const bool verbosity = false;
 
     // Equations
-    Expression mPolyCoefficient = Expression("2x -10");
+    Expression mPolyCoefficient = Expression("x^2 -10");
     Expression mZeroDerivativeCheck = Expression("x^2 - x^3 -x^6 +x^7 +22x^3 -33x^6 +20");
     Expression mLogCoefficient = Expression("log(x) - 10");
     Expression mTrigCoefficient = Expression("cos(2*pi*x) + sin(2*pi*x)");
@@ -44,7 +44,7 @@ private:
     Expression mPolyMultiplicity = Expression("sin(x)^2");
 
     // Derivatives
-    Expression mPolyDer = Expression("2");
+    Expression mPolyDer = Expression("2x");
     Expression mZeroDer = Expression("2x - 3x^2 -6x^5 + 7x^6 + 22*3x^2 -33*6x^5");
     Expression mLogDer = Expression("1/x");
     Expression mTrigDer = Expression("2*pi(cos(2*pi*x) - sin(2*pi*x))");

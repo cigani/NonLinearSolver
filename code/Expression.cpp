@@ -12,9 +12,9 @@
 
 #include "Expression.hpp"
 
-//Expression::Expression() {
-//    equation = "0";
-//}
+Expression::Expression() {
+    equation_ = "0";
+}
 
 void Expression::setEquation(const std::string &eq) {
     equation_ = eq;
@@ -22,7 +22,6 @@ void Expression::setEquation(const std::string &eq) {
 
 Expression::Expression(const std::string &eq)
         : equation_(eq) {
-    equation_ = eq;
 
     symbol_table_t symbol_table;
     symbol_table.create_variable("x", 0.0);
@@ -31,11 +30,14 @@ Expression::Expression(const std::string &eq)
     symbol_table.add_constants();
 
     var_.push_back(
-            (std::reference_wrapper<T> &&) (symbol_table.variable_ref("x")));
+            (std::reference_wrapper<double> &&)
+                    (symbol_table.variable_ref("x")));
     var_.push_back(
-            (std::reference_wrapper<T> &&) (symbol_table.variable_ref("y")));
+            (std::reference_wrapper<double> &&)
+                    (symbol_table.variable_ref("y")));
     var_.push_back(
-            (std::reference_wrapper<T> &&) (symbol_table.variable_ref("z")));
+            (std::reference_wrapper<double> &&)
+                    (symbol_table.variable_ref("z")));
 
     expression_.register_symbol_table(symbol_table);
 
@@ -54,6 +56,7 @@ std::string Expression::getEquation(){
 double Expression::evaluate(const double &x)
 {
     var_[e_x].get() = x;
+    //std::cout << var_[e_x] << "\t" << expression_.value() << "\n";
     return expression_.value();
 }
 

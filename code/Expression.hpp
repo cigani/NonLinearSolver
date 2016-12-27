@@ -31,10 +31,12 @@ public:
     /// A symbolic table containing the variables.
     /// An adapter for the symbol table.
     /// Parsed equations with the symbol table loaded.
-    typedef double T;
-    typedef exprtk::parser<T>             parser_t;
-    typedef exprtk::expression<T>     expression_t;
-    typedef exprtk::symbol_table<T> symbol_table_t;
+
+    Expression();
+
+    typedef exprtk::parser<double >             parser_t;
+    typedef exprtk::expression<double>     expression_t;
+    typedef exprtk::symbol_table<double> symbol_table_t;
     enum var_index { e_x = 0, e_y = 1, e_z = 2 };
 
     /*! A constructor to instantiate the container for the parsed expression.
@@ -84,7 +86,7 @@ private:
 
     std::string  equation_;
     expression_t expression_;
-    std::vector<std::reference_wrapper<T>> var_;
+    std::vector<std::reference_wrapper<double>> var_;
 };
 
 
