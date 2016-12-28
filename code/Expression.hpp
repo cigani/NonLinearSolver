@@ -32,16 +32,15 @@ public:
     /// An adapter for the symbol table.
     /// Parsed equations with the symbol table loaded.
 
-    Expression();
-
-    typedef exprtk::parser<double >             parser_t;
-    typedef exprtk::expression<double>     expression_t;
-    typedef exprtk::symbol_table<double> symbol_table_t;
+    typedef double T;
+    typedef exprtk::parser<T>             parser_t;
+    typedef exprtk::expression<T>     expression_t;
+    typedef exprtk::symbol_table<T> symbol_table_t;
     enum var_index { e_x = 0, e_y = 1, e_z = 2 };
 
     /*! A constructor to instantiate the container for the parsed expression.
      */
-    //Expression();
+    Expression();
 
     /*! A constructor to instantiate the container for the parsed expression.
      *
@@ -67,28 +66,26 @@ public:
      *
      * \param value A value to evaluate the expression.
      */
-     double evaluate(const double &x);
+     T evaluate(const T &x);
     /*! A method to evaluate the mathematical expression in this class with vectors.
      *
      * \param value A vector of values.
      */
-    double evaluate(const std::vector<double>& values);
+    T evaluate(const std::vector<T>& values);
 
     /*! A method to evaluate the derivative of the Expression class.
      *
      * \param value A value to evaluate the expression.
      * \param withrespect The variable to differentiate with respect to.
      */
-    double deriv(std::vector<double> &value, std::string withrespect);
+    T deriv(std::vector<T> &value, std::string withrespect);
 
 
 private:
 
     std::string  equation_;
     expression_t expression_;
-    typedef double T;
     std::vector<std::reference_wrapper<T> > var_;
-
     void generateEquation();
 };
 
