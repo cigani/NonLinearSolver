@@ -33,12 +33,16 @@ void Expression::generateEquation()  {
     symbol_table.create_variable("z", 0.0);
     symbol_table.add_constants();
 
-    var_.push_back(
-            (std::reference_wrapper<T> &&) symbol_table.variable_ref("x"));
-    var_.push_back(
-            (std::reference_wrapper<T> &&) symbol_table.variable_ref("y"));
-    var_.push_back(
-            (std::reference_wrapper<T> &&) symbol_table.variable_ref("z"));
+//    var_.push_back(
+//            (std::reference_wrapper<Expression::T> &) symbol_table.variable_ref("x"));
+//    var_.push_back(
+//            (std::reference_wrapper<Expression::T> &) symbol_table.variable_ref("y"));
+//    var_.push_back(
+//            (std::reference_wrapper<Expression::T> &) symbol_table.variable_ref("z"));
+
+    var_.push_back((symbol_table.variable_ref("x")));
+    var_.push_back((symbol_table.variable_ref("y")));
+    var_.push_back((symbol_table.variable_ref("z")));
 
     expression_.register_symbol_table(symbol_table);
 
@@ -53,13 +57,12 @@ std::string Expression::getEquation() {
     return equation_;
 }
 
-T Expression::evaluate(const T &x) {
+Expression::T Expression::evaluate(const Expression::T &x) {
     var_[e_x].get() = x;
-    //std::cout << var_[e_x] << "\t" << expression_.value() << "\n";
     return expression_.value();
 }
 
-T Expression::evaluate(const std::vector<T> &values) {
+Expression::T Expression::evaluate(const std::vector<Expression::T> &values) {
     switch (values.size()) {
         case 3 :
             var_[e_z].get() = values[e_z];
@@ -74,7 +77,7 @@ T Expression::evaluate(const std::vector<T> &values) {
     return expression_.value();
 }
 
-T Expression::deriv(std::vector<T> &value, std::string withrespect) {
+Expression::T Expression::deriv(std::vector<Expression::T> &value, std::string withrespect) {
     switch (value.size()) {
         case 3 :
             var_[e_z].get() = value[e_z];

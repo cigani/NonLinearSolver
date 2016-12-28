@@ -25,14 +25,13 @@
 
 class Expression {
 
-
 public:
+
+    typedef double T;
 
     /// A symbolic table containing the variables.
     /// An adapter for the symbol table.
     /// Parsed equations with the symbol table loaded.
-
-    Expression();
 
     typedef exprtk::parser<double >             parser_t;
     typedef exprtk::expression<double>     expression_t;
@@ -41,7 +40,7 @@ public:
 
     /*! A constructor to instantiate the container for the parsed expression.
      */
-    //Expression();
+    Expression();
 
     /*! A constructor to instantiate the container for the parsed expression.
      *
@@ -84,10 +83,10 @@ public:
 
 private:
 
+
     std::string  equation_;
     expression_t expression_;
-    typedef double T;
-    std::vector<std::reference_wrapper<T> > var_;
+    std::vector<std::reference_wrapper<T>> var_;
 
     void generateEquation();
 };
