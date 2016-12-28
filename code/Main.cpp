@@ -48,11 +48,12 @@ int main(int argc, char *argv[]) {
     }
 
     std::string mMethod;
-    Expression mExpression;
-    Expression mDerivative;
-    ExpressionSystem mSystem;
-    ExpressionSystem mJacobian;
-    InitialVector mInitialVector;
+    std::string expressionString;
+    std::string derivativeString;
+    std::string systemFilename;
+    std::string jacobianFilename;
+    std::string vectorFilename;
+
     double x0 = 1.0;
     int nMax = 1000;
     double tol = 0.001;
@@ -61,6 +62,8 @@ int main(int argc, char *argv[]) {
     double upperBound = 1.0;
     int mod = 1;
 
+    bool exprFlag = false;
+    bool derivFlag = false;
     bool systemFlag = false;
     bool jacobianFlag = false;
     bool vectorFlag = false;
@@ -89,24 +92,26 @@ int main(int argc, char *argv[]) {
                 }
             } else if (strcmp(argv[i], "-e") == 0) {
                 // Mathematical Expression
-                Expression mExpression(argv[i + 1]);
+                expressionString = argv[i + 1];
+                exprFlag = true;
             } else if (strcmp(argv[i], "-d") == 0) {
                 // Derivative Expression
-                Expression mDerivative(argv[i + 1]);
+                derivativeString = argv[i + 1];
+                derivFlag = true;
             } else if (strcmp(argv[i], "-xi") == 0) {
                 // Initial Value
                 x0 = std::stod(argv[i + 1]);
             } else if (strcmp(argv[i], "-f") == 0) {
                 // System of Equations
-                mSystem = ExpressionSystem(argv[i + 1]);
+                systemFilename = argv[i + 1];
                 systemFlag = true;
             } else if (strcmp(argv[i], "-j") == 0) {
                 // Jacobian
-                mJacobian = ExpressionSystem(argv[i + 1]);
+                jacobianFilename = argv[i + 1];
                 jacobianFlag = true;
             } else if (strcmp(argv[i], "-xv") == 0) {
                 // Initial Value
-                mInitialVector = InitialVector(argv[i + 1]);
+                vectorFilename = argv[i + 1];
                 vectorFlag = true;
             } else if (strcmp(argv[i], "-nmax") == 0) {
                 // Maximum number of iterations. Default 1000
@@ -139,7 +144,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (!systemFlag) {
-        mAssert(mExpression.getEquation() != "0",
+        mAssert(exprFlag,
                 "ERROR: No mathematical expression provided");
     } else {
         mAssert(boost::iequals(mMethod, "newton"),
@@ -147,6 +152,9 @@ int main(int argc, char *argv[]) {
     }
 
     if (boost::iequals(mMethod, "aitken")) {
+
+        Expression mExpression(expressionString);
+
         std::cout << std::endl << "AITKEN METHOD" << std::endl;
 
         Aitken aitken(mExpression,
@@ -161,6 +169,9 @@ int main(int argc, char *argv[]) {
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "bisection")) {
+
+        Expression mExpression(expressionString);
+
         std::cout << std::endl << "BISECTION METHOD" << std::endl;
 
         Bisection bisection(mExpression,
@@ -177,6 +188,9 @@ int main(int argc, char *argv[]) {
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "chord")) {
+
+        Expression mExpression(expressionString);
+
         std::cout << std::endl << "CHORD METHOD" << std::endl;
 
         Chord chord(mExpression,
@@ -191,6 +205,9 @@ int main(int argc, char *argv[]) {
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if (boost::iequals(mMethod, "fixedpoint")) {
+
+        Expression mExpression(expressionString);
+
         std::cout << std::endl << "FIXED POINT METHOD" << std::endl;
 
         FixedPoint fixedPoint(mExpression,
@@ -205,8 +222,12 @@ int main(int argc, char *argv[]) {
         std::cout << result << std::endl;
         std::cout << std::endl;
     } else if ((boost::iequals(mMethod, "newton"))&&(!systemFlag)) {
-        mAssert(mDerivative.getEquation() != "0",
+        mAssert(derivFlag,
                 "ERROR: No derivative provided");
+
+        Expression mExpression(expressionString);
+        Expression mDerivative(derivativeString);
+
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
 
         Newton newton(mExpression,
@@ -227,6 +248,10 @@ int main(int argc, char *argv[]) {
                 "ERROR: No jacobian provided");
         mAssert(vectorFlag,
                 "ERROR: No initial vector provided");
+
+        ExpressionSystem mSystem(systemFilename);
+        ExpressionSystem mJacobian(jacobianFilename);
+        InitialVector mInitialVector(vectorFilename);
 
         std::cout << std::endl << "NEWTON METHOD" << std::endl;
 
