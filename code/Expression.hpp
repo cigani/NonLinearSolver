@@ -86,7 +86,10 @@ private:
 
     std::string  equation_;
     expression_t expression_;
-    std::vector<std::reference_wrapper<double>> var_;
+    typedef double T;
+    std::vector<std::reference_wrapper<T> > var_;
+
+    void generateEquation();
 };
 
 
